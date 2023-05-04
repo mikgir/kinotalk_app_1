@@ -1,0 +1,62 @@
+{
+    "moderator": {
+        "users": [
+            "block",
+            "update-own-credentials",
+            "give-author-rights",
+            "remove-author-rights"
+        ],
+        "categories": [
+            "create",
+            "update",
+            "softDelete",
+            "restore"
+        ],
+        "articles": [
+            "create",
+            "update-own",
+            "update-status",
+            "delete-own",
+            "softDelete",
+            "restore",
+            "create-like"
+        ],
+        "comments": [
+            "create",
+            "delete",
+            "delete-own",
+            "create-like"
+        ]
+    },
+    "author": {
+        "users": [
+            "update-own-credentials"
+        ],
+        "articles": [
+            "create",
+            "update-own",
+            "delete-own",
+            "create-like"
+        ],
+        "comments": [
+            "create",
+            "delete-own",
+            "create-like"
+        ]
+    },
+    "user": {
+        "users": [
+            "update-own-credentials",
+            "request-author-rights"
+        ],
+        "articles": [
+            "create-like"
+        ],
+        "comments": [
+            "create",
+            "delete-own",
+            "create-like"
+        ]
+    }
+}
+

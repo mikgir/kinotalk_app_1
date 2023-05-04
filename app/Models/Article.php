@@ -1,0 +1,123 @@
+<?php
+
+namespace App\Models;
+
+use Carbon\Carbon;
+use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableInterface;
+use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
+use Cviebrock\EloquentSluggable\Sluggable;
+use Cviebrock\EloquentTaggable\Taggable;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+
+/**
+ * Class ArticlePage
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property int $category_id
+ * @property string $title
+ * @property string|null $seo_title
+ * @property string|null $excerpt
+ * @property string $body
+ * @property string|null $image
+ * @property string $slug
+ * @property string|null $meta_description
+ * @property string|null $meta_keywords
+ * @property string $status
+ * @property bool $featured
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property string|null $deleted_at
+ *
+ * @property Category $category
+ * @property User $user
+ * @property Collection|ArticleLike[] $article_likes
+ * @property Collection|Tag[] $tags
+ * @property Collection|Comment[] $comments
+ *
+ * @package App\Models
+ */
+class Article extends Model implements ReactableInterface, HasMedia
+{
+    use Taggable;
+    use Sluggable;
+    use SoftDeletes;
+    use Reactable;
+    use InteractsWithMedia;
+
+    public function registerMediaCollections(): void
+    {
+        $this ->addMediaCollection('image');
+    }
+
+    protected $table = 'articles';
+
+    protected $casts = [
+        'user_id' => 'int',
+        'category_id' => 'int',
+        'featured' => 'bool'
+    ];
+
+    protected $fillable = [
+        'user_id',
+        'category_id',
+        'title',
+        'seo_title',
+        'excerpt',
+        'body',
+        'image',
+        'image_id',
+        'image_type',
+        'slug',
+        'meta_description',
+        'meta_keywords',
+        'status',
+        'featured'
+    ];
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+//	public function article_likes(): HasMany
+//    {
+//		return $this->hasMany(ArticleLike::class);
+//	}
+
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    /**
+     * @return MorphMany
+     */
+    public function media(): MorphMany
+    {
+        return $this->morphMany(Media::class, 'image');
+    }
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
+    }
+}

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Admin\Resources\ArticleResource;
 use Illuminate\Support\ServiceProvider;
 use MoonShine\MoonShine;
 use MoonShine\Menu\MenuGroup;
@@ -22,9 +23,9 @@ class MoonShineServiceProvider extends ServiceProvider
                     ->translatable()
                     ->icon('bookmark'),
             ])->translatable(),
-
-            MenuItem::make('Documentation', 'https://laravel.com')
-                ->badge(fn() => 'Check'),
+            MenuGroup::make('Контент', [
+                MenuItem::make('Статьи', new ArticleResource())
+            ])->icon('app')
         ]);
     }
 }

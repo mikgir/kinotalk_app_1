@@ -12,7 +12,7 @@ return [
     'logo' => env('MOONSHINE_LOGO', ''),
 
     'route' => [
-        'prefix' => env('MOONSHINE_ROUTE_PREFIX', 'moonshine'),
+        'prefix' => env('MOONSHINE_ROUTE_PREFIX', 'admin'),
         'middleware' => ['web', 'moonshine'],
         'custom_page_slug' => 'custom_page',
         'notFoundHandler' => MoonShineNotFoundException::class
@@ -20,15 +20,15 @@ return [
 
     'auth' => [
         'enable' => true,
-        'guard' => 'moonshine',
+        'guard' => 'web',
         'guards' => [
-            'moonshine' => [
+            'web' => [
                 'driver' => 'session',
-                'provider' => 'moonshine',
+                'provider' => 'users',
             ],
         ],
         'providers' => [
-            'moonshine' => [
+            'users' => [
                 'driver' => 'eloquent',
                 'model' => User::class,
             ],
@@ -40,7 +40,7 @@ return [
     ],
     'middlewares' => [],
     'tinymce' => [
-        'file_manager' => false, // or 'laravel-filemanager' prefix for lfm
+        'file_manager' => true, // or 'laravel-filemanager' prefix for lfm
         'token' => env('MOONSHINE_TINYMCE_TOKEN', ''),
         'version' => env('MOONSHINE_TINYMCE_VERSION', '6')
     ],

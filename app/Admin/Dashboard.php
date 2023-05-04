@@ -1,6 +1,6 @@
 <?php
 
-namespace App\MoonShine;
+namespace App\Admin;
 
 use MoonShine\Dashboard\DashboardScreen;
 
