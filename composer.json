@@ -15,7 +15,9 @@
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^2.12",
         "moonshine/moonshine": "^1.55",
-        "spatie/laravel-permission": "^5.10"
+        "spatie/laravel-medialibrary": "^10.0.0",
+        "spatie/laravel-permission": "^5.10",
+        "visual-ideas/moonshine-spatie-medialibrary": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.8",

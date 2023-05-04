@@ -27,22 +27,26 @@ class CreateTaggableTable extends Migration
             case 'sqlite':
             case 'sqlsrv':
             default:
-                $collation = $charset .'_bin';
+                $collation = $charset . '_bin';
         }
 
         if (!Schema::connection($connection)->hasTable($taggableTagsTable)) {
-            Schema::connection($connection)->create($taggableTagsTable, static function(Blueprint $table) use ($collation) {
-                $table->bigIncrements('tag_id');
-                $table->string('name');
-                $table->string('normalized')->unique()->collation($collation);
-                $table->timestamps();
+            Schema::connection($connection)->create(
+                $taggableTagsTable,
+                static function (Blueprint $table) use ($collation) {
+                    $table->bigIncrements('tag_id');
+                    $table->string('name');
+                    $table->string('slug')->unique();
+                    $table->string('normalized')->unique()->collation($collation);
+                    $table->timestamps();
 
-                $table->index('normalized');
-            });
+                    $table->index('normalized');
+                }
+            );
         }
 
         if (!Schema::connection($connection)->hasTable($taggableTaggablesTable)) {
-            Schema::connection($connection)->create($taggableTaggablesTable, static function(Blueprint $table) {
+            Schema::connection($connection)->create($taggableTaggablesTable, static function (Blueprint $table) {
                 $table->unsignedBigInteger('tag_id');
                 $table->unsignedBigInteger('taggable_id');
                 $table->string('taggable_type');
