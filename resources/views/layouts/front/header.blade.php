@@ -37,7 +37,7 @@
                                                         </x-dropdown-link>
                                                     </li>
 {{--                                                    <li>--}}
-{{--                                                        <x-dropdown-link :href="route('admin')">--}}
+{{--                                                        <x-dropdown-link :href="route('/admin')">--}}
 {{--                                                            {{ __('Админ') }}--}}
 {{--                                                        </x-dropdown-link>--}}
 {{--                                                    </li>--}}
@@ -100,9 +100,9 @@
                             </div>
                             <div class="tgmenu__navbar-wrap tgmenu__main-menu d-none d-lg-flex">
                                 <ul class="navigation">
-                                    <li class="active menu-item-has-children"><a href="#">Главная</a>
+                                    <li class="active menu-item-has-children"><a href="{{route('main')}}">Главная</a>
                                         <ul class="sub-menu">
-                                            <li class="active"><a href="#">На главную</a></li>
+                                            <li class="active"><a href="{{route('main')}}">На главную</a></li>
                                             <li><a href="index-2.html">Новинки кино</a></li>
                                             <li><a href="index-3.html">В фокусе</a></li>
                                             <li><a href="index-4.html">Скоро в кино</a></li>
@@ -110,8 +110,9 @@
                                             <li><a href="index-5.html">Кассовые сборы за месяц</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="article.html">Статьи</a></li>
-                                    <li><a href="author.html">Авторы</a></li>
+                                    <li><a href="{{route('articles')}}">Статьи</a></li>
+                                    <li><a href="{{route('news')}}">Новости</a></li>
+                                    <li><a href="{{route('authors')}}">Авторы</a></li>
                                     <li class="menu-item-has-children"><a href="#">Популярное</a>
                                         <ul class="sub-menu">
                                             <li><a href="#">Статьи</a></li>
