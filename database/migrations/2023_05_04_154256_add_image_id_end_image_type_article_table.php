@@ -11,16 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('articles', function (Blueprint $table){
-            $table->bigInteger('image_id')->unsigned()->index()->nullable();
-            $table->enum('image_type', ['Article', 'News', 'Avatar'])
-                ->default('Article')
-                ->nullable();
+//        это лишнее
 
-            $table->foreign('image_id')
-                ->references('id')
-                ->on('media');
-        });
+//        Schema::table('articles', function (Blueprint $table){
+//            $table->bigInteger('image_id')->unsigned()->index()->nullable();
+//            $table->enum('image_type', ['Article', 'News', 'Avatar'])
+//                ->default('Article')
+//                ->nullable();
+//
+//            $table->foreign('image_id')
+//                ->references('id')
+//                ->on('media');
+//        });
     }
 
     /**
@@ -28,10 +30,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('articles', function (Blueprint $table){
-            $table->dropForeign('image_id');
-            $table->dropColumn('image_id');
-            $table->dropColumn('image_type', ['Article', 'News', 'Avatar']);
-        });
+//        Schema::table('articles', function (Blueprint $table){
+//            $table->dropForeign('image_id');
+//            $table->dropColumn('image_id');
+//            $table->dropColumn('image_type', ['Article', 'News', 'Avatar']);
+//        });
     }
 };
