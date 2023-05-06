@@ -59,7 +59,7 @@ class ArticleResource extends Resource
                 ])->columnSpan(6),
                 Column::make([
                     Block::make('Содержание', [
-                        MediaLibrary::make('Изображение', 'image'),
+//                        MediaLibrary::make('Изображение', 'image'),
                         TinyMce::make('Text')
                             // Переопределить набор плагинов
                             ->plugins('anchor')
