@@ -15,7 +15,7 @@ class CommentsTableSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('comments')->insert($this->getData());
+//        DB::table('comments')->insert($this->getData());
     }
 
     private function getData(): array

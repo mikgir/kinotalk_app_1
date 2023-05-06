@@ -42,8 +42,9 @@ class ArticlesTableSeeder extends Seeder
                 'excerpt' => Str::substr($body, 0, 100),
                 'body' => $body,
                 'image' => 'assets/front/img/user/People' . ($i + 1) . '.png',
-                'image_id'=> rand(1,10),
-                'image_type'=>'Article',
+//              это лишнее
+//                'image_id'=> rand(1,10),
+//                'image_type'=>'Article',
                 'slug' => Str::slug($title),
                 'status' => $this->getStatus(),
                 'featured' => 1,
