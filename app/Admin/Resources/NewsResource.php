@@ -4,27 +4,24 @@ namespace App\Admin\Resources;
 
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Article;
+use App\Models\News;
 
 use MoonShine\Decorations\Block;
 use MoonShine\Decorations\Column;
 use MoonShine\Decorations\Grid;
 use MoonShine\Fields\BelongsTo;
 use MoonShine\Fields\Date;
-use MoonShine\Fields\Image;
 use MoonShine\Fields\Text;
-use MoonShine\Fields\Textarea;
 use MoonShine\Fields\TinyMce;
 use MoonShine\Resources\Resource;
 use MoonShine\Fields\ID;
 use MoonShine\Actions\FiltersAction;
-use VI\MoonShineSpatieMediaLibrary\Fields\MediaLibrary;
 
-class ArticleResource extends Resource
+class NewsResource extends Resource
 {
-    public static string $model = Article::class;
-    public static string $title = 'Статьи';
-    public static string $subTitle = 'Управление статьями';
+    public static string $model = News::class;
+    public static string $title = 'Новости';
+    public static string $subTitle = 'Управление новостями';
     public string $titleField = 'title';
     public static int $itemsPerPage = 5;
     protected bool $editInModal = true;
@@ -32,7 +29,7 @@ class ArticleResource extends Resource
 
     public function query(): Builder
     {
-        return Article::with(['category', 'user']);
+        return News::with(['category']);
     }
 
     public function fields(): array
@@ -44,7 +41,8 @@ class ArticleResource extends Resource
                     Block::make('Информация', [
                         BelongsTo::make('Категоия', 'category_id', 'name')
                             ->sortable(),
-                        BelongsTo::make('Автор', 'user_id', 'name')->sortable(),
+                        Text::make('source')
+                            ->sortable(),
                         Text::make('title', 'title')
                             ->sortable(),
                         Text::make('seo title')
@@ -85,6 +83,7 @@ class ArticleResource extends Resource
     public function rules(Model $item): array
     {
         return [
+            'source' => ['required', 'string', 'min:3'],
             'title' => ['required', 'string', 'min:3'],
             'body' => ['required', 'string', 'min:3']
         ];

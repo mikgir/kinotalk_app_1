@@ -20,9 +20,10 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             CategoriesTableSeeder::class,
             ArticlesTableSeeder::class,
+            NewsTableSeeder::class,
             CommentsTableSeeder::class,
             ArticleLikesTableSeeder::class,
-//            CommentLikesTableSeeder::class,
+            ProfileTableSeeder::class,
         ]);
     }
 }
