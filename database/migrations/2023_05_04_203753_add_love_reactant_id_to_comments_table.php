@@ -18,21 +18,21 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::table('comments', function (Blueprint $table) {
-            $table->foreignId('love_reactant_id')->nullable();
-
-            $table
-                ->foreign('love_reactant_id')
-                ->references('id')
-                ->on('love_reactants');
-        });
+//        Schema::table('comments', function (Blueprint $table) {
+//            $table->foreignId('love_reactant_id')->nullable();
+//
+//            $table
+//                ->foreign('love_reactant_id')
+//                ->references('id')
+//                ->on('love_reactants');
+//        });
     }
 
     public function down(): void
     {
-        Schema::table('comments', function (Blueprint $table) {
-            $table->dropForeign(['love_reactant_id']);
-            $table->dropColumn('love_reactant_id');
-        });
+//        Schema::table('comments', function (Blueprint $table) {
+//            $table->dropForeign(['love_reactant_id']);
+//            $table->dropColumn('love_reactant_id');
+//        });
     }
 };
