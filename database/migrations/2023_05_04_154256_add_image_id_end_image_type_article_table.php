@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('articles', function (Blueprint $table){
-            $table->bigInteger('image_id')->unsigned()->index();
+            $table->bigInteger('image_id')->unsigned()->index()->nullable();
             $table->enum('image_type', ['Article', 'News', 'Avatar'])
                 ->default('Article')
                 ->nullable();
