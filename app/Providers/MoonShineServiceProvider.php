@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Admin\Resources\ArticleResource;
+use App\Admin\Resources\CategoryResource;
+use App\Admin\Resources\UserResource;
 use Illuminate\Support\ServiceProvider;
 use MoonShine\MoonShine;
 use MoonShine\Menu\MenuGroup;
@@ -23,9 +25,13 @@ class MoonShineServiceProvider extends ServiceProvider
                     ->translatable()
                     ->icon('bookmark'),
             ])->translatable(),
+            MenuGroup::make('Пользователи', [
+                MenuItem::make('Пользователи', new UserResource())
+            ]),
             MenuGroup::make('Контент', [
-                MenuItem::make('Статьи', new ArticleResource())
-            ])->icon('app')
+                MenuItem::make('Категории', new CategoryResource()),
+                MenuItem::make('Статьи', new ArticleResource()),
+            ])->icon('app'),
         ]);
     }
 }
