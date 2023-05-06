@@ -9,7 +9,7 @@ return [
     'namespace' => 'App\Admin',
 
     'title' => env('MOONSHINE_TITLE', 'KINOTALK'),
-    'logo' => env('MOONSHINE_LOGO', ''),
+    'logo' => env('MOONSHINE_LOGO', 'build/assets/src/assets/img/logo/w_kinotalk.png'),
 
     'route' => [
         'prefix' => env('MOONSHINE_ROUTE_PREFIX', 'admin'),

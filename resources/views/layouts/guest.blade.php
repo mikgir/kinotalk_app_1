@@ -13,18 +13,30 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
-            </div>
+        @include('layouts.front.css')
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
+    </head>
+    <body>
+    <!-- preloader -->
+{{--    <div id="preloader">--}}
+{{--        <div id="loading-center">--}}
+{{--            <div id="loading-center-absolute">--}}
+{{--                <div class="object" id="object_one"></div>--}}
+{{--                <div class="object" id="object_two"></div>--}}
+{{--                <div class="object" id="object_three"></div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+    <!-- preloader-end -->
+
+    <!-- Scroll-top -->
+    <button class="scroll__top scroll-to-target" data-target="html">
+        <i class="fas fa-angle-up"></i>
+    </button>
+    <!-- Scroll-top-end-->
+    @include('layouts.front.header')
                 {{ $slot }}
-            </div>
-        </div>
+    @include('layouts.front.footer')
+    @include('layouts.front.script')
     </body>
 </html>

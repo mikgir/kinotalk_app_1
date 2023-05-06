@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Article\ArticleController;
+use App\Http\Controllers\Author\AuthorController;
+use App\Http\Controllers\Main\MainController;
+use App\Http\Controllers\News\NewsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,9 +18,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+Route::get('/', [MainController::class, 'index'])->name('main');
+Route::get('/articles', [ArticleController::class, 'index'])->name('articles');
+Route::get('/articles/show', [ArticleController::class, 'show'])->name('show');
+Route::get('/authors', [AuthorController::class, 'index'])->name('authors');
+Route::get('/news', [NewsController::class, 'index'])->name('news');
+Route::get('/news/show', [NewsController::class, 'show'])->name('show');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
