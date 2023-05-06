@@ -2,13 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\Article;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class ArticlesTableSeeder extends Seeder
+class NewsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,13 +16,7 @@ class ArticlesTableSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('articles')->insert($this->getData());
-
-        $articles = Article::all();
-
-        foreach ($articles as $article) {
-            $article->tagById($this->array_fill_rand(2, 1, 10));
-        }
+        DB::table('news')->insert($this->getData());
     }
 
     private function getData(): array
@@ -36,8 +29,8 @@ class ArticlesTableSeeder extends Seeder
             $body = $faker->sentence(rand(50, 100));
 
             $data[] = [
-                'user_id' => rand(1, 4),
                 'category_id' => rand(1, 5),
+                'source' => $faker->url(),
                 'title' => $title,
                 'excerpt' => Str::substr($body, 0, 100),
                 'body' => $body,
@@ -65,25 +58,5 @@ class ArticlesTableSeeder extends Seeder
         }
 
         return $status;
-    }
-
-    function array_fill_rand($limit, $min = false, $max = false): array
-    {
-        $limit = (int)$limit;
-        $array = array();
-
-        if ($min !== false && $max !== false) {
-            $min = (int)$min;
-            $max = (int)$max;
-            for ($i = 0; $i < $limit; $i++) {
-                $array[$i] = rand($min, $max);
-            }
-        } else {
-            for ($i = 0; $i < $limit; $i++) {
-                $array[$i] = rand();
-            }
-        }
-
-        return $array;
     }
 }

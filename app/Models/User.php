@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Carbon\Carbon;
 use Cog\Contracts\Love\Reacterable\Models\Reacterable as ReacterableInterface;
 use Cog\Laravel\Love\Reacterable\Models\Traits\Reacterable;
@@ -30,11 +28,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * *
- * @property Collection|ArticleLike[] $article_likes
  * @property Collection|Article[] $articles
- * @property Collection|CommentLike[] $comment_likes
- * @property Collection|Comment[] $comments
- * @property Collection|Role[] $roles
  *
  * @package App\Models
  */
@@ -65,33 +59,13 @@ class User extends Authenticatable implements ReacterableInterface
         'avatar'
     ];
 
-    public function article_likes(): HasMany
-    {
-        return $this->hasMany(ArticleLike::class);
-    }
-
     public function articles(): HasMany
     {
         return $this->hasMany(Article::class);
     }
 
-    public function comment_likes(): HasMany
+    public function profile(): HasOne
     {
-        return $this->hasMany(CommentLike::class);
+        return $this->hasOne(Profile::class);
     }
-
-    public function comments(): HasMany
-    {
-        return $this->hasMany(Comment::class);
-    }
-
-//    public function profile(): HasOne
-//    {
-//        return $this->hasOne(Profile::class);
-//    }
-
-//	public function roles(): BelongsToMany
-//    {
-//		return $this->belongsToMany(Role::class, 'user_roles');
-//	}
 }

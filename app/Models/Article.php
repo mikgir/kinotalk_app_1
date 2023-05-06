@@ -7,15 +7,15 @@ use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableInterface;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentTaggable\Taggable;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Image\Exceptions\InvalidManipulation;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\Image\Manipulations;
 
 /**
  * Class ArticlePage
@@ -39,9 +39,6 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  *
  * @property Category $category
  * @property User $user
- * @property Collection|ArticleLike[] $article_likes
- * @property Collection|Tag[] $tags
- * @property Collection|Comment[] $comments
  *
  * @package App\Models
  */
@@ -74,8 +71,6 @@ class Article extends Model implements ReactableInterface, HasMedia
         'excerpt',
         'body',
         'image',
-        'image_id',
-        'image_type',
         'slug',
         'meta_description',
         'meta_keywords',
@@ -93,23 +88,27 @@ class Article extends Model implements ReactableInterface, HasMedia
         return $this->belongsTo(User::class);
     }
 
-//	public function article_likes(): HasMany
-//    {
-//		return $this->hasMany(ArticleLike::class);
-//	}
-
-
-    public function comments(): HasMany
-    {
-        return $this->hasMany(Comment::class);
-    }
-
     /**
      * @return MorphMany
      */
     public function media(): MorphMany
     {
         return $this->morphMany(Media::class, 'image');
+    }
+
+    /**
+     * @throws InvalidManipulation
+     */
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this
+            ->addMediaConversion('preview')
+            ->fit(Manipulations::FIT_CROP, 300, 300)
+            ->nonQueued();
+    }
+
+    public static function last() {
+        return static::all()->last();
     }
 
     public function sluggable(): array

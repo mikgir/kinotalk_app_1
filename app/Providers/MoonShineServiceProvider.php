@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Admin\Resources\ArticleResource;
 use App\Admin\Resources\CategoryResource;
+use App\Admin\Resources\NewsResource;
 use App\Admin\Resources\UserResource;
 use Illuminate\Support\ServiceProvider;
 use MoonShine\MoonShine;
@@ -31,6 +32,7 @@ class MoonShineServiceProvider extends ServiceProvider
             MenuGroup::make('Контент', [
                 MenuItem::make('Категории', new CategoryResource()),
                 MenuItem::make('Статьи', new ArticleResource()),
+                MenuItem::make('Новости', new NewsResource()),
             ])->icon('app'),
         ]);
     }

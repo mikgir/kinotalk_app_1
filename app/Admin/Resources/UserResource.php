@@ -17,18 +17,18 @@ use MoonShine\Actions\FiltersAction;
 
 class UserResource extends Resource
 {
-	public static string $model = User::class;
-	public static string $title = 'Пользователи';
-    public static string $subTitle = 'Управление статьями';
+    public static string $model = User::class;
+    public static string $title = 'Пользователи';
+    public static string $subTitle = 'Управление пользователями';
     public string $titleField = 'title';
     public static int $itemsPerPage = 5;
     protected bool $editInModal = true;
     protected bool $createInModal = true;
 
-	public function fields(): array
-	{
-		return [
-		    ID::make()->sortable(),
+    public function fields(): array
+    {
+        return [
+            ID::make()->sortable(),
             Grid::make([
                 Column::make([
                     Block::make('Информация', [
@@ -39,11 +39,11 @@ class UserResource extends Resource
                 ])
             ])
         ];
-	}
+    }
 
-	public function rules(Model $item): array
-	{
-	    return [];
+    public function rules(Model $item): array
+    {
+        return [];
     }
 
     public function search(): array
