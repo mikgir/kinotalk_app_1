@@ -3,11 +3,20 @@
 namespace App\Contracts;
 
 
+use Illuminate\Database\Eloquent\Collection;
+
 interface ArticleRepositoryInterface
 {
-    public function getAll();
+    /**
+     * @return Collection
+     */
+    public function getAll(): Collection;
 
-    public function getOne();
+    /**
+     * @param $id
+     * @return object
+     */
+    public function getOne($id): object;
 
 
 }

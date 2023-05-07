@@ -92,7 +92,7 @@ class ArticleResource extends Resource
 
     public function search(): array
     {
-        return ['id'];
+        return ['id', 'title'];
     }
 
     public function filters(): array
