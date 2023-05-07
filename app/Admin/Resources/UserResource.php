@@ -8,8 +8,8 @@ use App\Models\User;
 use MoonShine\Decorations\Block;
 use MoonShine\Decorations\Column;
 use MoonShine\Decorations\Grid;
-use MoonShine\Fields\BelongsTo;
 use MoonShine\Fields\Date;
+use MoonShine\Fields\HasOne;
 use MoonShine\Fields\Text;
 use MoonShine\Resources\Resource;
 use MoonShine\Fields\ID;
@@ -35,6 +35,8 @@ class UserResource extends Resource
                         Text::make('Имя', 'name'),
                         Text::make('email'),
                         Date::make('Дата регистрации', 'created_at'),
+                        HasOne::make('Роль', 'roles')
+                            ->sortable()
                     ])
                 ])
             ])
@@ -43,12 +45,15 @@ class UserResource extends Resource
 
     public function rules(Model $item): array
     {
-        return [];
+        return [
+            'name'=>['required', 'string'],
+            'email'=>['required', 'string']
+        ];
     }
 
     public function search(): array
     {
-        return ['id'];
+        return ['id', 'name'];
     }
 
     public function filters(): array

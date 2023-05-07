@@ -5,26 +5,39 @@ namespace App\Http\Controllers\Article;
 use App\Http\Controllers\Controller;
 use App\Repositories\ArticleRepository;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
+
 
 class ArticleController extends Controller
 {
-    /**
-     * @param ArticleRepository $repository
-     * @return View
-     */
-    public function index(ArticleRepository $repository): View
+    protected $repository;
+
+    public function __construct(ArticleRepository $repository)
     {
-        return view('articles.index', [
-            'articles' => $repository->getAll()->partition(5)
-        ]);
+        $this->repository = $repository;
     }
 
     /**
      * @return View
      */
-    public function show(): View
+    public function index(): View
     {
-        return view('articles.show');
+        $articles = $this->repository->getAll()->partition(5);
+
+        return view('articles.index', [
+            'articles' => $articles
+        ]);
+    }
+
+    /**
+     * @param $id
+     * @return View
+     */
+    public function show($id): View
+    {
+        $article = $this->repository->getOne($id);
+
+        return view('articles.show', [
+            'article' => $article
+        ]);
     }
 }

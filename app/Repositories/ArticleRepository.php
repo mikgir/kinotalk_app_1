@@ -10,15 +10,19 @@ class ArticleRepository implements ArticleRepositoryInterface
 {
 
     /**
-     * @return Collection|array
+     * @return Collection
      */
-    public function getAll(): Collection|array
+    public function getAll(): Collection
     {
        return Article::with('user')->get();
     }
 
-    public function getOne()
+    /**
+     * @param $id
+     * @return object
+     */
+    public function getOne($id): object
     {
-        // TODO: Implement getOne() method.
+        return Article::with('user')->firstOrFail($id);
     }
 }
