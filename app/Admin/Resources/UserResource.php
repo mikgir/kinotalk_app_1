@@ -2,6 +2,7 @@
 
 namespace App\Admin\Resources;
 
+use App\Models\Profile;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 
@@ -21,7 +22,7 @@ class UserResource extends Resource
     public static string $title = 'Пользователи';
     public static string $subTitle = 'Управление пользователями';
     public string $titleField = 'title';
-    public static int $itemsPerPage = 5;
+    public static int $itemsPerPage = 2;
     protected bool $editInModal = true;
     protected bool $createInModal = true;
 
@@ -38,7 +39,12 @@ class UserResource extends Resource
                         HasOne::make('Роль', 'roles')
                             ->sortable()
                     ])
-                ])
+                ])->columnSpan(6),
+                Column::make([
+                    Block::make('Профиль', [
+                        HasOne::make('Профиль', 'profile')
+                    ])
+                ])->columnSpan(6)
             ])
         ];
     }

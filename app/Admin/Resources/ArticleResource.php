@@ -47,6 +47,7 @@ class ArticleResource extends Resource
                         BelongsTo::make('Автор', 'user_id', 'name')->sortable(),
                         Text::make('title', 'title')
                             ->sortable(),
+                        Text::make('статус', 'status'),
                         Text::make('seo title')
                             ->sortable(),
                         Date::make('Дата создания', 'created_at')
