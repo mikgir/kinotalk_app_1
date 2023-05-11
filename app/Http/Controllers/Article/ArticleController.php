@@ -23,8 +23,10 @@ class ArticleController extends Controller
     /**
      * @return View
      */
-    public function show(): View
+    public function show(ArticleRepository $repository): View
     {
+        $art = $repository->getAll();
+
         return view('articles.show');
     }
 }

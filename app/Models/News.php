@@ -19,7 +19,7 @@ class News extends Model
 
     protected $fillable = [
         'category_id',
-        'source',
+        'source_id',
         'title',
         'seo_title',
         'excerpt',
@@ -35,5 +35,10 @@ class News extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function source(): BelongsTo
+    {
+        return $this->belongsTo(Source::class);
     }
 }

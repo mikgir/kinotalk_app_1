@@ -30,7 +30,7 @@ class NewsTableSeeder extends Seeder
 
             $data[] = [
                 'category_id' => rand(1, 5),
-                'source' => $faker->url(),
+                'source_id' =>  1,
                 'title' => $title,
                 'excerpt' => Str::substr($body, 0, 100),
                 'body' => $body,
