@@ -1,33 +1,16 @@
 {
     "moderator": {
         "users": [
-            "block"
-        ],
-        "own profile": [
-            "show",
-            "create",
-            "edit",
-            "delete"
-        ],
-        "own draft articles": [
-            "show",
-            "create",
-            "edit",
-            "delete"
+            "block",
+            "unblock"
         ],
         "all pending articles": [
             "show",
             "publish",
             "delete"
         ],
-        "own published articles": [
-            "show",
-            "create",
-            "edit",
-            "delete"
-        ],
+
         "all published articles": [
-            "show",
             "block"
         ],
         "all published news": [
@@ -40,22 +23,9 @@
             "show",
             "block",
             "delete"
-        ],
-        "own comments": [
-            "show",
-            "create",
-            "edit",
-            "publish",
-            "delete"
         ]
     },
     "author": {
-        "own profile": [
-            "show",
-            "create",
-            "edit",
-            "delete"
-        ],
         "own draft articles": [
             "show",
             "create",
@@ -63,21 +33,6 @@
             "delete"
         ],
         "own published articles": [
-            "show",
-            "create",
-            "edit",
-            "delete"
-        ],
-        "all published articles": [
-            "show"
-        ],
-        "all published news": [
-            "show"
-        ],
-        "all comments": [
-            "show"
-        ],
-        "own comments": [
             "show",
             "create",
             "edit",

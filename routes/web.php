@@ -4,7 +4,7 @@ use App\Http\Controllers\Article\ArticleController;
 use App\Http\Controllers\Author\AuthorController;
 use App\Http\Controllers\Main\MainController;
 use App\Http\Controllers\News\NewsController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Profile\UserProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,14 +29,15 @@ Route::get('/news', [NewsController::class, 'index'])->name('news');
 Route::get('/news/show', [NewsController::class, 'show'])->name('show');
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+//Route::get('/dashboard', function () {
+//    return view('dashboard');
+//})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile', [UserProfileController::class, 'index'])->name('profile.show');
+//    Route::get('/profile', [UserProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [UserProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [UserProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 require __DIR__.'/auth.php';

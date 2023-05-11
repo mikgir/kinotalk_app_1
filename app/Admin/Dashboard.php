@@ -9,7 +9,6 @@ use App\Models\User;
 use MoonShine\Dashboard\DashboardBlock;
 use MoonShine\Dashboard\DashboardScreen;
 use MoonShine\Dashboard\ResourcePreview;
-use MoonShine\Decorations\Block;
 use MoonShine\Metrics\ValueMetric;
 use Spatie\Permission\Models\Role;
 

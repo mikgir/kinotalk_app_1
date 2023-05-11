@@ -50,10 +50,6 @@ class Article extends Model implements ReactableInterface, HasMedia
     use Reactable;
     use InteractsWithMedia;
 
-    public function registerMediaCollections(): void
-    {
-        $this ->addMediaCollection('image');
-    }
 
     protected $table = 'articles';
 
@@ -88,19 +84,15 @@ class Article extends Model implements ReactableInterface, HasMedia
         return $this->belongsTo(User::class);
     }
 
-    /**
-     * @return MorphMany
-     */
-    public function media(): MorphMany
-    {
-        return $this->morphMany(Media::class, 'image');
-    }
 
     /**
      * @throws InvalidManipulation
      */
     public function registerMediaConversions(Media $media = null): void
     {
+        $this->addMediaConversion('sm_image')
+            ->width(820)
+            ->height(440);
         $this
             ->addMediaConversion('preview')
             ->fit(Manipulations::FIT_CROP, 300, 300)

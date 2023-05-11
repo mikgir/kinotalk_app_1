@@ -13,6 +13,7 @@ use MoonShine\Fields\Text;
 use MoonShine\Resources\Resource;
 use MoonShine\Fields\ID;
 use MoonShine\Actions\FiltersAction;
+use VI\MoonShineSpatieMediaLibrary\Fields\MediaLibrary;
 
 class CategoryResource extends Resource
 {
@@ -31,6 +32,7 @@ class CategoryResource extends Resource
             Grid::make([
                 Column::make([
                     Block::make('Информация', [
+                        MediaLibrary::make('Обложка', 'cover'),
                         Text::make('Наименование', 'name')->sortable(),
                         Date::make('Дата создания', 'created_at')->sortable(),
                         Date::make('Дата изменения', 'updated_at')->sortable()

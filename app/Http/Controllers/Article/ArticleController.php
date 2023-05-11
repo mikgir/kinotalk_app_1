@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Article;
 
 use App\Http\Controllers\Controller;
+use App\Models\Article;
 use App\Repositories\ArticleRepository;
 use Illuminate\Contracts\View\View;
 
@@ -35,7 +36,6 @@ class ArticleController extends Controller
     public function show($id): View
     {
         $article = $this->repository->getOne($id);
-
         return view('articles.show', [
             'article' => $article
         ]);

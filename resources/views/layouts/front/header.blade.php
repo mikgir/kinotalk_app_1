@@ -32,7 +32,7 @@
                                                         </x-dropdown-link>
                                                     </li>
                                                     <li>
-                                                        <x-dropdown-link :href="route('profile.edit')">
+                                                        <x-dropdown-link :href="route('profile.show')">
                                                             {{ __('Профиль') }}
                                                         </x-dropdown-link>
                                                     </li>

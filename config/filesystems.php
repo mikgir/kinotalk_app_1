@@ -29,7 +29,6 @@ return [
     */
 
     'disks' => [
-
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
@@ -42,6 +41,12 @@ return [
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
             'throw' => false,
+        ],
+        'media'=>[
+            'driver'=>'local',
+            'root'=>storage_path('app/public/media'),
+            'url'=> env('APP_URL').'/storage/media',
+            'visibility' => 'public',
         ],
 
         's3' => [
