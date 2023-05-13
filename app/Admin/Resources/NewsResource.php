@@ -16,6 +16,7 @@ use MoonShine\Fields\TinyMce;
 use MoonShine\Resources\Resource;
 use MoonShine\Fields\ID;
 use MoonShine\Actions\FiltersAction;
+use MoonShine\Decorations\Button;
 
 class NewsResource extends Resource
 {
@@ -29,7 +30,7 @@ class NewsResource extends Resource
 
     public function query(): Builder
     {
-        return News::with(['category']);
+        return News::with(['category', 'source']);
     }
 
     public function fields(): array
@@ -38,10 +39,15 @@ class NewsResource extends Resource
             ID::make()->sortable(),
             Grid::make([
                 Column::make([
+                    Button::make(
+                        'Link to article',
+                        $this->getItem() ? route('parser', $this->getItem()) : '/',
+                        true
+                    )->icon('clip'),
                     Block::make('Информация', [
                         BelongsTo::make('Категоия', 'category_id', 'name')
                             ->sortable(),
-                        Text::make('source')
+                        Text::make('Ресурс', 'source_id', 'name')
                             ->sortable(),
                         Text::make('title', 'title')
                             ->sortable(),

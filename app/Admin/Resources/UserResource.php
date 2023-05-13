@@ -2,6 +2,7 @@
 
 namespace App\Admin\Resources;
 
+use App\Models\Profile;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 
@@ -9,11 +10,13 @@ use MoonShine\Decorations\Block;
 use MoonShine\Decorations\Column;
 use MoonShine\Decorations\Grid;
 use MoonShine\Fields\Date;
+use MoonShine\Fields\Email;
 use MoonShine\Fields\HasOne;
 use MoonShine\Fields\Text;
 use MoonShine\Resources\Resource;
 use MoonShine\Fields\ID;
 use MoonShine\Actions\FiltersAction;
+use VI\MoonShineSpatieMediaLibrary\Fields\MediaLibrary;
 
 class UserResource extends Resource
 {
@@ -21,7 +24,8 @@ class UserResource extends Resource
     public static string $title = 'Пользователи';
     public static string $subTitle = 'Управление пользователями';
     public string $titleField = 'title';
-    public static int $itemsPerPage = 5;
+    public static array $with =['roles', 'profile', 'media'];
+    public static int $itemsPerPage = 2;
     protected bool $editInModal = true;
     protected bool $createInModal = true;
 
@@ -32,13 +36,19 @@ class UserResource extends Resource
             Grid::make([
                 Column::make([
                     Block::make('Информация', [
+                        MediaLibrary::make('Аватар', 'avatars'),
                         Text::make('Имя', 'name'),
-                        Text::make('email'),
+                        Email::make('email'),
                         Date::make('Дата регистрации', 'created_at'),
                         HasOne::make('Роль', 'roles')
                             ->sortable()
                     ])
-                ])
+                ])->columnSpan(6),
+//                Column::make([
+//                    Block::make('Профиль', [
+//                        HasOne::make('Профиль', 'profile')
+//                    ])
+//                ])->columnSpan(6)
             ])
         ];
     }

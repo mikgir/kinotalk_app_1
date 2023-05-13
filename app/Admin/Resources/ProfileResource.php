@@ -23,7 +23,7 @@ class ProfileResource extends Resource
     public static string $title = 'Профиль';
     public static string $subTitle = 'Информация о пользователях';
     public string $titleField = 'last_name';
-    public static int $itemsPerPage = 5;
+    public static int $itemsPerPage = 2;
     protected bool $editInModal = true;
     protected bool $createInModal = true;
 
@@ -36,7 +36,9 @@ class ProfileResource extends Resource
                     Block::make('Содержание', [
                         Text::make('first_name'),
                         Text::make('last_name'),
-                        Text::make('occupation'),
+                        HasOne::make('user', 'user_id'),
+                        Text::make('occupation')
+                            ->hideOnIndex(),
                         Text::make('Город', 'city'),
                         Text::make('Страна', 'country'),
                         Text::make('Вэб сайт', 'website')

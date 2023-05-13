@@ -14,7 +14,12 @@ class ArticleRepository implements ArticleRepositoryInterface
      */
     public function getAll(): Collection
     {
-       return Article::with('user')->get();
+        return Article::with('user')->get();
+    }
+
+    public function getLast()
+    {
+        return Article::last()->getFirstMedia('image')->getPath();
     }
 
     /**
@@ -25,4 +30,6 @@ class ArticleRepository implements ArticleRepositoryInterface
     {
         return Article::with('user')->firstOrFail($id);
     }
+
+
 }
