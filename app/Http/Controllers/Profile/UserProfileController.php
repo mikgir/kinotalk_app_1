@@ -3,25 +3,25 @@
 namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
-use App\Models\Profile;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 class UserProfileController extends Controller
 {
+    use InteractsWithMedia;
+
     /**
      * Display a listing of the resource.
      * @return View
      */
     public function index(): View
     {
-        $user = Auth::user();
+        $user = Auth::user()->with('profile');
 
         return view('profile.index', [
-            'user'=> $user->with('profile'),
+            'user' => $user->with('profile'),
         ]);
     }
 
