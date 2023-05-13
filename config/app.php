@@ -170,6 +170,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\MoonShineServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+        Orchestra\Parser\XmlServiceProvider::class,
     ])->toArray(),
 
     /*
@@ -185,6 +186,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
+        'XmlParser' => Orchestra\Parser\Xml\Facade::class,
     ])->toArray(),
 
 ];
