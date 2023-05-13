@@ -24,7 +24,7 @@ class UserResource extends Resource
     public static string $title = 'Пользователи';
     public static string $subTitle = 'Управление пользователями';
     public string $titleField = 'title';
-    public static array $with =['roles', 'profile'];
+    public static array $with =['roles', 'profile', 'media'];
     public static int $itemsPerPage = 2;
     protected bool $editInModal = true;
     protected bool $createInModal = true;
@@ -36,7 +36,7 @@ class UserResource extends Resource
             Grid::make([
                 Column::make([
                     Block::make('Информация', [
-                        MediaLibrary::make('avatar', 'avatars'),
+                        MediaLibrary::make('Аватар', 'avatars'),
                         Text::make('Имя', 'name'),
                         Email::make('email'),
                         Date::make('Дата регистрации', 'created_at'),
@@ -44,11 +44,11 @@ class UserResource extends Resource
                             ->sortable()
                     ])
                 ])->columnSpan(6),
-                Column::make([
-                    Block::make('Профиль', [
-                        HasOne::make('Профиль', 'profile')
-                    ])
-                ])->columnSpan(6)
+//                Column::make([
+//                    Block::make('Профиль', [
+//                        HasOne::make('Профиль', 'profile')
+//                    ])
+//                ])->columnSpan(6)
             ])
         ];
     }

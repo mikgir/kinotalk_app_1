@@ -19,12 +19,6 @@ class DatabaseSeeder extends Seeder
             PermissionsSeeder::class,
             UsersTableSeeder::class,
             SourceTableSeeder::class,
-            CategoriesTableSeeder::class,
-            ArticlesTableSeeder::class,
-            NewsTableSeeder::class,
-            CommentsTableSeeder::class,
-            ArticleLikesTableSeeder::class,
-            ProfileTableSeeder::class,
         ]);
     }
 }

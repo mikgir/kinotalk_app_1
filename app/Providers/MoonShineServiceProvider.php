@@ -7,6 +7,7 @@ use App\Admin\Resources\CategoryResource;
 use App\Admin\Resources\NewsResource;
 use App\Admin\Resources\ProfileResource;
 use App\Admin\Resources\RoleResource;
+use App\Admin\Resources\SourceResource;
 use App\Admin\Resources\UserResource;
 use Illuminate\Support\ServiceProvider;
 use MoonShine\MoonShine;
@@ -33,6 +34,8 @@ class MoonShineServiceProvider extends ServiceProvider
                     ->icon('heroicons.document-text'),
                 MenuItem::make('Статьи', new ArticleResource())
                     ->icon('heroicons.document-text'),
+                MenuItem::make('Ресурс сайты', new SourceResource())
+                    ->icon('heroicons.newspaper'),
                 MenuItem::make('Новости', new NewsResource())
                     ->icon('heroicons.newspaper'),
             ])->icon('app'),

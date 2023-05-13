@@ -3,18 +3,19 @@
 namespace App\Repositories;
 
 use App\Contracts\ArticleRepositoryInterface;
+use App\Contracts\SourceRepositoryInterface;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Source;
 use Illuminate\Database\Eloquent\Collection;
 
-class SourceRepository implements ArticleRepositoryInterface
+class SourceRepository implements SourceRepositoryInterface
 {
 
     /**
-     * @return Collection|array
+     * @return Collection
      */
-    public function getAll(): Collection|array
+    public function getAll(): Collection
     {
        return Source::all();
     }

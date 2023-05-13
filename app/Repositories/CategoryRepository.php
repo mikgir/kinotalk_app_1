@@ -2,18 +2,18 @@
 
 namespace App\Repositories;
 
-use App\Contracts\ArticleRepositoryInterface;
+use App\Contracts\CategoryRepositoryInterface;
 use App\Models\Article;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Collection;
 
-class CategoryRepository implements ArticleRepositoryInterface
+class CategoryRepository implements CategoryRepositoryInterface
 {
 
     /**
-     * @return Collection|array
+     * @return Collection
      */
-    public function getAll(): Collection|array
+    public function getAll(): Collection
     {
        return Article::with('user')->get();
     }

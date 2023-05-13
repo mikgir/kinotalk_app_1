@@ -85,14 +85,6 @@ class User extends Authenticatable implements ReacterableInterface, HasMedia
         return $this->hasOne(Profile::class);
     }
 
-//    /**
-//     * @return MorphMany
-//     */
-//    public function media(): MorphMany
-//    {
-//        return $this->morphMany(Media::class, 'avatars');
-//    }
-//
     /**
      * @param Media|null $media
      * @return void
