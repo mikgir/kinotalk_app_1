@@ -6,6 +6,7 @@ use App\Models\Profile;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use MoonShine\Decorations\Block;
 use MoonShine\Decorations\Column;
 use MoonShine\Decorations\Grid;
@@ -24,11 +25,17 @@ class UserResource extends Resource
     public static string $title = 'Пользователи';
     public static string $subTitle = 'Управление пользователями';
     public string $titleField = 'title';
-    public static array $with =['roles', 'profile', 'media'];
-    public static int $itemsPerPage = 2;
+    public static int $itemsPerPage = 5;
     protected bool $editInModal = true;
     protected bool $createInModal = true;
 
+    /**
+     * @return Builder
+     */
+    public function query(): Builder
+    {
+        return User::with(['roles', 'profile']);
+    }
     public function fields(): array
     {
         return [
@@ -68,7 +75,7 @@ class UserResource extends Resource
 
     public function filters(): array
     {
-        return [];
+        return ['name', 'roles'];
     }
 
     public function actions(): array

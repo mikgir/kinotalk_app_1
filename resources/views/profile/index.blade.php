@@ -30,7 +30,7 @@
                 <div class="col-7">
                     <div class="card-body">
                         <div class="w-100">
-                            <h3>{{Auth::user()->name}} profile</h3>
+                            <h4>Личная информация {{Auth::user()->name}}</h4>
 
                         </div>
                     </div>
