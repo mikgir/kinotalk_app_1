@@ -2,6 +2,7 @@
 
 namespace App\Admin\Resources;
 
+use App\MoonShine\Actions\ParserAction;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\News;
@@ -39,11 +40,6 @@ class NewsResource extends Resource
             ID::make()->sortable(),
             Grid::make([
                 Column::make([
-                    Button::make(
-                        'Link to article',
-                        $this->getItem() ? route('parser', $this->getItem()) : '/',
-                        true
-                    )->icon('clip'),
                     Block::make('Информация', [
                         BelongsTo::make('Категоия', 'category_id', 'name')
                             ->sortable(),
@@ -109,6 +105,7 @@ class NewsResource extends Resource
     {
         return [
             FiltersAction::make(trans('moonshine::ui.filters')),
+            ParserAction::make('Получить новости'),
         ];
     }
 }

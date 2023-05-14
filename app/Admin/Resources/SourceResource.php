@@ -11,6 +11,7 @@ use MoonShine\Decorations\Column;
 use MoonShine\Decorations\Grid;
 use MoonShine\Fields\BelongsTo;
 use MoonShine\Fields\Date;
+use MoonShine\Fields\SwitchBoolean;
 use MoonShine\Fields\Text;
 use MoonShine\Fields\Url;
 use MoonShine\Fields\TinyMce;
@@ -37,7 +38,7 @@ class SourceResource extends Resource
                     Block::make('Информация', [
                         Text::make('Имя', 'name'),
                         Url::make('Url', 'url'),
-                        Text::make('Статус', 'status'),
+                        SwitchBoolean::make('Статус', 'status'),
                         Date::make('Дата создания', 'created_at')->sortable(),
                         Date::make('Дата изменения', 'updated_at')->sortable()
                     ])
