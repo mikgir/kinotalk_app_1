@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Contracts\ArticleRepositoryInterface;
 use App\Models\Article;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
 
 class ArticleRepository implements ArticleRepositoryInterface
 {
@@ -31,5 +32,9 @@ class ArticleRepository implements ArticleRepositoryInterface
         return Article::with('user')->firstOrFail($id);
     }
 
+    public function createArticle(Request $request)
+    {
+
+    }
 
 }
