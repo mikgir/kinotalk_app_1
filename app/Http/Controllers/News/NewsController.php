@@ -13,7 +13,7 @@ class NewsController extends Controller
     public $newsRepository;
     public $categoryRepository;
 
-    public function __construct(NewsRepository $newsRepository,
+    public function __construct(NewsRepository     $newsRepository,
                                 CategoryRepository $categoryRepository)
     {
         $this->newsRepository = $newsRepository;
@@ -30,9 +30,9 @@ class NewsController extends Controller
         return view('news.index', compact('categories'));
     }
 
-    public function show(News $news): View
+    public function show($id): View
     {
-        $news=$this->newsRepository->getOne($news);
+        $news = $this->newsRepository->getOne($id);
         return view('news.show', compact('news'));
     }
 }

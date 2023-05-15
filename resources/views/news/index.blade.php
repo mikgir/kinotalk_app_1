@@ -45,12 +45,12 @@
                                     <div class="swiper-slide">
                                         <div class="trending__post">
                                             <div class="trending__post-thumb tgImage__hover">
-                                                <a href="#" class="image">
+                                                <a href="{{route('news.show', $item->id)}}" class="image">
                                                     <img src="{{asset($item->image)}}" alt="img">
                                                 </a>
                                             </div>
                                             <div class="trending__post-content">
-                                                <h4 class="title tgcommon__hover"><a href="#">{{$item->title}}</a></h4>
+                                                <h4 class="title tgcommon__hover"><a href="{{route('news.show', $item->id)}}">{{$item->title}}</a></h4>
                                             </div>
                                         </div>
                                     </div>

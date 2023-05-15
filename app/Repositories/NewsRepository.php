@@ -6,6 +6,7 @@ use App\Contracts\NewsRepositoryInterface;
 use App\Models\Category;
 use App\Models\News;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 
 
 class NewsRepository implements NewsRepositoryInterface
@@ -22,13 +23,12 @@ class NewsRepository implements NewsRepositoryInterface
 
 
     /**
-     * @param News $news
-     * @return Builder
+     * @param $id
+     * @return object
      */
-    public function getOne(News $news): Builder
+    public function getOne($id): object
     {
-        return News::with('category')
-            ->firstOrFail($news);
+        return News::with('category')->findOrFail($id);
     }
 
     public function getOrCreateByParser(array $data): void
