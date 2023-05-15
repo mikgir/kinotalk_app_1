@@ -8,7 +8,6 @@ use App\Repositories\NewsRepository;
 use App\Repositories\SourceRepository;
 use Illuminate\Support\Str;
 use Orchestra\Parser\Xml\Facade as Parser;
-use Goutte\Client;
 
 class KinonewsParserService implements Contract
 {
@@ -22,7 +21,7 @@ class KinonewsParserService implements Contract
      * @param string $url
      * @return array
      */
-    public function getData(string $url = 'https://www.kinonews.ru/rss'): array
+    public function getData(string $url): array
     {
         $xml = Parser::load($url);
          $data = $xml->parse([
@@ -83,23 +82,28 @@ class KinonewsParserService implements Contract
      */
     public function getNews(string $link): array
     {
-        $client = new Client();
+        $sh = curl_init($link);
+
+        curl_setopt($sh, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($sh, CURLOPT_HEADER, false);
+        $result = curl_exec($sh);
+
+        $dom = new \DOMDocument();
+        libxml_use_internal_errors(true);
+        $dom->loadHTML($result);
+        libxml_use_internal_errors(false);
+
+        $xpath = new \DOMXPath($dom);
         $news =[];
 
-        $crawler = $client->request('GET', $link);
+        $node = $xpath->query('//*[@id="current_news"]/div/h1', $dom)->item(0);
+        $news['title'] = ($node->textContent);
 
-        $news['title'] = $crawler->filter('h1')->each(function ($node) {
-            return $node->text();
-        })[0];
+        $node = $xpath->query('//*[@id="current_news"]/div/div[2]/img/@src', $dom)->item(0);
+        $news['image'] = $this->url . ($node->textContent);
 
-        $news['image'] = $crawler->filter('.txt_bigimg> img')->each(function ($node) {
-            $image = $node->attr("src");
-            return $this->url . $image;
-        })[0];
-
-        $news['body'] = $crawler->filter('.textart')->each(function ($node) {
-            return ($node->text());
-        })[0];
+        $nodes = $xpath->query('//*[@id="current_news"]/div/div[4]/div[1]', $dom)->item(0);
+        $news['body'] = str_replace('\r\n', '', $nodes->textContent);
 
         $news['excerpt'] = Str::substr($news['body'], 0, 100);
 

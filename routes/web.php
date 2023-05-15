@@ -40,6 +40,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [UserProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-//Route::get('/parser', \App\Http\Controllers\Admin\ParserController::class)->name('parser');
-
 require __DIR__.'/auth.php';

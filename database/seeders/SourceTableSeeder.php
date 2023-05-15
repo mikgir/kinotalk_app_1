@@ -25,7 +25,7 @@ class SourceTableSeeder extends Seeder
                 'id' => $source['id'],
                 'name' => $source['name'],
                 'url' => $source['url'],
-                'status' => 'ACTIVE',
+                'status' => 'INACTIVE',
                 'created_at' => now(),
             ]);
         }
