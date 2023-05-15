@@ -2,38 +2,45 @@
 
 namespace App\Repositories;
 
-use App\Contracts\ArticleRepositoryInterface;
 use App\Contracts\NewsRepositoryInterface;
-use App\Models\Article;
+use App\Models\Category;
 use App\Models\News;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Builder;
+
 
 class NewsRepository implements NewsRepositoryInterface
 {
 
     /**
-     * @return Collection
+     * @return Builder
      */
-    public function getAll(): Collection
+    public function getAll(): Builder
     {
-       return Article::with('user')->get();
+        return News::with('category')
+            ->orderBy('created_at', 'DESC');
     }
 
-    public function getOne()
+
+    /**
+     * @param News $news
+     * @return Builder
+     */
+    public function getOne(News $news): Builder
     {
-        // TODO: Implement getOne() method.
+        return News::with('category')
+            ->firstOrFail($news);
     }
 
     public function getOrCreateByParser(array $data): void
     {
         News::firstOrCreate([
             'category_id' => $data['category_id'],
-                'source_id' => $data['source_id'],
-                'title' => $data['title'],
-                'excerpt' => $data['excerpt'],
-                'body' => $data['body'],
-                'image' => $data['image'],
-                'status' => 'PUBLISHED',
+            'source_id' => $data['source_id'],
+            'title' => $data['title'],
+            'excerpt' => $data['excerpt'],
+            'body' => $data['body'],
+            'image' => $data['image'],
+            'status' => 'PUBLISHED',
         ]);
     }
 }

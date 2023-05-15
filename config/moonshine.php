@@ -41,7 +41,7 @@ return [
     'middlewares' => [],
     'tinymce' => [
         'file_manager' => true, // or 'laravel-filemanager' prefix for lfm
-        'token' => env('MOONSHINE_TINYMCE_TOKEN', ''),
+        'token' => env('MOONSHINE_TINYMCE_TOKEN', 'g6okvokn88t9v398bwbnryk9i0ixpaz3jgx2m3n0sdgj4ayd'),
         'version' => env('MOONSHINE_TINYMCE_VERSION', '6')
     ],
     'socialite' => [

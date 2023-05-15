@@ -5,7 +5,9 @@ namespace App\Repositories;
 use App\Contracts\CategoryRepositoryInterface;
 use App\Models\Article;
 use App\Models\Category;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 class CategoryRepository implements CategoryRepositoryInterface
 {
@@ -15,12 +17,33 @@ class CategoryRepository implements CategoryRepositoryInterface
      */
     public function getAll(): Collection
     {
-       return Article::with('user')->get();
+        return Category::all();
     }
 
-    public function getOne()
+    /**
+     * @param $id
+     * @return Model|Builder
+     */
+    public function getOne($id): Model|Builder
     {
-        // TODO: Implement getOne() method.
+        return Category::with('articles')
+            ->firstOrFail($id);
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getAllWithArticles(): Collection
+    {
+        return Category::with('articles')->get();
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getAllWithNews(): Collection
+    {
+        return Category::with('news')->get();
     }
 
     public function getCategoryIdByName(string $name): int
