@@ -8,7 +8,9 @@ use App\Repositories\SourceRepository;
 
 interface Parser
 {
-    public function __construct(CategoryRepository $categoryRepository,SourceRepository $sourceRepository,NewsRepository $newsRepository);
+    public function __construct(CategoryRepository $categoryRepository,
+                                SourceRepository $sourceRepository,
+                                NewsRepository $newsRepository);
 
     /**
      * @return array

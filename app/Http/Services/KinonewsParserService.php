@@ -13,7 +13,9 @@ class KinonewsParserService implements Contract
 {
     public string $url = 'https://www.kinonews.ru';
 
-    public function __construct(public CategoryRepository $categoryRepository, public SourceRepository $sourceRepository, public NewsRepository $newsRepository)
+    public function __construct(public CategoryRepository $categoryRepository,
+                                public SourceRepository $sourceRepository,
+                                public NewsRepository $newsRepository)
     {}
 
     /**

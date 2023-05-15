@@ -7,11 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Article;
 
 use MoonShine\Decorations\Block;
+use MoonShine\Decorations\Collapse;
 use MoonShine\Decorations\Column;
+use MoonShine\Decorations\Flex;
 use MoonShine\Decorations\Grid;
+use MoonShine\Decorations\Tab;
+use MoonShine\Decorations\Tabs;
 use MoonShine\Fields\BelongsTo;
 use MoonShine\Fields\Date;
 use MoonShine\Fields\Image;
+use MoonShine\Fields\Slug;
+use MoonShine\Fields\SwitchBoolean;
 use MoonShine\Fields\Text;
 use MoonShine\Fields\Textarea;
 use MoonShine\Fields\TinyMce;
@@ -26,14 +32,12 @@ class ArticleResource extends Resource
     public static string $title = 'Статьи';
     public static string $subTitle = 'Управление статьями';
     public string $titleField = 'title';
+    public static array $with = [
+        'user',
+        'category'
+    ];
     public static int $itemsPerPage = 5;
-    protected bool $editInModal = true;
-    protected bool $createInModal = true;
 
-    public function query(): Builder
-    {
-        return Article::with(['category', 'user']);
-    }
 
     public function fields(): array
     {
@@ -41,15 +45,55 @@ class ArticleResource extends Resource
             ID::make()->sortable(),
             Grid::make([
                 Column::make([
-                    Block::make('Информация', [
+                    Block::make('Основная информация', [
+                        Collapse::make('Заголовок/Slug', [
+                            Flex::make([
+                                Text::make('title', 'title')
+                                    ->sortable(),
+                                Slug::make('Slug')
+                                    ->from('title')
+                                    ->separator('-')
+                                    ->unique(),
+                            ]),
+                        ]),
+                        Tabs::make([
+                            Tab::make('Описание', [
+                                TinyMce::make('Описание', 'body')
+                                    // Переопределить набор плагинов
+                                    ->plugins('anchor')
+                                    // Переопределить набор toolbar
+                                    ->toolbar('undo redo | blocks fontfamily fontsize')
+                                    // Теги
+                                    ->mergeTags([
+                                        ['value' => 'tag', 'title' => 'Title']
+                                    ])
+                                    // Переопределение текущей локали
+                                    ->locale('ru')
+                                    ->hideOnIndex(),
+                            ]),
+                            Tab::make('SEO', [
+                                Text::make('Seo title')
+                                    ->sortable(),
+                            ])
+                        ]),
+
+                    ])
+                ])->columnSpan(7),
+                Column::make([
+                    Block::make('Дополнительная информация', [
+                        MediaLibrary::make('Изображение', 'sm_image')
+                            ->removable()
+                            ->multiple()
+                            ->dir('articles'),
                         BelongsTo::make('Категоия', 'category_id', 'name')
+                            ->searchable()
                             ->sortable(),
-                        BelongsTo::make('Автор', 'user_id', 'name')->sortable(),
-                        Text::make('title', 'title')
+                        BelongsTo::make('Автор', 'user_id', 'name')
+                            ->searchable()
                             ->sortable(),
+                        SwitchBoolean::make('Опубликовать', 'status',
+                            fn($item) => $item->status === 'PABLIC' ? $item->status = 'PUBLIC' : $item->status = 'PENDING'),
                         Text::make('статус', 'status'),
-                        Text::make('seo title')
-                            ->sortable(),
                         Date::make('Дата создания', 'created_at')
                             ->format('d.m.Y')
                             ->sortable(),
@@ -57,29 +101,7 @@ class ArticleResource extends Resource
                             ->format('d.m.Y')
                             ->sortable()
                     ])
-                ])->columnSpan(6),
-                Column::make([
-                    Block::make('Содержание', [
-                        MediaLibrary::make('Изображение', 'sm_image')
-                            ->multiple(),
-                        TinyMce::make('body')
-                            // Переопределить набор плагинов
-                            ->plugins('anchor')
-                            // Добавление плагинов в базовый набор
-                            ->addPlugins('code codesample')
-                            // Переопределить набор toolbar
-                            ->toolbar('undo redo | blocks fontfamily fontsize')
-                            // Добавление toolbar в базовый набор
-                            ->addToolbar('code codesample')
-                            // Теги
-                            ->mergeTags([
-                                ['value' => 'tag', 'title' => 'Title']
-                            ])
-                            // Переопределение текущей локали
-                            ->locale('ru')
-                            ->hideOnIndex(),
-                    ])
-                ])->columnSpan(6)
+                ])->columnSpan(5)
             ]),
         ];
     }

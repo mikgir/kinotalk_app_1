@@ -17,13 +17,13 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 /**
  * Class Category
  *
- * @property int                  $id
- * @property int                  $order
- * @property string               $name
- * @property string               $slug
- * @property Carbon|null          $created_at
- * @property Carbon|null          $updated_at
- * @property string|null          $deleted_at
+ * @property int $id
+ * @property int $order
+ * @property string $name
+ * @property string $slug
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property string|null $deleted_at
  *
  * @property Collection|Article[] $articles
  *
@@ -52,6 +52,11 @@ class Category extends Model implements HasMedia
         return $this->hasMany(Article::class);
     }
 
+    public function news():HasMany
+    {
+        return $this->hasMany(News::class);
+    }
+
 
     /**
      * @throws InvalidManipulation
@@ -66,6 +71,7 @@ class Category extends Model implements HasMedia
             ->fit(Manipulations::FIT_CROP, 200, 200)
             ->nonQueued();
     }
+
     /**
      * @return \string[][]
      */

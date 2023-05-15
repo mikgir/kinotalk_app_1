@@ -7,7 +7,7 @@ interface CategoryRepositoryInterface
 {
     public function getAll();
 
-    public function getOne();
+    public function getOne($id);
 
 
 }
