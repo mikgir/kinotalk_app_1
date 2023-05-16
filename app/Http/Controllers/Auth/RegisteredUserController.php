@@ -11,10 +11,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Permission\Traits\HasRoles;
 
 class RegisteredUserController extends Controller
 {
+    use HasRoles;
+    use InteractsWithMedia;
     /**
      * Display the registration view.
      */
@@ -26,7 +31,7 @@ class RegisteredUserController extends Controller
     /**
      * Handle an incoming registration request.
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function store(Request $request): RedirectResponse
     {
@@ -41,6 +46,12 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+        if ($request->hasFile('avatar')) {
+            $user->addMediaFromRequest('avatar')
+                ->toMediaCollection('avatars');
+        }
+
+        $user->assignRole('user');
 
         event(new Registered($user));
 

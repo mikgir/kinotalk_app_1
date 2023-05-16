@@ -1,0 +1,10 @@
+<link rel="stylesheet" href="{{asset('build/assets/src/assets/css/bootstrap.min.css')}}">
+<link rel="stylesheet" href="{{asset('build/assets/src/assets/css/animate.min.css')}}">
+<link rel="stylesheet" href="{{asset('build/assets/src/assets/css/magnific-popup.css')}}">
+<link rel="stylesheet" href="{{asset('build/assets/src/assets/css/fontawesome-all.min.css')}}">
+<link rel="stylesheet" href="{{asset('build/assets/src/assets/css/imageRevealHover.css')}}">
+<link rel="stylesheet" href="{{asset('build/assets/src/assets/css/swiper-bundle.css')}}">
+<link rel="stylesheet" href="{{asset('build/assets/src/assets/css/flaticon.css')}}">
+<link rel="stylesheet" href="{{asset('build/assets/src/assets/css/slick.css')}}">
+<link rel="stylesheet" href="{{asset('build/assets/src/assets/css/spacing.css')}}">
+<link rel="stylesheet" href="{{asset('build/assets/src/assets/css/main.css')}}">
