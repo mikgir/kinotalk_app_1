@@ -46,7 +46,7 @@
                                         <div class="blog-details-tags">
                                             <ul class="list-wrap mb-0">
                                                 <li><a href="{{route('news')}}">Новости</a></li>
-                                                <li><a href="#">Кино</a></li>
+                                                <li><a href="{{route('news')}}">{{$news->category->name}}</a></li>
                                             </ul>
                                         </div>
                                     </div>

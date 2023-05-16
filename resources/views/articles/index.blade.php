@@ -27,21 +27,21 @@
                         <div class="blog-post-wrapper">
                             <div class="latest__post-item">
                                 <div class="latest__post-thumb tgImage__hover">
-                                    <a href="{{route('show')}}"><img src="{{asset('build/assets/src/assets/img/lifestyle/MrsMaisel.png')}}" alt="img"></a>
+                                    <a href="#"><img src="{{asset('build/assets/src/assets/img/lifestyle/MrsMaisel.png')}}" alt="img"></a>
                                 </div>
                                 <div class="latest__post-content">
                                     <ul class="tgbanner__content-meta list-wrap">
-                                        <li class="category"><a href="{{route('show')}}">Статья: "Удивительной миссис Мейзел"</a></li>
+                                        <li class="category"><a href="#">Статья: "Удивительной миссис Мейзел"</a></li>
                                         <li><span class="by">Автор:</span><a href="blog.html">Любовь и Сериалы</a></li>
                                         <li>05.05.2023</li>
                                     </ul>
-                                    <h3 class="title tgcommon__hover"><a href="{{route('show')}}">Не все без ума от Мидж: Каким вышел четвертый сезон «Удивительной миссис Мейзел»?</a></h3>
+                                    <h3 class="title tgcommon__hover"><a href="#">Не все без ума от Мидж: Каким вышел четвертый сезон «Удивительной миссис Мейзел»?</a></h3>
                                     <p>Одно из главных обстоятельств новых восьми эпизодов, которое может вызвать протест, — исчезновение центра притяжения.
                                         Поначалу им был клуб «Газлайт», во втором сезоне — курорт Катскилл, окутанный пеленой объяснений с родителями, а в третьем — турне и навык жизни в дороге.
                                         Теперь Мидж отдана самой себе: комикесса находит постоянную работу в нелегальном стриптиз-клубе и отказывается от предложений открывать концерты больших звезд
                                         (и даже выступать на разогреве у своей заклятой врагини Софи Леннон). </p>
                                     <div class="latest__post-read-more">
-                                        <a href="{{route('show')}}">Читать дальше <i class="far fa-long-arrow-right"></i></a>
+                                        <a href="#">Читать дальше <i class="far fa-long-arrow-right"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -87,7 +87,7 @@
                                 </div>
                                 <div class="latest__post-content">
                                     <ul class="tgbanner__content-meta list-wrap">
-                                        <li class="category"><a href="article-details.html>Статья: "Фишер"</a></li>
+                                        <li class="category"><a href="article-details.html">Статья: "Фишер"</a></li>
                                         <li><span class="by">Автор:</span><a href="blog.html">Любовь и Сериалы</a></li>
                                         <li>05.05.2023</li>
                                     </ul>
