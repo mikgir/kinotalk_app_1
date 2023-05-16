@@ -15,7 +15,11 @@ use MoonShine\Decorations\Tab;
 use MoonShine\Decorations\Tabs;
 use MoonShine\Fields\BelongsTo;
 use MoonShine\Fields\Date;
+use MoonShine\Fields\Enum;
 use MoonShine\Fields\Image;
+use MoonShine\Fields\NoInput;
+use MoonShine\Fields\Number;
+use MoonShine\Fields\Select;
 use MoonShine\Fields\Slug;
 use MoonShine\Fields\SwitchBoolean;
 use MoonShine\Fields\Text;
@@ -43,17 +47,21 @@ class ArticleResource extends Resource
     {
         return [
             ID::make()->sortable(),
+            NoInput::make( 'статус', 'status',
+                static fn($item)=> $item->status == 'PUBLISHED')
+                ->boolean(),
             Grid::make([
                 Column::make([
                     Block::make('Основная информация', [
                         Collapse::make('Заголовок/Slug', [
                             Flex::make([
-                                Text::make('title', 'title')
+                                Text::make('Заголовок', 'title')
                                     ->sortable(),
                                 Slug::make('Slug')
                                     ->from('title')
                                     ->separator('-')
-                                    ->unique(),
+                                    ->unique()
+                                    ->hideOnIndex(),
                             ]),
                         ]),
                         Tabs::make([
@@ -73,7 +81,7 @@ class ArticleResource extends Resource
                             ]),
                             Tab::make('SEO', [
                                 Text::make('Seo title')
-                                    ->sortable(),
+                                    ->hideOnIndex(),
                             ])
                         ]),
 
@@ -83,23 +91,23 @@ class ArticleResource extends Resource
                     Block::make('Дополнительная информация', [
                         MediaLibrary::make('Изображение', 'sm_image')
                             ->removable()
-                            ->multiple()
-                            ->dir('articles'),
+                            ->multiple(),
                         BelongsTo::make('Категоия', 'category_id', 'name')
                             ->searchable()
                             ->sortable(),
                         BelongsTo::make('Автор', 'user_id', 'name')
                             ->searchable()
                             ->sortable(),
-                        SwitchBoolean::make('Опубликовать', 'status',
-                            fn($item) => $item->status === 'PABLIC' ? $item->status = 'PUBLIC' : $item->status = 'PENDING'),
-                        Text::make('статус', 'status'),
+                        Number::make('Рейтинг', 'love_reactant_id')
+                            ->stars(),
+                        SwitchBoolean::make('Блокировка', 'active'),
                         Date::make('Дата создания', 'created_at')
                             ->format('d.m.Y')
                             ->sortable(),
                         Date::make('Дата обновления', 'updated_at')
                             ->format('d.m.Y')
                             ->sortable()
+                            ->hideOnIndex()
                     ])
                 ])->columnSpan(5)
             ]),

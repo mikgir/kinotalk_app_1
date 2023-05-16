@@ -43,12 +43,12 @@ class NewsResource extends Resource
                     Block::make('Информация', [
                         BelongsTo::make('Категоия', 'category_id', 'name')
                             ->sortable(),
-                        Text::make('Ресурс', 'source_id', 'name')
+                        BelongsTo::make('Ресурс', 'source_id', 'url')
                             ->sortable(),
                         Text::make('title', 'title')
                             ->sortable(),
                         Text::make('seo title')
-                            ->sortable(),
+                            ->hideOnIndex(),
                         Date::make('Дата создания', 'created_at')
                             ->format('d.m.Y')
                             ->sortable(),
