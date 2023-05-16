@@ -9,7 +9,7 @@ interface NewsRepositoryInterface
 {
     public function getAll();
 
-    public function getOne(News $news);
+    public function getOne($id);
 
 
 }

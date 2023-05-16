@@ -23,10 +23,14 @@ use Illuminate\Support\Facades\Route;
 //});
 Route::get('/', [MainController::class, 'index'])->name('main');
 Route::get('/articles', [ArticleController::class, 'index'])->name('articles');
-Route::get('/articles/show', [ArticleController::class, 'show'])->name('show');
+Route::get('/articles/{id}', [ArticleController::class, 'show'])
+    ->where('id', '\d+')
+    ->name('articles.show');
 Route::get('/authors', [AuthorController::class, 'index'])->name('authors');
 Route::get('/news', [NewsController::class, 'index'])->name('news');
-Route::get('/news/show', [NewsController::class, 'show'])->name('show');
+Route::get('/news/{id}', [NewsController::class, 'show'])
+    ->where('id', '\d+')
+    ->name('news.show');
 
 
 //Route::get('/dashboard', function () {
