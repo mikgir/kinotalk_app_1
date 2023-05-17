@@ -68,9 +68,9 @@ class ArticleResource extends Resource
                             Tab::make('Описание', [
                                 TinyMce::make('Описание', 'body')
                                     // Переопределить набор плагинов
-                                    ->plugins('anchor')
+                                    ->plugins('anchor autoresize image link fullscreen preview visualblocks')
                                     // Переопределить набор toolbar
-                                    ->toolbar('undo redo | blocks fontfamily fontsize')
+                                    ->toolbar('undo redo | blocks fontfamily fontsize | link image media | fullscreen preview visualblocks')
                                     // Теги
                                     ->mergeTags([
                                         ['value' => 'tag', 'title' => 'Title']

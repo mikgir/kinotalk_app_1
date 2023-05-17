@@ -15,15 +15,20 @@ use MoonShine\Fields\Date;
 use MoonShine\Fields\Email;
 use MoonShine\Fields\HasMany;
 use MoonShine\Fields\MorphMany;
+use MoonShine\Fields\NoInput;
 use MoonShine\Fields\Text;
+use MoonShine\ItemActions\ItemAction;
 use MoonShine\Resources\Resource;
 use MoonShine\Fields\ID;
 use MoonShine\Actions\FiltersAction;
+use Spatie\Permission\Traits\HasRoles;
 use VI\MoonShineSpatieMediaLibrary\Fields\MediaLibrary;
 
 
 class UserResource extends Resource
 {
+    use HasRoles;
+
     public static string $model = User::class;
     public static string $title = 'Пользователи';
     public static string $subTitle = 'Управление пользователями';
@@ -43,6 +48,7 @@ class UserResource extends Resource
             'media'
         ]);
     }
+
     public function fields(): array
     {
         return [
@@ -73,8 +79,8 @@ class UserResource extends Resource
     public function rules(Model $item): array
     {
         return [
-            'name'=>['required', 'string'],
-            'email'=>['required', 'string']
+            'name' => ['required', 'string'],
+            'email' => ['required', 'string']
         ];
     }
 
@@ -92,6 +98,48 @@ class UserResource extends Resource
     {
         return [
             FiltersAction::make(trans('moonshine::ui.filters')),
+        ];
+    }
+
+    public function itemActions(): array
+    {
+        return [
+            ItemAction::make('Блок +', function (Model $item) {
+                $item->update(['active' => false]);
+            }, 'Заблокирован')
+                ->withConfirm()
+                ->icon('heroicons.outline.user-minus'),
+            ItemAction::make('Блок -', function (Model $item) {
+                $item->update(['active' => true]);
+            }, 'Разблокирован')
+                ->withConfirm()
+                ->icon('heroicons.user-plus'),
+            ItemAction::make('Автор +', function (Model $item) {
+                if ($item->hasRole(['user', 'moderator'])) {
+                    $item->syncRoles(['user', 'moderator', 'author']);
+                }
+                $item->syncRoles(['user', 'author']);
+            }, 'Зарегистрирован автором')
+                ->withConfirm()
+                ->icon('heroicons.pencil-square'),
+            ItemAction::make('Автор -', function (Model $item) {
+                $item->removeRole('author');
+            }, 'Автор удален')
+                ->withConfirm()
+                ->icon('heroicons.outline.pencil-square'),
+            ItemAction::make('Модератор +', function (Model $item) {
+                if ($item->hasRole(['user', 'author'])) {
+                    $item->syncRoles(['user', 'moderator', 'author']);
+                }
+                $item->syncRoles(['user', 'moderator']);
+            }, 'Зарегистрирован модератором')
+                ->withConfirm()
+                ->icon('heroicons.academic-cap'),
+            ItemAction::make('Модератор -', function (Model $item) {
+                $item->removeRole('moderator');
+            }, 'Модератор удален')
+                ->withConfirm()
+                ->icon('heroicons.outline.academic-cap'),
         ];
     }
 }

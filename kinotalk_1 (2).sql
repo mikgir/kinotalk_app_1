@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 17 2023 г., 12:44
+-- Время создания: Май 17 2023 г., 17:40
 -- Версия сервера: 10.4.26-MariaDB
 -- Версия PHP: 8.1.9
 
@@ -53,11 +53,11 @@ CREATE TABLE `articles` (
 --
 
 INSERT INTO `articles` (`id`, `user_id`, `category_id`, `title`, `seo_title`, `excerpt`, `body`, `image`, `slug`, `meta_description`, `meta_keywords`, `status`, `featured`, `created_at`, `updated_at`, `deleted_at`, `love_reactant_id`, `active`) VALUES
-(1, 11, 5, 'Не все без ума от Мидж: Каким вышел четвертый сезон «Удивительной миссис Мейзел»?', NULL, NULL, '<pre>Одно из главных обстоятельств новых восьми эпизодов, которое может вызвать протест,<br>&mdash; исчезновение центра притяжения.<br>Поначалу им был клуб &laquo;Газлайт&raquo;, во втором сезоне &mdash; курорт Катскилл,&nbsp;окутанный пеленой <br>объяснений с родителями, а в третьем &mdash; турне и навык жизни в дороге.<br>Теперь Мидж отдана самой себе: комикесса находит постоянную работу в нелегальном <br>стриптиз-клубе и отказывается от предложений открывать концерты больших звезд<br>(и даже выступать на разогреве у своей заклятой врагини Софи Леннон).</pre>', NULL, 'ne-vse-bez-uma-ot-midz-kakim-vysel-cetvertyi-sezon-udivitelnoi-missis-meizel', NULL, NULL, 'PENDING', 0, '2023-05-15 21:00:00', '2023-05-15 21:00:00', NULL, 1, 0),
-(2, 12, 4, 'В&nbsp;трейлере фильма &laquo;Марвелы&raquo; намекнули на&nbsp;Стражей Галактики?', NULL, NULL, '<pre>Студия Марвел представила первый трейлер экранизации комиксов \"Марвелы\", и в нем содержатся некоторые элементы, намекающие<br>на связь с другими популярным фильмом - \"Стражи Галактики\".</pre>', NULL, 'vnbsptreilere-filma-laquomarvelyraquo-nameknuli-nanbspstrazei-galaktiki', NULL, NULL, 'DRAFT', 0, '2023-05-16 21:00:00', NULL, NULL, 2, 0),
-(3, 11, 2, '&laquo;Очень странные дела&raquo; станут анимационным сериалом?', NULL, NULL, '<pre>Netflix объявил о работе над анимационным сериалом по вселенной &laquo;Очень странных дел&raquo;. Автором мультсериала выступит Эрик Роблз,<br>продюсерами станут братья Мэтт и Росс Дафферы, а их компания Upside Down Pictures займется производством, сообщает Variety</pre>', NULL, 'laquoocen-strannye-delaraquo-stanut-animacionnym-serialom', NULL, NULL, 'DRAFT', 0, NULL, NULL, NULL, 3, 0),
-(4, 11, 2, 'Фишер, это жуткий сериал, про манька который убивал..', NULL, NULL, '<pre>В названии основанного на реальных событиях сериала скрывается имя маньяка, которого ищут следователи. Фишер &mdash; прозвище Сергея Головкина.<br>Жертвами преступника с 1986-го по 1992 год в Одинцовском районе Московской области стали как минимум 11 мальчиков и юношей.</pre>', NULL, 'fiser-eto-zutkii-serial-pro-manka-kotoryi-ubival', NULL, NULL, 'DRAFT', 0, '2023-05-16 21:00:00', NULL, NULL, 4, 0),
-(5, 6, 1, '«Океаны» предлагают зрителю заглянуть в волшебный...', NULL, NULL, '<pre>&laquo;Как можно искупить преступления ловцов, срезающих живым акулам плавники и бросающих их обратно в воду, оставляя погибать от шока и удушья?&raquo; &mdash;<br>сказала в одном интервью вокалистка Dead Can Dance и обладательница чарующего голоса Лайза Джеррард.</pre>', NULL, 'okeany-predlagaiut-zriteliu-zaglianut-v-volsebnyi', NULL, NULL, 'DRAFT', 0, '2023-05-16 21:00:00', NULL, NULL, 5, 0);
+(1, 11, 5, 'Не все без ума от Мидж: Каким вышел четвертый сезон «Удивительной миссис Мейзел»?', NULL, NULL, '<p><span style=\"font-size: 18pt;\">Одно из главных обстоятельств новых восьми эпизодов, которое может вызвать протест, </span><span style=\"font-size: 18pt;\">&mdash; исчезновение центра притяжения.</span><br><span style=\"font-size: 18pt;\">Поначалу им был клуб &laquo;Газлайт&raquo;, во втором сезоне &mdash; курорт Катскилл, окутанный пеленой </span><span style=\"font-size: 18pt;\">объяснений с родителями, а в третьем &mdash; турне и навык жизни в дороге.</span><br><span style=\"font-size: 18pt;\">Теперь Мидж отдана самой себе: комикесса находит постоянную работу в нелегальном </span><span style=\"font-size: 18pt;\">стриптиз-клубе и отказывается от предложений открывать концерты больших звезд </span><span style=\"font-size: 18pt;\">(и даже выступать на разогреве у своей заклятой врагини Софи Леннон).</span></p>', NULL, 'ne-vse-bez-uma-ot-midz-kakim-vysel-cetvertyi-sezon-udivitelnoi-missis-meizel', NULL, NULL, 'PENDING', 0, '2023-05-15 21:00:00', '2023-05-16 21:00:00', NULL, 1, 0),
+(2, 12, 4, 'В&nbsp;трейлере фильма &laquo;Марвелы&raquo; намекнули на&nbsp;Стражей Галактики?', NULL, NULL, '<p><span style=\"font-size: 18pt;\">Студия Марвел представила первый трейлер экранизации комиксов \"Марвелы\", и в нем содержатся некоторые элементы, намекающие</span><br><span style=\"font-size: 18pt;\">на связь с другими популярным фильмом - \"Стражи Галактики\".</span></p>', NULL, 'vnbsptreilere-filma-laquomarvelyraquo-nameknuli-nanbspstrazei-galaktiki', NULL, NULL, 'DRAFT', 0, '2023-05-16 21:00:00', '2023-05-17 07:42:14', NULL, 2, 0),
+(3, 11, 2, '&laquo;Очень странные дела&raquo; станут анимационным сериалом?', NULL, NULL, '<p><span style=\"font-size: 18pt;\">Netflix объявил о работе над анимационным сериалом по вселенной &laquo;Очень странных дел&raquo;. Автором мультсериала выступит Эрик Роблз,</span><br><span style=\"font-size: 18pt;\">продюсерами станут братья Мэтт и Росс Дафферы, а их компания Upside Down Pictures займется производством, сообщает Variety</span></p>', NULL, 'laquoocen-strannye-delaraquo-stanut-animacionnym-serialom', NULL, NULL, 'DRAFT', 0, NULL, '2023-05-17 07:41:34', NULL, 3, 0),
+(4, 11, 2, 'Фишер, это жуткий сериал, про манька который убивал..', NULL, NULL, '<p><span style=\"font-size: 18pt;\">В названии основанного на реальных событиях сериала скрывается имя маньяка, которого ищут следователи. Фишер &mdash; прозвище Сергея Головкина.</span><br><span style=\"font-size: 18pt;\">Жертвами преступника с 1986-го по 1992 год в Одинцовском районе Московской области стали как минимум 11 мальчиков и юношей.</span></p>', NULL, 'fiser-eto-zutkii-serial-pro-manka-kotoryi-ubival', NULL, NULL, 'DRAFT', 0, '2023-05-16 21:00:00', '2023-05-17 07:40:58', NULL, 4, 0),
+(5, 6, 1, '«Океаны» предлагают зрителю заглянуть в волшебный...', NULL, NULL, '<p><span style=\"font-size: 18pt;\">&laquo;Как можно искупить преступления ловцов, срезающих живым акулам плавники и бросающих их обратно в воду, оставляя погибать от шока и удушья?&raquo; &mdash;</span><br><span style=\"font-size: 18pt;\">сказала в одном интервью вокалистка Dead Can Dance и обладательница чарующего голоса Лайза Джеррард.</span></p>', NULL, 'okeany-predlagaiut-zriteliu-zaglianut-v-volsebnyi', NULL, NULL, 'DRAFT', 0, '2023-05-16 21:00:00', '2023-05-17 07:38:01', NULL, 5, 0);
 
 -- --------------------------------------------------------
 
@@ -365,6 +365,15 @@ INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (2, 'App\\Models\\User', 2),
 (3, 'App\\Models\\User', 3),
 (3, 'App\\Models\\User', 4),
+(3, 'App\\Models\\User', 6),
+(3, 'App\\Models\\User', 7),
+(3, 'App\\Models\\User', 8),
+(3, 'App\\Models\\User', 9),
+(3, 'App\\Models\\User', 10),
+(3, 'App\\Models\\User', 11),
+(3, 'App\\Models\\User', 12),
+(3, 'App\\Models\\User', 13),
+(3, 'App\\Models\\User', 14),
 (4, 'App\\Models\\User', 5),
 (4, 'App\\Models\\User', 6),
 (4, 'App\\Models\\User', 7),
@@ -796,10 +805,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `love_reacter_id`, `deleted_at`, `active`) VALUES
-(1, 'Admin', 'admin@admin.com', NULL, '$2y$10$G5dn0a3GgRgJ8do9PcY1vO6DXp//8COt1y5dDQ8ImecizoTJah9Su', 'KShZoPojEDwJQQYdYCsWriA0rut0KBhlzkRNqkId3aPgpTSByiXV1SWUeVLO', '2023-05-13 11:18:14', '2023-05-13 11:18:14', 1, NULL, 1),
+(1, 'Admin', 'admin@admin.com', NULL, '$2y$10$G5dn0a3GgRgJ8do9PcY1vO6DXp//8COt1y5dDQ8ImecizoTJah9Su', 'KShZoPojEDwJQQYdYCsWriA0rut0KBhlzkRNqkId3aPgpTSByiXV1SWUeVLO', '2023-05-12 21:00:00', '2023-05-17 11:33:50', 1, NULL, 1),
 (2, 'Moderator', 'moderator@admin.com', NULL, '$2y$10$4oy5lB0zzA6AsknZwKFEEuhGinGmoVDYjzxlobtivMrRNEXMmnJT2', 'DzqCftMET8u8g9idTpeQgS4I7bsq765NyHh4I0bXcO9HGXSPFEoV96rtGWm1', '2023-05-13 11:18:15', '2023-05-13 11:18:15', 2, NULL, 1),
 (3, 'Author1', 'author1@admin.com', NULL, '$2y$10$XTRvCflPd2ty7PllfNRuEeGLiWTH5WoVEEH9oeDSXC1eR5dJKEKfS', 'DrOo5gePxbbo8ZiPJZVpYuke6O2liW1SVu8Sp1Ztk33ykWimVJKYfXEqtMtp', '2023-05-13 11:18:15', '2023-05-13 11:18:15', 3, NULL, 1),
-(4, 'Author2', 'author2@admin.com', NULL, '$2y$10$s/pI9aAvqMhw6F1TEXkwp.jASfR/lvT9L/gUf1Jqhz7hkc134Gazm', 'wKdM88Pp7e5KNbHX1Luzp1BQ27o5NaS1EVRGqobHh2TdjNTdHXHVzKuj4EKw', '2023-05-13 11:18:15', '2023-05-13 11:18:15', 4, NULL, 1),
+(4, 'Author2', 'author2@admin.com', NULL, '$2y$10$s/pI9aAvqMhw6F1TEXkwp.jASfR/lvT9L/gUf1Jqhz7hkc134Gazm', 'wKdM88Pp7e5KNbHX1Luzp1BQ27o5NaS1EVRGqobHh2TdjNTdHXHVzKuj4EKw', '2023-05-12 21:00:00', '2023-05-17 11:35:34', 4, NULL, 1),
 (5, 'User', 'user@admin.com', NULL, '$2y$10$Bhw5G48noprbtQZZKh61V.4JQo3xjLj2WXI55BwdDHc9vijWQdKUC', 'rKA57qOBMRS1fnVTsTYHz0Nfrmi7cFlwgodNC9wCsh7zu5jW9H5HLBI3w0jJ', '2023-05-13 11:18:16', '2023-05-13 11:18:16', 5, NULL, 1),
 (6, 'Тесс', 'tess@author.com', NULL, '$2y$10$zSmGmmt.g1ZWINW37hBj/ecinyKINvYf5Yj2jgnbALPBhJQk/kONu', NULL, '2023-05-13 14:35:41', '2023-05-13 14:35:41', 6, NULL, 1),
 (7, 'Леди Кошка', 'lady@author.com', NULL, '$2y$10$SrCXE1TsYNKz6/d47MiDSuVHraaN8k5zfzBoIHqIm6DFvjBnxl4uu', NULL, '2023-05-13 14:37:04', '2023-05-13 14:37:04', 7, NULL, 1),
