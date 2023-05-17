@@ -24,7 +24,7 @@ class ArticleController extends Controller
      */
     public function index(): View
     {
-        $articles = $this->repository->getAll()->partition(5);
+        $articles = $this->repository->getAll();
 
         return view('articles.index', [
             'articles' => $articles
