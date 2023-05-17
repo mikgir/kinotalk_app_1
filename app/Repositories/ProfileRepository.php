@@ -34,33 +34,4 @@ class ProfileRepository implements ProfileRepositoryInterface
         return Profile::with($user)->findOrFail($id);
     }
 
-    /**
-     * @param $id
-     * @return void
-     */
-    public function setAuthor($id): void
-    {
-        $user = User::with('roles')->findOrFail($id);
-
-        if ($user->hasRole(['user', 'moderator'])){
-            $user->assignRole(['user', 'moderator', 'author']);
-        }
-        $user->assignRole(['user', 'author']);
-
-    }
-
-    /**
-     * @param $id
-     * @return void
-     */
-    public function setModerator($id): void
-    {
-        $user= User::with('roles')->findOrFail($id);
-
-        if ($user->hasRole(['user', 'author'])){
-            $user->assignRole(['user', 'moderator', 'author']);
-        }
-        $user->assingRole(['user', 'moderator']);
-
-    }
 }
