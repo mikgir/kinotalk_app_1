@@ -9,7 +9,8 @@
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('main')}}">Главная</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Статьи</li>
+                                    <li class="breadcrumb-item"><a href="{{route('articles')}}">Статьи</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{$article->title}}</li>
                                 </ol>
                             </nav>
                         </div>
@@ -177,10 +178,10 @@
                             <div class="widget sidebar-widget">
                                 <div class="tgAbout-me">
                                     <div class="tgAbout-thumb">
-                                        <img src="{{asset('build/assets/src/assets/img/others/People6.png')}}" alt="me">
+                                        {{ $article->user->getFirstMedia('avatars') }}
                                     </div>
                                     <div class="tgAbout-info">
-                                        <span class="designation">Любовь и Сериалы</span>
+                                        <span class="designation">{{$article->user->name}}</span>
                                     </div>
                                     <div class="tgAbout-social">
                                         <a href="#"><i class="fab flaticon-instagram"></i></a>

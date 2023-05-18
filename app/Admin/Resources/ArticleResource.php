@@ -25,6 +25,7 @@ use MoonShine\Fields\SwitchBoolean;
 use MoonShine\Fields\Text;
 use MoonShine\Fields\Textarea;
 use MoonShine\Fields\TinyMce;
+use MoonShine\ItemActions\ItemAction;
 use MoonShine\Resources\Resource;
 use MoonShine\Fields\ID;
 use MoonShine\Actions\FiltersAction;
@@ -47,8 +48,8 @@ class ArticleResource extends Resource
     {
         return [
             ID::make()->sortable(),
-            NoInput::make( 'статус', 'status',
-                static fn($item)=> $item->status == 'PUBLISHED')
+            NoInput::make('статус', 'status',
+                static fn($item) => $item->status == 'PUBLISHED')
                 ->boolean(),
             Grid::make([
                 Column::make([
@@ -136,6 +137,22 @@ class ArticleResource extends Resource
     {
         return [
             FiltersAction::make(trans('moonshine::ui.filters')),
+        ];
+    }
+
+    public function itemActions(): array
+    {
+        return [
+            ItemAction::make('Блок +', function (Model $item) {
+                $item->update(['active' => false]);
+            }, 'Заблокировано')
+                ->withConfirm()
+                ->icon('heroicons.signal-slash'),
+            ItemAction::make('Блок -', function (Model $item) {
+                $item->update(['active' => true]);
+            }, 'Разблокировано')
+                ->withConfirm()
+                ->icon('heroicons.signal'),
         ];
     }
 }

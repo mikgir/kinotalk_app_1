@@ -32,7 +32,12 @@
                         <div class="row align-items-end">
                             <div class="col-sm-6">
                                 <div class="section__title">
-                                    <h3 class="section__main-title">{{$category->name}}</h3>
+                                    <h3 class="section__main-title"><a href="#">{{$category->name}}</a></h3>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="section__read-more text-start text-sm-end">
+                                    <a href="#">Читать все новости<i class="far fa-long-arrow-right"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -40,7 +45,7 @@
 
                     <div class="trending__slider">
                         <div class="swiper-container popular-active">
-                            <div class="swiper-wrapper">
+                            <div class="swiper-wrapper align-content-between">
                                 @foreach($category->news as $key=>$item)
                                     <div class="swiper-slide">
                                         <div class="trending__post">
@@ -60,7 +65,7 @@
                     </div>
                 </div>
             </section>
-    @endforeach
+        @endforeach
 
     </main>
 </x-guest-layout>

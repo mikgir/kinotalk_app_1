@@ -9,7 +9,8 @@
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('main')}}">Главная</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Статьи</li>
+                                    <li class="breadcrumb-item"><a href="{{route('authors')}}">Авторы</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Автор: {{$user->name}}</li>
                                 </ol>
                             </nav>
                         </div>
@@ -25,34 +26,45 @@
                 <div class="row justify-content-center">
                     <div class="col-xl-8 col-lg-7">
                         <div class="blog-post-wrapper">
-                            @foreach($articles as $key=>$article)
-                            <div class="latest__post-item">
-                                <div class="latest__post-thumb tgImage__hover">
-                                    <a href="{{route('articles.show', $article->id)}}">
-                                        {{$article->getFirstMedia('sm_image')}}
-                                    </a>
-                                </div>
-                                <div class="latest__post-content">
-                                    <ul class="tgbanner__content-meta list-wrap">
-                                        <li class="category"><a href="#">Категория: {{$article->category->name}}</a></li>
-                                        <li><span class="by">Автор:</span><a href="blog.html">{{$article->user->name}}</a></li>
-                                        <li>05.05.2023</li>
-                                    </ul>
-                                    <h3 class="title tgcommon__hover"><a href="{{route('articles.show', $article->id)}}">{{$article->title}}</a></h3>
-                                    <p>{!! $article->body !!}</p>
-                                    <div class="latest__post-read-more">
-                                        <a href="{{route('articles.show', $article->id)}}">Читать дальше <i class="far fa-long-arrow-right"></i></a>
+                            @foreach($user->articles as $key=>$article)
+                                <div class="latest__post-item">
+                                    <div class="latest__post-thumb tgImage__hover">
+                                        <a href="{{route('articles.show', $article->id)}}">
+                                            {{$article->getFirstMedia('sm_image')}}
+                                        </a>
+                                    </div>
+                                    <div class="latest__post-content">
+                                        <ul class="tgbanner__content-meta list-wrap">
+                                            <li class="category"><a href="#">Категория: {{$article->category->name}}</a></li>
+                                            <li>{{$article->created_at}}</li>
+                                        </ul>
+                                        <h3 class="title tgcommon__hover"><a href="{{route('articles.show', $article->id)}}">{{$article->title}}</a></h3>
+                                        <p>{!! $article->body !!}</p>
+                                        <div class="latest__post-read-more">
+                                            <a href="{{route('articles.show', $article->id)}}">Читать дальше <i class="far fa-long-arrow-right"></i></a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             @endforeach
-                            <div class="pagination__wrap">
-                                {{ $articles->links('vendor.pagination.bootstrap-5') }}
-                            </div>
                         </div>
                     </div>
                     <div class="col-xl-3 col-lg-4 col-md-6">
                         <aside class="blog-sidebar">
+                            <div class="widget sidebar-widget">
+                                <div class="tgAbout-me">
+                                    <div class="tgAbout-thumb">
+                                        {{ $user->getFirstMedia('avatars') }}
+                                    </div>
+                                    <div class="tgAbout-info">
+                                        <span class="designation">{{$user->name}}</span>
+                                    </div>
+                                    <div class="tgAbout-social">
+                                        <a href="#"><i class="fab flaticon-instagram"></i></a>
+                                        <a href="#"><i class="fab fa-telegram-plane"></i></a>
+                                        <a href="#"><i class="fab fa-vk"></i></a>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="widget sidebar-widget widget_categories">
                                 <h4 class="widget-title">Популярная категория</h4>
                                 <ul class="list-wrap">
