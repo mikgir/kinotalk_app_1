@@ -21,39 +21,42 @@
                         <ul class="list-wrap">
                             <li class="news-btn">
                                 @if (Route::has('login'))
+                                    @auth
                                     <div class="dropdown">
-                                        @auth
-                                            <a class="dropdown-toggle btn" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <a class="dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                 <span class="btn-text"><i class="fa fa-user"></i> {{ Auth::user()->name }}</span>
-                                                <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
+                                            </a>
+                                                <ul class="dropdown-menu p-3" aria-labelledby="navbarDarkDropdownMenuLink">
                                                     <li>
-                                                        <x-dropdown-link :href="route('main')">
+                                                        <a class="dropdown-item" href="{{route('main')}}">
                                                             {{ __('Главная') }}
-                                                        </x-dropdown-link>
+                                                        </a>
                                                     </li>
                                                     <li>
-                                                        <x-dropdown-link :href="route('profile.show')">
+                                                        <a class="dropdown-item" href="{{route('profile.show')}}">
                                                             {{ __('Профиль') }}
-                                                        </x-dropdown-link>
+                                                        </a>
                                                     </li>
-{{--                                                    <li>--}}
-{{--                                                        <x-dropdown-link :href="route('/admin')">--}}
-{{--                                                            {{ __('Админ') }}--}}
-{{--                                                        </x-dropdown-link>--}}
-{{--                                                    </li>--}}
+                                                    @hasrole('super_admin')
+                                                    <li>
+                                                        <a class="dropdown-item" href="{{route('admin')}}">
+                                                            {{ __('Админ') }}
+                                                        </a>
+                                                    </li>
+                                                    @endhasrole
                                                     <li>
                                                         <form method="POST" action="{{ route('logout') }}">
                                                             @csrf
 
-                                                            <x-dropdown-link :href="route('logout')"
+                                                            <a class="dropdown-item" href="{{route('logout')}}"
                                                                              onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                                                 {{ __('Выход') }}
-                                                            </x-dropdown-link>
+                                                            </a>
                                                         </form>
                                                     </li>
                                                 </ul>
-                                            </a>
+                                    </div>
                                         @else
                                             <a href="{{ route('login') }}" class="btn"><span class="btn-text">Войти</span></a>
 
@@ -61,7 +64,6 @@
                                                 <a href="{{ route('register') }}" class="btn"><span class="btn-text">Регистрация</span></a>
                                             @endif
                                         @endif
-                                    </div>
                                 @endif
 {{--                                <a href="#" class="btn"><span class="btn-text">Войти</span></a>--}}
                             </li>

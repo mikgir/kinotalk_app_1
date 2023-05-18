@@ -1,11 +1,9 @@
 <section class="mb-2">
     <header>
-        <h4 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-            {{ __('Изменение пароля') }}
-        </h4>
+        <div class="card-header">{{ __('Изменение пароля') }}</div>
 
-        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            {{ __('Ensure your account is using a long, random password to stay secure.') }}
+        <p class="mt-1 px-3">
+            {{ __('Убедитесь, что ваша учетная запись использует длинный случайный пароль, чтобы оставаться в безопасности.') }}
         </p>
     </header>
 
