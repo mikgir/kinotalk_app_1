@@ -16,7 +16,7 @@ class ArticleRepository implements ArticleRepositoryInterface
      */
     public function getAll(): Collection|LengthAwarePaginator
     {
-        return Article::with(['category', 'user'])->paginate(5);
+        return Article::with(['category', 'user'])->paginate(3);
     }
 
     public function getLast()
