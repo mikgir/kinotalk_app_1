@@ -32,7 +32,8 @@ class CategoryResource extends Resource
             Grid::make([
                 Column::make([
                     Block::make('Информация', [
-                        MediaLibrary::make('Обложка', 'cover'),
+                        MediaLibrary::make('Обложка', 'cover')
+                            ->removable(),
                         Text::make('Наименование', 'name')->sortable(),
                         Date::make('Дата создания', 'created_at')->sortable(),
                         Date::make('Дата изменения', 'updated_at')->sortable()

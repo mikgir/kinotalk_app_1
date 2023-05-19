@@ -36,12 +36,11 @@ Route::get('/news/{id}', [NewsController::class, 'show'])
     ->name('news.show');
 
 
-//Route::get('/dashboard', function () {
-//    return view('dashboard');
-//})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/moonshine')->middleware(['auth', 'moonshine'])->name('admin');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [UserProfileController::class, 'index'])->name('profile.show');
+    Route::get('/profile', [UserProfileController::class, 'index'])
+        ->name('profile.show');
 //    Route::get('/profile', [UserProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [UserProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [UserProfileController::class, 'destroy'])->name('profile.destroy');
