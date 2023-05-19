@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
+use App\Models\Article;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
@@ -21,10 +22,10 @@ class UserProfileController extends Controller
      */
     public function index(): View
     {
-        $user = Auth::user()->with('profile');
+        $user = Auth::user()->with(['profile'])->get();
 
         return view('profile.index', [
-            'user' => $user->with('profile'),
+            'user'=>$user,
         ]);
     }
 

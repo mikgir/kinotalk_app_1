@@ -22,7 +22,7 @@
         </div>
 
         <div>
-            <x-input-label for="name" :value="__('Name')" />
+            <x-input-label for="name" :value="__('Имя')" />
             <x-text-input id="name" name="name" type="text" value="{{Auth::user()->name}}" class="form-control mb-2" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
@@ -52,7 +52,7 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <x-primary-button>{{ __('Сохранить') }}</x-primary-button>
 
             @if (session('status') === 'profile-updated')
                 <p
