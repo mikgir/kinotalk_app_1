@@ -171,6 +171,7 @@ return [
         App\Providers\MoonShineServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
         Orchestra\Parser\XmlServiceProvider::class,
+        Usamamuneerchaudhary\Commentify\Providers\CommentifyServiceProvider::class,
     ])->toArray(),
 
     /*
