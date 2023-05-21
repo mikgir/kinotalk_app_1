@@ -108,6 +108,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <livewire:comments :model="$article"/>
                             <div class="blog-avatar-wrap">
                                 <div class="blog-avatar-img">
                                     <a href="#"><img src="{{asset('build/assets/src/assets/img/user/People17.png')}}" alt="img"></a>
