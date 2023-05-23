@@ -102,39 +102,25 @@
                                         <div class="blog-details-tags">
                                             <ul class="list-wrap mb-0">
                                                 <li><a href="#">Сериалы</a></li>
-                                                <li><a href="author.html">Авторы</a></li>
+                                                <li><a href="{{route('authors')}}">Авторы</a></li>
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="blog-avatar-wrap">
-                                <div class="blog-avatar-img">
-                                    <a href="#"><img src="{{asset('build/assets/src/assets/img/user/People17.png')}}" alt="img"></a>
+                            @foreach($article->comments as $key=>$comment)
+                                <div class="blog-avatar-wrap">
+                                    <div class="blog-avatar-img">
+                                        {{$comment->user->getFirstMedia('avatars')}}
+{{--                                        <a href="#"><img src="{{asset('build/assets/src/assets/img/user/People17.png')}}" alt="img"></a>--}}
+                                    </div>
+                                    <div class="blog-avatar-content">
+                                        <p>{{ $comment->text }}</p>
+                                        <h5 class="name">{{$comment->user->name}}</h5>
+                                    </div>
                                 </div>
-                                <div class="blog-avatar-content">
-                                    <p>Сумасшедший сериал, заслуженные номинации на «Эмми» и «Золотой глобус». Ода женственности, юмору и стойкости.</p>
-                                    <h5 class="name">Олеся Иванова</h5>
-                                </div>
-                            </div>
-                            <div class="blog-avatar-wrap">
-                                <div class="blog-avatar-img">
-                                    <a href="#"><img src="{{asset('build/assets/src/assets/img/user/People16.png')}}" alt="img"></a>
-                                </div>
-                                <div class="blog-avatar-content">
-                                    <p>Годный драмедийный сериал про девушку из обеспеченной семьи еврейских эмигрантов в США, которая избрала для себя нелёгкую судьбу стендап-комика.</p>
-                                    <h5 class="name">Дамир Иванов</h5>
-                                </div>
-                            </div>
-                            <div class="blog-avatar-wrap">
-                                <div class="blog-avatar-img">
-                                    <a href="#"><img src="{{asset('build/assets/src/assets/img/user/People15.png')}}" alt="img"></a>
-                                </div>
-                                <div class="blog-avatar-content">
-                                    <p>Превосходный сериал, от просмотра которого получаешь эстетическое удовольствие..</p>
-                                    <h5 class="name">Карина Петрова</h5>
-                                </div>
-                            </div>
+                            @endforeach
+
                             <div class="pagination__wrap-article">
                                 <ul class="list-wrap">
                                     <li class="active"><a href="#">01</a></li>
@@ -144,7 +130,25 @@
                                     <li><a href="#"><i class="fas fa-angle-double-right"></i></a></li>
                                 </ul>
                             </div>
-
+                            @can('create-own comments')
+                            <div class="blog-avatar-wrap px-5">
+                                <div class="blog-avatar-img">
+                                    {{Auth::user()->getFirstMedia('avatars')}}
+                                    {{--                                        <a href="#"><img src="{{asset('build/assets/src/assets/img/user/People17.png')}}" alt="img"></a>--}}
+                                </div>
+                                <div class="blog-avatar-content">
+                                   <form method="POST" action="{{route('comment.create', $article->id)}}">
+                                       @csrf
+                                       <label class="small mb-1" for="text"> Оставьте комментарий </label>
+                                       <textarea class="form-control @error('text') border-red-500 @enderror" type="text" name="text"></textarea>
+                                           @error('text')
+                                                <p class="text-red-500">{{$message}}</p>
+                                           @enderror
+                                       <button class="btn btn-primary mt-3 mb-3" type="submit">Коментировать</button>
+                                   </form>
+                                </div>
+                            </div>
+                            @endcan
                             <div class="blog-prev-next-posts">
                                 <div class="row">
                                     <div class="col-xl-6 col-lg-8 col-md-6">
