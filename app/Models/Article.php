@@ -9,6 +9,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Image\Exceptions\InvalidManipulation;
@@ -84,6 +85,10 @@ class Article extends Model implements ReactableInterface, HasMedia
         return $this->belongsTo(User::class);
     }
 
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
+    }
 
     /**
      * @throws InvalidManipulation
@@ -99,7 +104,8 @@ class Article extends Model implements ReactableInterface, HasMedia
             ->nonQueued();
     }
 
-    public static function last() {
+    public static function last()
+    {
         return static::all()->last();
     }
 
