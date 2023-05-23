@@ -1,21 +1,20 @@
-<section class="mb-2">
+<section class="mb-5">
     <header>
-        <h4 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-            {{ __('Удалить аккаунт') }}
-        </h4>
-
-        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+        <div class="card-header">{{ __('Удалить аккаунт') }}</div>
+        <p class="mt-2 px-3">
             {{ __('После удаления вашей учетной записи все ее ресурсы и данные будут безвозвратно удалены. Перед удалением своей учетной записи загрузите любые данные или информацию, которые вы хотите сохранить.') }}
         </p>
     </header>
-
-    <x-danger-button
-        x-data=""
-        x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
-    >{{ __('Удалить аккаунт') }}</x-danger-button>
+    <div class="px-3">
+        <x-primary-button
+            x-data=""
+            x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')">
+            {{ __('Удалить аккаунт') }}
+        </x-primary-button>
+</div>
 
     <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
-        <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
+        <form method="post" action="{{ route('profile.destroy', $user->id) }}" class="p-6">
             @csrf
             @method('delete')
 
@@ -23,7 +22,7 @@
                 {{ __('Are you sure you want to delete your account?') }}
             </h4>
 
-            <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+            <p class="mt-1">
                 {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
             </p>
 
@@ -46,7 +45,7 @@
                     {{ __('Cancel') }}
                 </x-secondary-button>
 
-                <x-danger-button class="btn btn-danger">
+                <x-danger-button class="btn btn-danger">role_has_permissions
                     {{ __('Delete Account') }}
                 </x-danger-button>
             </div>

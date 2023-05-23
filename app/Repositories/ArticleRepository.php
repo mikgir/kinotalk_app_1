@@ -16,12 +16,17 @@ class ArticleRepository implements ArticleRepositoryInterface
      */
     public function getAll(): Collection|LengthAwarePaginator
     {
-        return Article::with(['category', 'user'])->paginate(5);
+        return Article::with(['category', 'user'])->paginate(3);
     }
 
-    public function getLast()
+    /**
+     * @return Collection
+     */
+    public function getLast(): Collection
     {
-        return Article::last()->getFirstMedia('image')->getPath();
+        return Article::with(['user', 'category', 'media'])
+            ->latest('created_at')
+            ->limit(1)->get();
     }
 
     /**
@@ -30,7 +35,7 @@ class ArticleRepository implements ArticleRepositoryInterface
      */
     public function getOne($id): object
     {
-        return Article::with(['category', 'user'])->findOrFail($id);
+        return Article::with(['category', 'user', 'comments'])->findOrFail($id);
     }
 
     public function createArticle(Request $request)

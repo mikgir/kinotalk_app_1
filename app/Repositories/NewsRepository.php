@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Contracts\NewsRepositoryInterface;
 use App\Models\Category;
 use App\Models\News;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -13,12 +14,12 @@ class NewsRepository implements NewsRepositoryInterface
 {
 
     /**
-     * @return Builder
+     * @return LengthAwarePaginator|Collection
      */
-    public function getAll(): Builder
+    public function getAll(): LengthAwarePaginator| Collection
     {
         return News::with('category')
-            ->orderBy('created_at', 'DESC');
+            ->orderBy('created_at', 'DESC')->paginate(3);
     }
 
 

@@ -46,10 +46,6 @@ class User extends Authenticatable implements ReacterableInterface, HasMedia
     use Reacterable;
     use InteractsWithMedia;
 
-//    public function registerMediaCollections(): void
-//    {
-//        $this ->addMediaCollection('avatars');
-//    }
     protected $table = 'users';
 
     protected $casts = [
@@ -75,6 +71,11 @@ class User extends Authenticatable implements ReacterableInterface, HasMedia
     public function articles(): HasMany
     {
         return $this->hasMany(Article::class);
+    }
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
     }
 
     /**
