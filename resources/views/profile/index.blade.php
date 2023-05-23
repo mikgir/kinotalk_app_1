@@ -33,23 +33,28 @@
                     <div class="card mb-4">
                         <div class="card-header">Личная информация</div>
                         <div class="card-body">
-                            <form>
-                                <!-- Form Group (username)-->
-{{--                                <div class="mb-3">--}}
-{{--                                    <label class="small mb-1" for="inputUsername">Username (how your name will appear to other users on the site)</label>--}}
-{{--                                    <input class="form-control" id="inputUsername" type="text" placeholder="Enter your username" value="username">--}}
-{{--                                </div>--}}
-                                <!-- Form Row-->
+                           @yield('profile-form')
+                            <form method="POST" action="{{route('profile.store', auth()->id())}}">
+                                @csrf
+
                                 <div class="row gx-3 mb-3">
                                     <!-- Form Group (first name)-->
                                     <div class="col-md-6 mb-3">
                                         <label class="small mb-1" for="inputFirstName">Имя</label>
-                                        <input class="form-control" id="inputFirstName" type="text" placeholder="Enter your first name" value="">
+                                        <input name="first_name" class="form-control @error('first_name') border-red-500 @enderror"
+                                               id="inputFirstName" type="text"  placeholder="Enter your first name" value="">
+                                        @error('first_name')
+                                        <p class="text-red-500">{{$message}}</p>
+                                        @enderror
                                     </div>
                                     <!-- Form Group (last name)-->
                                     <div class="col-md-6 mb-3">
                                         <label class="small mb-1" for="inputLastName">Фамилия</label>
-                                        <input class="form-control" id="inputLastName" type="text" placeholder="Enter your last name" value="">
+                                        <input name="last_name" class="form-control @error('last_name') border-red-500 @enderror"
+                                               id="inputLastName" type="text" placeholder="Enter your last name" value="">
+                                        @error('last_name')
+                                        <p class="text-red-500">{{$message}}</p>
+                                        @enderror
                                     </div>
                                 </div>
                                 <!-- Form Row        -->
@@ -57,22 +62,38 @@
                                     <!-- Form Group (organization name)-->
                                     <div class="col-md-6 mb-3">
                                         <label class="small mb-1" for="occupation">Род занятий</label>
-                                        <input class="form-control" id="occupation" type="text" placeholder="Enter your occupation" value="">
+                                        <input name="occupation" class="form-control @error('occupation') border-red-500 @enderror"
+                                               id="occupation" type="text" placeholder="Enter your occupation" value="">
+                                        @error('occupation')
+                                        <p class="text-red-500">{{$message}}</p>
+                                        @enderror
                                     </div>
                                     <!-- Form Group (company)-->
                                     <div class="col-md-6 mb-3">
                                         <label class="small mb-1" for="company">Организация</label>
-                                        <input class="form-control" id="company" type="text" placeholder="Enter your organization name" value="">
+                                        <input name="company" class="form-control @error('company') border-red-500 @enderror"
+                                               id="company" type="text" placeholder="Enter your organization name" value="">
+                                        @error('company')
+                                        <p class="text-red-500">{{$message}}</p>
+                                        @enderror
                                     </div>
                                     <!-- Form Group (location)-->
                                     <div class="col-md-6 mb-3">
                                         <label class="small mb-1" for="city">Город</label>
-                                        <input class="form-control" id="city" type="text" placeholder="Enter your city" value="">
+                                        <input name="city" class="form-control @error('city') border-red-500 @enderror"
+                                               id="city" type="text" placeholder="Enter your city" value="">
+                                        @error('city')
+                                        <p class="text-red-500">{{$message}}</p>
+                                        @enderror
                                     </div>
                                     <!-- Form Group (email address)-->
                                     <div class="col-md-6 mb-3">
                                         <label class="small mb-1" for="country">Страна</label>
-                                        <input class="form-control" id="country" type="text" placeholder="Enter your country" value="">
+                                        <input name="country" class="form-control @error('country') border-red-500 @enderror"
+                                               id="country" type="text" placeholder="Enter your country" value="">
+                                        @error('country')
+                                        <p class="text-red-500">{{$message}}</p>
+                                        @enderror
                                     </div>
                                 </div>
                                 <!-- Form Row-->
@@ -80,26 +101,42 @@
                                     <!-- Form Group (phone number)-->
                                     <div class="col-md-6 mb-3">
                                         <label class="small mb-1" for="website">Phone number</label>
-                                        <input class="form-control" id="website" type="text" placeholder="Enter your website" value="">
+                                        <input name="website" class="form-control @error('website') border-red-500 @enderror"
+                                               id="website" type="text" placeholder="Enter your website" value="">
+                                        @error('website')
+                                        <p class="text-red-500">{{$message}}</p>
+                                        @enderror
                                     </div>
                                     <!-- Form Group (birthday)-->
                                     <div class="col-md-6 mb-3">
                                         <label class="small mb-1" for="inputBirthday">Дата рождения</label>
-                                        <input class="form-control" id="inputBirthday" type="date" name="birthday" placeholder="Enter your birthday" value="06/10/1988">
+                                        <input class="form-control @error('birthday') border-red-500 @enderror"
+                                               id="inputBirthday" type="date" name="birthday" placeholder="Enter your birthday" value="06/10/1988">
+                                        @error('birthday')
+                                        <p class="text-red-500">{{$message}}</p>
+                                        @enderror
                                     </div>
                                     <!-- Form Group (about_me)-->
                                     <div class="col-md-6 mb-3">
                                         <label class="small mb-1" for="about_me">Обо мне</label>
-                                        <textarea class="form-control" id="about_me" type="text" name="about_me" placeholder="Enter information about you"></textarea>
+                                        <textarea class="form-control @error('about_me') border-red-500 @enderror"
+                                                  id="about_me" type="text" name="about_me" placeholder="Enter information about you"></textarea>
+                                        @error('about_me')
+                                        <p class="text-red-500">{{$message}}</p>
+                                        @enderror
                                     </div>
                                     <!-- Form Group (bio)-->
                                     <div class="col-md-6 mb-3">
                                         <label class="small mb-1" for="bio">Биография</label>
-                                        <textarea class="form-control" id="bio" type="text" name="bio" placeholder="Enter biography"></textarea>
+                                        <textarea class="form-control @error('bio') border-red-500 @enderror"
+                                                  id="bio" type="text" name="bio" placeholder="Enter biography"></textarea>
+                                        @error('bio')
+                                        <p class="text-red-500">{{$message}}</p>
+                                        @enderror
                                     </div>
                                 </div>
                                 <!-- Save changes button-->
-                                <button class="btn btn-primary" type="button">Сохранить</button>
+                                <button class="btn btn-primary" type="submit">Сохранить</button>
                             </form>
                         </div>
                     </div>

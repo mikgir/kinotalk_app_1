@@ -72,6 +72,11 @@ class User extends Authenticatable implements ReacterableInterface, HasMedia
         return $this->hasMany(Article::class);
     }
 
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     /**
      * @return HasOne
      */
