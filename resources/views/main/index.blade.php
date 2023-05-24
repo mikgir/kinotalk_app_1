@@ -6,7 +6,9 @@
                 <div class="tgbanner__grid">
                     <div class="tgbanner__post big-post">
                         <div class="tgbanner__thumb tgImage__hover">
-                            <a href="#"><img src="{{asset('build/assets/src/assets/img/blog/MrsMaisel.png')}}" alt="img"></a>
+                            <a href="#">
+                                <img src="{{asset('build/assets/src/assets/img/blog/MrsMaisel.png')}}" alt="img">
+                            </a>
                         </div>
                         <div class="tgbanner__content">
                             <ul class="tgbanner__content-meta list-wrap">
