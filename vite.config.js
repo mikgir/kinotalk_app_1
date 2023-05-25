@@ -10,8 +10,6 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/js/app.js',
-                // 'resources/assets/src/assets/sass/main.scss',
-                // 'resources/assets/src/assets/js/main.js'
             ],
             refresh: true,
         }),
