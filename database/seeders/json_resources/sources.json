@@ -1,7 +1,12 @@
 [
     {
         "id": 1,
-        "name": "Киноновости со всего мира",
+        "name": "Kinonews",
         "url": "https://www.kinonews.ru/rss"
+    },
+    {
+        "id": 2,
+        "name": "FilmRU",
+        "url": "https://www.film.ru/news"
     }
 ]
