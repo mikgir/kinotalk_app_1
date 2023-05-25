@@ -8,9 +8,9 @@
                         <div class="breadcrumb-content">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{route('main')}}">Главная</a></li>
-                                    <li class="breadcrumb-item"><a href="{{route('news')}}">Новости</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{$news->title}}</li>
+{{--                                    <li class="breadcrumb-item"><a href="{{route('main')}}">Главная</a></li>--}}
+{{--                                    <li class="breadcrumb-item"><a href="{{route('news')}}">Новости</a></li>--}}
+{{--                                    <li class="breadcrumb-item active" aria-current="page">{{$news->title}}</li>--}}
                                 </ol>
                             </nav>
                         </div>
@@ -28,8 +28,8 @@
                     <div class="col-xl-8 col-lg-7">
                         <div class="blog-details-wrap">
                             <ul class="tgbanner__content-meta list-wrap">
-                                <li class="category"><a href="{{route('news')}}">{{$news->category->name}}</a></li>
-                                <li>МИРА</li>
+{{--                                <li class="category"><a href="{{route('news')}}">{{$news->category->name}}</a></li>--}}
+{{--                                <li>МИРА</li>--}}
                                 <li>{{$news->created_at}}</li>
                             </ul>
                             <h2 class="title">{{$news->title}}</h2>
@@ -37,7 +37,7 @@
                                 <img src="{{asset($news->image)}}" alt="img">
                             </div>
                             <div class="blog-details-content">
-                                <p>{{$news->body}}</p>
+                                <p>{!! $news->body !!}</p>
 
                             </div>
                             <div class="blog-details-bottom">
@@ -46,7 +46,7 @@
                                         <div class="blog-details-tags">
                                             <ul class="list-wrap mb-0">
                                                 <li><a href="{{route('news')}}">Новости</a></li>
-                                                <li><a href="{{route('news')}}">{{$news->category->name}}</a></li>
+{{--                                                <li><a href="{{route('news')}}">{{$news->category->name}}</a></li>--}}
                                             </ul>
                                         </div>
                                     </div>
