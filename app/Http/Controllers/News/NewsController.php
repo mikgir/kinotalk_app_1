@@ -25,11 +25,14 @@ class NewsController extends Controller
      */
     public function index(): View
     {
-        $categories = $this->categoryRepository->getAllWithNews();
-
-        return view('news.index', compact('categories'));
+        $news = $this->newsRepository->getAll();
+        return view('news.index', compact('news'));
     }
 
+    /**
+     * @param $id
+     * @return View
+     */
     public function show($id): View
     {
         $news = $this->newsRepository->getOne($id);

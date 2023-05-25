@@ -18,8 +18,7 @@ class NewsRepository implements NewsRepositoryInterface
      */
     public function getAll(): LengthAwarePaginator| Collection
     {
-        return News::with('category')
-            ->orderBy('created_at', 'DESC')->paginate(3);
+        return News::orderByDesc('created_at')->paginate(12);
     }
 
 
@@ -29,13 +28,12 @@ class NewsRepository implements NewsRepositoryInterface
      */
     public function getOne($id): object
     {
-        return News::with('category')->findOrFail($id);
+        return News::findOrFail($id);
     }
 
     public function getOrCreateByParser(array $data): void
     {
         News::firstOrCreate([
-            'category_id' => $data['category_id'],
             'source_id' => $data['source_id'],
             'title' => $data['title'],
             'excerpt' => $data['excerpt'],
