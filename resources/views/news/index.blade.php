@@ -78,7 +78,7 @@
                         </div>
                     </div>
                     @endforeach
-
+                        {{ $news->links('vendor.pagination.bootstrap-5') }}
                 </div>
             </div>
     </main>
