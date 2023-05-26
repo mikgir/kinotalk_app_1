@@ -191,7 +191,7 @@
                                 <span>Стать автором</span>
                             </div>
                             <div class="card-body">
-                                <a href="{{ route('authors.create') }}" class="btn btn-primary">Подать заявку</a>
+                                <a href="#" class="btn btn-primary">Подать заявку</a>
 
                             </div>
                         </div>
