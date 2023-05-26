@@ -1,25 +1,22 @@
 <x-guest-layout>
-    <!-- breadcrumb-area -->
-    <div class="breadcrumb-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="breadcrumb-content-news">
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{route('main')}}">Главная</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Новости</li>
-                            </ol>
-                        </nav>
+    <!-- main-area -->
+    <main>
+        <div class="breadcrumb-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="breadcrumb-content">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{{route('main')}}">Главная</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Новости</li>
+                                </ol>
+                            </nav>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- breadcrumb-area-end -->
-
-    <!-- main-area -->
-    <main>
 {{--        {{ dd($categories, $news) }}--}}
 {{--        <!-- popular-area -->--}}
 {{--        @foreach($categories as $key=>$category)--}}
@@ -67,7 +64,7 @@
 {{--            </section>--}}
 {{--        @endforeach--}}
 
-            <div class="container mb-5">
+            <div class="container mb-5 container__news">
                 <div class="row">
                     @foreach($news as $key=>$item)
                     <div class="col-3 mb-4">

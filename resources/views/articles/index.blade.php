@@ -46,7 +46,7 @@
                                 </div>
                             </div>
                             @endforeach
-                            <div class="pagination__wrap">
+                            <div>
                                 {{ $articles->links('vendor.pagination.bootstrap-5') }}
                             </div>
                         </div>
