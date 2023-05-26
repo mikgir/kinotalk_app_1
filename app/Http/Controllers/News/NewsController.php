@@ -11,13 +11,10 @@ use Illuminate\View\View;
 class NewsController extends Controller
 {
     public $newsRepository;
-    public $categoryRepository;
 
-    public function __construct(NewsRepository     $newsRepository,
-                                CategoryRepository $categoryRepository)
+    public function __construct(NewsRepository     $newsRepository)
     {
         $this->newsRepository = $newsRepository;
-        $this->categoryRepository = $categoryRepository;
     }
 
     /**
@@ -30,10 +27,10 @@ class NewsController extends Controller
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @return View
      */
-    public function show($id): View
+    public function show(int $id): View
     {
         $news = $this->newsRepository->getOne($id);
         return view('news.show', compact('news'));
