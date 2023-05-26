@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Admin\Resources\ArticleResource;
 use App\Admin\Resources\CategoryResource;
+use App\Admin\Resources\CommentResource;
 use App\Admin\Resources\NewsResource;
 use App\Admin\Resources\ProfileResource;
 use App\Admin\Resources\RoleResource;
@@ -38,6 +39,8 @@ class MoonShineServiceProvider extends ServiceProvider
                     ->icon('heroicons.newspaper'),
                 MenuItem::make('Новости', new NewsResource())
                     ->icon('heroicons.newspaper'),
+                MenuItem::make('Комментарии', new CommentResource())
+                    ->icon('heroicons.chat-bubble-bottom-center-text'),
             ])->icon('app'),
         ]);
     }

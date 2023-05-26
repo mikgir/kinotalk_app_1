@@ -16,6 +16,7 @@ use MoonShine\Decorations\Tabs;
 use MoonShine\Fields\BelongsTo;
 use MoonShine\Fields\Date;
 use MoonShine\Fields\Enum;
+use MoonShine\Fields\HasMany;
 use MoonShine\Fields\Image;
 use MoonShine\Fields\NoInput;
 use MoonShine\Fields\Number;
@@ -39,7 +40,8 @@ class ArticleResource extends Resource
     public string $titleField = 'title';
     public static array $with = [
         'user',
-        'category'
+        'category',
+        'comments'
     ];
     public static int $itemsPerPage = 5;
 
@@ -85,8 +87,7 @@ class ArticleResource extends Resource
                                     ->hideOnIndex(),
                             ])
                         ]),
-
-                    ])
+                    ]),
                 ])->columnSpan(7),
                 Column::make([
                     Block::make('Дополнительная информация', [
@@ -110,7 +111,11 @@ class ArticleResource extends Resource
                             ->sortable()
                             ->hideOnIndex()
                     ])
-                ])->columnSpan(5)
+                ])
+                    ->columnSpan(5),
+                HasMany::make('Comments')
+                    ->hideOnIndex()
+                    ->resourceMode(),
             ]),
         ];
     }
