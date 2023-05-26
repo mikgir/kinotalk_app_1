@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 17 2023 г., 17:40
+-- Время создания: Май 25 2023 г., 21:17
 -- Версия сервера: 10.4.26-MariaDB
 -- Версия PHP: 8.1.9
 
@@ -86,6 +86,35 @@ INSERT INTO `categories` (`id`, `order`, `name`, `slug`, `created_at`, `updated_
 (4, 1, 'Франшизы', 'franshizy', '2023-05-12 21:00:00', '2023-05-12 21:00:00', NULL),
 (5, 1, 'Новости кино', 'novosti-kino', '2023-05-12 21:00:00', '2023-05-12 21:00:00', NULL),
 (6, 1, 'Киноновости со всего мира', 'kinonovosti-so-vsego-mira', '2023-05-14 21:00:00', '2023-05-14 21:00:00', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `comments`
+--
+
+CREATE TABLE `comments` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `article_id` bigint(20) UNSIGNED NOT NULL,
+  `text` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` enum('PUBLISHED','DRAFT','PENDING') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'DRAFT',
+  `active` tinyint(1) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Дамп данных таблицы `comments`
+--
+
+INSERT INTO `comments` (`id`, `user_id`, `article_id`, `text`, `status`, `active`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 6, 1, 'Хорошая статья!', 'PENDING', 0, '2023-05-24 21:00:00', NULL, NULL),
+(2, 10, 1, 'Нормалёк )))', 'PENDING', 0, '2023-05-24 21:00:00', NULL, NULL),
+(3, 7, 2, 'Хорошая статья!', 'PENDING', 0, '2023-05-24 21:00:00', NULL, NULL),
+(4, 12, 2, 'Здорово написано!', 'PENDING', 0, '2023-05-24 21:00:00', NULL, NULL),
+(5, 8, 3, 'Хорошая статья!', 'PENDING', 0, '2023-05-24 21:00:00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -330,7 +359,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (29, '9999_12_20_173629_create_notifications_table', 1),
 (30, '2023_05_16_155615_add_active_to_articles_table', 2),
 (31, '2023_05_16_160001_add_active_to_news_table', 2),
-(32, '2023_05_16_160309_add_active_to_users_table', 2);
+(32, '2023_05_16_160309_add_active_to_users_table', 2),
+(33, '2023_05_23_120750_create_comments_table', 3);
 
 -- --------------------------------------------------------
 
@@ -841,6 +871,14 @@ ALTER TABLE `categories`
   ADD UNIQUE KEY `categories_slug_unique` (`slug`);
 
 --
+-- Индексы таблицы `comments`
+--
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `comments_user_id_index` (`user_id`),
+  ADD KEY `comments_article_id_index` (`article_id`);
+
+--
 -- Индексы таблицы `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -1065,6 +1103,12 @@ ALTER TABLE `categories`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT для таблицы `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT для таблицы `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -1116,7 +1160,7 @@ ALTER TABLE `media`
 -- AUTO_INCREMENT для таблицы `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT для таблицы `moonshine_change_logs`
@@ -1207,6 +1251,13 @@ ALTER TABLE `articles`
   ADD CONSTRAINT `articles_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`),
   ADD CONSTRAINT `articles_love_reactant_id_foreign` FOREIGN KEY (`love_reactant_id`) REFERENCES `love_reactants` (`id`),
   ADD CONSTRAINT `articles_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Ограничения внешнего ключа таблицы `comments`
+--
+ALTER TABLE `comments`
+  ADD CONSTRAINT `comments_article_id_foreign` FOREIGN KEY (`article_id`) REFERENCES `articles` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `comments_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Ограничения внешнего ключа таблицы `love_reactant_reaction_counters`

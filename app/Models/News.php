@@ -15,12 +15,10 @@ class News extends Model
     protected $table = 'news';
 
     protected $casts = [
-        'category_id' => 'int',
         'featured' => 'bool'
     ];
 
     protected $fillable = [
-        'category_id',
         'source_id',
         'title',
         'seo_title',
@@ -33,11 +31,6 @@ class News extends Model
         'status',
         'featured'
     ];
-
-    public function category(): BelongsTo
-    {
-        return $this->belongsTo(Category::class);
-    }
 
     public function source(): BelongsTo
     {

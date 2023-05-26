@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Services;
+namespace App\Http\Services\Parser;
 
 use App\Http\Contracts\Parser as Contract;
+use App\Http\Services\Parser\Enum\NewsSources;
 use App\Repositories\CategoryRepository;
 use App\Repositories\NewsRepository;
 use App\Repositories\SourceRepository;
@@ -13,8 +14,7 @@ class KinonewsParserService implements Contract
 {
     public string $url = 'https://www.kinonews.ru';
 
-    public function __construct(public CategoryRepository $categoryRepository,
-                                public SourceRepository $sourceRepository,
+    public function __construct(public SourceRepository $sourceRepository,
                                 public NewsRepository $newsRepository)
     {}
 
@@ -65,12 +65,12 @@ class KinonewsParserService implements Contract
     {
         $data = $this->getData($url);
 
-        $categoryTitle = explode(': ', $data['title']);
+        $paths = NewsSources::from($url)->getPathToElem();
 
         foreach ($data['news'] as $news) {
-            $news = $this->getNews($news['link']);
-            $news['category_id'] = $this->categoryRepository->getCategoryIdByName(end($categoryTitle));
-            $news['source_id'] = $this->sourceRepository->getSourceIdByName(end($categoryTitle));
+            $news = $this->getNews($news['link'], $paths);
+
+            $news['source_id'] = $this->sourceRepository->getSourceIdByName(NewsSources::tryFrom($url)->name);
 
             //создаем новую запись в БД
             $this->newsRepository->getOrCreateByParser($news);
@@ -80,32 +80,42 @@ class KinonewsParserService implements Contract
     /**
      * Парсит новость по ссылке
      * @param string $link
-     * @return array
+     * @param object $paths
+     * @return array|null
      */
-    public function getNews(string $link): array
+    public function getNews(string $link, object $paths): ?array
     {
         $sh = curl_init($link);
 
         curl_setopt($sh, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($sh, CURLOPT_HEADER, false);
+        curl_setopt($sh, CURLOPT_ENCODING, 'gzip');
+
         $result = curl_exec($sh);
 
         $dom = new \DOMDocument();
         libxml_use_internal_errors(true);
+
         $dom->loadHTML($result);
         libxml_use_internal_errors(false);
 
         $xpath = new \DOMXPath($dom);
         $news =[];
 
-        $node = $xpath->query('//*[@id="current_news"]/div/h1', $dom)->item(0);
+        $node = $xpath->query($paths->pathToTitle, $dom)->item(0);
         $news['title'] = ($node->textContent);
 
-        $node = $xpath->query('//*[@id="current_news"]/div/div[2]/img/@src', $dom)->item(0);
+        $node = $xpath->query($paths->pathToImage, $dom)->item(0);
+        if(!$node){
+            return null;
+        }
         $news['image'] = $this->url . ($node->textContent);
 
-        $nodes = $xpath->query('//*[@id="current_news"]/div/div[4]/div[1]', $dom)->item(0);
-        $news['body'] = str_replace('\r\n', '', $nodes->textContent);
+        $nodes = $xpath->query($paths->pathToBody, $dom)->item(0);
+        $news['body'] = $nodes->textContent;
+        $news['body'] = preg_replace("/\n/", '<br><br>', $news['body']);
+        $news['body'] = preg_replace("/(^<br>\s*<br>|(<br>\s*){3,})/", '<br><br>', $news['body']);
+        $news['body'] = trim($news['body'], " <br>");
 
         $news['excerpt'] = Str::substr($news['body'], 0, 100);
 

@@ -11,6 +11,7 @@ use MoonShine\Decorations\Column;
 use MoonShine\Decorations\Grid;
 use MoonShine\Fields\Date;
 use MoonShine\Fields\Email;
+use MoonShine\Fields\HasMany;
 use MoonShine\Fields\MorphMany;
 use MoonShine\Fields\Password;
 use MoonShine\Fields\Text;
@@ -42,7 +43,8 @@ class UserResource extends Resource
             'roles',
             'permissions',
             'profile',
-            'media'
+            'media',
+            'comments'
         ]);
     }
 
@@ -64,6 +66,9 @@ class UserResource extends Resource
                             ->removable()
                     ])
                 ])->columnSpan(6),
+                HasMany::make('Comments')
+                    ->hideOnIndex()
+                    ->resourceMode()
             ])
         ];
     }

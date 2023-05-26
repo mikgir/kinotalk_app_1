@@ -18,7 +18,7 @@ class AuthorController extends Controller
      */
     public function index(): View
     {
-        $users = User::role('author')->get();
+        $users = User::role('author')->paginate(9);
 
         return view('authors.index', compact('users'));
     }

@@ -22,24 +22,24 @@
                             <li class="news-btn">
                                 @if (Route::has('login'))
                                     @auth
-                                    <div class="dropdown">
+                                    <div class="dropdown lang">
                                             <a class="dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                 <span class="btn-text"><i class="fa fa-user"></i> {{ Auth::user()->name }}</span>
                                             </a>
                                                 <ul class="dropdown-menu p-3" aria-labelledby="navbarDarkDropdownMenuLink">
                                                     <li>
-                                                        <a class="dropdown-item" href="{{route('main')}}">
+                                                        <a class="item dropdown-item " href="{{route('main')}}">
                                                             {{ __('Главная') }}
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a class="dropdown-item" href="{{route('profile.show')}}">
+                                                        <a class="item dropdown-item item" href="{{route('profile.show')}}">
                                                             {{ __('Профиль') }}
                                                         </a>
                                                     </li>
                                                     @hasrole('super_admin')
                                                     <li>
-                                                        <a class="dropdown-item" href="{{route('admin')}}">
+                                                        <a class="item dropdown-item" href="{{route('admin')}}">
                                                             {{ __('Админ') }}
                                                         </a>
                                                     </li>
@@ -48,7 +48,7 @@
                                                         <form method="POST" action="{{ route('logout') }}">
                                                             @csrf
 
-                                                            <a class="dropdown-item" href="{{route('logout')}}"
+                                                            <a class="item dropdown-item" href="{{route('logout')}}"
                                                                              onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                                                 {{ __('Выход') }}

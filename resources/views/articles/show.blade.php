@@ -109,43 +109,34 @@
                                 </div>
                             </div>
                             @foreach($article->comments as $key=>$comment)
-                                <div class="blog-avatar-wrap">
+                                <div class="blog-avatar-wrap p-3 bg-transparent border justify-content-between">
                                     <div class="blog-avatar-img">
                                         {{$comment->user->getFirstMedia('avatars')}}
-{{--                                        <a href="#"><img src="{{asset('build/assets/src/assets/img/user/People17.png')}}" alt="img"></a>--}}
+                                        <span class="name m-lg-2">{{$comment->user->name}}</span>
                                     </div>
                                     <div class="blog-avatar-content">
                                         <p>{{ $comment->text }}</p>
-                                        <h5 class="name">{{$comment->user->name}}</h5>
                                     </div>
                                 </div>
                             @endforeach
 
-                            <div class="pagination__wrap-article">
-                                <ul class="list-wrap">
-                                    <li class="active"><a href="#">01</a></li>
-                                    <li><a href="#">02</a></li>
-                                    <li><a href="#">...</a></li>
-                                    <li><a href="#">07</a></li>
-                                    <li><a href="#"><i class="fas fa-angle-double-right"></i></a></li>
-                                </ul>
-                            </div>
                             @can('create-own comments')
-                            <div class="blog-avatar-wrap px-5">
+                            <div class="row bg-transparent mt-3">
                                 <div class="blog-avatar-img">
                                     {{Auth::user()->getFirstMedia('avatars')}}
-                                    {{--                                        <a href="#"><img src="{{asset('build/assets/src/assets/img/user/People17.png')}}" alt="img"></a>--}}
                                 </div>
-                                <div class="blog-avatar-content">
-                                   <form method="POST" action="{{route('comment.create', $article->id)}}">
+                                <div class="blog-avatar-content w-100">
+                                    <form method="POST" action="{{route('comment.create', $article->id)}}" class="form-control bg-transparent w-100">
                                        @csrf
-                                       <label class="small mb-1" for="text"> Оставьте комментарий </label>
-                                       <textarea class="form-control @error('text') border-red-500 @enderror" type="text" name="text"></textarea>
+                                       <div class="form-group">
+                                           <label class="small mb-1" for="text"> Оставьте комментарий </label>
+                                           <textarea class="form-control @error('text') border-red-500 @enderror" type="text" name="text"></textarea>
                                            @error('text')
-                                                <p class="text-red-500">{{$message}}</p>
+                                           <p class="text-red-500">{{$message}}</p>
                                            @enderror
+                                       </div>
                                        <button class="btn btn-primary mt-3 mb-3" type="submit">Коментировать</button>
-                                   </form>
+                                    </form>
                                 </div>
                             </div>
                             @endcan
