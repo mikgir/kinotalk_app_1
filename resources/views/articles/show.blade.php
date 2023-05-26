@@ -120,23 +120,13 @@
                                 </div>
                             @endforeach
 
-                            <div class="pagination__wrap-article">
-                                <ul class="list-wrap">
-                                    <li class="active"><a href="#">01</a></li>
-                                    <li><a href="#">02</a></li>
-                                    <li><a href="#">...</a></li>
-                                    <li><a href="#">07</a></li>
-                                    <li><a href="#"><i class="fas fa-angle-double-right"></i></a></li>
-                                </ul>
-                            </div>
                             @can('create-own comments')
-                            <div class="blog-avatar-wrap px-5 justify-content-between bg-transparent">
+                            <div class="row bg-transparent mt-3">
                                 <div class="blog-avatar-img">
                                     {{Auth::user()->getFirstMedia('avatars')}}
-                                    {{--                                        <a href="#"><img src="{{asset('build/assets/src/assets/img/user/People17.png')}}" alt="img"></a>--}}
                                 </div>
-                                <div class="blog-avatar-content w-75">
-                                   <form method="POST" action="{{route('comment.create', $article->id)}}" class="form-control bg-transparent w-100">
+                                <div class="blog-avatar-content w-100">
+                                    <form method="POST" action="{{route('comment.create', $article->id)}}" class="form-control bg-transparent w-100">
                                        @csrf
                                        <div class="form-group">
                                            <label class="small mb-1" for="text"> Оставьте комментарий </label>
@@ -146,7 +136,7 @@
                                            @enderror
                                        </div>
                                        <button class="btn btn-primary mt-3 mb-3" type="submit">Коментировать</button>
-                                   </form>
+                                    </form>
                                 </div>
                             </div>
                             @endcan
