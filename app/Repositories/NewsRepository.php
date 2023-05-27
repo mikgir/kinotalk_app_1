@@ -21,16 +21,19 @@ class NewsRepository implements NewsRepositoryInterface
         return News::orderByDesc('created_at')->paginate(12);
     }
 
-
     /**
-     * @param $id
-     * @return object
+     * @param int $id
+     * @return News
      */
-    public function getOne($id): object
+    public function getOne(int $id): News
     {
         return News::findOrFail($id);
     }
 
+    /**
+     * @param array $data
+     * @return void
+     */
     public function getOrCreateByParser(array $data): void
     {
         News::firstOrCreate([
@@ -41,5 +44,10 @@ class NewsRepository implements NewsRepositoryInterface
             'image' => $data['image'],
             'status' => 'PUBLISHED',
         ]);
+    }
+
+    public function getAllBySourceId(int $id)
+    {
+        return News::where('source_id', $id)->get();
     }
 }
