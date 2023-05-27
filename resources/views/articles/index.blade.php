@@ -9,7 +9,12 @@
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('main')}}">Главная</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page"> Статьи</li>
+                                    <li class="breadcrumb-item">Статьи</li>
+                                    @foreach($categories as $key=>$category)
+                                    <li class="breadcrumb-item {{ $category->name === $category->id ? 'active' : '' }}">
+                                        <a href="{{route('articles.category', $category->id)}}">{{$category->name}}</a>
+                                    </li>
+                                    @endforeach
                                 </ol>
                             </nav>
                         </div>
@@ -27,7 +32,7 @@
                         <div class="blog-post-wrapper">
                             @foreach($categories as $key=>$category)
                                 <div class="section-header mb-5">
-                                    <h3>{{ $category->name }}</h3>
+                                    <h4>категория: <span>{{ $category->name }}</span></h4>
                                 </div>
                                  @forelse($category->articles as $key=>$article)
                                     <div class="latest__post-item">
