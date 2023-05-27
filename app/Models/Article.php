@@ -17,7 +17,6 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Image\Manipulations;
-use Usamamuneerchaudhary\Commentify\Traits\Commentable;
 
 /**
  * Class ArticlePage
@@ -51,7 +50,6 @@ class Article extends Model implements ReactableInterface, HasMedia
     use SoftDeletes;
     use Reactable;
     use InteractsWithMedia;
-    use Commentable;
 
     protected $table = 'articles';
 

@@ -108,38 +108,9 @@
                                     </div>
                                 </div>
                             </div>
-                            @foreach($article->comments as $key=>$comment)
-                                <div class="blog-avatar-wrap p-3 bg-transparent border justify-content-between">
-                                    <div class="blog-avatar-img">
-                                        {{$comment->user->getFirstMedia('avatars')}}
-                                        <span class="name m-lg-2">{{$comment->user->name}}</span>
-                                    </div>
-                                    <div class="blog-avatar-content">
-                                        <p>{{ $comment->text }}</p>
-                                    </div>
-                                </div>
-                            @endforeach
 
-                            @can('create-own comments')
-                            <div class="row bg-transparent mt-3">
-                                <div class="blog-avatar-img">
-                                    {{Auth::user()->getFirstMedia('avatars')}}
-                                </div>
-                                <div class="blog-avatar-content w-100">
-                                    <form method="POST" action="{{route('comment.create', $article->id)}}" class="form-control bg-transparent w-100">
-                                       @csrf
-                                       <div class="form-group">
-                                           <label class="small mb-1" for="text"> Оставьте комментарий </label>
-                                           <textarea class="form-control @error('text') border-red-500 @enderror" type="text" name="text"></textarea>
-                                           @error('text')
-                                           <p class="text-red-500">{{$message}}</p>
-                                           @enderror
-                                       </div>
-                                       <button class="btn btn-primary mt-3 mb-3" type="submit">Коментировать</button>
-                                    </form>
-                                </div>
-                            </div>
-                            @endcan
+                            @include('comments.index', ['article' => $article])
+
                             <div class="blog-prev-next-posts">
                                 <div class="row">
                                     <div class="col-xl-6 col-lg-8 col-md-6">

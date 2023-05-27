@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Article\ArticleController;
 use App\Http\Controllers\Author\AuthorController;
+use App\Http\Controllers\Comment\CommentController;
 use App\Http\Controllers\Main\MainController;
 use App\Http\Controllers\News\NewsController;
 use App\Http\Controllers\Profile\UserProfileController;
@@ -60,9 +61,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile/{id}', [UserProfileController::class, 'destroy'])
         ->where('id', '\d+')
         ->name('profile.destroy');
-    Route::post('article/{id}/comment/create', [App\Http\Controllers\Comment\CommentController::class, 'store'])
+
+    Route::post('articles/{id}/comments/create', [CommentController::class, 'store'])
         ->where('id', '\d+')
-        ->name('comment.create');
+        ->name('comments.create');
+    Route::delete('comments/{id}', [CommentController::class, 'destroy'])
+        ->where('id', '\d+')
+        ->name('comments.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
