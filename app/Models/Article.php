@@ -51,7 +51,6 @@ class Article extends Model implements ReactableInterface, HasMedia
     use Reactable;
     use InteractsWithMedia;
 
-
     protected $table = 'articles';
 
     protected $casts = [

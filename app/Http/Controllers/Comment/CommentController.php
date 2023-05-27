@@ -10,6 +10,7 @@ use App\Models\Comment;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
+use Throwable;
 
 class CommentController extends Controller
 {
@@ -40,7 +41,7 @@ class CommentController extends Controller
         $article = Article::with(['user', 'comments'])->findOrFail($id);
         $article->comments()->create($request->validated());
 
-        return back('success', 'Comment sending successful');
+        return back();
     }
 
     /**
@@ -70,8 +71,12 @@ class CommentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Comment $comment)
+    public function destroy($id)
     {
-        //
+        $comment = Comment::findOrFail($id);
+
+        if ($comment->delete()) {
+            return back();
+        }
     }
 }
