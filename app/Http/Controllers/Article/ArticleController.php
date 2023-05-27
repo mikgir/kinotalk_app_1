@@ -5,18 +5,20 @@ namespace App\Http\Controllers\Article;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Repositories\ArticleRepository;
+use App\Repositories\CategoryRepository;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 
-
 class ArticleController extends Controller
 {
-    protected $repository;
+    protected $articleRepository;
+    protected $categoryRepository;
 
-    public function __construct(ArticleRepository $repository)
+    public function __construct(ArticleRepository $articleRepository, CategoryRepository $categoryRepository)
     {
-        $this->repository = $repository;
+        $this->articleRepository = $articleRepository;
+        $this->categoryRepository = $categoryRepository;
     }
 
     /**
@@ -24,10 +26,12 @@ class ArticleController extends Controller
      */
     public function index(): View
     {
-        $articles = $this->repository->getAll();
+        $categories = $this->categoryRepository->getAll();
+        $articles = $this->articleRepository->getAll();
 
         return view('articles.index', [
-            'articles' => $articles
+            'articles' => $articles,
+            'categories' => $categories
         ]);
     }
 
@@ -37,7 +41,7 @@ class ArticleController extends Controller
      */
     public function show($id): View
     {
-        $article = $this->repository->getOne($id);
+        $article = $this->articleRepository->getOne($id);
         return view('articles.show', [
             'article' => $article
         ]);

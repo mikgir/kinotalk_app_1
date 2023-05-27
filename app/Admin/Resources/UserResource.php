@@ -59,8 +59,10 @@ class UserResource extends Resource
                             ->removable(),
                         Text::make('Имя', 'name'),
                         Email::make('email'),
-                        Password::make('Пароль', 'password'),
-                        Date::make('Дата регистрации', 'created_at'),
+                        Password::make('Пароль', 'password')
+                            ->hideOnIndex(),
+                        Date::make('Дата регистрации', 'created_at')
+                            ->sortable(),
                         MorphMany::make('Роль', 'roles')
                             ->sortable()
                             ->removable()

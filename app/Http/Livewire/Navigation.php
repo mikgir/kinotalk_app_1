@@ -16,7 +16,7 @@ class Navigation extends Component
      */
     public function render(CategoryRepository $repository): Factory|Application|View
     {
-        $categories = $repository->getAll();
+        $categories = $repository->getHeaderAll();
         return view('livewire.navigation', compact('categories'));
     }
 }
