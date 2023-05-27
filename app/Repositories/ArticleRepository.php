@@ -16,7 +16,9 @@ class ArticleRepository implements ArticleRepositoryInterface
      */
     public function getAll(): Collection|LengthAwarePaginator
     {
-        return Article::with(['category', 'user'])->paginate(3);
+        return Article::with(['category', 'user'])
+            ->where('category_id', '=', 'categories.id')
+            ->paginate(3);
     }
 
     /**

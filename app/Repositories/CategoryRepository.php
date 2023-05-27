@@ -14,11 +14,19 @@ class CategoryRepository implements CategoryRepositoryInterface
 {
 
     /**
+     * @return LengthAwarePaginator
+     */
+    public function getAll(): LengthAwarePaginator
+    {
+        return Category::with('articles')->paginate(1);
+    }
+
+    /**
      * @return Collection
      */
-    public function getAll(): Collection
+    public function getHeaderAll(): Collection
     {
-        return Category::all();
+        return Category::with('articles')->get();
     }
 
     /**
