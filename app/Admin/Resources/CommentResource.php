@@ -11,6 +11,8 @@ use MoonShine\Decorations\Grid;
 use MoonShine\Fields\BelongsTo;
 use MoonShine\Fields\Date;
 use MoonShine\Fields\Text;
+use MoonShine\Filters\BelongsToFilter;
+use MoonShine\Filters\DateFilter;
 use MoonShine\Resources\Resource;
 use MoonShine\Fields\ID;
 use MoonShine\Actions\FiltersAction;
@@ -71,7 +73,15 @@ class CommentResource extends Resource
 
     public function filters(): array
     {
-        return [];
+        return [
+            BelongsToFilter::make('User')
+                ->nullable()
+                ->searchable(),
+            BelongsToFilter::make('Статья', 'article')
+                ->nullable()
+                ->searchable(),
+            DateFilter::make('Дата', 'created_at')
+        ];
     }
 
     public function actions(): array
