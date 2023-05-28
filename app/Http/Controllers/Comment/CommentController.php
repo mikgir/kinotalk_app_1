@@ -10,7 +10,6 @@ use App\Models\Comment;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
-use Throwable;
 
 class CommentController extends Controller
 {

@@ -1,14 +1,11 @@
 @can('delete-own comments')
-    @if($comment->user->id == Auth::id())
+    @if($comment->user_id == Auth::id())
         <div>
-            <form method="POST" action="{{ route('comments.destroy', $comment->id) }}">
-                @csrf
-                @method('delete')
-                <x-dropdown-link :href="route('comments.destroy', $comment->id)"
-                                 onclick="event.preventDefault(); this.closest('form').submit();">
-                    {{ __('Удалить') }}
-                </x-dropdown-link>
-            </form>
+            <button type="button" class="btn btn-danger"
+                    wire:click="deleteComment({{ $comment->id }})"
+                    wire:loading.attr="disabled">
+                Удалить
+            </button>
         </div>
     @endif
 @endcan
