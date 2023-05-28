@@ -3,10 +3,12 @@
 namespace App\Repositories;
 
 use App\Contracts\ArticleRepositoryInterface;
+use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Date;
 
 class ArticleRepository implements ArticleRepositoryInterface
 {
@@ -40,9 +42,31 @@ class ArticleRepository implements ArticleRepositoryInterface
         return Article::with(['category', 'user', 'comments'])->findOrFail($id);
     }
 
-    public function createArticle(Request $request)
+    /**
+     * @param ArticleRequest $request
+     * @return object
+     */
+    public function createArticle(ArticleRequest $request): object
     {
+        $article = Article::create($request->validated([
+            'user_id' => auth()->id(),
+            'category_id' => $request->category,
+            'title' => $request->title,
+            'body' => $request->body,
+            'seo_title' => $request->title,
+            'excerpt' => substr($request->body, 0, 100) . '...',
+            'status' => "DRAFT",
+            'featured' => false,
+            'active' => false,
+            'created_at'=>Date::now('EU/Moscow')
 
+        ]));
+
+        if ($request->hasFile('image')) {
+            $article->addMediaFromRequest('image')
+                ->toMediaCollection('sm_image');
+        }
+        return $article;
     }
 
 }

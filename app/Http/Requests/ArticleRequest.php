@@ -11,7 +11,7 @@ class ArticleRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return auth('web')->check();
     }
 
     /**
@@ -22,8 +22,18 @@ class ArticleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title'=>'required|max:255',
-            'body'=>'required|max:500',
+            'user_id' => ['required', 'exists:users,id'],
+            'category_id' => ['required', 'exists:categories,id'],
+            'title' => ['required', 'min:3', 'max:255'],
+            'body' => ['required', 'min:100', 'max:1000'],
+            'seo_title' => ['string', 'max:100'],
+            'excerpt' => ['string', 'max:120'],
+            'slug' => ['string'],
+            'meta_description' => ['string'],
+            'meta_keywords' => ['string'],
+            'status' => ['enum', 'DRAFT'],
+            'featured'
+
         ];
     }
 }

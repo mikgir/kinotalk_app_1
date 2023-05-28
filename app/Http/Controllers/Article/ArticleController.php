@@ -3,11 +3,16 @@
 namespace App\Http\Controllers\Article;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
 use App\Repositories\ArticleRepository;
 use App\Repositories\CategoryRepository;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 
 
 class ArticleController extends Controller
@@ -53,25 +58,43 @@ class ArticleController extends Controller
      */
     public function create(): View
     {
-        return view('articles.create');
+        $categories = $this->categoryRepository->getAll();
+        return view('articles.create', compact('categories'));
     }
 
     /**
      * Store a newly created resource in storage.
+     * @param ArticleRequest $request
+     * @return Application|Redirector|RedirectResponse
      */
-    public function store(Request $request)
+    public function store(ArticleRequest $request): Application|Redirector|RedirectResponse
     {
-        $article = new Article();
+        $this->articleRepository->createArticle($request);
 
+        return redirect('profile.show')
+            ->with('success', 'Статья успешно сохранена');
+    }
+
+    /**
+     * @param $id
+     * @return void
+     */
+    public function publish($id): void
+    {
+        $article = Article::with('user')->findOrFail($id);
+        $article->update(['status'=>'PENDING']);
     }
 
 
     /**
      * Show the form for editing the specified resource.
+     * @param string $id
+     * @return Factory|Application|View
      */
-    public function edit(string $id)
+    public function edit(string $id): Factory|Application|View
     {
-        //
+        $article = Article::with(['user', 'category'])->findOrFail($id);
+        return \view('articles.edit', compact('article'));
     }
 
     /**

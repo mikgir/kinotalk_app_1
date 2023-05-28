@@ -26,6 +26,10 @@ use MoonShine\Fields\SwitchBoolean;
 use MoonShine\Fields\Text;
 use MoonShine\Fields\Textarea;
 use MoonShine\Fields\TinyMce;
+use MoonShine\Filters\BelongsToFilter;
+use MoonShine\Filters\DateFilter;
+use MoonShine\Filters\SwitchBooleanFilter;
+use MoonShine\Filters\TextFilter;
 use MoonShine\ItemActions\ItemAction;
 use MoonShine\Resources\Resource;
 use MoonShine\Fields\ID;
@@ -50,9 +54,6 @@ class ArticleResource extends Resource
     {
         return [
             ID::make()->sortable(),
-            NoInput::make('статус', 'status',
-                static fn($item) => $item->status == 'PUBLISHED')
-                ->boolean(),
             Grid::make([
                 Column::make([
                     Block::make('Основная информация', [
@@ -102,7 +103,7 @@ class ArticleResource extends Resource
                             ->sortable(),
                         Number::make('Рейтинг', 'love_reactant_id')
                             ->stars(),
-                        SwitchBoolean::make('Блокировка', 'active'),
+                        SwitchBoolean::make('Опубликовать', 'active'),
                         Date::make('Дата создания', 'created_at')
                             ->format('d.m.Y')
                             ->sortable(),
@@ -135,7 +136,14 @@ class ArticleResource extends Resource
 
     public function filters(): array
     {
-        return [];
+        return [
+            TextFilter::make('Заголовок', 'title'),
+            BelongsToFilter::make('Автор', 'user', 'name')
+                ->nullable()
+                ->searchable(),
+            DateFilter::make('Дата', 'created_at'),
+            SwitchBooleanFilter::make("Active")
+        ];
     }
 
     public function actions(): array
@@ -145,19 +153,37 @@ class ArticleResource extends Resource
         ];
     }
 
+   public function trClass(Model $item, int $index): string
+   {
+       if ($item->status === 'DRAFT' ){
+           return 'yellow';
+       }
+       if ($item->status === 'PENDING' ){
+           return 'blue';
+       }
+       if ($item->status === 'PUBLISED' ){
+           return 'green';
+       }
+       if ($item->active == false ){
+           return 'red';
+       }
+
+       return parent::trClass($item, $index);
+   }
+
     public function itemActions(): array
     {
         return [
-            ItemAction::make('Блок +', function (Model $item) {
-                $item->update(['active' => false]);
-            }, 'Заблокировано')
-                ->withConfirm()
-                ->icon('heroicons.signal-slash'),
-            ItemAction::make('Блок -', function (Model $item) {
-                $item->update(['active' => true]);
-            }, 'Разблокировано')
-                ->withConfirm()
-                ->icon('heroicons.signal'),
+//            ItemAction::make('Блок +', function (Model $item) {
+//                $item->update(['active' => false]);
+//            }, 'Заблокировано')
+//                ->withConfirm()
+//                ->icon('heroicons.signal-slash'),
+//            ItemAction::make('Блок -', function (Model $item) {
+//                $item->update(['active' => true]);
+//            }, 'Разблокировано')
+//                ->withConfirm()
+//                ->icon('heroicons.signal'),
         ];
     }
 }

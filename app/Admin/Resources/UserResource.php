@@ -15,6 +15,8 @@ use MoonShine\Fields\HasMany;
 use MoonShine\Fields\MorphMany;
 use MoonShine\Fields\Password;
 use MoonShine\Fields\Text;
+use MoonShine\Filters\DateFilter;
+use MoonShine\Filters\TextFilter;
 use MoonShine\ItemActions\ItemAction;
 use MoonShine\Resources\Resource;
 use MoonShine\Fields\ID;
@@ -90,7 +92,11 @@ class UserResource extends Resource
 
     public function filters(): array
     {
-        return ['name', 'roles'];
+        return [
+            TextFilter::make('Имя', 'name'),
+            TextFilter::make('Email'),
+            DateFilter::make('Дата', 'created_at'),
+        ];
     }
 
     public function actions(): array
