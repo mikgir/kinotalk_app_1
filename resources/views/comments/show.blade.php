@@ -1,13 +1,13 @@
-<div class="blog-avatar-wrap p-3 bg-white rounded-3 justify-content-between">
-    <div class="blog-avatar-img" style="width: 4rem; display: grid; justify-items: left;">
+<div class="blog-avatar-wrap p-3 bg-transparent rounded border justify-content-between">
+    <div class="blog-avatar-img">
         {{$comment->user->getFirstMedia('avatars')}}
+        <span class="name ml-3 ">{{$comment->user->name}}</span>
     </div>
-    <div class="blog-avatar-content">
-        <span class="name m-lg-2 ">{{$comment->user->name}}</span>
-        <p style="width: 34rem; word-wrap: break-word;">{{ $comment->text }}</p>
-        <span class="name m-lg-2 fw-bold float-end">{{$comment->created_at->diffForHumans()}}</span>
+    <div class="blog-avatar-content w-75">
+        <p class="text-center">{{ $comment->text }}</p>
+        <span>{{$comment->created_at->diffForHumans()}}</span>
     </div>
-    <div style="width: 8rem;">
+    <div>
         @include('comments.blocks.delete-button', ['comment' => $comment])
     </div>
 </div>
