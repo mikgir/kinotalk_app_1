@@ -33,7 +33,7 @@ class ParserAction extends Action
             $sources = $sourceRepository->getAll();
 
             foreach ($sources as $source) {
-                if($source->status === 'ACTIVE') {
+                if($source->status) {
                     $parser = match ($source->url) {
                         NewsSources::Kinonews->value => $kinonewsParserServiceParser,
                         NewsSources::FilmRu->value => $filmRUParserService

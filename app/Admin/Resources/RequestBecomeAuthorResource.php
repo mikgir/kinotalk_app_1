@@ -2,25 +2,34 @@
 
 namespace App\Admin\Resources;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
-
 use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use App\Models\Article;
+
 use MoonShine\Decorations\Block;
+use MoonShine\Decorations\Collapse;
 use MoonShine\Decorations\Column;
+use MoonShine\Decorations\Flex;
 use MoonShine\Decorations\Grid;
+use MoonShine\Decorations\Tab;
+use MoonShine\Decorations\Tabs;
 use MoonShine\Fields\BelongsTo;
 use MoonShine\Fields\Date;
 use MoonShine\Fields\Email;
+use MoonShine\Fields\Enum;
 use MoonShine\Fields\HasMany;
-use MoonShine\Fields\HasOne;
+use MoonShine\Fields\Image;
 use MoonShine\Fields\MorphMany;
+use MoonShine\Fields\NoInput;
+use MoonShine\Fields\Number;
 use MoonShine\Fields\Password;
+use MoonShine\Fields\Select;
+use MoonShine\Fields\Slug;
+use MoonShine\Fields\SwitchBoolean;
 use MoonShine\Fields\Text;
 use MoonShine\Fields\Textarea;
-use MoonShine\Fields\Url;
-use MoonShine\Filters\DateFilter;
-use MoonShine\Filters\TextFilter;
+use MoonShine\Fields\TinyMce;
 use MoonShine\ItemActions\ItemAction;
 use MoonShine\Resources\Resource;
 use MoonShine\Fields\ID;
@@ -28,8 +37,7 @@ use MoonShine\Actions\FiltersAction;
 use Spatie\Permission\Traits\HasRoles;
 use VI\MoonShineSpatieMediaLibrary\Fields\MediaLibrary;
 
-
-class UserResource extends Resource
+class RequestBecomeAuthorResource extends Resource
 {
     use HasRoles;
 
@@ -50,6 +58,7 @@ class UserResource extends Resource
             'permissions',
             'profile',
             'media',
+            'comments'
         ]);
     }
 
@@ -64,37 +73,18 @@ class UserResource extends Resource
                             ->removable(),
                         Text::make('Имя', 'name'),
                         Email::make('email'),
-//                        Password::make('Пароль', 'password')
-//                            ->hideOnIndex(),
+                        Password::make('Пароль', 'password')
+                            ->hideOnIndex(),
                         Date::make('Дата регистрации', 'created_at')
                             ->sortable(),
-                        HasOne::make('Профиль', 'profile')
-                            ->fields([
-                                Text::make('Имя', 'first_name'),
-                                Text::make('Фамилия', 'last_name'),
-                                Text::make('Город', 'city'),
-                                Text::make('Страна', 'country'),
-                            ])
-                            ->hideOnIndex(),
-                        HasOne::make('Род занятий', 'profile')
-                            ->fields([
-                                Text::make('Род занятий', 'occupation'),
-                                Text::make('Компания', 'company'),
-                                Url::make('Сайт', 'url'),
-                            ])
-                            ->hideOnIndex(),
-                        HasOne::make('Обо мне', 'profile')
-                            ->fields([
-                                Textarea::make('Обо мне', 'about_me'),
-                            ])
-                            ->hideOnIndex(),
                         MorphMany::make('Роль', 'roles')
                             ->sortable()
                             ->removable()
                     ])
-
                 ])->columnSpan(6),
-
+                HasMany::make('Comments')
+                    ->hideOnIndex()
+                    ->resourceMode()
             ])
         ];
     }
@@ -114,11 +104,7 @@ class UserResource extends Resource
 
     public function filters(): array
     {
-        return [
-            TextFilter::make('Имя', 'name'),
-            TextFilter::make('Email'),
-            DateFilter::make('Дата', 'created_at'),
-        ];
+        return ['name', 'roles'];
     }
 
     public function actions(): array
