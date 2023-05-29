@@ -6,6 +6,7 @@ use App\Http\Controllers\Comment\CommentController;
 use App\Http\Controllers\Main\MainController;
 use App\Http\Controllers\News\NewsController;
 use App\Http\Controllers\Profile\UserProfileController;
+use App\Http\Controllers\Mail\MailController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,6 +40,10 @@ Route::get('/news', [NewsController::class, 'index'])->name('news');
 Route::get('/news/{id}', [NewsController::class, 'show'])
     ->where('id', '\d+')
     ->name('news.show');
+
+Route::get('/becomeAuthor/{id}', [MailController::class, 'sendEmailBecomeAuthor'])
+    ->where('id', '\d+')
+    ->name('becomeAuthor');
 
 
 Route::get('/moonshine')->middleware(['auth', 'moonshine'])
