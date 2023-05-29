@@ -15,7 +15,7 @@ return new class extends Migration
             $table->increments('id');
             $table->string('name', 255);
             $table->string('url', 255);
-            $table->enum('status', ['ACTIVE', 'INACTIVE'])->default('INACTIVE');
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }

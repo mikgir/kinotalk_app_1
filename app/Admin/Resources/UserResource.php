@@ -9,12 +9,16 @@ use Illuminate\Contracts\Database\Eloquent\Builder;
 use MoonShine\Decorations\Block;
 use MoonShine\Decorations\Column;
 use MoonShine\Decorations\Grid;
+use MoonShine\Fields\BelongsTo;
 use MoonShine\Fields\Date;
 use MoonShine\Fields\Email;
 use MoonShine\Fields\HasMany;
+use MoonShine\Fields\HasOne;
 use MoonShine\Fields\MorphMany;
 use MoonShine\Fields\Password;
 use MoonShine\Fields\Text;
+use MoonShine\Fields\Textarea;
+use MoonShine\Fields\Url;
 use MoonShine\Filters\DateFilter;
 use MoonShine\Filters\TextFilter;
 use MoonShine\ItemActions\ItemAction;
@@ -46,7 +50,6 @@ class UserResource extends Resource
             'permissions',
             'profile',
             'media',
-            'comments'
         ]);
     }
 
@@ -61,18 +64,37 @@ class UserResource extends Resource
                             ->removable(),
                         Text::make('Имя', 'name'),
                         Email::make('email'),
-                        Password::make('Пароль', 'password')
-                            ->hideOnIndex(),
+//                        Password::make('Пароль', 'password')
+//                            ->hideOnIndex(),
                         Date::make('Дата регистрации', 'created_at')
                             ->sortable(),
+                        HasOne::make('Профиль', 'profile')
+                            ->fields([
+                                Text::make('Имя', 'first_name'),
+                                Text::make('Фамилия', 'last_name'),
+                                Text::make('Город', 'city'),
+                                Text::make('Страна', 'country'),
+                            ])
+                            ->hideOnIndex(),
+                        HasOne::make('Род занятий', 'profile')
+                            ->fields([
+                                Text::make('Род занятий', 'occupation'),
+                                Text::make('Компания', 'company'),
+                                Url::make('Сайт', 'url'),
+                            ])
+                            ->hideOnIndex(),
+                        HasOne::make('Обо мне', 'profile')
+                            ->fields([
+                                Textarea::make('Обо мне', 'about_me'),
+                            ])
+                            ->hideOnIndex(),
                         MorphMany::make('Роль', 'roles')
                             ->sortable()
                             ->removable()
                     ])
+
                 ])->columnSpan(6),
-                HasMany::make('Comments')
-                    ->hideOnIndex()
-                    ->resourceMode()
+
             ])
         ];
     }
