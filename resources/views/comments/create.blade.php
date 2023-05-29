@@ -12,12 +12,12 @@
                         <div class="blog-avatar-img">
                             {{Auth::user()->getFirstMedia('avatars')}}
                         </div>
-                        <textarea wire:model.defer="text" class="form-control mx-lg-2 bg-transparent @error('text') border-red-500 @enderror"
+                        <textarea wire:model.defer="text" class="fs-5 form-control mx-lg-2 bg-transparent @error('text') border-red-500 @enderror"
                                   type="text"
                                   name="text"></textarea>
                     </div>
                     @error('text')
-                    <p class="text-red-500">{{$message}}</p>
+                    <p class="fs-3 ms-2 fs-5">{{$message}}</p>
                     @enderror
                 </div>
                 <button class="btn btn-primary mt-3 mb-3 float-end" type="submit"

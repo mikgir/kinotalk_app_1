@@ -78,3 +78,30 @@
     margin-top: 25px;
 
 }
+.name{
+    font-size: 12px;
+    margin: 10px 10px 8px;
+}
+.blog-avatar-wrap__w3{
+    margin-top: 15px;
+    padding: 5px 5px 5px;
+    display: flex;
+    border: 1px solid #dee2e6!important;
+    justify-content: space-between;
+}
+.blog-avatar-content{
+    width: 500%;
+    text-align: justify;
+}
+.blog-avatar-content__span3{
+    font-size: 10px;
+    padding-left: 10%;
+
+}
+.blog-avatar-wrap__btn{
+    margin-top: 12%;
+}
+.block-comments__svg{
+    width: 20px;
+}
+
