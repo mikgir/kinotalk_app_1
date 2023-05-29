@@ -48,25 +48,25 @@ class ArticleRepository implements ArticleRepositoryInterface
      */
     public function createArticle(ArticleRequest $request): object
     {
-        $article = Article::create($request->validated([
-            'user_id' => auth()->id(),
-            'category_id' => $request->category,
-            'title' => $request->title,
-            'body' => $request->body,
-            'seo_title' => $request->title,
-            'excerpt' => substr($request->body, 0, 100) . '...',
-            'status' => "DRAFT",
-            'featured' => false,
-            'active' => false,
-            'created_at'=>Date::now('EU/Moscow')
-
-        ]));
-
-        if ($request->hasFile('image')) {
-            $article->addMediaFromRequest('image')
-                ->toMediaCollection('sm_image');
-        }
-        return $article;
+//        $article = Article::create($request->validated([
+//            'user_id' => auth()->id(),
+//            'category_id' => $request->category,
+//            'title' => $request->title,
+//            'body' => $request->body,
+//            'seo_title' => $request->title,
+//            'excerpt' => substr($request->body, 0, 100) . '...',
+//            'status' => "DRAFT",
+//            'featured' => false,
+//            'active' => false,
+//            'created_at'=>Date::now('EU/Moscow')
+//
+//        ]));
+//
+//        if ($request->hasFile('image')) {
+//            $article->addMediaFromRequest('image')
+//                ->toMediaCollection('sm_image');
+//        }
+//        return $article;
     }
 
 }

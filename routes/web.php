@@ -31,6 +31,10 @@ Route::get('/articles?page={key}', [ArticleController::class, 'index'])
 Route::get('/articles/{id}', [ArticleController::class, 'show'])
     ->where('id', '\d+')
     ->name('articles.show');
+Route::get('/articles/create', [ArticleController::class, 'create'])
+    ->name('articles.create');
+Route::post('/articles/store', [ArticleController::class, 'store'])
+    ->name('articles.store');
 Route::get('/authors', [AuthorController::class, 'index'])->name('authors');
 Route::get('/authors/{id}', [AuthorController::class, 'show'])
     ->where('id', '\d+')

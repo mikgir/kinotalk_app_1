@@ -146,7 +146,7 @@
                             <span>Статьи</span>
                         </div>
                         <div class="card-body">
-                            <a href="#" class="btn btn-primary">Написать статью</a>
+                            <a href="{{route('articles.create')}}" class="btn btn-primary">Написать статью</a>
                             <hr>
                             <span>Список статей</span>
                             <div class="table-responsive-md table-hover">

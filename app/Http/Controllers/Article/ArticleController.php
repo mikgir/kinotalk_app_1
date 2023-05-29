@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Article;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
+use App\Models\Category;
 use App\Repositories\ArticleRepository;
 use App\Repositories\CategoryRepository;
 use Illuminate\Contracts\View\Factory;
@@ -12,7 +13,8 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Date;
+
 
 
 class ArticleController extends Controller
@@ -58,20 +60,39 @@ class ArticleController extends Controller
      */
     public function create(): View
     {
-        $categories = $this->categoryRepository->getAll();
+        $categories = Category::all();
         return view('articles.create', compact('categories'));
     }
 
     /**
      * Store a newly created resource in storage.
-     * @param ArticleRequest $request
-     * @return Application|Redirector|RedirectResponse
+     * @param Request $request
+     * @param ArticleRequest $articleRequest
+     * @return RedirectResponse
      */
-    public function store(ArticleRequest $request): Application|Redirector|RedirectResponse
+    public function store(Request $request, ArticleRequest $articleRequest): RedirectResponse
     {
-        $this->articleRepository->createArticle($request);
+        $request->validate($articleRequest->rules());
 
-        return redirect('profile.show')
+        $article = Article::create([
+            'user_id' => auth('web')->id(),
+            'category_id' => $request->category,
+            'title' => $request->title,
+            'body' => $request->body,
+            'seo_title' => $request->title,
+            'excerpt' => substr($request->body, 0, 100) . '...',
+            'status' => "DRAFT",
+            'featured' => false,
+            'active' => false,
+            'created_at' => Date::now('EU/Moscow')
+        ]);
+
+        if ($request->hasFile('image')) {
+            $article->addMediaFromRequest('image')
+                ->toMediaCollection('sm_image');
+        }
+
+        return redirect('profile.show', auth('web')->id())
             ->with('success', 'Статья успешно сохранена');
     }
 
@@ -82,7 +103,7 @@ class ArticleController extends Controller
     public function publish($id): void
     {
         $article = Article::with('user')->findOrFail($id);
-        $article->update(['status'=>'PENDING']);
+        $article->update(['status' => 'PENDING']);
     }
 
 
@@ -94,6 +115,7 @@ class ArticleController extends Controller
     public function edit(string $id): Factory|Application|View
     {
         $article = Article::with(['user', 'category'])->findOrFail($id);
+
         return \view('articles.edit', compact('article'));
     }
 

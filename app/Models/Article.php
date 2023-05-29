@@ -34,6 +34,7 @@ use Spatie\Image\Manipulations;
  * @property string|null $meta_keywords
  * @property string $status
  * @property bool $featured
+ * @property bool $active
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property string|null $deleted_at
@@ -56,7 +57,8 @@ class Article extends Model implements ReactableInterface, HasMedia
     protected $casts = [
         'user_id' => 'int',
         'category_id' => 'int',
-        'featured' => 'bool'
+        'featured' => 'bool',
+        'active'=>'bool'
     ];
 
     protected $fillable = [
@@ -71,7 +73,8 @@ class Article extends Model implements ReactableInterface, HasMedia
         'meta_description',
         'meta_keywords',
         'status',
-        'featured'
+        'featured',
+        'active'
     ];
 
     public function category(): BelongsTo

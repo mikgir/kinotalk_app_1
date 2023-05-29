@@ -32,8 +32,6 @@ class ArticleRequest extends FormRequest
             'meta_description' => ['string'],
             'meta_keywords' => ['string'],
             'status' => ['enum', 'DRAFT'],
-            'featured'
-
         ];
     }
 }

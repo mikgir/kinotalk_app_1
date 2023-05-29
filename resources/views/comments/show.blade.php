@@ -5,7 +5,7 @@
     </div>
     <div class="blog-avatar-content w-75">
         <p class="text-center">{{ $comment->text }}</p>
-        <span>{{$comment->created_at->diffForHumans()}}</span>
+        <span class="flex-end">{{$comment->created_at->diffForHumans()}}</span>
     </div>
     <div>
         @include('comments.blocks.delete-button', ['comment' => $comment])
