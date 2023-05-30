@@ -174,9 +174,13 @@
                                         <td>{{$article->created_at}}</td>
                                         <td>{{$article->updated_at}}</td>
                                         <td>
-                                            <a href="{{route('articles.edit', $article->id)}}" class="btn-outline-primary">Редактировать</a>
-                                            <a href="{{route('articles.publish', $article->id)}}" class="btn-outline-success">Опубликовать</a>
-                                            <a href="{{route('articles.destroy', $article->id)}}" class="btn-outline-danger">Удалить</a>
+                                            <a href="{{route('articles.edit', $article->id)}}" class="btn btn-outline-primary mb-2 w-100">Редактировать</a>
+                                            <form method="post" action="{{route('articles.publish', $article->id)}}">
+                                                @csrf
+                                                @method('patch')
+                                                <button type="submit" class="btn btn-outline-success mb-2 w-100">Опубликовать</button>
+                                            </form>
+                                            <a href="{{route('articles.destroy', $article->id)}}" class="btn btn-outline-danger mb-2 w-100">Удалить</a>
                                         </td>
                                     </tr>
                                     @endforeach

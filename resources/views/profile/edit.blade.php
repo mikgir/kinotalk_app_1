@@ -1,7 +1,7 @@
 @section('profile-form')
-    <form method="POST" action="{{route('profile.update', $profile->id)}}">
+    <form method="post" action="{{route('profile.update', $profile->id)}}">
         @csrf
-        @method('PUT')
+        @method('PATCH')
 
         <div class="row gx-3 mb-3">
             <!-- Form Group (first name)-->

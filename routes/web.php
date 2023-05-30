@@ -80,7 +80,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/articles/edit/{id}', [ArticleController::class, 'edit'])
         ->where('id', '\d+')
         ->name('articles.edit');
-    Route::patch('/articles/update/{id}', [ArticleController::class, 'update'])
+    Route::post('/articles/update/{id}', [ArticleController::class, 'update'])
         ->where('id', '\d+')
         ->name('articles.update');
     Route::delete('/articles/destroy/{id}', [ArticleController::class, 'destroy'])
