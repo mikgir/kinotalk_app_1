@@ -19,7 +19,7 @@ class CommentRepository implements CommentRepositoryInterface
         return Comment::with(['user'])
             ->where('article_id', $id)
             ->orderByDesc('created_at')
-            ->paginate(10);
+            ->paginate(5);
     }
 
     /**

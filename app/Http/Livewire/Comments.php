@@ -4,37 +4,37 @@ namespace App\Http\Livewire;
 
 use App\Http\Requests\StoreCommentRequest;
 use App\Models\Article;
-use App\Repositories\ArticleRepository;
+use App\Models\Comment;
 use App\Repositories\CommentRepository;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Comments extends Component
 {
-    public Article $article;
-    public string $text;
-    public int $user_id;
-    protected array $rules;
+    use WithPagination;
 
-    protected function getRules()
+    public Article $article;
+    public string $text = '';
+    public int $user_id;
+
+    protected string $paginationTheme = 'bootstrap';
+
+    protected function rules()
     {
         return (new StoreCommentRequest)->rules();
     }
 
-    public function postComment(ArticleRepository $repository): void
+    public function postComment(): void
     {
         $this->text = htmlspecialchars($this->text);
         $this->user_id = Auth::id();
-
-        $this->rules = $this->getRules();
         $this->validate();
 
-        $article = $repository->getOne($this->article->id);
-
-        $article->comments()->create([
+        Comment::create([
             'user_id' => Auth::id(),
             'article_id' => $this->article->id,
             'text' => htmlspecialchars($this->text),
@@ -42,6 +42,7 @@ class Comments extends Component
 
         $this->text = '';
         $this->article = Article::find($this->article->id);
+        $this->dispatchBrowserEvent('closeModal');
         session()->flash('message', 'Comment posted');
     }
 
@@ -55,8 +56,10 @@ class Comments extends Component
         }
     }
 
-    public function render(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    public function render(CommentRepository $repository): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('livewire.comments');
+        return view('livewire.comments', [
+            'comments' => $repository->getAllByArticleId($this->article->id),
+        ]);
     }
 }

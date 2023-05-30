@@ -1,3 +1,6 @@
 <div>
-    @include('comments.index', ['article' => $article])
+    @include('comments.index', [
+        'article' => $article,
+        'comments' => $comments,
+    ])
 </div>
