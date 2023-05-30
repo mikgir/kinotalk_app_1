@@ -46,9 +46,6 @@ Route::get('/becomeAuthor/{id}', [MailController::class, 'sendEmailBecomeAuthor'
     ->name('becomeAuthor');
 
 
-Route::get('/moonshine')->middleware(['auth', 'moonshine'])
-    ->name('admin');
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [UserProfileController::class, 'index'])
         ->name('profile.show');
@@ -88,12 +85,12 @@ Route::middleware('auth')->group(function () {
         ->name('articles.destroy');
 
     // Не используются
-    Route::post('articles/{id}/comments/create', [CommentController::class, 'store'])
-        ->where('id', '\d+')
-        ->name('comments.create');
-    Route::delete('comments/{id}', [CommentController::class, 'destroy'])
-        ->where('id', '\d+')
-        ->name('comments.destroy');
+//    Route::post('articles/{id}/comments/create', [CommentController::class, 'store'])
+//        ->where('id', '\d+')
+//        ->name('comments.create');
+//    Route::delete('comments/{id}', [CommentController::class, 'destroy'])
+//        ->where('id', '\d+')
+//        ->name('comments.destroy');
 });
 
 require __DIR__ . '/auth.php';

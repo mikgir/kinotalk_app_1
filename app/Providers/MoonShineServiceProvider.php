@@ -10,6 +10,10 @@ use App\Admin\Resources\ProfileResource;
 use App\Admin\Resources\RoleResource;
 use App\Admin\Resources\SourceResource;
 use App\Admin\Resources\UserResource;
+use App\Models\Article;
+use App\Models\Comment;
+use App\Models\News;
+use App\Models\User;
 use Illuminate\Support\ServiceProvider;
 use MoonShine\MoonShine;
 use MoonShine\Menu\MenuGroup;
@@ -24,6 +28,7 @@ class MoonShineServiceProvider extends ServiceProvider
         app(MoonShine::class)->menu([
             MenuGroup::make('Система', [
                 MenuItem::make('Пользователи', new UserResource())
+                    ->badge(fn() => User::query()->count())
                     ->icon('users'),
                 MenuItem::make('Профили', new ProfileResource())
                     ->icon('heroicons.identification'),
@@ -34,12 +39,15 @@ class MoonShineServiceProvider extends ServiceProvider
                 MenuItem::make('Категории', new CategoryResource())
                     ->icon('heroicons.document-text'),
                 MenuItem::make('Статьи', new ArticleResource())
+                    ->badge(fn() => Article::query()->count())
                     ->icon('heroicons.document-text'),
                 MenuItem::make('Ресурс сайты', new SourceResource())
                     ->icon('heroicons.newspaper'),
                 MenuItem::make('Новости', new NewsResource())
+                    ->badge(fn() => News::query()->count())
                     ->icon('heroicons.newspaper'),
                 MenuItem::make('Комментарии', new CommentResource())
+                    ->badge(fn() => Comment::query()->count())
                     ->icon('heroicons.chat-bubble-bottom-center-text'),
             ])->icon('app'),
         ]);
