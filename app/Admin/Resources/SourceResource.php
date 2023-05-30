@@ -38,7 +38,7 @@ class SourceResource extends Resource
                     Block::make('Информация', [
                         Text::make('Имя', 'name'),
                         Url::make('Url', 'url'),
-                        SwitchBoolean::make('Статус', 'status'),
+                        SwitchBoolean::make('Статус', 'active'),
                         Date::make('Дата создания', 'created_at')->sortable(),
                         Date::make('Дата изменения', 'updated_at')->sortable()
                     ])
