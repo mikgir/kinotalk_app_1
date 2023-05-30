@@ -146,7 +146,7 @@
                             <span>Статьи</span>
                         </div>
                         <div class="card-body">
-                            <a href="#" class="btn btn-primary">Написать статью</a>
+                            <a href="{{route('articles.create')}}" class="btn btn-primary">Написать статью</a>
                             <hr>
                             <span>Список статей</span>
                             <div class="table-responsive-md table-hover">
@@ -174,9 +174,9 @@
                                         <td>{{$article->created_at}}</td>
                                         <td>{{$article->updated_at}}</td>
                                         <td>
-                                            <a href="#" class="btn-outline-primary">Редактировать</a>
-                                            <a href="#" class="btn-outline-success">Опубликовать</a>
-                                            <a href="#" class="btn-outline-danger">Удалить</a>
+                                            <a href="{{route('articles.edit', $article->id)}}" class="btn-outline-primary">Редактировать</a>
+                                            <a href="{{route('articles.publish', $article->id)}}" class="btn-outline-success">Опубликовать</a>
+                                            <a href="{{route('articles.destroy', $article->id)}}" class="btn-outline-danger">Удалить</a>
                                         </td>
                                     </tr>
                                     @endforeach

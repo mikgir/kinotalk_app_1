@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Article;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
+use App\Models\Category;
+use App\Models\User;
 use App\Repositories\ArticleRepository;
 use App\Repositories\CategoryRepository;
 use Illuminate\Contracts\View\Factory;
@@ -12,11 +14,15 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Date;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 
 class ArticleController extends Controller
 {
+
     protected $articleRepository;
     protected $categoryRepository;
 
@@ -58,21 +64,23 @@ class ArticleController extends Controller
      */
     public function create(): View
     {
-        $categories = $this->categoryRepository->getAll();
+        $categories = Category::all();
         return view('articles.create', compact('categories'));
     }
 
     /**
      * Store a newly created resource in storage.
      * @param ArticleRequest $request
-     * @return Application|Redirector|RedirectResponse
+     * @return RedirectResponse
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
      */
-    public function store(ArticleRequest $request): Application|Redirector|RedirectResponse
+    public function store(ArticleRequest $request): RedirectResponse
     {
         $this->articleRepository->createArticle($request);
 
-        return redirect('profile.show')
-            ->with('success', 'Статья успешно сохранена');
+        return redirect('/profile')
+            ->with('success', 'Статья успешно создана');
     }
 
     /**
@@ -82,7 +90,7 @@ class ArticleController extends Controller
     public function publish($id): void
     {
         $article = Article::with('user')->findOrFail($id);
-        $article->update(['status'=>'PENDING']);
+        $article->update(['status' => 'PENDING']);
     }
 
 
@@ -94,15 +102,23 @@ class ArticleController extends Controller
     public function edit(string $id): Factory|Application|View
     {
         $article = Article::with(['user', 'category'])->findOrFail($id);
-        return \view('articles.edit', compact('article'));
+        $categories = Category::all();
+
+        return \view('articles.edit', [
+            'article'=>$article,
+            'categories'=>$categories
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ArticleRequest $request, string $id)
     {
+        $this->articleRepository->updateArticle($id,$request);
 
+        return redirect('/profile')
+            ->with('success', 'Статья успешно обновлена');
     }
 
     /**

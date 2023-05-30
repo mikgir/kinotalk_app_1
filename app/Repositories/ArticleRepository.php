@@ -7,11 +7,15 @@ use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 class ArticleRepository implements ArticleRepositoryInterface
 {
+    use InteractsWithMedia;
+
 
     /**
      * @return Collection|LengthAwarePaginator
@@ -44,29 +48,54 @@ class ArticleRepository implements ArticleRepositoryInterface
 
     /**
      * @param ArticleRequest $request
-     * @return object
+     * @return void
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
      */
-    public function createArticle(ArticleRequest $request): object
+    public function createArticle(ArticleRequest $request): void
     {
-        $article = Article::create($request->validated([
-            'user_id' => auth()->id(),
-            'category_id' => $request->category,
-            'title' => $request->title,
-            'body' => $request->body,
-            'seo_title' => $request->title,
-            'excerpt' => substr($request->body, 0, 100) . '...',
-            'status' => "DRAFT",
-            'featured' => false,
-            'active' => false,
-            'created_at'=>Date::now('EU/Moscow')
+        $article = new Article;
 
-        ]));
+        $article->user_id = auth()->id();
+        $article->category_id = $request->category;
+        $article->title = $request->title;
+        $article->body = $request->body;
+        $article->status = "DRAFT";
+        $article->active = false;
 
         if ($request->hasFile('image')) {
             $article->addMediaFromRequest('image')
                 ->toMediaCollection('sm_image');
         }
-        return $article;
+
+        $article->save();
+
+    }
+
+    /**
+     * @param $id
+     * @param ArticleRequest $request
+     * @return void
+     */
+    public function updateArticle($id, ArticleRequest $request): void
+    {
+        $article = Article::with(['user', 'category'])->findOrFail($id);
+
+        $article->update([
+            'category_id' => $request->category,
+            'title' => $request->title,
+            'body' => $request->body,
+            'status' => "DRAFT",
+            'active' => false
+        ]);
+
+        if ($request->hasFile('image')) {
+            $article->clearMediaCollection('sm_image');
+
+            $article->addMediaFromRequest('image')
+                ->toMediaCollection('sm_image');
+        }
+
     }
 
 }

@@ -70,12 +70,29 @@ Route::middleware('auth')->group(function () {
         ->where('id', '\d+')
         ->name('profile.destroy');
 
-//    Route::post('articles/{id}/comments/create', [CommentController::class, 'store'])
-//        ->where('id', '\d+')
-//        ->name('comments.create');
-//    Route::delete('comments/{id}', [CommentController::class, 'destroy'])
-//        ->where('id', '\d+')
-//        ->name('comments.destroy');
+    Route::get('/articles/create', [ArticleController::class, 'create'])
+        ->name('articles.create');
+    Route::post('/articles/store', [ArticleController::class, 'store'])
+        ->name('articles.store');
+    Route::patch('/articles/publish/{id}', [ArticleController::class, 'publish'])
+        ->where('id', '\d+')
+        ->name('articles.publish');
+    Route::get('/articles/edit/{id}', [ArticleController::class, 'edit'])
+        ->where('id', '\d+')
+        ->name('articles.edit');
+    Route::patch('/articles/update/{id}', [ArticleController::class, 'update'])
+        ->where('id', '\d+')
+        ->name('articles.update');
+    Route::delete('/articles/destroy/{id}', [ArticleController::class, 'destroy'])
+        ->where('id', '\d+')
+        ->name('articles.destroy');
+
+    Route::post('articles/{id}/comments/create', [CommentController::class, 'store'])
+        ->where('id', '\d+')
+        ->name('comments.create');
+    Route::delete('comments/{id}', [CommentController::class, 'destroy'])
+        ->where('id', '\d+')
+        ->name('comments.destroy');
 });
 
 require __DIR__ . '/auth.php';

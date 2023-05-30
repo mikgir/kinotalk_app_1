@@ -101,9 +101,9 @@
                         font-size: 14px;
                         text-transform: uppercase;
                         &.active,
-                        &:active {
+                        /*&:active {
                             background-color: var(--tg-theme-primary);
-                        }
+                        }*/
                     }
                 }
             }
