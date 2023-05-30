@@ -27,9 +27,10 @@ class UserProfileController extends Controller
      */
     public function index(): View
     {
+
         $userId = auth('web')->id();
         $user = \auth()->user();
-        $profile = Profile::with('user')->where(['user_id', '=', $userId]);
+        $profile = Profile::with('user')->where('user_id',  $userId);
 
         return view('profile.index', [
             'profile' => $profile,

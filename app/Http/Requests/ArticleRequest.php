@@ -23,15 +23,18 @@ class ArticleRequest extends FormRequest
     {
         return [
             'user_id' => ['required', 'exists:users,id'],
-            'category_id' => ['required', 'exists:categories,id'],
             'title' => ['required', 'min:3', 'max:255'],
-            'body' => ['required', 'min:100', 'max:1000'],
-            'seo_title' => ['string', 'max:100'],
-            'excerpt' => ['string', 'max:120'],
-            'slug' => ['string'],
-            'meta_description' => ['string'],
-            'meta_keywords' => ['string'],
-            'status' => ['enum', 'DRAFT'],
+            'body' => ['required', 'min:100'],
         ];
+    }
+
+    /**
+     * @return void
+     */
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'user_id'=>auth('web')->id(),
+        ]);
     }
 }

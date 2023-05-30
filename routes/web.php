@@ -32,10 +32,6 @@ Route::get('/articles?page={key}', [ArticleController::class, 'index'])
 Route::get('/articles/{id}', [ArticleController::class, 'show'])
     ->where('id', '\d+')
     ->name('articles.show');
-Route::get('/articles/create', [ArticleController::class, 'create'])
-    ->name('articles.create');
-Route::post('/articles/store', [ArticleController::class, 'store'])
-    ->name('articles.store');
 Route::get('/authors', [AuthorController::class, 'index'])->name('authors');
 Route::get('/authors/{id}', [AuthorController::class, 'show'])
     ->where('id', '\d+')
@@ -73,6 +69,23 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile/{id}', [UserProfileController::class, 'destroy'])
         ->where('id', '\d+')
         ->name('profile.destroy');
+
+    Route::get('/articles/create', [ArticleController::class, 'create'])
+        ->name('articles.create');
+    Route::post('/articles/store', [ArticleController::class, 'store'])
+        ->name('articles.store');
+    Route::patch('/articles/publish/{id}', [ArticleController::class, 'publish'])
+        ->where('id', '\d+')
+        ->name('articles.publish');
+    Route::get('/articles/edit/{id}', [ArticleController::class, 'edit'])
+        ->where('id', '\d+')
+        ->name('articles.edit');
+    Route::patch('/articles/update/{id}', [ArticleController::class, 'update'])
+        ->where('id', '\d+')
+        ->name('articles.update');
+    Route::delete('/articles/destroy/{id}', [ArticleController::class, 'destroy'])
+        ->where('id', '\d+')
+        ->name('articles.destroy');
 
     Route::post('articles/{id}/comments/create', [CommentController::class, 'store'])
         ->where('id', '\d+')
