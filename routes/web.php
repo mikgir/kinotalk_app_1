@@ -87,7 +87,7 @@ Route::middleware('auth')->group(function () {
         ->where('id', '\d+')
         ->name('articles.destroy');
 
-    // Не изпользуются
+    // Не используются
     Route::post('articles/{id}/comments/create', [CommentController::class, 'store'])
         ->where('id', '\d+')
         ->name('comments.create');
