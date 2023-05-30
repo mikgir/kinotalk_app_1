@@ -70,12 +70,12 @@ Route::middleware('auth')->group(function () {
         ->where('id', '\d+')
         ->name('profile.destroy');
 
-    Route::post('articles/{id}/comments/create', [CommentController::class, 'store'])
-        ->where('id', '\d+')
-        ->name('comments.create');
-    Route::delete('comments/{id}', [CommentController::class, 'destroy'])
-        ->where('id', '\d+')
-        ->name('comments.destroy');
+//    Route::post('articles/{id}/comments/create', [CommentController::class, 'store'])
+//        ->where('id', '\d+')
+//        ->name('comments.create');
+//    Route::delete('comments/{id}', [CommentController::class, 'destroy'])
+//        ->where('id', '\d+')
+//        ->name('comments.destroy');
 });
 
 require __DIR__ . '/auth.php';

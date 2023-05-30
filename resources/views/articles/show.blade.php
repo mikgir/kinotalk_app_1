@@ -122,7 +122,11 @@
                             </div>
 
                             <livewire:comments :article="$article"/>
-                            {{--                            @include('comments.index', ['article' => $article])--}}
+                            <script>
+                                window.addEventListener('closeModal', event => {
+                                    $("#modalForm").modal('hide');
+                                })
+                            </script>
 
                             <div class="blog-prev-next-posts">
                                 <div class="row">

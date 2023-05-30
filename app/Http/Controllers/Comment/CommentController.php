@@ -37,10 +37,10 @@ class CommentController extends Controller
      */
     public function store(StoreCommentRequest $request, $id): Redirector|Application|RedirectResponse
     {
-        $article = Article::with(['user', 'comments'])->findOrFail($id);
-        $article->comments()->create($request->validated());
-
-        return back();
+//        $article = Article::with(['user', 'comments'])->findOrFail($id);
+//        $article->comments()->create($request->validated());
+//
+//        return back();
     }
 
     /**
@@ -72,10 +72,10 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        $comment = Comment::findOrFail($id);
-
-        if ($comment->delete()) {
-            return back();
-        }
+//        $comment = Comment::findOrFail($id);
+//
+//        if ($comment->delete()) {
+//            return back();
+//        }
     }
 }
