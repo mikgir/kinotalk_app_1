@@ -22,7 +22,6 @@ use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 class ArticleController extends Controller
 {
-
     protected $articleRepository;
     protected $categoryRepository;
 

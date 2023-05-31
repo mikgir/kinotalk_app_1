@@ -3,17 +3,22 @@
 namespace App\Http\Controllers\Mail;
 
 use App\Http\Controllers\Controller;
-use App\Mail\BecomeAuthor;
-use App\Models\User;
+use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use App\Events\BecomeAuthor as BecomeAuthorEvent;
 
 class MailController extends Controller
 {
+    protected $userRepository;
+
+    public function __construct(UserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
+
     public function sendEmailBecomeAuthor(Request $request)
     {
-        $user = User::findOrFail($request->id);
+        $user = $this->userRepository->getOne($request->id);
         event(new BecomeAuthorEvent($user));
 
         return redirect('profile');
