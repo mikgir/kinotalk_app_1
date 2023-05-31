@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Contracts\AuthorRepositoryInterface;
 use App\Models\User;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -12,9 +13,9 @@ class AuthorRepository implements AuthorRepositoryInterface
     use HasRoles;
 
     /**
-     * @return Collection
+     * @return LengthAwarePaginator|Collection
      */
-    public function getAllWithLastArticle(): Collection
+    public function getAllWithLastArticle(): LengthAwarePaginator| Collection
     {
         return User::role('author')
                 ->where('active', 1)
@@ -31,9 +32,9 @@ class AuthorRepository implements AuthorRepositoryInterface
 
     /**
      * @param int $id
-     * @return Collection
+     * @return Collection|User
      */
-    public function showAuthorWithArticles(int $id): Collection
+    public function showAuthorWithArticles(int $id): Collection | User
     {
         return User::with(['articles' => function ($query) {
                 $query->where('status', 'PUBLISHED')
