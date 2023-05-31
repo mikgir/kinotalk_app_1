@@ -7,6 +7,7 @@ use App\Http\Controllers\Main\MainController;
 use App\Http\Controllers\News\NewsController;
 use App\Http\Controllers\Profile\UserProfileController;
 use App\Http\Controllers\Mail\MailController;
+use App\Http\Controllers\Social\SocialLinkController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -54,18 +55,32 @@ Route::middleware('auth')->group(function () {
     Route::post('profile/store/{id}', [UserProfileController::class, 'store'])
         ->where('id', '\d+')
         ->name('profile.store');
-    Route::get('/profile/{id}', [UserProfileController::class, 'edit'])
+    Route::get('/profile/edit/{id}', [UserProfileController::class, 'edit'])
         ->where('id', '\d+')
         ->name('profile.edit');
-    Route::patch('/profile/{id}', [UserProfileController::class, 'update'])
+    Route::patch('/profile/update/{id}', [UserProfileController::class, 'update'])
         ->where('id', '\d+')
         ->name('profile.update');
     Route::patch('/profile/{id}', [UserProfileController::class, 'userUpdate'])
         ->where('id', '\d+')
         ->name('profile.user_update');
-    Route::delete('/profile/{id}', [UserProfileController::class, 'destroy'])
+    Route::delete('/profile/destroy/{id}', [UserProfileController::class, 'destroy'])
         ->where('id', '\d+')
         ->name('profile.destroy');
+
+    Route::get('/social_link/create', [SocialLinkController::class, 'create'])
+        ->name('social_link.create');
+    Route::post('/social_link/store', [SocialLinkController::class, 'store'])
+        ->name('social_link.store');
+    Route::get('/social_link/edit/{id}', [SocialLinkController::class, 'edit'])
+        ->where('id', '\d+')
+        ->name('social_link.edit');
+    Route::post('/social_link/update/{id}', [SocialLinkController::class, 'update'])
+        ->where('id', '\d+')
+        ->name('social_link.update');
+    Route::delete('/social_link/delete/{id}', [SocialLinkController::class, 'destroy'])
+        ->where('id', '\d+')
+        ->name('social_link.delete');
 
     Route::get('/articles/create', [ArticleController::class, 'create'])
         ->name('articles.create');

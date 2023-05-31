@@ -8,6 +8,7 @@ use App\Admin\Resources\CommentResource;
 use App\Admin\Resources\NewsResource;
 use App\Admin\Resources\ProfileResource;
 use App\Admin\Resources\RoleResource;
+use App\Admin\Resources\SocialTypeResource;
 use App\Admin\Resources\SourceResource;
 use App\Admin\Resources\UserResource;
 use App\Models\Article;
@@ -49,6 +50,8 @@ class MoonShineServiceProvider extends ServiceProvider
                 MenuItem::make('Комментарии', new CommentResource())
                     ->badge(fn() => Comment::query()->count())
                     ->icon('heroicons.chat-bubble-bottom-center-text'),
+                MenuItem::make('Соц-сети', new SocialTypeResource())
+                    ->icon('heroicons.share'),
             ])->icon('app'),
         ]);
     }

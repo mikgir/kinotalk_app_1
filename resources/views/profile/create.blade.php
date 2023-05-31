@@ -1,4 +1,4 @@
-@section('profile-form')
+
     <form method="POST" action="{{route('profile.store', auth()->id())}}">
         @csrf
 
@@ -59,21 +59,21 @@
         <!-- Form Row-->
         <div class="row gx-3 mb-3">
             <!-- Form Group (phone number)-->
-            <div class="col-md-6 mb-3">
-                <label class="small mb-1" for="website">Phone number</label>
-                <input name="website" class="form-control @error('website') border-red-500 @enderror" id="website" type="text" placeholder="Enter your website" value="">
-                @error('website')
-                <p class="text-red-500">{{$message}}</p>
-                @enderror
-            </div>
-            <!-- Form Group (birthday)-->
-            <div class="col-md-6 mb-3">
-                <label class="small mb-1" for="inputBirthday">Дата рождения</label>
-                <input class="form-control @error('birthday') border-red-500 @enderror" id="inputBirthday" type="date" name="birthday" placeholder="Enter your birthday" value="06/10/1988">
-                @error('birthday')
-                <p class="text-red-500">{{$message}}</p>
-                @enderror
-            </div>
+{{--            <div class="col-md-6 mb-3">--}}
+{{--                <label class="small mb-1" for="website">Phone number</label>--}}
+{{--                <input name="website" class="form-control @error('website') border-red-500 @enderror" id="website" type="text" placeholder="Enter your website" value="">--}}
+{{--                @error('website')--}}
+{{--                <p class="text-red-500">{{$message}}</p>--}}
+{{--                @enderror--}}
+{{--            </div>--}}
+{{--            <!-- Form Group (birthday)-->--}}
+{{--            <div class="col-md-6 mb-3">--}}
+{{--                <label class="small mb-1" for="inputBirthday">Дата рождения</label>--}}
+{{--                <input class="form-control @error('birthday') border-red-500 @enderror" id="inputBirthday" type="date" name="birthday" placeholder="Enter your birthday" value="06/10/1988">--}}
+{{--                @error('birthday')--}}
+{{--                <p class="text-red-500">{{$message}}</p>--}}
+{{--                @enderror--}}
+{{--            </div>--}}
             <!-- Form Group (about_me)-->
             <div class="col-md-6 mb-3">
                 <label class="small mb-1" for="about_me">Обо мне</label>
@@ -94,6 +94,6 @@
         <!-- Save changes button-->
         <button class="btn btn-primary" type="submit">Сохранить</button>
     </form>
-@endsection
+
 
 

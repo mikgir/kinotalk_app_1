@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProfileFormRequest extends FormRequest
+class StoreSocialLinkRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,15 +24,7 @@ class ProfileFormRequest extends FormRequest
     {
         return [
             'user_id'=>['required', 'exists:users,id'],
-            'first_name'=>['required', 'sting', 'min:3'],
-            'last_name'=>['required', 'sting', 'min:2'],
-            'occupation'=>['sting', 'max:255'],
-            'company'=>['sting', 'max:255'],
-            'city'=>['required', 'sting', 'max:255'],
-            'country'=>['required', 'sting', 'max:255'],
-            'website'=>['sting', 'max:255'],
-            'about_me'=>['required', 'sting', 'max:255'],
-            'bio'=>['sting', 'max:500'],
+            'link'=>['required', 'sting', 'max:255']
         ];
     }
 
