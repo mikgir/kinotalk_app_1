@@ -16,6 +16,7 @@ use MoonShine\Fields\HasMany;
 use MoonShine\Fields\HasOne;
 use MoonShine\Fields\MorphMany;
 use MoonShine\Fields\Password;
+use MoonShine\Fields\Select;
 use MoonShine\Fields\Text;
 use MoonShine\Fields\Textarea;
 use MoonShine\Fields\Url;
@@ -90,7 +91,10 @@ class UserResource extends Resource
                             ->hideOnIndex(),
                         MorphMany::make('Роль', 'roles')
                             ->sortable()
-                            ->removable()
+                            ->removable(),
+                        Text::make('Статус пользователя', 'active', fn($item) => $item->active ? 'Активный пользователь' : 'Пользователь заблокирован')
+                            ->hideOnIndex()
+
                     ])
 
                 ])->columnSpan(6),
@@ -126,6 +130,15 @@ class UserResource extends Resource
         return [
             FiltersAction::make(trans('moonshine::ui.filters')),
         ];
+    }
+
+    public function trClass(Model $item, int $index): string
+    {
+        if ($item->active === 0 ){
+            return 'red';
+        }
+
+        return parent::trClass($item, $index);
     }
 
     public function itemActions(): array

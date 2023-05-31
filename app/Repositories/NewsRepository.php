@@ -3,10 +3,8 @@
 namespace App\Repositories;
 
 use App\Contracts\NewsRepositoryInterface;
-use App\Models\Category;
 use App\Models\News;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
 
@@ -46,7 +44,11 @@ class NewsRepository implements NewsRepositoryInterface
         ]);
     }
 
-    public function getAllBySourceId(int $id)
+    /**
+     * @param int $id
+     * @return Collection
+     */
+    public function getAllBySourceId(int $id): Collection
     {
         return News::where('source_id', $id)->get();
     }

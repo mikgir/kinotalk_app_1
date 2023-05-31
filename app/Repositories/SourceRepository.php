@@ -11,20 +11,10 @@ use Illuminate\Database\Eloquent\Collection;
 
 class SourceRepository implements SourceRepositoryInterface
 {
-
     /**
-     * @return Collection
+     * @param string $name
+     * @return int
      */
-    public function getAll(): Collection
-    {
-       return Source::all();
-    }
-
-    public function getOne()
-    {
-        // TODO: Implement getOne() method.
-    }
-
     public function getSourceIdByName(string $name): int
     {
         return Source::where('name', $name)->value('id');

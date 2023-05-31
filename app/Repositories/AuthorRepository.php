@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Contracts\AuthorRepositoryInterface;
-use App\Contracts\UserRepositoryInterface;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Spatie\Permission\Traits\HasRoles;
@@ -12,9 +11,13 @@ class AuthorRepository implements AuthorRepositoryInterface
 {
     use HasRoles;
 
-    public function getAllWithLastArticle()
+    /**
+     * @return Collection
+     */
+    public function getAllWithLastArticle(): Collection
     {
         return User::role('author')
+                ->where('active', 1)
                 ->with(['articles' => function ($query) {
                     $query->where('status', 'PUBLISHED')
                         ->orderBy('created_at', 'desc')
@@ -26,7 +29,11 @@ class AuthorRepository implements AuthorRepositoryInterface
                 ->paginate(9);
     }
 
-    public function showAuthorWithArticles(int $id)
+    /**
+     * @param int $id
+     * @return Collection
+     */
+    public function showAuthorWithArticles(int $id): Collection
     {
         return User::with(['articles' => function ($query) {
                 $query->where('status', 'PUBLISHED')

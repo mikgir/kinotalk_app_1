@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Author;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use App\Repositories\AuthorRepository;
-use App\Repositories\NewsRepository;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
