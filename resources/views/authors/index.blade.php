@@ -33,10 +33,7 @@
                                 <li><span class="by">Автор:</span> <a href="{{route('authors.show', $user->id)}}">{{$user->name}}</a></li>
                                 <li>{{$user->created_at}}</li>
                             </ul>
-                            @if ($user->articles->isNotEmpty())
-                                <h4 class="title tgcommon__hover"><a href="{{route('articles.show', $user->articles->first()->id)}}">{{$user->articles->first()->title}}</a></h4>
-                            @endif
-
+                            <h4 class="title tgcommon__hover"><a href="article-details.html">После просмотра 1 сезона "The Last of Us"...</a></h4>
                         </div>
                     </div>
                     @endforeach

@@ -10,7 +10,7 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('main')}}">Главная</a></li>
                                     <li class="breadcrumb-item"><a href="{{route('authors')}}">Авторы</a></li>
-{{--                                    <li class="breadcrumb-item active" aria-current="page">Автор: {{$user->name}}</li>--}}
+                                    <li class="breadcrumb-item active" aria-current="page">Автор: {{$user->name}}</li>
                                 </ol>
                             </nav>
                         </div>

@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Author;
 
 use App\Http\Controllers\Controller;
+<<<<<<< HEAD
 use App\Repositories\AuthorRepository;
+=======
+use App\Models\User;
+>>>>>>> parent of f57fe52 (Authors, fix)
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -13,19 +17,12 @@ class AuthorController extends Controller
 {
     use HasRoles;
 
-    public $authorRepository;
-
-    public function __construct(AuthorRepository $authorRepository)
-    {
-        $this->authorRepository = $authorRepository;
-    }
-
     /**
      * @return View
      */
     public function index(): View
     {
-        $users = $this->authorRepository->getAllWithLastArticle();
+        $users = User::role('author')->paginate(9);
 
         return view('authors.index', compact('users'));
     }
@@ -36,8 +33,7 @@ class AuthorController extends Controller
      */
     public function show($id): Factory|Application|View
     {
-        $user = $this->authorRepository->showAuthorWithArticles($id);
-
+        $user = User::with('articles')->findOrFail($id);
         return view('authors.show', compact('user'));
 
     }
