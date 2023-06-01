@@ -11,14 +11,15 @@ class CommentRepository implements CommentRepositoryInterface
 {
 
     /**
-     * @param int $id
+     * @param $model
      * @return Collection|LengthAwarePaginator
      */
-    public function getAllByArticleId($id): Collection|LengthAwarePaginator
+    public function getAllByModel($model): Collection|LengthAwarePaginator
     {
-        return Comment::with(['user'])
-            ->where('article_id', $id)
-            ->orderByDesc('created_at')
+        return $model
+            ->comments()
+            ->with('user')
+            ->latest()
             ->paginate(5);
     }
 

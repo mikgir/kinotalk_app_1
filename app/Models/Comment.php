@@ -7,22 +7,23 @@ use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Comment extends Model
 {
     use HasFactory;
+
 //    use Reactable;
 
     protected $table = 'comments';
 
     protected $casts = [
         'user_id' => 'int',
-        'article_id' => 'int'
     ];
 
     protected $fillable = [
         'user_id',
-        'article_id',
         'text',
         'status',
         'active'
@@ -36,11 +37,18 @@ class Comment extends Model
         return $this->belongsTo(User::class);
     }
 
-    /**
-     * @return BelongsTo
-     */
-    public function article(): BelongsTo
+    public function isParent(): bool
     {
-        return $this->belongsTo(Article::class);
+        return is_null($this->parent_id);
+    }
+
+    public function children(): HasMany
+    {
+        return $this->hasMany(Comment::class, 'parent_id')->oldest();
+    }
+
+    public function commentable(): MorphTo
+    {
+        return $this->morphTo();
     }
 }
