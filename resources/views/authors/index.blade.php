@@ -21,21 +21,24 @@
             <div class="container">
                 <div class="minimal__post-wrapper">
                     @foreach($users as $key=>$user)
-                    <div class="minimal__post-item grid-item">
-                        <div class="minimal__post-thumb minImage__hover">
-                            <a href="{{route('authors.show', $user->id)}}">
-                                {{ $user->getFirstMedia('avatars') }}
-{{--                                <img src="{{asset('build/assets/src/assets/img/user/People1.png')}}" alt="img">--}}
-                            </a>
+                        <div class="minimal__post-item grid-item">
+                            <div class="minimal__post-thumb minImage__hover">
+                                <a href="{{route('authors.show', $user->id)}}">
+                                    {{ $user->getFirstMedia('avatars') }}
+                                    {{--                                <img src="{{asset('build/assets/src/assets/img/user/People1.png')}}" alt="img">--}}
+                                </a>
+                            </div>
+                            <div class="minimal__post-content">
+                                <ul class="tgbanner__content-meta list-wrap">
+                                    <li><span class="by">Автор:</span> <a href="{{route('authors.show', $user->id)}}">{{$user->name}}</a></li>
+                                    <li>{{$user->created_at}}</li>
+                                </ul>
+                                @if ($user->articles->isNotEmpty())
+                                    <h4 class="title tgcommon__hover"><a href="{{route('articles.show', $user->articles->first()->id)}}">{{$user->articles->first()->title}}</a></h4>
+                                @endif
+
+                            </div>
                         </div>
-                        <div class="minimal__post-content">
-                            <ul class="tgbanner__content-meta list-wrap">
-                                <li><span class="by">Автор:</span> <a href="{{route('authors.show', $user->id)}}">{{$user->name}}</a></li>
-                                <li>{{$user->created_at}}</li>
-                            </ul>
-                            <h4 class="title tgcommon__hover"><a href="article-details.html">После просмотра 1 сезона "The Last of Us"...</a></h4>
-                        </div>
-                    </div>
                     @endforeach
                 </div>
                 {{ $users->links('vendor.pagination.bootstrap-5') }}
