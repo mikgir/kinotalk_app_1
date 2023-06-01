@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileFormRequest;
 use App\Models\Article;
 use App\Models\Profile;
+use App\Models\SocialLink;
+use App\Models\SocialType;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\View;
@@ -30,11 +32,15 @@ class UserProfileController extends Controller
 
         $userId = auth('web')->id();
         $user = \auth()->user();
-        $profile = Profile::with('user')->where('user_id',  $userId);
+        $socialTypes = SocialType::all();
+        $profile = Profile::with('user')->where('user_id', $userId);
+        $socialLinks = SocialLink::with(['user', 'socialType'])->where('user_id', $userId);
 
         return view('profile.index', [
             'profile' => $profile,
-            'user' => $user
+            'user' => $user,
+            'socialTypes' => $socialTypes,
+            'socialLinks' => $socialLinks
         ]);
     }
 
@@ -60,7 +66,7 @@ class UserProfileController extends Controller
 
         $user->profile()->create($request->validated());
 
-        return redirect('profile.show', $id)->with('success', 'Profile created successful');
+        return redirect('/profile', $id)->with('success', 'Profile created successful');
     }
 
     /**
@@ -96,7 +102,7 @@ class UserProfileController extends Controller
         $profile = Profile::with('user')->findOrFail($id);
         $profile->update($request->validated());
 
-        return redirect('profile.show', $id)->with('success', 'Profile updated successful');
+        return redirect('/profile', $id)->with('success', 'Profile updated successful');
     }
 
     public function userUpdate(Request $request, $id)
@@ -112,6 +118,8 @@ class UserProfileController extends Controller
             'email' => $request->email,
         ]);
         if ($request->hasFile('avatar')) {
+            $user->clearMediaCollection('avatars');
+
             $user->addMediaFromRequest('avatar')
                 ->toMediaCollection('avatars');
         }

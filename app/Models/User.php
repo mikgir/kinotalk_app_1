@@ -34,6 +34,8 @@ use Spatie\Permission\Traits\HasRoles;
  * @property Carbon|null $updated_at
  * *
  * @property Collection|Article[] $articles
+ * @property Collection|SocialLink[] $socialLinks
+ *
  *
  * @package App\Models
  */
@@ -83,6 +85,14 @@ class User extends Authenticatable implements ReacterableInterface, HasMedia
     public function profile(): HasOne
     {
         return $this->hasOne(Profile::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function socialLinks():HasMany
+    {
+        return $this->hasMany(SocialLink::class);
     }
 
     /**

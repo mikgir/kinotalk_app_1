@@ -38,11 +38,11 @@
                                                         </a>
                                                     </li>
                                                     @hasrole('super_admin')
-                                                    <li>
-                                                        <a class="item dropdown-item" href="{{route('admin')}}">
-                                                            {{ __('Админ') }}
-                                                        </a>
-                                                    </li>
+{{--                                                    <li>--}}
+{{--                                                        <a class="item dropdown-item" href="{{route('admin')}}">--}}
+{{--                                                            {{ __('Админ') }}--}}
+{{--                                                        </a>--}}
+{{--                                                    </li>--}}
                                                     @endhasrole
                                                     <li>
                                                         <form method="POST" action="{{ route('logout') }}">
