@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Author;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use App\Repositories\AuthorRepository;
-use App\Repositories\NewsRepository;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -25,7 +23,7 @@ class AuthorController extends Controller
     /**
      * @return View
      */
-    public function getAllAuthorsWithLastArticle(): View
+    public function index(): View
     {
         $users = $this->authorRepository->getAllWithLastArticle();
 
@@ -36,7 +34,7 @@ class AuthorController extends Controller
      * @param $id
      * @return Factory|Application|View
      */
-    public function showAuthorWithArticles($id): Factory|Application|View
+    public function show($id): Factory|Application|View
     {
         $user = $this->authorRepository->showAuthorWithArticles($id);
 

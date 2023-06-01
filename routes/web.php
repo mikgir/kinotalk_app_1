@@ -33,8 +33,8 @@ Route::get('/articles?page={key}', [ArticleController::class, 'index'])
 Route::get('/articles/{id}', [ArticleController::class, 'show'])
     ->where('id', '\d+')
     ->name('articles.show');
-Route::get('/authors', [AuthorController::class, 'getAllAuthorsWithLastArticle'])->name('authors');
-Route::get('/authors/{id}', [AuthorController::class, 'showAuthorWithArticles'])
+Route::get('/authors', [AuthorController::class, 'index'])->name('authors');
+Route::get('/authors/{id}', [AuthorController::class, 'show'])
     ->where('id', '\d+')
     ->name('authors.show');
 Route::get('/news', [NewsController::class, 'index'])->name('news');

@@ -46,7 +46,11 @@ class NewsRepository implements NewsRepositoryInterface
         ]);
     }
 
-    public function getAllBySourceId(int $id)
+    /**
+     * @param int $id
+     * @return News
+     */
+    public function getAllBySourceId(int $id): News
     {
         return News::where('source_id', $id)->get();
     }
