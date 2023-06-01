@@ -9,10 +9,10 @@
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('main')}}">Главная</a></li>
-                                    <li class="breadcrumb-item">Статьи</li>
+                                    <li class="breadcrumb-item active">Статьи</li>
                                     @foreach($categories as $key=>$category)
-                                    <li class="breadcrumb-item {{ $category->name === $category->id ? 'active' : '' }}">
-                                        <a href="{{route('articles.category', $category->id)}}">{{$category->name}}</a>
+                                    <li class="breadcrumb-item  {{ $category->name === $category->id ? 'active' : '' }}">
+                                        <a href="{{route('articles.category', $category->id)}}" >{{$category->name}}</a>
                                     </li>
                                     @endforeach
                                 </ol>

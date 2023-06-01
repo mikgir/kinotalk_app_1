@@ -5,7 +5,7 @@
 
         <div class="row gx-3 mb-3">
             <!-- Form Group (first name)-->
-            <div class="col-md-6 mb-3">
+            <div class="col-md-6 mb-3 ">
                 <label class="small mb-1" for="inputFirstName">Имя</label>
                 <input name="first_name" class="form-control @error('first_name') border-red-500 @enderror"
                        id="inputFirstName" type="text" value="{{$profile->first_name}}">

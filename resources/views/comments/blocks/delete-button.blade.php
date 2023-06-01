@@ -1,7 +1,7 @@
 @can('delete-own comments')
     @if($comment->user_id == Auth::id())
-        <div xmlns:wire="http://www.w3.org/1999/xhtml">
-            <button class="btn btn-primary blog-avatar-wrap__btn"  type="button" style="width: 10px; height: 10px; border: none"
+        <div xmlns:wire="http://www.w3.org/1999/xhtml" class="blog-wrap-content-btn__w2">
+            <button class=" btn btn-primary  btn-primary__w2 "  type="button"
                     wire:click="deleteComment({{ $comment->id }})"
                     wire:loading.attr="disabled">
                X
