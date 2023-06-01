@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Contracts\CategoryRepositoryInterface;
-use App\Models\Article;
 use App\Models\Category;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;

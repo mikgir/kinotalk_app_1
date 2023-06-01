@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Author;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Repositories\AuthorRepository;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -13,12 +13,19 @@ class AuthorController extends Controller
 {
     use HasRoles;
 
+    public $authorRepository;
+
+    public function __construct(AuthorRepository $authorRepository)
+    {
+        $this->authorRepository = $authorRepository;
+    }
+
     /**
      * @return View
      */
     public function index(): View
     {
-        $users = User::role('author')->paginate(9);
+        $users = $this->authorRepository->getAllWithLastArticle();
 
         return view('authors.index', compact('users'));
     }
@@ -29,8 +36,8 @@ class AuthorController extends Controller
      */
     public function show($id): Factory|Application|View
     {
-        $user = User::with('articles')->findOrFail($id);
-        return view('authors.show', compact('user'));
+        $user = $this->authorRepository->showAuthorWithArticles($id);
 
+        return view('authors.show', compact('user'));
     }
 }

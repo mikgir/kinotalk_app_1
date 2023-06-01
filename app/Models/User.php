@@ -64,6 +64,7 @@ class User extends Authenticatable implements ReacterableInterface, HasMedia
         'email_verified_at',
         'password',
         'remember_token',
+        'active'
     ];
 
     /**

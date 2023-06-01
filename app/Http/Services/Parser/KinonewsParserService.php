@@ -70,10 +70,15 @@ class KinonewsParserService implements Contract
         foreach ($data['news'] as $news) {
             $news = $this->getNews($news['link'], $paths);
 
+            if(!$news){
+                continue;
+            }
+
             $news['source_id'] = $this->sourceRepository->getSourceIdByName(NewsSources::tryFrom($url)->name);
 
             //создаем новую запись в БД
             $this->newsRepository->getOrCreateByParser($news);
+
         };
     }
 

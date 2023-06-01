@@ -2,7 +2,7 @@
 
 namespace App\Contracts;
 
-
-interface SourceRepositoryInterface
+interface AuthorRepositoryInterface
 {
+
 }
