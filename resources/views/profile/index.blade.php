@@ -1,17 +1,31 @@
 <x-app-layout>
-
     <main class="mb-5">
-        <h3 class="text-center m-5">Профиль пользователя</h3>
-        <div class="container-xl px-4 mt-4">
+        <div class="breadcrumb-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="breadcrumb-content">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{{route('main')}}">Главная</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Профиль пользователя</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-xl container-xl__wp2">
             <div class="row">
                 <div class="col-xl-3">
                     <!-- Profile picture card-->
-                    <div class="card mb-4 mb-xl-0">
-                        <div class="card-header">Аккаунт</div>
-                        <div class="w-100">
+                    <div class="mb-4 mb-xl-0">
+                        <div class="card-header__wp4">Аккаунт</div>
+                        <div class="w-100 card-header__img">
                             {{ Auth::user()->getFirstMedia('avatars') }}
                             <div class="col">
-                                <div class="">
+                                <div>
                                     @include('profile.partials.update-profile-information-form')
                                 </div>
                             </div>
@@ -30,8 +44,8 @@
                 </div>
                 <div class="col-xl-9">
                     <!-- Account details card-->
-                    <div class="card mb-4">
-                        <div class="card-header">Личная информация</div>
+                    <div>
+                        <div class="card-header__wp4">Личная информация</div>
                         <div class="card-body">
                           @if(isset($user->profile))
                               @include('profile.edit')
@@ -40,9 +54,9 @@
                           @endif
                         </div>
                     </div>
-                    <div class="card mb-4">
-                        <div class="card-header">Странички социальных сетей</div>
-                        <div class="card-body">
+                    <div class="block__wp5">
+                        <div class="card-header__wp4">Странички социальных сетей</div>
+                        <div class="card-body__wp4">
                             @if(isset($user->socialLinks))
                                 @foreach($socialLinks as $key=>$link)
                                     @include('social.edit')
@@ -52,16 +66,88 @@
                         </div>
                     </div>
                     @hasrole('author')
-                    <div class="card mb-4">
-                        <div class="card-header flex-nowrap">
+                    <div class="block__wp8">
+                        <div class="card-header__wp4 flex-nowrap">
                             <span>Статьи</span>
                         </div>
-                        <div class="card-body">
+
+                        <div class="card-body card-header__wp4">
                             <a href="{{route('articles.create')}}" class="btn btn-primary">Написать статью</a>
-                            <hr>
+                            <div class="block__wp5">
                             <span>Список статей</span>
-                            <div class="table-responsive-md table-hover">
-                                <table class="table">
+                            <div class="table-responsive-md table-hover block__wp6 small mb-1">
+                                <div class="table_col">
+                                    <div>
+                                        <span scope="col">ID</span>
+                                    </div>
+                                    <div>
+                                        <span scope="col">Категория</span>
+                                    </div>
+                                    <div>
+                                        <span scope="col">Наименование</span>
+                                    </div>
+                                    <div>
+                                        <span scope="col">Статус</span>
+                                    </div>
+                                    <div>
+                                        <span scope="col">Активность</span>
+                                    </div>
+                                    <div>
+                                        <span scope="col">Дата написания</span>
+                                    </div>
+                                    <div>
+                                        <span scope="col">Дата изменения</span>
+                                    </div>
+                                    <div>
+                                        <span scope="col">Действия</span>
+                                    </div>
+                                </div>
+                                @foreach(Auth::user()->articles as $key=>$article)
+                                    <div class="table_col">
+                                        <div>
+                                            <span scope="row">{{$article->id}}></span>
+                                        </div>
+                                        <div>
+                                            <span>{{$article->category->name}}</span>
+                                        </div>
+                                        <div>
+                                            <span>{{$article->title}}</span>
+                                        </div>
+                                        <div>
+                                            <span>{{$article->status}}</span>
+                                        </div>
+                                        <div>
+                                            <span>{{$article->active}}</span>
+                                        </div>
+                                        <div>
+                                            <span>{{$article->created_at}}</span>
+                                        </div>
+                                        <div>
+                                            <span>{{$article->updated_at}}</span>
+                                        </div>
+                                        <div>
+                                            <span>Действия</span>
+                                        </div>
+                                    </div>
+                                <div class="block-btn__pr4">
+                                    <div>
+                                        <a href="{{route('articles.edit', $article->id)}}" class="btn btn-outline-primary mb-2">Редактировать</a>
+                                    </div>
+                                    <div>
+                                        <form method="post" action="{{route('articles.publish', $article->id)}}">
+                                        @csrf
+                                            @method('patch')
+                                            <button type="submit" class="btn btn-outline-success mb-2 ">Опубликовать</button>
+                                    </form>
+                                    </div>
+                                    <div>
+                                        <a href="{{route('articles.destroy', $article->id)}}" class="btn btn-outline-danger mb-2">Удалить</a>
+                                    </div>
+
+                                </div>
+                                @endforeach
+
+                             {{--  <table class="table">
                                     <thead>
                                     <tr>
                                         <th scope="col">ID</th>
@@ -74,7 +160,7 @@
                                         <th scope="col">Действия</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
+                                <tbody>
                                     @foreach(Auth::user()->articles as $key=>$article)
                                     <tr>
                                         <th scope="row">{{$article->id}}</th>
@@ -89,14 +175,15 @@
                                             <form method="post" action="{{route('articles.publish', $article->id)}}">
                                                 @csrf
                                                 @method('patch')
-                                                <button type="submit" class="btn btn-outline-success mb-2 w-100">Опубликовать</button>
+                                                <button type="submit" class="btn btn-outline-success mb-2">Опубликовать</button>
                                             </form>
                                             <a href="{{route('articles.destroy', $article->id)}}" class="btn btn-outline-danger mb-2 w-100">Удалить</a>
                                         </td>
                                     </tr>
                                     @endforeach
                                     </tbody>
-                                </table>
+                                </table>--}}
+                            </div>
                             </div>
                         </div>
                     </div>

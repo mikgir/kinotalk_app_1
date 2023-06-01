@@ -1,11 +1,11 @@
 <section class="mb-5">
     <header>
-        <div class="card-header">{{ __('Удалить аккаунт') }}</div>
-        <p class="mt-2 px-3">
+        <div class="card-header__wp5 block__wp5">{{ __('Удалить аккаунт') }}</div>
+        <p class="mt-1 card-header__font font__wp5">
             {{ __('После удаления вашей учетной записи все ее ресурсы и данные будут безвозвратно удалены. Перед удалением своей учетной записи загрузите любые данные или информацию, которые вы хотите сохранить.') }}
         </p>
     </header>
-    <div class="px-3">
+    <div class="btn-update__wp3">
         <x-primary-button
             x-data=""
             x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')">

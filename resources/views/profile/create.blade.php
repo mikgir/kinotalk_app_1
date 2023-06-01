@@ -4,18 +4,19 @@
 
         <div class="row gx-3 mb-3">
             <!-- Form Group (first name)-->
-            <div class="col-md-6 mb-3">
+            <div class="col-md-6 mb-3 card-header__wp6">
                 <label class="small mb-1" for="inputFirstName">Имя</label>
-                <input name="first_name" class="form-control @error('first_name') border-red-500 @enderror"
-                       id="inputFirstName" type="text"  placeholder="Enter your first name" value="">
+                <input name="first_name" class="form-select__inp2 form-control @error('first_name') border-red-500 @enderror"
+                       id="inputFirstName" type="text"  placeholder="Введите свое имя" value="">
                 @error('first_name')
                 <p class="text-red-500">{{$message}}</p>
                 @enderror
             </div>
             <!-- Form Group (last name)-->
-            <div class="col-md-6 mb-3">
+            <div class="col-md-6 mb-3 card-header__wp6">
                 <label class="small mb-1" for="inputLastName">Фамилия</label>
-                <input name="last_name" class="form-control @error('last_name') border-red-500 @enderror" id="inputLastName" type="text" placeholder="Enter your last name" value="">
+                <input name="last_name" class="form-select__inp2 form-control @error('last_name') border-red-500 @enderror" id="inputLastName"
+                       type="text" placeholder="Введите вашу фамилию" value="">
                 @error('last_name')
                 <p class="text-red-500">{{$message}}</p>
                 @enderror
@@ -24,33 +25,37 @@
         <!-- Form Row        -->
         <div class="row gx-3 mb-3">
             <!-- Form Group (organization name)-->
-            <div class="col-md-6 mb-3">
+            <div class="col-md-6 mb-3 card-header__wp6">
                 <label class="small mb-1" for="occupation">Род занятий</label>
-                <input name="occupation" class="form-control @error('occupation') border-red-500 @enderror" id="occupation" type="text" placeholder="Enter your occupation" value="">
+                <input name="occupation" class="form-select__inp2 form-control @error('occupation') border-red-500 @enderror" id="occupation" type="text"
+                       placeholder="Введите ваш род занятий" value="">
                 @error('occupation')
                 <p class="text-red-500">{{$message}}</p>
                 @enderror
             </div>
             <!-- Form Group (company)-->
-            <div class="col-md-6 mb-3">
+            <div class="col-md-6 mb-3 card-header__wp6">
                 <label class="small mb-1" for="company">Организация</label>
-                <input name="company" class="form-control @error('company') border-red-500 @enderror" id="company" type="text" placeholder="Enter your organization name" value="">
+                <input name="company" class="form-select__inp2 form-control @error('company') border-red-500 @enderror" id="company" type="text"
+                       placeholder="Введите название вашей организации" value="">
                 @error('company')
                 <p class="text-red-500">{{$message}}</p>
                 @enderror
             </div>
             <!-- Form Group (location)-->
-            <div class="col-md-6 mb-3">
+            <div class="col-md-6 mb-3 card-header__wp6">
                 <label class="small mb-1" for="city">Город</label>
-                <input name="city" class="form-control @error('city') border-red-500 @enderror" id="city" type="text" placeholder="Enter your city" value="">
+                <input name="city" class="form-select__inp2 form-control @error('city') border-red-500 @enderror" id="city" type="text"
+                       placeholder="Введите свой город" value="">
                 @error('city')
                 <p class="text-red-500">{{$message}}</p>
                 @enderror
             </div>
             <!-- Form Group (email address)-->
-            <div class="col-md-6 mb-3">
+            <div class="col-md-6 mb-3 card-header__wp6">
                 <label class="small mb-1" for="country">Страна</label>
-                <input name="country" class="form-control @error('country') border-red-500 @enderror" id="country" type="text" placeholder="Enter your country" value="">
+                <input name="country" class=" form-select__inp2 form-control @error('country') border-red-500 @enderror" id="country" type="text"
+                       placeholder="Введите свою страну" value="">
                 @error('country')
                 <p class="text-red-500">{{$message}}</p>
                 @enderror
@@ -75,24 +80,29 @@
 {{--                @enderror--}}
 {{--            </div>--}}
             <!-- Form Group (about_me)-->
-            <div class="col-md-6 mb-3">
+            <div class="col-md-6 mb-3 card-header__wp6">
                 <label class="small mb-1" for="about_me">Обо мне</label>
-                <textarea class="form-control @error('about_me') border-red-500 @enderror" id="about_me" type="text" name="about_me" placeholder="Enter information about you"></textarea>
+                <textarea class="form-select__inp2 form-control @error('about_me') border-red-500 @enderror" id="about_me" type="text" name="about_me"
+                          placeholder="Напишите информацию о себе "></textarea>
                 @error('about_me')
                 <p class="text-red-500">{{$message}}</p>
                 @enderror
             </div>
             <!-- Form Group (bio)-->
-            <div class="col-md-6 mb-3">
+            <div class="col-md-6 mb-3 card-header__wp6">
                 <label class="small mb-1" for="bio">Биография</label>
-                <textarea class="form-control @error('bio') border-red-500 @enderror" id="bio" type="text" name="bio" placeholder="Enter biography"></textarea>
+                <textarea class="form-select__inp2 form-control @error('bio') border-red-500 @enderror" id="bio" type="text" name="bio"
+                          placeholder="Напишите свою биографию"></textarea>
                 @error('bio')
                 <p class="text-red-500">{{$message}}</p>
                 @enderror
             </div>
         </div>
         <!-- Save changes button-->
-        <button class="btn btn-primary" type="submit">Сохранить</button>
+        <div class="block-btn__pr">
+            <button class="btn btn-primary" type="submit">Сохранить</button>
+        </div>
+
     </form>
 
 
