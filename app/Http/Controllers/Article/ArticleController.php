@@ -14,6 +14,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Date;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
@@ -84,12 +85,15 @@ class ArticleController extends Controller
 
     /**
      * @param $id
-     * @return void
+     * @return Application|Redirector|RedirectResponse
      */
-    public function publish($id): void
+    public function publish($id): Application|Redirector|RedirectResponse
     {
         $article = Article::with('user')->findOrFail($id);
         $article->update(['status' => 'PENDING']);
+
+        return redirect('/profile')
+            ->with('success', 'Статья успешно обновлена');
     }
 
 
@@ -111,8 +115,11 @@ class ArticleController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * @param ArticleRequest $request
+     * @param string $id
+     * @return Application|Redirector|RedirectResponse
      */
-    public function update(ArticleRequest $request, string $id)
+    public function update(ArticleRequest $request, string $id): Application|Redirector|RedirectResponse
     {
         $this->articleRepository->updateArticle($id,$request);
 

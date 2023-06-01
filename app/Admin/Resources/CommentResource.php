@@ -19,31 +19,31 @@ use MoonShine\Actions\FiltersAction;
 
 class CommentResource extends Resource
 {
-	public static string $model = Comment::class;
+    public static string $model = Comment::class;
 
-	public static string $title = 'Комментарии';
+    public static string $title = 'Комментарии';
 
     public static string $subTitle = 'Список комментариев';
     public string $titleField = 'title';
     public static array $with = [
         'user',
-        'article'
+        'commentable'
     ];
     public static int $itemsPerPage = 5;
 
-	public function fields(): array
-	{
-		return [
-		    ID::make()->sortable(),
+    public function fields(): array
+    {
+        return [
+            ID::make()->sortable(),
             Grid::make([
                 Column::make([
                     Block::make('Информация статья и автор', [
                         BelongsTo::make('User')
                             ->searchable()
                             ->sortable(),
-                        BelongsTo::make('Article')
-                            ->searchable()
-                            ->sortable()
+//                        BelongsTo::make('Article')
+//                            ->searchable()
+//                            ->sortable()
                     ])
                 ])->columnSpan(5),
                 Column::make([
@@ -59,11 +59,11 @@ class CommentResource extends Resource
                 ])
             ])
         ];
-	}
+    }
 
-	public function rules(Model $item): array
-	{
-	    return [];
+    public function rules(Model $item): array
+    {
+        return [];
     }
 
     public function search(): array
@@ -77,7 +77,7 @@ class CommentResource extends Resource
             BelongsToFilter::make('User')
                 ->nullable()
                 ->searchable(),
-            BelongsToFilter::make('Статья', 'article')
+            BelongsToFilter::make('Статья', 'commentable')
                 ->nullable()
                 ->searchable(),
             DateFilter::make('Дата', 'created_at')

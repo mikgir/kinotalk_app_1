@@ -4,11 +4,9 @@ namespace App\Http\Livewire;
 
 use App\Http\Requests\StoreCommentRequest;
 use App\Models\Article;
-use App\Models\Comment;
+use App\Models\News;
 use App\Repositories\CommentRepository;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -17,11 +15,14 @@ class Comments extends Component
 {
     use WithPagination;
 
-    public Article $article;
+    public Article|News $model;
     public string $text = '';
     public int $user_id;
 
     protected string $paginationTheme = 'bootstrap';
+    protected $listeners = [
+        'refresh' => '$refresh',
+    ];
 
     protected function rules()
     {
@@ -34,14 +35,12 @@ class Comments extends Component
         $this->user_id = Auth::id();
         $this->validate();
 
-        Comment::create([
-            'user_id' => Auth::id(),
-            'article_id' => $this->article->id,
-            'text' => htmlspecialchars($this->text),
-        ]);
+        $comment = $this->model->comments()->make(['text' => htmlspecialchars($this->text)]);
+        $comment->user()->associate(auth()->user());
+        $comment->save();
 
         $this->text = '';
-        $this->article = Article::find($this->article->id);
+        $this->emitUp('refresh');
         $this->dispatchBrowserEvent('closeModal');
         session()->flash('message', 'Comment posted');
     }
@@ -49,17 +48,18 @@ class Comments extends Component
     public function deleteComment($id, CommentRepository $repository): void
     {
         $comment = $repository->getOne($id);
+        $comment->delete();
 
-        if ($comment->delete()) {
-            $this->article = Article::find($this->article->id);
-            session()->flash('message', 'Comment deleted');
-        }
+        $this->emitUp('refresh');
+        session()->flash('message', 'Comment deleted');
     }
 
-    public function render(CommentRepository $repository): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    public function render(CommentRepository $repository): View
     {
+        $comments = $repository->getAllByModel($this->model);
+
         return view('livewire.comments', [
-            'comments' => $repository->getAllByArticleId($this->article->id),
+            'comments' => $comments
         ]);
     }
 }

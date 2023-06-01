@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\Commentable;
 use Carbon\Carbon;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableInterface;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
@@ -9,8 +10,6 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Image\Exceptions\InvalidManipulation;
 use Spatie\MediaLibrary\HasMedia;
@@ -51,6 +50,7 @@ class Article extends Model implements ReactableInterface, HasMedia
     use SoftDeletes;
     use Reactable;
     use InteractsWithMedia;
+    use Commentable;
 
     protected $table = 'articles';
 
@@ -58,7 +58,7 @@ class Article extends Model implements ReactableInterface, HasMedia
         'user_id' => 'int',
         'category_id' => 'int',
         'featured' => 'bool',
-        'active'=>'bool'
+        'active' => 'bool'
     ];
 
     protected $fillable = [
@@ -85,11 +85,6 @@ class Article extends Model implements ReactableInterface, HasMedia
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function comments(): HasMany
-    {
-        return $this->hasMany(Comment::class);
     }
 
     /**
