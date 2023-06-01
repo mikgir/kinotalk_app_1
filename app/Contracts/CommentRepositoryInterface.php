@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Collection;
 interface CommentRepositoryInterface
 {
     /**
-     * @param $id
+     * @param $model
      * @return Collection|LengthAwarePaginator
      */
-    public function getAllByArticleId($id): Collection|LengthAwarePaginator;
+    public function getAllByModel($model): Collection|LengthAwarePaginator;
 
     /**
      * @param $id

@@ -1,6 +1,6 @@
 <div>
     @include('comments.index', [
-        'article' => $article,
+        'model' => $model,
         'comments' => $comments,
     ])
 </div>
