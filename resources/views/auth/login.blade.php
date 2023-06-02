@@ -44,77 +44,95 @@
 {{--            </x-primary-button>--}}
 {{--        </div>--}}
 {{--    </form>--}}
-    <div class="container">
-        <x-auth-session-status class="mb-4" :status="session('status')" />
-        <div class="row">
-{{--            <div class="col-xl-5"><img class="bg-img bg-center" src="{{asset('build/assets/src/assets/img/login-bg-2.jpg')}}" alt="looginpage"></div>--}}
-            <div class="col-xl-6 p-0 mx-auto">
-                <div>
-                    <div>
-{{--                        <div class="col-sm-4">--}}
-{{--                            <div class="header__top-logo logo text-lg-center">--}}
-{{--                                <a href="#" class="logo-dark"><img src="{{asset('build/assets/src/assets/img/logo/b_kinotalk.png')}}" alt="Logo"></a>--}}
-{{--                                <a href="#" class="logo-light"><img src="{{asset('build/assets/src/assets/img/logo/w_kinotalk.png')}}" alt="Logo"></a>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-                        <div class="form-div">
-                            <form class="form-div_post"  method="POST" action="{{ route('login') }}">
-                                @csrf
-                                <div class="form-div_cont">
-                                <h4>Войти в аккаунт</h4>
-                                <p>Введите адрес электронной почты и пароль для входа</p>
-                                <div class="form-group">
-                                    <x-input-label for="email" :value="__('Email')" />
-                                    <x-text-input id="email" class="form-control input-control" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-                                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
-                                </div>
-                                <div class="form-group">
-                                    <x-input-label for="password" :value="__('Пароль')" />
-
-                                    <x-text-input id="password" class="form-control"
-                                                  type="password"
-                                                  name="password"
-                                                  required autocomplete="current-password" />
-
-                                    <x-input-error :messages="$errors->get('password')" class="mt-2" />
-                                    <div class="show-hide"><span class="show"></span></div>
-                                </div>
-                                <div class="form-group mb-0">
-                                    <div class="checkbox p-0">
-                                        <input id="checkbox1" type="checkbox">
-                                        <label class="text-muted" for="checkbox1">Запомнить пароль</label>
-                                    </div>
-                                    <div class="link-checkbox">
-                                        <div class="link-checkbox_a"> <a class="link" href="#">Забыли пароль?</a></div>
-                                        <div><button class="btn btn-primary btn-block link-checkbox_btn" type="submit">Войти</button></div>
-                                    </div>
-                                </div>
-                                    <div>
-                                <div class="copyright_text">
-                                        <h6 class="muted or">Или войти через социальные сети</h6>
-                                    </div>
-                                    <div class="social-a_i">
-                                        <a class="social-links" href="#" target="_blank">
-                                            <i class="fab fa-google" data-feather="google"></i>
-
-                                        </a>
-                                        <a class="social-links" href="#" target="_blank">
-                                            <i class="fab fa-vk" data-feather="vk"></i>
-                                        </a>
-                                        <a class="social-links" href="#" target="_blank">
-                                            <i class="fab fa-telegram" data-feather="telegram"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="mt-4 mb-0">
-                                    <p class="mt-4 mb-0">Ещё не зарегистрированы?<a class="ms-2" href="{{ route('register') }}">Зарегистрироваться</a></p>
-                                </div>
-                                </div>
-                            </form>
+    <main>
+        <div class="breadcrumb-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="breadcrumb-content">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{{route('main')}}">Главная</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">АВТОРИЗАЦИЯ</li>
+                                </ol>
+                            </nav>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+        <div class="container">
+            <x-auth-session-status class="mb-4" :status="session('status')" />
+            <div class="row">
+                {{--            <div class="col-xl-5"><img class="bg-img bg-center" src="{{asset('build/assets/src/assets/img/login-bg-2.jpg')}}" alt="looginpage"></div>--}}
+                <div class="col-xl-6 p-0 mx-auto">
+                    <div>
+                        <div>
+                            {{--                        <div class="col-sm-4">--}}
+                            {{--                            <div class="header__top-logo logo text-lg-center">--}}
+                            {{--                                <a href="#" class="logo-dark"><img src="{{asset('build/assets/src/assets/img/logo/b_kinotalk.png')}}" alt="Logo"></a>--}}
+                            {{--                                <a href="#" class="logo-light"><img src="{{asset('build/assets/src/assets/img/logo/w_kinotalk.png')}}" alt="Logo"></a>--}}
+                            {{--                            </div>--}}
+                            {{--                        </div>--}}
+                            <div class="form-div">
+                                <form class="form-div_post"  method="POST" action="{{ route('login') }}">
+                                    @csrf
+                                    <div class="card-header__wp1">
+                                        <p>Введите адрес электронной почты и пароль для входа</p>
+                                        <div class="card-header__wp6">
+                                            <x-input-label for="email" :value="__('Email')" />
+                                            <x-text-input id="email" class="form-control input-control" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+                                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                                        </div>
+                                        <div class="card-header__wp7">
+                                            <x-input-label for="password" :value="__('Пароль')" />
+
+                                            <x-text-input id="password" class="form-control"
+                                                          type="password"
+                                                          name="password"
+                                                          required autocomplete="current-password" />
+
+                                            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                                            <div class="show-hide"><span class="show"></span></div>
+                                        </div>
+                                        <div class="form-group mb-0">
+                                            <div class="checkbox p-0 ">
+                                                <input id="checkbox1" type="checkbox" >
+                                                <label class="text-muted" for="checkbox1">Запомнить пароль</label>
+                                            </div>
+                                            <div class="link-checkbox">
+                                                <div class="link-checkbox_a"> <a class="link" href="#">Забыли пароль?</a></div>
+                                                <div><button class="btn btn-primary btn-block link-checkbox_btn" type="submit">Войти</button></div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="copyright_text">
+                                                <h6 class="muted or">Или войти через социальные сети</h6>
+                                            </div>
+                                            <div class="social-a_i">
+                                                <a class="social-links" href="#" target="_blank">
+                                                    <i class="fab fa-google" data-feather="google"></i>
+
+                                                </a>
+                                                <a class="social-links" href="#" target="_blank">
+                                                    <i class="fab fa-vk" data-feather="vk"></i>
+                                                </a>
+                                                <a class="social-links" href="#" target="_blank">
+                                                    <i class="fab fa-telegram" data-feather="telegram"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="mt-4 mb-0">
+                                            <p class="mt-4 mb-0">Ещё не зарегистрированы?<a class="ms-2" href="{{ route('register') }}">Зарегистрироваться</a></p>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
 </x-guest-layout>

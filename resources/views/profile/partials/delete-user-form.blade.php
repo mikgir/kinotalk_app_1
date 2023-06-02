@@ -13,13 +13,13 @@
         </x-primary-button>
 </div>
 
-    <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
-        <form method="post" action="{{ route('profile.destroy', $user->id) }}" class="p-6">
+    <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable >
+        <form method="post" action="{{ route('profile.destroy', $user->id) }}" class="">
             @csrf
             @method('delete')
 
-            <h4 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                {{ __('Are you sure you want to delete your account?') }}
+            <h4 class="">
+                {{ __('Вы уверены, что хотите удалить свой аккаунт?') }}
             </h4>
 
             <p class="mt-1">

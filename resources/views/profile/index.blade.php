@@ -76,72 +76,66 @@
                             <div class="block__wp5">
                             <span>Список статей</span>
                             <div class="table-responsive-md table-hover block__wp6 small mb-1">
-                                <div class="table_col">
-                                    <div>
+                                <div class="table_col small__lab2">
+                                    <div class="col__tab3">
                                         <span scope="col">ID</span>
                                     </div>
-                                    <div>
+                                    <div class="col__tab3">
                                         <span scope="col">Категория</span>
                                     </div>
-                                    <div>
+                                    <div class="col__tab3">
                                         <span scope="col">Наименование</span>
                                     </div>
-                                    <div>
+                                    <div class="col__tab3">
                                         <span scope="col">Статус</span>
                                     </div>
-                                    <div>
-                                        <span scope="col">Активность</span>
-                                    </div>
-                                    <div>
+                                    <div class="col__tab3">
                                         <span scope="col">Дата написания</span>
                                     </div>
-                                    <div>
+                                    <div class="col__tab3">
                                         <span scope="col">Дата изменения</span>
                                     </div>
-                                    <div>
+                                    <div class="col__tab3">
                                         <span scope="col">Действия</span>
                                     </div>
                                 </div>
                                 @foreach(Auth::user()->articles as $key=>$article)
-                                    <div class="table_col">
-                                        <div>
+                                    <div class="table_col small__lab2">
+                                        <div class="col__tab4">
                                             <span scope="row">{{$article->id}}></span>
                                         </div>
-                                        <div>
+                                        <div class="col__tab4">
                                             <span>{{$article->category->name}}</span>
                                         </div>
-                                        <div>
+                                        <div class="col__tab4">
                                             <span>{{$article->title}}</span>
                                         </div>
-                                        <div>
+                                        <div class="col__tab4">
                                             <span>{{$article->status}}</span>
                                         </div>
-                                        <div>
-                                            <span>{{$article->active}}</span>
-                                        </div>
-                                        <div>
+                                        <div class="col__tab4">
                                             <span>{{$article->created_at}}</span>
                                         </div>
-                                        <div>
+                                        <div class="col__tab4">
                                             <span>{{$article->updated_at}}</span>
                                         </div>
-                                        <div>
+                                        <div class="col__tab4">
                                             <span>Действия</span>
                                         </div>
                                     </div>
                                 <div class="block-btn__pr4">
                                     <div>
-                                        <a href="{{route('articles.edit', $article->id)}}" class="btn btn-outline-primary mb-2">Редактировать</a>
+                                        <a href="{{route('articles.edit', $article->id)}}" class="btn btn__b3 btn-outline-primary mb-2">Редактировать</a>
                                     </div>
                                     <div>
                                         <form method="post" action="{{route('articles.publish', $article->id)}}">
                                         @csrf
                                             @method('patch')
-                                            <button type="submit" class="btn btn-outline-success mb-2 ">Опубликовать</button>
+                                            <button type="submit" class="btn btn__b3 btn-outline-success mb-2 ">Опубликовать</button>
                                     </form>
                                     </div>
                                     <div>
-                                        <a href="{{route('articles.destroy', $article->id)}}" class="btn btn-outline-danger mb-2">Удалить</a>
+                                        <a href="{{route('articles.destroy', $article->id)}}" class="btn btn__b3 btn-outline-danger mb-2">Удалить</a>
                                     </div>
 
                                 </div>
