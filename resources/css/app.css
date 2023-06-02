@@ -90,16 +90,18 @@
 .blog-avatar-content__wrap p{
     margin: 10px 30px 2px;
     font-size: 15px;
+    width: 90%;
 }
 
 .blog-avatar-wrap__w3{
     display: flex;
+    width: 100%;
 }
 .blog-avatar-content{
     text-align: justify;
 }
 .blog-avatar-content__span3{
-    font-size: 10px;
+    font-size: 12px;
     margin: 10px 30px 8px;
 
 }
@@ -108,8 +110,8 @@
 }
 
 .blog-avatar-content__p4 {
-    /*width: 39rem;*/
     word-wrap: break-word;
+   margin: 10px 0 2px 30px;
 }
 .container-xl__wp2{
     margin-top: 3rem;
@@ -119,7 +121,7 @@
     word-wrap: break-word;
 }
 .blog-avatar-img__p4 img{
-    max-width: 5rem;
+    max-width: 6rem;
     border-radius: 50%;
 }
 
