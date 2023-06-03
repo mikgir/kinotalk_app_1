@@ -13,19 +13,19 @@
 
         <div class="card-header__wp6 ">
             <x-input-label for="current_password" :value="__('Текущий пароль')" />
-            <x-text-input id="current_password" name="current_password" type="password" class="form-control mb-2" autocomplete="current-password" />
+            <x-text-input id="current_password" name="current_password" type="password" class="form-control mb-2 card-header__inp3" autocomplete="current-password" />
             <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
         </div>
 
         <div class="card-header__wp6 ">
             <x-input-label for="password" :value="__('Новый пароль')" />
-            <x-text-input id="password" name="password" type="password" class="form-control mb-2" autocomplete="new-password" />
+            <x-text-input id="password" name="password" type="password" class="form-control mb-2 card-header__inp3" autocomplete="new-password" />
             <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
         </div>
 
         <div class="card-header__wp6 ">
             <x-input-label for="password_confirmation" :value="__('Подтвердите пароль')" />
-            <x-text-input id="password_confirmation" name="password_confirmation" type="password" class="form-control mb-2" autocomplete="new-password" />
+            <x-text-input id="password_confirmation" name="password_confirmation" type="password" class="form-control mb-2 card-header__inp3" autocomplete="new-password" />
             <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
         </div>
 

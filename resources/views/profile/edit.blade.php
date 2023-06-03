@@ -7,7 +7,7 @@
             <!-- Form Group (first name)-->
             <div class="col-md-6 mb-3 ">
                 <label class="small mb-1" for="inputFirstName">Имя</label>
-                <input name="first_name" class="form-control @error('first_name') border-red-500 @enderror"
+                <input name="first_name" class="form-control card-header__inp3 @error('first_name') border-red-500 @enderror"
                        id="inputFirstName" type="text" value="{{$profile->first_name}}">
                 @error('first_name')
                 <p class="text-red-500">{{$message}}</p>
