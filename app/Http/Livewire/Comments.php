@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Events\CallModerator;
 use App\Http\Requests\StoreCommentRequest;
 use App\Models\Article;
 use App\Models\News;
@@ -37,6 +38,11 @@ class Comments extends Component
         $comment = $this->model->comments()->make(['text' => $this->text]);
         $comment->user()->associate(auth()->user());
         $comment->save();
+        $callModerator = preg_match('/@moderator/', $comment->text);
+        if($callModerator){
+            event(new CallModerator($comment));
+        }
+
 
         $this->text = '';
         $this->emitUp('refresh');
