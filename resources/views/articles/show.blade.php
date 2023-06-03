@@ -56,7 +56,7 @@
                                 </div>
                             </div>
 
-                            <livewire:comments :article="$article"/>
+                            <livewire:comments :model="$article"/>
                             <script>
                                 window.addEventListener('closeModal', event => {
                                     $("#modalForm").modal('hide');

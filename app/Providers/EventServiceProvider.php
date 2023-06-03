@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Events\BecomeAuthor;
+use App\Events\CallModerator;
 use App\Listeners\BecomeAuthorListener;
+use App\Listeners\CallModeratorListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -22,7 +24,10 @@ class EventServiceProvider extends ServiceProvider
         ],
         BecomeAuthor::class => [
             BecomeAuthorListener::class,
-        ]
+        ],
+        CallModerator::class => [
+            CallModeratorListener::class,
+        ],
     ];
 
     /**

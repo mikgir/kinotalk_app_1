@@ -2,10 +2,12 @@
 
 namespace App\Admin\Resources;
 
+use App\Enum\PageTypeFromCommentEnum;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Comment;
 
 use MoonShine\Decorations\Block;
+use MoonShine\Decorations\Button;
 use MoonShine\Decorations\Column;
 use MoonShine\Decorations\Grid;
 use MoonShine\Fields\BelongsTo;
@@ -13,6 +15,7 @@ use MoonShine\Fields\Date;
 use MoonShine\Fields\Text;
 use MoonShine\Filters\BelongsToFilter;
 use MoonShine\Filters\DateFilter;
+use MoonShine\ItemActions\ItemAction;
 use MoonShine\Resources\Resource;
 use MoonShine\Fields\ID;
 use MoonShine\Actions\FiltersAction;
@@ -50,7 +53,8 @@ class CommentResource extends Resource
                     Block::make('Основная информация', [
                         Text::make('Text')
                             ->hideOnIndex(),
-                        Text::make('Status'),
+//                        Text::make('Status'),
+                        Text::make('Текст', 'text'),
                         Date::make('Дата создания', 'created_at')
                             ->sortable(),
                         Date::make('Дата изменения', 'updated_at')
@@ -88,6 +92,26 @@ class CommentResource extends Resource
     {
         return [
             FiltersAction::make(trans('moonshine::ui.filters')),
+        ];
+    }
+
+    public function itemActions(): array
+    {
+        return [
+            ItemAction::make('К ресурсу', function (Model $item){
+//                $route = PageTypeFromCommentEnum::tryFrom($item->commentable_type)->getRouteFromItem();
+//                dd(route($route, ['id' => $item->commentable_id]));
+                return redirect()->route('moonshine.sources.index');
+
+
+//                if($item->commentable_type == 'App\Models\Article'){
+////                    dd(redirect()->route('articles.show', $item->commentable_id));
+//                    return redirect()->route('articles.show', $item->commentable_id);
+//                } elseif ($item->commentable_type == 'App\Models\News'){
+//                    return redirect()->route('news.show', $item->commentable_id);
+//                }
+            })
+                ->showInLine()
         ];
     }
 }
