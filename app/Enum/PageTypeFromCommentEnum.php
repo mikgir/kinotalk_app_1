@@ -10,10 +10,10 @@ enum PageTypeFromCommentEnum: string
     case Article = 'App\Models\Article';
     case News = 'App\Models\News';
 
-    public function getRouteFromItem(){
+    public function getRouteFromItem(int $id){
         return match($this){
-            self::Article => 'articles.show',
-            self::News => 'news.show',
+            self::Article => getenv('APP_URL').'/articles/'.$id,
+            self::News => getenv('APP_URL').'/news/'.$id,
         };
     }
 }
