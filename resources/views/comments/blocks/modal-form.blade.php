@@ -1,16 +1,11 @@
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalForm">
-    Оставить комментарий
-</button>
-
 <!-- Modal -->
-<div wire:ignore.self class="modal fade" id="modalForm" tabindex="-1" aria-labelledby="exampleModalLabel"
+<div wire:ignore.self class="modal fade" id={{ $modal_form_id }} tabindex="-1" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content__md2">
             <div class="modal-header">
                 @auth
-                    <h5 class="modal-title" id="exampleModalLabel">Оставьте свой комментарий:</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{{ $title }}</h5>
                 @endauth
                 @guest
                     <h5 class="modal-title modal-title__text3" id="exampleModalLabel">Вы не авторизованы:</h5>
@@ -19,7 +14,7 @@
             </div>
             <div class="modal-body">
                 @auth
-                    @include('comments.create')
+                    @include($nested_form_name)
                 @endauth
                 @guest
                     <a href="{{ route('login') }}"

@@ -31,11 +31,10 @@ class Comments extends Component
 
     public function postComment(): void
     {
-        $this->text = htmlspecialchars($this->text);
         $this->user_id = Auth::id();
         $this->validate();
 
-        $comment = $this->model->comments()->make(['text' => htmlspecialchars($this->text)]);
+        $comment = $this->model->comments()->make(['text' => $this->text]);
         $comment->user()->associate(auth()->user());
         $comment->save();
 
@@ -43,6 +42,31 @@ class Comments extends Component
         $this->emitUp('refresh');
         $this->dispatchBrowserEvent('closeModal');
         session()->flash('message', 'Comment posted');
+    }
+
+    public function clearText(): void
+    {
+        $this->text = '';
+    }
+
+    public function setText($id, CommentRepository $repository): void
+    {
+        $comment = $repository->getOne($id);
+        $this->text = $comment->text;
+    }
+
+    public function editComment($id, CommentRepository $repository): void
+    {
+        $comment = $repository->getOne($id);
+        $this->user_id = Auth::id();
+        $this->validate();
+
+        $comment->update(['text' => $this->text]);
+
+        $this->text = '';
+        $this->emitUp('refresh');
+        $this->dispatchBrowserEvent('closeModal');
+        session()->flash('message', 'Comment edited');
     }
 
     public function deleteComment($id, CommentRepository $repository): void
