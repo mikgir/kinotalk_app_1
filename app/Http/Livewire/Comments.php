@@ -38,11 +38,11 @@ class Comments extends Component
         $comment = $this->model->comments()->make(['text' => $this->text]);
         $comment->user()->associate(auth()->user());
         $comment->save();
+
         $callModerator = preg_match('/@moderator/', $comment->text);
-        if($callModerator){
+        if ($callModerator) {
             event(new CallModerator($comment));
         }
-
 
         $this->text = '';
         $this->emitUp('refresh');
