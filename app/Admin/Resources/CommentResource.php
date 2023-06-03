@@ -12,6 +12,7 @@ use MoonShine\Decorations\Column;
 use MoonShine\Decorations\Grid;
 use MoonShine\Fields\BelongsTo;
 use MoonShine\Fields\Date;
+use MoonShine\Fields\NoInput;
 use MoonShine\Fields\Text;
 use MoonShine\Filters\BelongsToFilter;
 use MoonShine\Filters\DateFilter;
@@ -58,7 +59,8 @@ class CommentResource extends Resource
                         Date::make('Дата создания', 'created_at')
                             ->sortable(),
                         Date::make('Дата изменения', 'updated_at')
-                            ->sortable()
+                            ->sortable(),
+                        NoInput::make('К публикации')->link(fn($item) => PageTypeFromCommentEnum::tryFrom($item->commentable_type)->getRouteFromItem($item->commentable_id), blank: true)
                     ])
                 ])
             ])
@@ -92,26 +94,6 @@ class CommentResource extends Resource
     {
         return [
             FiltersAction::make(trans('moonshine::ui.filters')),
-        ];
-    }
-
-    public function itemActions(): array
-    {
-        return [
-            ItemAction::make('К ресурсу', function (Model $item){
-//                $route = PageTypeFromCommentEnum::tryFrom($item->commentable_type)->getRouteFromItem();
-//                dd(route($route, ['id' => $item->commentable_id]));
-                return redirect()->route('moonshine.sources.index');
-
-
-//                if($item->commentable_type == 'App\Models\Article'){
-////                    dd(redirect()->route('articles.show', $item->commentable_id));
-//                    return redirect()->route('articles.show', $item->commentable_id);
-//                } elseif ($item->commentable_type == 'App\Models\News'){
-//                    return redirect()->route('news.show', $item->commentable_id);
-//                }
-            })
-                ->showInLine()
         ];
     }
 }
