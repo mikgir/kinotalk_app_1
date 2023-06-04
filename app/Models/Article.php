@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enum\ArticleStatusEnum;
 use App\Traits\Commentable;
 use Carbon\Carbon;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableInterface;
@@ -58,7 +59,8 @@ class Article extends Model implements ReactableInterface, HasMedia
         'user_id' => 'int',
         'category_id' => 'int',
         'featured' => 'bool',
-        'active' => 'bool'
+        'active' => 'bool',
+        'status' => ArticleStatusEnum::class
     ];
 
     protected $fillable = [

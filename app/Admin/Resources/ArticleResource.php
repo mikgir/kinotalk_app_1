@@ -2,6 +2,7 @@
 
 namespace App\Admin\Resources;
 
+use App\Enum\ArticleStatusEnum;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Article;
@@ -104,6 +105,7 @@ class ArticleResource extends Resource
                         Number::make('Рейтинг', 'love_reactant_id')
                             ->stars(),
                         SwitchBoolean::make('Опубликовать', 'active'),
+                        Enum::make('Статус', 'status')->attach(ArticleStatusEnum::class),
                         Date::make('Дата создания', 'created_at')
                             ->format('d.m.Y')
                             ->sortable(),
@@ -155,13 +157,13 @@ class ArticleResource extends Resource
 
    public function trClass(Model $item, int $index): string
    {
-       if ($item->status === 'DRAFT' ){
+       if ($item->status === ArticleStatusEnum::DRAFT->value ){
            return 'yellow';
        }
-       if ($item->status === 'PENDING' ){
+       if ($item->status === ArticleStatusEnum::PENDING->value  ){
            return 'blue';
        }
-       if ($item->status === 'PUBLISED' ){
+       if ($item->status === ArticleStatusEnum::PUBLISHED->value  ){
            return 'green';
        }
        if ($item->active == false ){

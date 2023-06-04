@@ -30,4 +30,10 @@ class UserRepository implements UserRepositoryInterface
         return User::findOrFail($id);
     }
 
+    public function getModeratorIds()
+    {
+         return User::role(['moderator', 'super_admin'])
+            ->pluck('id')->toArray();
+    }
+
 }
