@@ -156,9 +156,9 @@ class UserResource extends Resource
                 ->icon('heroicons.user-plus'),
             ItemAction::make('Автор +', function (Model $item) {
                 if ($item->hasRole(['user', 'moderator'])) {
-                    $item->syncRoles(['user', 'moderator', 'author']);
+                    $item->assignRole(['user', 'moderator', 'author']);
                 }
-                $item->syncRoles(['user', 'author']);
+                $item->assignRole(['user', 'author']);
             }, 'Зарегистрирован автором')
                 ->withConfirm()
                 ->icon('heroicons.pencil-square'),
@@ -169,9 +169,9 @@ class UserResource extends Resource
                 ->icon('heroicons.outline.pencil-square'),
             ItemAction::make('Модератор +', function (Model $item) {
                 if ($item->hasRole(['user', 'author'])) {
-                    $item->syncRoles(['user', 'moderator', 'author']);
+                    $item->assignRole(['user', 'moderator', 'author']);
                 }
-                $item->syncRoles(['user', 'moderator']);
+                $item->assignRole(['user', 'moderator']);
             }, 'Зарегистрирован модератором')
                 ->withConfirm()
                 ->icon('heroicons.academic-cap'),

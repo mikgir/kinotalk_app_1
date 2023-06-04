@@ -132,51 +132,18 @@
                                         @csrf
                                             @method('patch')
                                             <button type="submit" class="btn btn__b3 btn-outline-success mb-2 ">Опубликовать</button>
-                                    </form>
+                                        </form>
                                     </div>
                                     <div>
-                                        <a href="{{route('articles.destroy', $article->id)}}" class="btn btn__b3 btn-outline-danger mb-2">Удалить</a>
+                                        <form method="delete" action="{{route('articles.destroy', $article->id)}}">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" class="btn btn__b3 btn-outline-success mb-2 ">Удалить</button>
+                                        </form>
                                     </div>
 
                                 </div>
                                 @endforeach
-
-                             {{--  <table class="table">
-                                    <thead>
-                                    <tr>
-                                        <th scope="col">ID</th>
-                                        <th scope="col">Категория</th>
-                                        <th scope="col">Наименование</th>
-                                        <th scope="col">Статус</th>
-                                        <th scope="col">Активность</th>
-                                        <th scope="col">Дата написания</th>
-                                        <th scope="col">Дата изменения</th>
-                                        <th scope="col">Действия</th>
-                                    </tr>
-                                    </thead>
-                                <tbody>
-                                    @foreach(Auth::user()->articles as $key=>$article)
-                                    <tr>
-                                        <th scope="row">{{$article->id}}</th>
-                                        <td>{{$article->category->name}}</td>
-                                        <td>{{$article->title}}</td>
-                                        <td>{{$article->status}}</td>
-                                        <td>{{$article->active}}</td>
-                                        <td>{{$article->created_at}}</td>
-                                        <td>{{$article->updated_at}}</td>
-                                        <td>
-                                            <a href="{{route('articles.edit', $article->id)}}" class="btn btn-outline-primary mb-2 w-100">Редактировать</a>
-                                            <form method="post" action="{{route('articles.publish', $article->id)}}">
-                                                @csrf
-                                                @method('patch')
-                                                <button type="submit" class="btn btn-outline-success mb-2">Опубликовать</button>
-                                            </form>
-                                            <a href="{{route('articles.destroy', $article->id)}}" class="btn btn-outline-danger mb-2 w-100">Удалить</a>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>--}}
                             </div>
                             </div>
                         </div>

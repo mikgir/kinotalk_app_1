@@ -129,9 +129,16 @@ class ArticleController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     * @param string $id
+     * @return RedirectResponse
      */
-    public function destroy(string $id)
+    public function destroy(string $id): RedirectResponse
     {
-        //
+        $article = $this->articleRepository->getOne($id);
+        $article->delete();
+
+        return redirect('/profile')
+            ->with('success', 'Статья успешно удалена');
+
     }
 }
