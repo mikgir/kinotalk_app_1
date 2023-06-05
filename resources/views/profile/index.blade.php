@@ -65,15 +65,18 @@
                                 @include('social.create')
                         </div>
                     </div>
-                    @hasrole('author')
-                    <div class="block__wp8">
-                        <div class="card-header__wp4 flex-nowrap">
-                            <span>Статьи</span>
-                        </div>
+                    @if(!$user->active)
+                        <p style="color: red; ">Вы заблокированы</p>
+                    @else
+                        @hasrole('author')
+                        <div class="block__wp8">
+                            <div class="card-header__wp4 flex-nowrap">
+                                <span>Статьи</span>
+                            </div>
 
-                        <div class="card-body card-header__wp4">
-                            <a href="{{route('articles.create')}}" class="btn btn-primary">Написать статью</a>
-                            <div class="block__wp5">
+                            <div class="card-body card-header__wp4">
+                                <a href="{{route('articles.create')}}" class="btn btn-primary">Написать статью</a>
+                                <div class="block__wp5">
                             <span>Список статей</span>
                             <div class="table-responsive-md table-hover block__wp6 small mb-1">
                                 <div class="table_col small__lab2">
@@ -146,20 +149,19 @@
                                 @endforeach
                             </div>
                             </div>
+                            </div>
                         </div>
-                    </div>
-                    @else
+                        @else
                         <div class="card mb-4">
                             <div class="card-header flex-nowrap">
                                 <span>Стать автором</span>
                             </div>
                             <div class="card-body">
                                 <a href="{{route('becomeAuthor', $user->id)}}" class="btn btn-primary">Подать заявку</a>
-
                             </div>
                         </div>
-                    @endhasrole
-
+                        @endhasrole
+                    @endif
                 </div>
             </div>
         </div>
