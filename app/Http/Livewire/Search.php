@@ -21,4 +21,5 @@ class Search extends Component
 
         return view('livewire.search');
     }
+    
 }
