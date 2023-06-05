@@ -6,13 +6,11 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-4 col-md-6 col-sm-6 order-2 order-lg-0">
-                    
                     {{--                    <div class="header__top-search">--}}
                     {{--                        <form action="#">--}}
                     {{--                            <input type="text" placeholder="Статьи, авторы, теги...">--}}
                     {{--                        </form>--}}
                     {{--                    </div>--}}
-
                     <livewire:search/>
                 </div>
                 <div class="col-lg-4 col-md-3 order-0 order-lg-2 d-none d-md-block">

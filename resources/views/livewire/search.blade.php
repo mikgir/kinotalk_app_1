@@ -6,7 +6,6 @@
         <input wire:model.debounce.250ms="search" type="search" class="form-control rounded"
                placeholder="Статьи, новости..." aria-label="Search" aria-describedby="search-addon"/>
     </div>
-    
     <div class="list-group position-absolute z-50">
         @if(mb_strlen($search) > 2)
             @forelse($searchResults as $result)
