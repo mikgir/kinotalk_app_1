@@ -49,6 +49,11 @@ class Comments extends Component
             event(new CallModerator($comment));
         }
 
+        $callModerator = preg_match('/@moderator/', $comment->text);
+        if ($callModerator) {
+            event(new CallModerator($comment));
+        }
+
         $this->text = '';
         $this->emitUp('refresh');
         $this->dispatchBrowserEvent('closeModal');
