@@ -58,8 +58,8 @@
                         <div class="card-header__wp4">Странички социальных сетей</div>
                         <div class="card-body__wp4">
                             @if(isset($user->socialLinks))
-                                @foreach($socialLinks as $key=>$link)
-                                    @include('social.edit')
+                            @foreach($user->socialLinks as $key => $link)
+                                    @include('social.edit', ['link' => $link])
                                 @endforeach
                             @endif
                                 @include('social.create')
