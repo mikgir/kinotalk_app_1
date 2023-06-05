@@ -24,7 +24,7 @@ class UpdateSocialLinkRequest extends FormRequest
     {
         return [
             'user_id'=>['required', 'exists:users,id'],
-            'link'=>['required', 'sting', 'max:255']
+            'social_link'=>['required', 'url', 'max:255']
         ];
     }
 
