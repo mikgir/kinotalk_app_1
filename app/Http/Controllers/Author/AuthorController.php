@@ -25,7 +25,7 @@ class AuthorController extends Controller
      */
     public function index(): View
     {
-        $users = $this->authorRepository->getAllWithLastArticle();
+        $users = $this->authorRepository->getAll();
 
         return view('authors.index', compact('users'));
     }

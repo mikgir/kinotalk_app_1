@@ -91,7 +91,7 @@ class User extends Authenticatable implements ReacterableInterface, HasMedia
     /**
      * @return HasMany
      */
-    public function socialLinks():HasMany
+    public function socialLinks(): HasMany
     {
         return $this->hasMany(SocialLink::class);
     }
