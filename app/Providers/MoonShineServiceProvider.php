@@ -8,12 +8,14 @@ use App\Admin\Resources\CommentResource;
 use App\Admin\Resources\NewsResource;
 use App\Admin\Resources\ProfileResource;
 use App\Admin\Resources\RoleResource;
+use App\Admin\Resources\SocialLinkResource;
 use App\Admin\Resources\SocialTypeResource;
 use App\Admin\Resources\SourceResource;
 use App\Admin\Resources\UserResource;
 use App\Models\Article;
 use App\Models\Comment;
 use App\Models\News;
+use App\Models\SocialLink;
 use App\Models\User;
 use Illuminate\Support\ServiceProvider;
 use MoonShine\MoonShine;
@@ -35,6 +37,11 @@ class MoonShineServiceProvider extends ServiceProvider
                     ->icon('heroicons.identification'),
                 MenuItem::make('Роли', new RoleResource())
                     ->icon('bookmark'),
+                MenuItem::make('Соц-сети', new SocialTypeResource())
+                    ->icon('heroicons.share'),
+                MenuItem::make('Соц-сети страницы', new SocialLinkResource())
+                    ->badge(fn() => SocialLink::query()->count())
+                    ->icon('heroicons.link'),
             ])->icon('heroicons.cog-6-tooth'),
             MenuGroup::make('Контент', [
                 MenuItem::make('Категории', new CategoryResource())
@@ -50,8 +57,6 @@ class MoonShineServiceProvider extends ServiceProvider
                 MenuItem::make('Комментарии', new CommentResource())
                     ->badge(fn() => Comment::query()->count())
                     ->icon('heroicons.chat-bubble-bottom-center-text'),
-                MenuItem::make('Соц-сети', new SocialTypeResource())
-                    ->icon('heroicons.share'),
             ])->icon('app'),
         ]);
     }

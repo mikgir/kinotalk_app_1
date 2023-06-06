@@ -24,12 +24,19 @@ class BecomeAuthorListener
      */
     public function handle(BecomeAuthor $event): void
     {
+
+        // автоматическое присвоение роли "автор"
+        if ($event->user->hasRole(['user', 'moderator'])) {
+            $event->user->assignRole(['user', 'moderator', 'author']);
+        }
+        $event->user->assignRole(['user', 'author']);
+
         //отправляем письмо на почту
         Mail::to('kinotalkapp@gmail.com')->send(new BecomeAuthorMail($event->user));
 
         //отправляем уведомление в личный кабинет администратора
         MoonShineNotification::send(
-            message: 'Пользователь ' . $event->user->name . ' хочет стать автором',
+            message: 'Пользователь ' . $event->user->name . ' стал автором',
             // Опционально button
             button: ['link' => route('moonshine.users.show', ['resourceItem' => $event->user->id]), 'label' => 'К профилю пользователя'],
             // Опционально id администраторов (по умолчанию всем)

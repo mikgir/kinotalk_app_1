@@ -104,7 +104,7 @@ class ArticleResource extends Resource
                             ->sortable(),
                         Number::make('Рейтинг', 'love_reactant_id')
                             ->stars(),
-                        SwitchBoolean::make('Опубликовать', 'active'),
+                        SwitchBoolean::make('Active'),
                         Enum::make('Статус', 'status')->attach(ArticleStatusEnum::class),
                         Date::make('Дата создания', 'created_at')
                             ->format('d.m.Y')
@@ -116,10 +116,12 @@ class ArticleResource extends Resource
                     ])
                 ])
                     ->columnSpan(5),
-                HasMany::make('Comments')
+            ]),
+            Block::make('Комментарии', [
+                HasMany::make('Комментарии', 'comments')
                     ->hideOnIndex()
                     ->resourceMode(),
-            ]),
+            ])
         ];
     }
 
@@ -157,13 +159,13 @@ class ArticleResource extends Resource
 
    public function trClass(Model $item, int $index): string
    {
-       if ($item->status === ArticleStatusEnum::DRAFT->value ){
+       if ($item->status === ArticleStatusEnum::DRAFT ){
            return 'yellow';
        }
-       if ($item->status === ArticleStatusEnum::PENDING->value  ){
+       if ($item->status === ArticleStatusEnum::PENDING ){
            return 'blue';
        }
-       if ($item->status === ArticleStatusEnum::PUBLISHED->value  ){
+       if ($item->status === ArticleStatusEnum::PUBLISHED  ){
            return 'green';
        }
        if ($item->active == false ){
@@ -176,16 +178,19 @@ class ArticleResource extends Resource
     public function itemActions(): array
     {
         return [
-//            ItemAction::make('Блок +', function (Model $item) {
-//                $item->update(['active' => false]);
-//            }, 'Заблокировано')
-//                ->withConfirm()
-//                ->icon('heroicons.signal-slash'),
-//            ItemAction::make('Блок -', function (Model $item) {
-//                $item->update(['active' => true]);
-//            }, 'Разблокировано')
-//                ->withConfirm()
-//                ->icon('heroicons.signal'),
+            ItemAction::make('Опубликовать', function (Model $item){
+                $item->update(['status'=>'PUBLISHED']);
+                $item->update(['active'=> true]);
+            }, 'Опубликовано')
+                ->withConfirm()
+                ->icon('heroicons.signal'),
+            ItemAction::make('Ожидание', function (Model $item){
+                $item->update(['status'=>'PENDING']);
+                $item->update(['active'=>false]);
+            }, 'В ожидании')
+                ->withConfirm()
+                ->icon('heroicons.signal-slash'),
+
         ];
     }
 }
