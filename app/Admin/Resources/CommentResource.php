@@ -3,6 +3,8 @@
 namespace App\Admin\Resources;
 
 use App\Enum\PageTypeFromCommentEnum;
+use App\Models\Article;
+use App\Models\News;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Comment;
 
@@ -12,7 +14,9 @@ use MoonShine\Decorations\Column;
 use MoonShine\Decorations\Grid;
 use MoonShine\Fields\BelongsTo;
 use MoonShine\Fields\Date;
+use MoonShine\Fields\MorphTo;
 use MoonShine\Fields\NoInput;
+use MoonShine\Fields\SwitchBoolean;
 use MoonShine\Fields\Text;
 use MoonShine\Filters\BelongsToFilter;
 use MoonShine\Filters\DateFilter;
@@ -45,22 +49,21 @@ class CommentResource extends Resource
                         BelongsTo::make('User')
                             ->searchable()
                             ->sortable(),
-//                        BelongsTo::make('Article')
-//                            ->searchable()
-//                            ->sortable()
+                        MorphTo::make('Commentable')->types([
+                            Article::class => 'title',
+                            News::class => 'title'
+                        ])
                     ])
                 ])->columnSpan(5),
                 Column::make([
                     Block::make('Основная информация', [
                         Text::make('Text')
                             ->hideOnIndex(),
-//                        Text::make('Status'),
-                        Text::make('Текст', 'text'),
                         Date::make('Дата создания', 'created_at')
                             ->sortable(),
                         Date::make('Дата изменения', 'updated_at')
                             ->sortable(),
-                        NoInput::make('К публикации')->link(fn($item) => PageTypeFromCommentEnum::tryFrom($item->commentable_type)->getRouteFromItem($item->commentable_id), blank: true)
+                        NoInput::make('К публикации')->link(fn($item) => PageTypeFromCommentEnum::tryFrom($item->commentable_type)->getRouteFromItem($item->commentable_id), blank: true),
                     ])
                 ])
             ])
@@ -100,20 +103,20 @@ class CommentResource extends Resource
     public function itemActions(): array
     {
         return [
-            ItemAction::make('К ресурсу', function (Model $item){
+//            ItemAction::make('К ресурсу', function (Model $item){
 //                $route = PageTypeFromCommentEnum::tryFrom($item->commentable_type)->getRouteFromItem();
 //                dd(route($route, ['id' => $item->commentable_id]));
-                return redirect()->route('moonshine.sources.index');
+//                return redirect()->route('moonshine.sources.index');
 
 
 //                if($item->commentable_type == 'App\Models\Article'){
 ////                    dd(redirect()->route('articles.show', $item->commentable_id));
-//                    return redirect()->route('articles.show', $item->commentable_id);
+//                    return redirect('/articles/show/' . $item->commentable_id);
 //                } elseif ($item->commentable_type == 'App\Models\News'){
-//                    return redirect()->route('news.show', $item->commentable_id);
+//                    return redirect('/news/show/' . $item->commentable_id);
 //                }
-            })
-                ->showInLine()
+//            })
+//                ->showInLine()
         ];
     }
 }
