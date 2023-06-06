@@ -44,7 +44,7 @@ class AuthorRepository implements AuthorRepositoryInterface
      */
     public function showAuthorWithArticles(int $id): Collection|User
     {
-        return User::with(['articles' => function ($query) {
+        return User::with(['profile','socialLinks', 'articles' => function ($query) {
             $query->where('status', 'PUBLISHED')
                 ->orderBy('created_at', 'desc');
         }])

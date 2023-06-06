@@ -58,10 +58,13 @@
                                     <div class="tgAbout-info">
                                         <span class="designation">{{$user->name}}</span>
                                     </div>
+                                    <div class="tgAbout-info">
+{{--                                        <span class="designation">{{$user->profile->about_me}}</span>--}}
+                                    </div>
                                     <div class="tgAbout-social">
-                                        <a href="#"><i class="fab flaticon-instagram"></i></a>
-                                        <a href="#"><i class="fab fa-telegram-plane"></i></a>
-                                        <a href="#"><i class="fab fa-vk"></i></a>
+                                        @foreach($user->socialLinks as $key=>$socialLink)
+                                        <a href="{{$socialLink->link}}" target="_blank"><i class="fab fa-{{$socialLink->socialType->icon_name}}"></i></a>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
