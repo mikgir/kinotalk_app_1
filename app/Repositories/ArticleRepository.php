@@ -23,6 +23,7 @@ class ArticleRepository implements ArticleRepositoryInterface
     public function getAll(): Collection|LengthAwarePaginator
     {
         return Article::with(['category', 'user'])
+            ->where('active', 1)
             ->paginate(5);
     }
 
@@ -32,6 +33,7 @@ class ArticleRepository implements ArticleRepositoryInterface
     public function getLast(): Collection
     {
         return Article::with(['user', 'category', 'media'])
+            ->where('active', 1)
             ->latest('created_at')
             ->limit(1)->get();
     }
