@@ -30,26 +30,6 @@ class Comments extends Component
         return (new StoreCommentRequest)->rules();
     }
 
-    public function postComment(): void
-    {
-        $this->user_id = Auth::id();
-        $this->validate();
-
-        $comment = $this->model->comments()->make(['text' => $this->text]);
-        $comment->user()->associate(auth()->user());
-        $comment->save();
-
-        $callModerator = preg_match('/@moderator/', $comment->text);
-        if ($callModerator) {
-            event(new CallModerator($comment));
-        }
-
-        $this->text = '';
-        $this->emitUp('refresh');
-        $this->dispatchBrowserEvent('closeModal');
-        session()->flash('message', 'Comment posted');
-    }
-
     public function clearText(): void
     {
         $this->text = '';
@@ -61,6 +41,26 @@ class Comments extends Component
         $this->text = $comment->text;
     }
 
+    public function postComment(): void
+    {
+        $this->user_id = Auth::id();
+        $this->validate();
+
+        $comment = $this->model->comments()->make(['text' => $this->text]);
+        $comment->user()->associate(auth()->user());
+        $comment->save();
+        $this->dispatchBrowserEvent('closeModal');
+
+        $callModerator = preg_match('/@moderator/', $comment->text);
+        if ($callModerator) {
+            event(new CallModerator($comment));
+        }
+
+        $this->clearText();
+        $this->emitUp('refresh');
+//        session()->flash('message', 'Comment posted');
+    }
+
     public function editComment($id, CommentRepository $repository): void
     {
         $comment = $repository->getOne($id);
@@ -68,11 +68,11 @@ class Comments extends Component
         $this->validate();
 
         $comment->update(['text' => $this->text]);
-
-        $this->text = '';
-        $this->emitUp('refresh');
         $this->dispatchBrowserEvent('closeModal');
-        session()->flash('message', 'Comment edited');
+
+        $this->clearText();
+        $this->emitUp('refresh');
+//        session()->flash('message', 'Comment edited');
     }
 
     public function deleteComment($id, CommentRepository $repository): void
@@ -80,8 +80,9 @@ class Comments extends Component
         $comment = $repository->getOne($id);
         $comment->delete();
 
+        $this->clearText();
         $this->emitUp('refresh');
-        session()->flash('message', 'Comment deleted');
+//        session()->flash('message', 'Comment deleted');
     }
 
     public function render(CommentRepository $repository): View
