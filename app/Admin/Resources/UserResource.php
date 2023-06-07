@@ -11,6 +11,7 @@ use MoonShine\Decorations\Column;
 use MoonShine\Decorations\Grid;
 use MoonShine\Fields\Date;
 use MoonShine\Fields\Email;
+use MoonShine\Fields\HasMany;
 use MoonShine\Fields\HasOne;
 use MoonShine\Fields\MorphMany;
 use MoonShine\Fields\Password;
@@ -47,6 +48,7 @@ class UserResource extends Resource
             'roles',
             'permissions',
             'profile',
+            'socialLinks',
             'media',
         ]);
     }
@@ -86,6 +88,8 @@ class UserResource extends Resource
                                 Textarea::make('Обо мне', 'about_me'),
                             ])
                             ->hideOnIndex(),
+                        HasMany::make('SocialLinks')
+                            ->resourceMode(),
                         MorphMany::make('Роль', 'roles')
                             ->sortable()
                             ->removable(),

@@ -13,10 +13,17 @@ class AuthorRepository implements AuthorRepositoryInterface
 {
     use HasRoles;
 
+    public function getAll(): LengthAwarePaginator|Collection
+    {
+        return User::role('author')
+            ->with(['articles', 'profile', 'socialLinks'])
+            ->paginate(9);
+    }
+
     /**
      * @return LengthAwarePaginator|Collection
      */
-    public function getAllWithLastArticle(): LengthAwarePaginator| Collection
+    public function getAllWithLastArticle(): LengthAwarePaginator|Collection
     {
         return User::role('author')
             ->where('active', 1)
@@ -35,9 +42,9 @@ class AuthorRepository implements AuthorRepositoryInterface
      * @param int $id
      * @return Collection|User
      */
-    public function showAuthorWithArticles(int $id): Collection | User
+    public function showAuthorWithArticles(int $id): Collection|User
     {
-        return User::with(['articles' => function ($query) {
+        return User::with(['profile','socialLinks', 'articles' => function ($query) {
             $query->where('status', 'PUBLISHED')
                 ->orderBy('created_at', 'desc');
         }])

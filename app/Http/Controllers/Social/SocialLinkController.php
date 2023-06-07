@@ -48,9 +48,9 @@ class SocialLinkController extends Controller
     /**
      * Store a newly created resource in storage.
      * @param StoreSocialLinkRequest $request
-     * @return Application|RedirectResponse|Redirector
+     * @return RedirectResponse
      */
-    public function store(StoreSocialLinkRequest $request): Application|Redirector|RedirectResponse
+    public function store(StoreSocialLinkRequest $request): RedirectResponse
     {
         $this->socialLinkRepository->createSocialLink($request);
 
@@ -83,9 +83,9 @@ class SocialLinkController extends Controller
      * Update the specified resource in storage.
      * @param UpdateSocialLinkRequest $request
      * @param $id
-     * @return Application|Redirector|RedirectResponse
+     * @return RedirectResponse
      */
-    public function update(UpdateSocialLinkRequest $request, $id): Application|Redirector|RedirectResponse
+    public function update(UpdateSocialLinkRequest $request, $id): RedirectResponse
     {
         $this->socialLinkRepository->updateSocialLink($id, $request);
 
@@ -95,9 +95,9 @@ class SocialLinkController extends Controller
     /**
      * Remove the specified resource from storage.
      * @param $id
-     * @return Application|Redirector|RedirectResponse
+     * @return RedirectResponse
      */
-    public function destroy($id): Application|Redirector|RedirectResponse
+    public function destroy($id): RedirectResponse
     {
         $socialLink = $this->socialLinkRepository->getOne($id);
         $socialLink->delete();

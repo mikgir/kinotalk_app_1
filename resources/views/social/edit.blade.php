@@ -5,7 +5,7 @@
         <label for="social_type" class="card-header__font">Категория соц-сети</label>
         <select name="social_type" id="social_type" class="form-select form-select-sm mb-3 @error('social_type') border-red-500 @enderror"
                 aria-label=".form-select-sm example">
-            <option selected>{{$link->social_type->name}}</option>
+            <option selected>{{$link->socialType->name}}</option>
             @foreach($socialTypes as $key=>$type)
                 <option value="{{$type->id}}">{{$type->name}}</option>
             @endforeach

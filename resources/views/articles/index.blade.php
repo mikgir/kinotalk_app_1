@@ -10,11 +10,6 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('main')}}">Главная</a></li>
                                     <li class="breadcrumb-item active">Статьи</li>
-                                    @foreach($categories as $key=>$category)
-                                    <li class="breadcrumb-item  {{ $category->name === $category->id ? 'active' : '' }}">
-                                        <a href="{{route('articles.category', $category->id)}}" >{{$category->name}}</a>
-                                    </li>
-                                    @endforeach
                                 </ol>
                             </nav>
                         </div>
@@ -30,11 +25,7 @@
                 <div class="row justify-content-center">
                     <div class="col-xl-8 col-lg-7">
                         <div class="blog-post-wrapper">
-                            @foreach($categories as $key=>$category)
-                                <div class="section-header mb-5">
-                                    <h4>категория: <span>{{ $category->name }}</span></h4>
-                                </div>
-                                 @forelse($category->articles as $key=>$article)
+                            @foreach($articles as $key=>$article)
                                     <div class="latest__post-item">
                                         <div class="latest__post-thumb tgImage__hover">
                                             <a href="{{route('articles.show', $article->id)}}">
@@ -54,13 +45,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            @empty
-                                <div class="container">
-                                    <h3 class="text-center">Статей пока нет</h3>
-                                </div>
-                            @endforelse
                         @endforeach
-                              {{$categories->links('vendor.pagination.bootstrap-5')}}
+                              {{$articles->links('vendor.pagination.bootstrap-5')}}
                         </div>
                     </div>
                     <div class="col-xl-3 col-lg-4 col-md-6">
