@@ -36,5 +36,4 @@ class SearchRepository implements SearchRepositoryInterface
             })
             ->union($news)->latest()->limit(10)->get();
     }
-    
 }
