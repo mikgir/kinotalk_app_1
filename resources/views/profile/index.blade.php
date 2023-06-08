@@ -26,6 +26,23 @@
                             {{ Auth::user()->getFirstMedia('avatars') }}
                             <div class="col">
                                 <div>
+                                    <form method="post" action="{{route('profile.avatar_update', Auth::id())}}">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="form-group row">
+                                            <label for="image" class="col-md-4 col-form-label text-md-right card-header__wp5">{{ __('Аватар') }}</label>
+                                            <div class="col-md-20">
+                                                <input id="image" name="image" type="file" class="form-control card-header__inp3">
+                                            </div>
+                                            <div class="btn-update__wp3">
+                                                <button type="submit" class="btn btn-primary w-100 my-4">Обновить</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div>
                                     @include('profile.partials.update-profile-information-form')
                                 </div>
                             </div>

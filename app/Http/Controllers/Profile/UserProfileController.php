@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileFormRequest;
-use App\Models\Article;
 use App\Models\Profile;
 use App\Models\SocialLink;
 use App\Models\SocialType;
@@ -14,7 +13,6 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
-use Illuminate\Support\Facades\Auth;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -105,24 +103,46 @@ class UserProfileController extends Controller
         return redirect('/profile', $id)->with('success', 'Profile updated successful');
     }
 
-    public function userUpdate(Request $request, $id)
+    /**
+     * @param Request $request
+     * @param $id
+     * @return RedirectResponse
+     */
+    public function userUpdate(Request $request, $id): RedirectResponse
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
         ]);
-        $user = User::with('profile')->findOrFail($id);
+        $user = User::with('profile', 'media')->findOrFail($id);
 
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
         ]);
-        if ($request->hasFile('avatar')) {
+
+        return redirect('/profile', $id)->with('success', 'User account updated successful');
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return RedirectResponse
+     */
+    public function avatarUpdate(Request $request, $id): RedirectResponse
+    {
+
+        $user = User::with('media')->findOrFail($id);
+
+        if ($request->hasFile('image')) {
+
             $user->clearMediaCollection('avatars');
 
-            $user->addMediaFromRequest('avatar')
+            $user->addMediaFromRequest('image')
                 ->toMediaCollection('avatars');
         }
+        return back();
+
     }
 
     /**

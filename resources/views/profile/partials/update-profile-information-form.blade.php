@@ -13,14 +13,6 @@
     <form method="post" action="{{ route('profile.user_update', auth()->id()) }}">
         @csrf
         @method('patch')
-
-        <div class="form-group row">
-            <label for="avatar" class="col-md-4 col-form-label text-md-right card-header__wp5">{{ __('Аватар') }}</label>
-            <div class="col-md-20">
-                <input id="avatar" type="file" class="form-control card-header__inp3" name="avatar">
-            </div>
-        </div>
-
         <div class="card-header__wp6">
             <x-input-label for="name" :value="__('Имя')" />
             <x-text-input id="name" name="name" type="text" value="{{Auth::user()->name}}" class="form-control mb-2 card-header__inp3" required autofocus autocomplete="name"

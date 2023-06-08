@@ -61,9 +61,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile/update/{id}', [UserProfileController::class, 'update'])
         ->where('id', '\d+')
         ->name('profile.update');
-    Route::patch('/profile/{id}', [UserProfileController::class, 'userUpdate'])
+    Route::patch('/profile/user/{id}', [UserProfileController::class, 'userUpdate'])
         ->where('id', '\d+')
         ->name('profile.user_update');
+    Route::put('/profile/avatar/{id}', [UserProfileController::class, 'avatarUpdate'])
+        ->where('id', '\d+')
+        ->name('profile.avatar_update');
     Route::delete('/profile/destroy/{id}', [UserProfileController::class, 'destroy'])
         ->where('id', '\d+')
         ->name('profile.destroy');

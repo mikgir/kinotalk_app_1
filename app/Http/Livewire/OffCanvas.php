@@ -15,7 +15,7 @@ class OffCanvas extends Component
      */
     public function render(): Factory|Application|View
     {
-        $authors = User::role('author')->get();
+        $authors = User::role('author')->limit(6)->get();
         return view('livewire.off-canvas', compact('authors'));
     }
 }
