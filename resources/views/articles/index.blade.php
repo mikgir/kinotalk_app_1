@@ -39,7 +39,9 @@
                                             <li>{{$article->created_at}}</li>
                                         </ul>
                                         <h3 class="title tgcommon__hover"><a href="{{route('articles.show', $article->id)}}">{{$article->title}}</a></h3>
-                                        <p>{!! $article->body !!}</p>
+                                        <div>
+                                            <p>{!! $article->body !!} </p>
+                                        </div>
                                         <div class="latest__post-read-more">
                                             <a href="{{route('articles.show', $article->id)}}">Читать дальше <i class="far fa-long-arrow-right"></i></a>
                                         </div>

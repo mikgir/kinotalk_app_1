@@ -26,23 +26,6 @@
                             {{ Auth::user()->getFirstMedia('avatars') }}
                             <div class="col">
                                 <div>
-                                    <form method="post" action="{{route('profile.avatar_update', Auth::id())}}">
-                                        @csrf
-                                        @method('PUT')
-                                        <div class="form-group row">
-                                            <label for="image" class="col-md-4 col-form-label text-md-right card-header__wp5">{{ __('Аватар') }}</label>
-                                            <div class="col-md-20">
-                                                <input id="image" name="image" type="file" class="form-control card-header__inp3">
-                                            </div>
-                                            <div class="btn-update__wp3">
-                                                <button type="submit" class="btn btn-primary w-100 my-4">Обновить</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div>
                                     @include('profile.partials.update-profile-information-form')
                                 </div>
                             </div>
@@ -95,74 +78,68 @@
                                 <a href="{{route('articles.create')}}" class="btn btn-primary">Написать статью</a>
                                 <div class="block__wp5">
                             <span>Список статей</span>
-                            <div class="table-responsive-md table-hover block__wp6 small mb-1">
-                                <div class="table_col small__lab2">
-                                    <div class="col__tab3">
+                            <div class="table-responsive-md table-hover block__wp6 small mb-2">
+                                <div class="row small__lab2 mb-3">
+                                    <div class="col-1 text-center col__tab3">
                                         <span scope="col">ID</span>
                                     </div>
-                                    <div class="col__tab3">
+                                    <div class="col-2 text-center col__tab3">
                                         <span scope="col">Категория</span>
                                     </div>
-                                    <div class="col__tab3">
+                                    <div class="col-3 text-center col__tab3">
                                         <span scope="col">Наименование</span>
                                     </div>
-                                    <div class="col__tab3">
+                                    <div class="col-2 text-center col__tab3">
                                         <span scope="col">Статус</span>
                                     </div>
-                                    <div class="col__tab3">
+                                    <div class="col-2 text-center col__tab3">
                                         <span scope="col">Дата написания</span>
                                     </div>
-                                    <div class="col__tab3">
-                                        <span scope="col">Дата изменения</span>
-                                    </div>
-                                    <div class="col__tab3">
+                                    <div class="col-2 text-center col__tab3">
                                         <span scope="col">Действия</span>
                                     </div>
                                 </div>
                                 @foreach(Auth::user()->articles as $key=>$article)
-                                    <div class="table_col small__lab2">
-                                        <div class="col__tab4">
+                                    <div class="row small__lab2">
+                                        <div class="col-1 text-center col__tab4">
                                             <span scope="row">{{$article->id}}></span>
                                         </div>
-                                        <div class="col__tab4">
+                                        <div class="col-2 text-center col__tab4">
                                             <span>{{$article->category->name}}</span>
                                         </div>
-                                        <div class="col__tab4">
+                                        <div class="col-3 text-center col__tab4">
                                             <span>{{$article->title}}</span>
                                         </div>
-                                        <div class="col__tab4">
+                                        <div class="col-2 text-center col__tab4">
                                             <span>{{$article->status}}</span>
                                         </div>
-                                        <div class="col__tab4">
+                                        <div class="col-2 text-center col__tab4">
                                             <span>{{$article->created_at}}</span>
                                         </div>
-                                        <div class="col__tab4">
-                                            <span>{{$article->updated_at}}</span>
+                                        <div class="col-2 text-center col__tab4">
+                                            <div class="block-btn__pr4 flex-column">
+                                                <div>
+                                                    <a href="{{route('articles.edit', $article->id)}}" class="btn btn__b3 btn-outline-primary mb-2 w-100">Редактировать</a>
+                                                </div>
+                                                <div>
+                                                    <form method="post" action="{{route('articles.publish', $article->id)}}">
+                                                        @csrf
+                                                        @method('patch')
+                                                        <button type="submit" class="btn btn__b3 btn-outline-success mb-2 w-100">Опубликовать</button>
+                                                    </form>
+                                                </div>
+                                                <div>
+                                                    <form method="delete" action="{{route('articles.destroy', $article->id)}}">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button type="submit" class="btn btn__b3 btn-outline-success mb-2 w-100">Удалить</button>
+                                                    </form>
+                                                </div>
+
+                                            </div>
                                         </div>
-                                        <div class="col__tab4">
-                                            <span>Действия</span>
-                                        </div>
-                                    </div>
-                                <div class="block-btn__pr4">
-                                    <div>
-                                        <a href="{{route('articles.edit', $article->id)}}" class="btn btn__b3 btn-outline-primary mb-2">Редактировать</a>
-                                    </div>
-                                    <div>
-                                        <form method="post" action="{{route('articles.publish', $article->id)}}">
-                                        @csrf
-                                            @method('patch')
-                                            <button type="submit" class="btn btn__b3 btn-outline-success mb-2 ">Опубликовать</button>
-                                        </form>
-                                    </div>
-                                    <div>
-                                        <form method="delete" action="{{route('articles.destroy', $article->id)}}">
-                                            @csrf
-                                            @method('delete')
-                                            <button type="submit" class="btn btn__b3 btn-outline-success mb-2 ">Удалить</button>
-                                        </form>
                                     </div>
 
-                                </div>
                                 @endforeach
                             </div>
                             </div>

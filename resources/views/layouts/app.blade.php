@@ -21,7 +21,7 @@
 </button>
 
 <!-- Page Content -->
-<@include('layouts.front.header')
+@include('layouts.front.header')
 {{ $slot }}
 @include('layouts.front.footer')
 @include('layouts.front.script')

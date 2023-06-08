@@ -47,6 +47,7 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
         if ($request->hasFile('avatar')) {
+
             $user->addMediaFromRequest('avatar')
                 ->toMediaCollection('avatars');
         }
