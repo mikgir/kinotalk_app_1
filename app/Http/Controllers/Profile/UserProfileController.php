@@ -108,8 +108,8 @@ class UserProfileController extends Controller
     public function userUpdate(Request $request, $id)
     {
         $request->validate([
+//            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
         ]);
         $user = User::with('profile')->findOrFail($id);
 
@@ -117,12 +117,19 @@ class UserProfileController extends Controller
             'name' => $request->name,
             'email' => $request->email,
         ]);
+
         if ($request->hasFile('avatar')) {
-            $user->clearMediaCollection('avatars');
+            $media = $user->getMedia('avatars')->first();
+
+            if ($media) {
+                $user->clearMediaCollection('avatars');
+            }
 
             $user->addMediaFromRequest('avatar')
                 ->toMediaCollection('avatars');
         }
+
+        return redirect('/profile')->with('success', 'Profile updated successful');
     }
 
     /**

@@ -10,7 +10,7 @@
     </form>
 
 
-    <form method="post" action="{{ route('profile.user_update', auth()->id()) }}">
+    <form method="post" enctype="multipart/form-data" action="{{ route('profile.user_update', auth()->id()) }}">
         @csrf
         @method('patch')
 
