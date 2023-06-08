@@ -16,6 +16,7 @@ class AuthorRepository implements AuthorRepositoryInterface
     public function getAll(): LengthAwarePaginator|Collection
     {
         return User::role('author')
+            ->where('active', 1)
             ->with(['articles', 'profile', 'socialLinks'])
             ->paginate(9);
     }

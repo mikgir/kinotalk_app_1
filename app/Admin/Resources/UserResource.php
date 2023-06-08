@@ -93,7 +93,7 @@ class UserResource extends Resource
                         MorphMany::make('Роль', 'roles')
                             ->sortable()
                             ->removable(),
-                        Text::make('Статус пользователя', 'active', fn($item) => $item->active ? 'Активный пользователь' : 'Пользователь заблокирован')
+                        Text::make('Статус пользователя', 'active', fn($item) => $item->active ? 1 : 0)
                             ->hideOnIndex()
                     ])
 

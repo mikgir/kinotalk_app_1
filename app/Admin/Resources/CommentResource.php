@@ -99,24 +99,4 @@ class CommentResource extends Resource
             FiltersAction::make(trans('moonshine::ui.filters')),
         ];
     }
-
-    public function itemActions(): array
-    {
-        return [
-//            ItemAction::make('К ресурсу', function (Model $item){
-//                $route = PageTypeFromCommentEnum::tryFrom($item->commentable_type)->getRouteFromItem();
-//                dd(route($route, ['id' => $item->commentable_id]));
-//                return redirect()->route('moonshine.sources.index');
-
-
-//                if($item->commentable_type == 'App\Models\Article'){
-////                    dd(redirect()->route('articles.show', $item->commentable_id));
-//                    return redirect('/articles/show/' . $item->commentable_id);
-//                } elseif ($item->commentable_type == 'App\Models\News'){
-//                    return redirect('/news/show/' . $item->commentable_id);
-//                }
-//            })
-//                ->showInLine()
-        ];
-    }
 }

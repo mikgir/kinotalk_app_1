@@ -25,21 +25,21 @@
         <!-- Form Row        -->
         <div class="row gx-3 mb-3">
             <!-- Form Group (organization name)-->
-            <div class="col-md-6 mb-3">
-                <label class="small mb-1" for="occupation">Род занятий</label>
-                <input name="occupation" class="form-control @error('occupation') border-red-500 @enderror" id="occupation" type="text" value="{{$profile->occupation}}">
-                @error('occupation')
-                <p class="text-red-500">{{$message}}</p>
-                @enderror
-            </div>
+{{--            <div class="col-md-6 mb-3">--}}
+{{--                <label class="small mb-1" for="occupation">Род занятий</label>--}}
+{{--                <input name="occupation" class="form-control @error('occupation') border-red-500 @enderror" id="occupation" type="text" value="{{$profile->occupation}}">--}}
+{{--                @error('occupation')--}}
+{{--                <p class="text-red-500">{{$message}}</p>--}}
+{{--                @enderror--}}
+{{--            </div>--}}
             <!-- Form Group (company)-->
-            <div class="col-md-6 mb-3">
-                <label class="small mb-1" for="company">Организация</label>
-                <input name="company" class="form-control @error('company') border-red-500 @enderror" id="company" type="text" value="{{$profile->company}}">
-                @error('company')
-                <p class="text-red-500">{{$message}}</p>
-                @enderror
-            </div>
+{{--            <div class="col-md-6 mb-3">--}}
+{{--                <label class="small mb-1" for="company">Организация</label>--}}
+{{--                <input name="company" class="form-control @error('company') border-red-500 @enderror" id="company" type="text" value="{{$profile->company}}">--}}
+{{--                @error('company')--}}
+{{--                <p class="text-red-500">{{$message}}</p>--}}
+{{--                @enderror--}}
+{{--            </div>--}}
             <!-- Form Group (location)-->
             <div class="col-md-6 mb-3">
                 <label class="small mb-1" for="city">Город</label>
@@ -67,14 +67,6 @@
 {{--                <p class="text-red-500">{{$message}}</p>--}}
 {{--                @enderror--}}
 {{--            </div>--}}
-{{--            <!-- Form Group (birthday)-->--}}
-{{--            <div class="col-md-6 mb-3">--}}
-{{--                <label class="small mb-1" for="inputBirthday">Дата рождения</label>--}}
-{{--                <input class="form-control @error('birthday') border-red-500 @enderror" id="inputBirthday" type="date" name="birthday" value="{{$profile->birthday}}">--}}
-{{--                @error('birthday')--}}
-{{--                <p class="text-red-500">{{$message}}</p>--}}
-{{--                @enderror--}}
-{{--            </div>--}}
             <!-- Form Group (about_me)-->
             <div class="col-md-6 mb-3">
                 <label class="small mb-1" for="about_me">Обо мне</label>
@@ -83,14 +75,22 @@
                 <p class="text-red-500">{{$message}}</p>
                 @enderror
             </div>
-            <!-- Form Group (bio)-->
+            <!-- Form Group (birthday)-->--}}
             <div class="col-md-6 mb-3">
-                <label class="small mb-1" for="bio">Биография</label>
-                <textarea class="form-control @error('bio') border-red-500 @enderror" id="bio" type="text" name="bio">{{$profile->bio}}</textarea>
-                @error('bio')
+                <label class="small mb-1" for="inputBirthday">Дата рождения</label>
+                <input class="form-control @error('birthday') border-red-500 @enderror" id="inputBirthday" type="date" name="birthday" value="{{$profile->birthday}}">
+                @error('birthday')
                 <p class="text-red-500">{{$message}}</p>
                 @enderror
             </div>
+            <!-- Form Group (bio)-->
+{{--            <div class="col-md-6 mb-3">--}}
+{{--                <label class="small mb-1" for="bio">Биография</label>--}}
+{{--                <textarea class="form-control @error('bio') border-red-500 @enderror" id="bio" type="text" name="bio">{{$profile->bio}}</textarea>--}}
+{{--                @error('bio')--}}
+{{--                <p class="text-red-500">{{$message}}</p>--}}
+{{--                @enderror--}}
+{{--            </div>--}}
         </div>
         <!-- Save changes button-->
         <button class="btn btn-primary" type="submit">Сохранить</button>
