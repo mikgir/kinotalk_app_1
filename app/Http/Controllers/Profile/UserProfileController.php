@@ -108,14 +108,14 @@ class UserProfileController extends Controller
     public function userUpdate(Request $request, $id)
     {
         $request->validate([
-//            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'name' => ['required', 'string', 'max:255'],
+            'email' => ['nullable', 'string', 'email', 'max:255', 'unique:users'],
+            'name' => ['nullable', 'string', 'max:255'],
         ]);
         $user = User::with('profile')->findOrFail($id);
 
         $user->update([
-            'name' => $request->name,
-            'email' => $request->email,
+            'name' => $request->name ?? $user->name,
+            'email' => $request->email ?? $user->email,
         ]);
 
         if ($request->hasFile('avatar')) {

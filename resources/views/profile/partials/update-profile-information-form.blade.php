@@ -23,15 +23,15 @@
 
         <div class="card-header__wp6">
             <x-input-label for="name" :value="__('Имя')" />
-            <x-text-input id="name" name="name" type="text" value="{{Auth::user()->name}}" class="form-control mb-2 card-header__inp3" required autofocus autocomplete="name"
+            <x-text-input id="name" name="name" type="text" class="form-control mb-2 card-header__inp3" autofocus autocomplete="name"
                           placeholder="Введите имя"/>
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
 
         <div class="card-header__wp6">
             <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" name="email" type="email" value="{{Auth::user()->email}}" class="form-control mb-2 card-header__inp3"
-                          required autocomplete="username"
+            <x-text-input id="email" name="email" type="email" class="form-control mb-2 card-header__inp3"
+                          autocomplete="username"
                           placeholder="Введите Email"/>
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
 
