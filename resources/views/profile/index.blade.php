@@ -21,7 +21,7 @@
                 <div class="col-xl-3">
                     <!-- Profile picture card-->
                     <div class="mb-4 mb-xl-0">
-                        <div class="card-header__wp4">Аккаунт</div>
+                        <div class="card-header__wp4">{{ $user->email  }}</div>
                         <div class="w-100 card-header__img">
                             {{ Auth::user()->getFirstMedia('avatars') }}
                             <div class="col">
