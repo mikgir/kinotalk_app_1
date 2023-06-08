@@ -26,7 +26,7 @@
 
 @if($comments->count())
     {{ $comments->links() }}
-    @foreach($comments as $key=>$comment)
+    @foreach($comments as $comment)
         @include('comments.show', ['comment' => $comment])
     @endforeach
     {{ $comments->links() }}

@@ -26,7 +26,8 @@ class Comment extends Model
         'user_id',
         'text',
         'status',
-        'active'
+        'active',
+        'parent_id',
     ];
 
     /**
