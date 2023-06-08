@@ -7,6 +7,7 @@ use App\Http\Requests\StoreCommentRequest;
 use App\Models\Article;
 use App\Models\News;
 use App\Repositories\CommentRepository;
+use App\Repositories\UserRepository;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -41,12 +42,22 @@ class Comments extends Component
         $this->text = $comment->text;
     }
 
+    public function setReplyText($user_id, UserRepository $repository): void
+    {
+        $user = $repository->getOne($user_id);
+        $this->text = $user->name . ', ';
+    }
+
     public function postComment(): void
     {
         $this->user_id = Auth::id();
         $this->validate();
 
-        $comment = $this->model->comments()->make(['text' => $this->text]);
+        $comment = $this->model->comments()->make([
+            'text' => $this->text,
+            'status' => 'PUBLISHED',
+            'active' => 1,
+        ]);
         $comment->user()->associate(auth()->user());
         $comment->save();
         $this->dispatchBrowserEvent('closeModal');
@@ -59,6 +70,31 @@ class Comments extends Component
         $this->clearText();
         $this->emitUp('refresh');
 //        session()->flash('message', 'Comment posted');
+    }
+
+    public function replyComment($id): void
+    {
+        $this->user_id = Auth::id();
+        $this->validate();
+
+        $comment = $this->model->comments()->make([
+            'text' => $this->text,
+            'status' => 'PUBLISHED',
+            'active' => 1,
+            'parent_id' => $id,
+        ]);
+        $comment->user()->associate(auth()->user());
+        $comment->save();
+        $this->dispatchBrowserEvent('closeModal');
+
+        $callModerator = preg_match('/@moderator/', $comment->text);
+        if ($callModerator) {
+            event(new CallModerator($comment));
+        }
+
+        $this->clearText();
+        $this->emitUp('refresh');
+//        session()->flash('message', 'Comment replied');
     }
 
     public function editComment($id, CommentRepository $repository): void
@@ -88,7 +124,7 @@ class Comments extends Component
     public function render(CommentRepository $repository): View
     {
         $comments = $repository->getAllByModel($this->model);
-
+//        dd($comments);
         return view('livewire.comments', [
             'comments' => $comments
         ]);

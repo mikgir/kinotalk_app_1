@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Collection;
 
 class CommentRepository implements CommentRepositoryInterface
 {
-
     /**
      * @param $model
      * @return Collection|LengthAwarePaginator
@@ -18,7 +17,9 @@ class CommentRepository implements CommentRepositoryInterface
     {
         return $model
             ->comments()
-            ->with('user')
+            ->with('user', 'children')
+            ->withCount('children')
+            ->whereNull('parent_id')
             ->latest()
             ->paginate(5);
     }
