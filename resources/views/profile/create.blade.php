@@ -71,6 +71,14 @@
 {{--                <p class="text-red-500">{{$message}}</p>--}}
 {{--                @enderror--}}
 {{--            </div>--}}
+        <!-- Form Group (birthday)-->
+            <div class="col-md-6 mb-3 card-header__wp6">
+                <label class="small mb-1" for="inputBirthday">Дата рождения</label>
+                <input class="card-header__inp3 form-select__inp2  form-control @error('birthday') border-red-500 @enderror" id="inputBirthday" type="date" name="birthday" placeholder="Enter your birthday" value="06/10/1988">
+                @error('birthday')
+                <p class="text-red-500">{{$message}}</p>
+                @enderror
+            </div>
             <!-- Form Group (about_me)-->
             <div class="col-md-6 mb-3 card-header__wp6">
                 <label class="small mb-1" for="about_me">Обо мне</label>
@@ -80,14 +88,7 @@
                 <p class="text-red-500">{{$message}}</p>
                 @enderror
             </div>
-            <!-- Form Group (birthday)-->
-            <div class="col-md-6 mb-3">
-                <label class="small mb-1" for="inputBirthday">Дата рождения</label>
-                <input class="form-control @error('birthday') border-red-500 @enderror" id="inputBirthday" type="date" name="birthday" placeholder="Enter your birthday" value="06/10/1988">
-                @error('birthday')
-                <p class="text-red-500">{{$message}}</p>
-                @enderror
-            </div>
+
             <!-- Form Group (bio)-->
 {{--            <div class="col-md-6 mb-3 card-header__wp6">--}}
 {{--                <label class="small mb-1" for="bio">Биография</label>--}}
