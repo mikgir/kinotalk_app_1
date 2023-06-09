@@ -8,8 +8,8 @@
             <p class="blog-avatar-content__p4">{{ $comment->text }}</p>
             <div style="display: flex;">
                 <span class="blog-avatar-content__span3">{{ $comment->created_at->diffForHumans() }}</span>
-                @if($comment->children_count)
-                    <span class="blog-avatar-content__span3">Ответов: {{ $comment->children_count }}</span>
+                @if($comment->children->count())
+                    <span class="blog-avatar-content__span3">Ответов: {{ $comment->children->count() }}</span>
                 @endif
                 @if($comment->parent_id == null)
                     @include('comments.blocks.reply-button', ['comment' => $comment])
@@ -21,6 +21,7 @@
     <div class="blog-wrap-content__btn" style="display: flex;">
         @include('comments.blocks.edit-button', ['comment' => $comment])
         @include('comments.blocks.delete-button', ['comment' => $comment])
+        @include('comments.blocks.reactions', ['comment' => $comment])
     </div>
 
     <div style="margin-left: 50px;">
