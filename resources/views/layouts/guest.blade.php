@@ -34,9 +34,12 @@
         <i class="fas fa-angle-up"></i>
     </button>
     <!-- Scroll-top-end-->
-    @include('layouts.front.header')
-                {{ $slot }}
-    @include('layouts.front.footer')
-    @include('layouts.front.script')
+    <div class="wrapper">
+        @include('layouts.front.header')
+        {{ $slot }}
+        @include('layouts.front.footer')
+        @include('layouts.front.script')
+    </div>
+
     </body>
 </html>

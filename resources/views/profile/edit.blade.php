@@ -67,6 +67,14 @@
 {{--                <p class="text-red-500">{{$message}}</p>--}}
 {{--                @enderror--}}
 {{--            </div>--}}
+        <!-- Form Group (birthday)-->--}}
+            <div class="col-md-6 mb-3">
+                <label class="small mb-1" for="inputBirthday">Дата рождения</label>
+                <input class="form-control @error('birthday') border-red-500 @enderror" id="inputBirthday" type="date" name="birthday" value="{{$profile->birthday}}">
+                @error('birthday')
+                <p class="text-red-500">{{$message}}</p>
+                @enderror
+            </div>
             <!-- Form Group (about_me)-->
             <div class="col-md-6 mb-3">
                 <label class="small mb-1" for="about_me">Обо мне</label>
@@ -75,14 +83,7 @@
                 <p class="text-red-500">{{$message}}</p>
                 @enderror
             </div>
-            <!-- Form Group (birthday)-->--}}
-            <div class="col-md-6 mb-3">
-                <label class="small mb-1" for="inputBirthday">Дата рождения</label>
-                <input class="form-control @error('birthday') border-red-500 @enderror" id="inputBirthday" type="date" name="birthday" value="{{$profile->birthday}}">
-                @error('birthday')
-                <p class="text-red-500">{{$message}}</p>
-                @enderror
-            </div>
+
             <!-- Form Group (bio)-->
 {{--            <div class="col-md-6 mb-3">--}}
 {{--                <label class="small mb-1" for="bio">Биография</label>--}}
