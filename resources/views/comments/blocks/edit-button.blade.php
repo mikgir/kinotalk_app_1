@@ -1,7 +1,7 @@
 @can('edit-own comments')
     @if($comment->user_id == Auth::id())
         <div xmlns:wire="http://www.w3.org/1999/xhtml" class="blog-wrap-content-btn__w2">
-            <button class="btn btn-primary btn-primary__w2" type="button" style="padding: 15px;"
+            <button class="btn btn-primary btn-primary__w2 btn__b4" type="button"
                     data-bs-toggle="modal" data-bs-target="#modalFormEdit_{{ $comment->id }}"
                     wire:click="setText({{ $comment->id }})"
                     wire:loading.attr="disabled">

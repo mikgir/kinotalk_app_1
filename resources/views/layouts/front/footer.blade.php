@@ -1,5 +1,5 @@
 <!-- footer-area -->
-<footer class="footer-area black-bg">
+<footer class="footer-area black-bg footer-container">
     <div class="container">
         <div class="footer__top-wrap">
             <div class="row">

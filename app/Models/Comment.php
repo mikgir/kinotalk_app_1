@@ -10,11 +10,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
-class Comment extends Model
+class Comment extends Model implements ReactableInterface
 {
     use HasFactory;
-
-//    use Reactable;
+    use Reactable;
 
     protected $table = 'comments';
 
