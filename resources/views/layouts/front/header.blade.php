@@ -32,7 +32,7 @@
                                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                 <span class="btn-text"><i class="fa fa-user"></i> {{ Auth::user()->name }}</span>
                                             </a>
-                                            <ul class="dropdown-menu p-3" aria-labelledby="navbarDarkDropdownMenuLink">
+                                            <ul class="dropdown-menu dropdown-menu_w3" aria-labelledby="navbarDarkDropdownMenuLink">
                                                 <li>
                                                     <a class="item dropdown-item " href="{{route('main')}}">
                                                         {{ __('Главная') }}

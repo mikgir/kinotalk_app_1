@@ -83,7 +83,6 @@
                 </div>
             </div>
         </div>
-
     </main>
 
 </x-guest-layout>

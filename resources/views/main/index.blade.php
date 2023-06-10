@@ -57,12 +57,12 @@
                     <div class="row align-items-end">
                         <div class="col-sm-6">
                             <div class="section__title">
-                                <h3 class="section__main-title">Последнии новости</h3>
+                                <h3 class="section__main-title">Популярные статьи</h3>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="section__read-more text-start text-sm-end">
-                                <a href="news.html">Читать все новости<i class="far fa-long-arrow-right"></i></a>
+                                <a href="news.html">Читать все статьи<i class="far fa-long-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -259,12 +259,12 @@
                     <div class="row align-items-end">
                         <div class="col-sm-6">
                             <div class="section__title">
-                                <h3 class="section__main-title">Статьи авторов</h3>
+                                <h3 class="section__main-title">Последние новости</h3>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="section__read-more text-start text-sm-end">
-                                <a href="article.html">Читать все статьи<i class="far fa-long-arrow-right"></i></a>
+                                <a href="article.html">Читать все новости<i class="far fa-long-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>

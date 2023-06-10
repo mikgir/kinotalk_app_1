@@ -16,12 +16,15 @@
                 </div>
             </div>
         </div>
+
+
+
         <div class="container-xl container-xl__wp2">
             <div class="row">
                 <div class="col-xl-3">
                     <!-- Profile picture card-->
                     <div class="mb-4 mb-xl-0">
-                        <div class="card-header__wp4">{{ $user->email  }}</div>
+                        <div class="card-header__wp4 user_text__w3">{{ $user->email  }}</div>
                         <div class="w-100 card-header__img">
                             {{ Auth::user()->getFirstMedia('avatars') }}
                             <div class="col">
@@ -78,82 +81,76 @@
                                 <a href="{{route('articles.create')}}" class="btn btn-primary">Написать статью</a>
                                 <div class="block__wp5">
                             <span>Список статей</span>
-                            <div class="table-responsive-md table-hover block__wp6 small mb-1">
-                                <div class="table_col small__lab2">
-                                    <div class="col__tab3">
-                                        <span scope="col">ID</span>
-                                    </div>
-                                    <div class="col__tab3">
-                                        <span scope="col">Категория</span>
-                                    </div>
-                                    <div class="col__tab3">
-                                        <span scope="col">Наименование</span>
-                                    </div>
-                                    <div class="col__tab3">
-                                        <span scope="col">Статус</span>
-                                    </div>
-                                    <div class="col__tab3">
-                                        <span scope="col">Дата написания</span>
-                                    </div>
-                                    <div class="col__tab3">
-                                        <span scope="col">Дата изменения</span>
-                                    </div>
-                                    <div class="col__tab3">
-                                        <span scope="col">Действия</span>
-                                    </div>
-                                </div>
-                                @foreach(Auth::user()->articles as $key=>$article)
-                                    <div class="table_col small__lab2">
-                                        <div class="col__tab4">
-                                            <span scope="row">{{$article->id}}></span>
+                                    <div class="table-responsive-md table-hover block__wp6 small mb-2">
+                                        <div class="row small__lab2 mb-3 table__w2">
+                                            <div class="col-1 text-center col__tab3 ">
+                                                <span scope="col">ID</span>
+                                            </div>
+                                            <div class="col-2 text-center col__tab3">
+                                                <span scope="col">Категория</span>
+                                            </div>
+                                            <div class="col-3 text-center col__tab3">
+                                                <span scope="col">Наименование</span>
+                                            </div>
+                                            <div class="col-2 text-center col__tab3">
+                                                <span scope="col">Статус</span>
+                                            </div>
+                                            <div class="col-2 text-center col__tab3">
+                                                <span scope="col">Дата написания</span>
+                                            </div>
+                                            <div class="col-2 text-center col__tab3">
+                                                <span scope="col">Действия</span>
+                                            </div>
                                         </div>
-                                        <div class="col__tab4">
-                                            <span>{{$article->category->name}}</span>
-                                        </div>
-                                        <div class="col__tab4">
-                                            <span>{{$article->title}}</span>
-                                        </div>
-                                        <div class="col__tab4">
-                                            <span>{{$article->status}}</span>
-                                        </div>
-                                        <div class="col__tab4">
-                                            <span>{{$article->created_at}}</span>
-                                        </div>
-                                        <div class="col__tab4">
-                                            <span>{{$article->updated_at}}</span>
-                                        </div>
-                                        <div class="col__tab4">
-                                            <span>Действия</span>
-                                        </div>
-                                    </div>
-                                <div class="block-btn__pr4">
-                                    <div>
-                                        <a href="{{route('articles.edit', $article->id)}}" class="btn btn__b3 btn-outline-primary mb-2">Редактировать</a>
-                                    </div>
-                                    <div>
-                                        <form method="post" action="{{route('articles.publish', $article->id)}}">
-                                        @csrf
-                                            @method('patch')
-                                            <button type="submit" class="btn btn__b3 btn-outline-success mb-2 ">Опубликовать</button>
-                                        </form>
-                                    </div>
-                                    <div>
-                                        <form method="delete" action="{{route('articles.destroy', $article->id)}}">
-                                            @csrf
-                                            @method('delete')
-                                            <button type="submit" class="btn btn__b3 btn-outline-success mb-2 ">Удалить</button>
-                                        </form>
-                                    </div>
+                                        @foreach(Auth::user()->articles as $key=>$article)
+                                            <div class="row small__lab2 table__w3 table__w2">
+                                                <div class="col-1 text-center col__tab4">
+                                                    <span scope="row">{{$article->id}}></span>
+                                                </div>
+                                                <div class="col-2 text-center col__tab4">
+                                                    <span>{{$article->category->name}}</span>
+                                                </div>
+                                                <div class="col-3 text-center col__tab4">
+                                                    <span>{{$article->title}}</span>
+                                                </div>
+                                                <div class="col-2 text-center col__tab4">
+                                                    <span>{{$article->status}}</span>
+                                                </div>
+                                                <div class="col-2 text-center col__tab4">
+                                                    <span>{{$article->created_at}}</span>
+                                                </div>
+                                                <div class="col-2 text-center col__tab4">
+                                                    <div class="block-btn__pr4 flex-column">
+                                                        <div>
+                                                            <a href="{{route('articles.edit', $article->id)}}" class="btn btn__b3 btn-outline-primary mb-2 w-100">Редактировать</a>
+                                                        </div>
+                                                        <div>
+                                                            <form method="post" action="{{route('articles.publish', $article->id)}}">
+                                                                @csrf
+                                                                @method('patch')
+                                                                <button type="submit" class="btn btn__b3 btn-outline-success mb-2 w-100">Опубликовать</button>
+                                                            </form>
+                                                        </div>
+                                                        <div>
+                                                            <form method="delete" action="{{route('articles.destroy', $article->id)}}">
+                                                                @csrf
+                                                                @method('delete')
+                                                                <button type="submit" class="btn btn__b3 btn-outline-success mb-2 w-100">Удалить</button>
+                                                            </form>
+                                                        </div>
 
-                                </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                 @endforeach
                             </div>
                             </div>
                             </div>
                         </div>
                         @else
-                        <div class="card mb-4">
-                            <div class="card-header flex-nowrap">
+                        <div class="block__wp5">
+                            <div class="card-header__wp4">
                                 <span>Стать автором</span>
                             </div>
                             <div class="card-body">
@@ -165,6 +162,9 @@
                 </div>
             </div>
         </div>
+
+
+
 
     </main>
 </x-app-layout>

@@ -13,16 +13,15 @@
                         </div>
                         <div class="tgmenu__navbar-wrap tgmenu__main-menu d-none d-lg-flex">
                             <ul class="navigation">
-                                <li class="active menu-item-has-children"><a href="{{route('main')}}">Главная</a>
+                                <li class="active"><a href="{{route('main')}}">Главная</a></li>
+                                <li class="menu-item-has-children"><a href="{{route('articles')}}">Статьи</a>
                                     <ul class="sub-menu">
                                         @foreach($categories as $key=>$category)
                                             <li class="item {{ $category->name === $category->id ? 'active' : '' }}">
                                                 <a href="{{route('articles.category', $category->id)}}">{{$category->name}}</a>
                                             </li>
                                         @endforeach
-                                    </ul>
-                                </li>
-                                <li><a href="{{route('articles')}}">Статьи</a></li>
+                                    </ul></li>
                                 <li><a href="{{route('news')}}">Новости</a></li>
                                 <li><a href="{{route('authors')}}">Авторы</a></li>
                                 <li class="menu-item-has-children"><a href="#">Популярное</a>
