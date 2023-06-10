@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Events\CallModerator;
 use App\Http\Requests\StoreCommentRequest;
 use App\Models\Article;
+use App\Models\Comment;
 use App\Models\News;
 use App\Repositories\CommentRepository;
 use App\Repositories\UserRepository;
@@ -20,6 +21,8 @@ class Comments extends Component
     public Article|News $model;
     public string $text = '';
     public int $user_id;
+    public array $totalArray = [];
+    public array $likeArray = [];
 
     protected string $paginationTheme = 'bootstrap';
     protected $listeners = [
@@ -48,6 +51,13 @@ class Comments extends Component
         $this->text = $user->name . ', ';
     }
 
+    public function callModerator(Comment $comment): void
+    {
+        if (str_contains($comment->text, '@moderator')) {
+            event(new CallModerator($comment));
+        }
+    }
+
     public function postComment(): void
     {
         $this->user_id = Auth::id();
@@ -62,10 +72,7 @@ class Comments extends Component
         $comment->save();
         $this->dispatchBrowserEvent('closeModal');
 
-        $callModerator = preg_match('/@moderator/', $comment->text);
-        if ($callModerator) {
-            event(new CallModerator($comment));
-        }
+        $this->callModerator($comment);
 
         $this->clearText();
         $this->emitUp('refresh');
@@ -87,10 +94,7 @@ class Comments extends Component
         $comment->save();
         $this->dispatchBrowserEvent('closeModal');
 
-        $callModerator = preg_match('/@moderator/', $comment->text);
-        if ($callModerator) {
-            event(new CallModerator($comment));
-        }
+        $this->callModerator($comment);
 
         $this->clearText();
         $this->emitUp('refresh');
@@ -121,12 +125,63 @@ class Comments extends Component
 //        session()->flash('message', 'Comment deleted');
     }
 
+    public function setReaction($id, $reactionType, CommentRepository $repository): void
+    {
+        $user = Auth::user();
+        $reacterIsRegistered = $user->isRegisteredAsLoveReacter();
+
+        $comment = $repository->getOne($id);
+        $reactantIsRegistered = $comment->isRegisteredAsLoveReactant();
+
+        if ($reacterIsRegistered && $reactantIsRegistered) {
+            $reacterFacade = $user->viaLoveReacter();
+            $isReacted = $reacterFacade->hasReactedTo($comment, $reactionType);
+
+            if ($isReacted) {
+                $reacterFacade->unreactTo($comment, $reactionType);
+            } else {
+                $reacterFacade->reactTo($comment, $reactionType);
+            }
+
+            $this->emitUp('refresh');
+        }
+    }
+
+    public function fillReactionArrays($comment, $user_id): void
+    {
+        $total = $comment->loveReactant->reactionTotal;
+        $this->totalArray[$comment->id] = isset($total) ? $total->count : 0;
+
+        $like = false;
+        $reactions = $comment->loveReactant->reactions;
+        if ($reactions->count()) {
+            foreach ($reactions as $reaction) {
+                if ($reaction->reacter->reacterable->id == $user_id) {
+                    $like = true;
+                    break;
+                }
+            }
+        }
+        $this->likeArray[$comment->id] = $like;
+    }
+
     public function render(CommentRepository $repository): View
     {
         $comments = $repository->getAllByModel($this->model);
-//        dd($comments);
+        $this->totalArray = [];
+        $this->likeArray = [];
+        $user_id = Auth::id();
+
+        foreach ($comments as $comment) {
+            $this->fillReactionArrays($comment, $user_id);
+
+            foreach ($comment->children as $child) {
+                $this->fillReactionArrays($child, $user_id);
+            }
+        }
+
         return view('livewire.comments', [
-            'comments' => $comments
+            'comments' => $comments,
         ]);
     }
 }

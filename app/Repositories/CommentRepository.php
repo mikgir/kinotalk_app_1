@@ -17,8 +17,10 @@ class CommentRepository implements CommentRepositoryInterface
     {
         return $model
             ->comments()
-            ->with('user', 'children')
-            ->withCount('children')
+            ->with('user',
+                'children',
+                'loveReactant.reactions.reacter.reacterable',
+                'loveReactant.reactionTotal')
             ->whereNull('parent_id')
             ->latest()
             ->paginate(5);
