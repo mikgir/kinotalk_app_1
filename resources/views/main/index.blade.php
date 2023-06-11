@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-guest-layout xmlns:livewire="http://www.w3.org/1999/xhtml">
     <main>
         <!-- banner-area -->
         <section class="tgbanner__area">
@@ -7,45 +7,78 @@
                     <div class="tgbanner__post big-post">
                         <div class="tgbanner__thumb tgImage__hover">
                             <a href="#">
-                                <img src="{{asset('build/assets/src/assets/img/blog/MrsMaisel.png')}}" alt="img">
+                                {{$mainArticles[0]->getFirstMedia('sm_image')}}
                             </a>
                         </div>
                         <div class="tgbanner__content">
                             <ul class="tgbanner__content-meta list-wrap">
-                                <li class="category"><a href="article-details.html">Статья: "Удивительной миссис Мейзел"</a></li>
-                                <li><span class="by">Автор:</span><a href="blog.html">Любовь и Сериалы</a></li>
-                                <li>05.05.2023</li>
+                                <li class="category"><a href="article-details.html">Категория: {{$mainArticles[0]->category->name}}</a></li>
+                                <li><span class="by">Автор: </span>
+                                    <a href="blog.html">
+                                        {{$mainArticles[0]->user->name}}
+                                    </a>
+                                </li>
+                                <li>{{$mainArticles[0]->craeted_at}}</li>
                             </ul>
-                            <h2 class="title tgcommon__hover"><a href="article-details.html">Не все без ума от Мидж: Каким вышел четвертый сезон «Удивительной миссис Мейзел»?</a></h2>
+                            <h2 class="title tgcommon__hover">
+                                <a href="article-details.html">
+                                    {{$mainArticles[0]->title}}
+                                </a
+                            ></h2>
                         </div>
                     </div>
+
                     <div class="tgbanner__side-post">
+
                         <div class="tgbanner__post small-post">
                             <div class="tgbanner__thumb tgImage__hover">
-                                <a href="article-details.html"><img src="{{asset('build/assets/src/assets/img/blog/marvel.png')}}" alt="img"></a>
+                                <a href="article-details.html">
+                                    {{$mainArticles[1]->getFirstMedia('sm_image')}}
+                                </a>
                             </div>
                             <div class="tgbanner__content">
                                 <ul class="tgbanner__content-meta list-wrap">
-                                    <li class="category"><a href="article-details.html">Статья: Мультивселенная</a></li>
-                                    <li><span class="by">Автор:</span><a href="blog.html">Multi</a></li>
+                                    <li class="category"><a href="article-details.html">Категория: {{$mainArticles[1]->category->name}}</a></li>
+                                    <li><span class="by">Автор: </span>
+                                        <a href="blog.html">
+                                            {{$mainArticles[1]->user->name}}
+                                        </a>
+                                    </li>
                                 </ul>
-                                <h2 class="title tgcommon__hover"><a href="article-details.html">В&nbsp;трейлере фильма &laquo;Марвелы&raquo; намекнули на&nbsp;Стражей Галлактики?</a></h2>
+                                <h2 class="title tgcommon__hover"><a href="article-details.html">
+                                       {{$mainArticles[1]->title}}
+                                    </a></h2>
                             </div>
                         </div>
                         <div class="tgbanner__post small-post">
                             <div class="tgbanner__thumb tgImage__hover">
-                                <a href="article-details.html"><img src="{{asset('build/assets/src/assets/img/blog/VeryStrangeThings.jpg')}}" alt="img"></a>
+                                    <a href="article-details.html">
+                                        {{$mainArticles[2]->getFirstMedia('sm_image')}}
+                                    </a>
                             </div>
                             <div class="tgbanner__content">
                                 <ul class="tgbanner__content-meta list-wrap">
-                                    <li class="category"><a href="article-details.html">Статья: Очень странные дела</a></li>
-                                    <li><span class="by">Автор:</span><a href="blog.html">Любитель сериалов</a></li>
+                                   <li class="category">
+                                       <a href="article-details.html">
+                                           Категория: {{$mainArticles[2]->category->name}}
+                                       </a>
+                                   </li>
+                                   <li><span class="by">Автор: </span>
+                                       <a href="blog.html"> {{$mainArticles[2]->user->name}}
+                                       </a>
+                                   </li>
                                 </ul>
-                                <h2 class="title tgcommon__hover"><a href="article-details.html">&laquo;Очень странные дела&raquo; станут анимационным сериалом?</a></h2>
+                                <h2 class="title tgcommon__hover">
+                                    <a href="article-details.html">
+                                        {{$mainArticles[2]->title}}
+                                    </a>
+                                </h2>
                             </div>
                         </div>
+
                     </div>
                 </div>
+
             </div>
         </section>
         <!-- banner-area-end -->
@@ -62,7 +95,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="section__read-more text-start text-sm-end">
-                                <a href="news.html">Читать все статьи<i class="far fa-long-arrow-right"></i></a>
+                                <a href="{{route('articles')}}">Читать все статьи<i class="far fa-long-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -70,86 +103,36 @@
                 <div class="trending__slider">
                     <div class="swiper-container trending-active">
                         <div class="swiper-wrapper">
+                            @foreach($popularArticles as $key=>$article)
                             <div class="swiper-slide">
                                 <div class="trending__post">
                                     <div class="trending__post-thumb tgImage__hover">
-                                        <a href="#" class="addWish"><i class="fal fa-heart"></i></a>
-                                        <a href="news-details.html"><img src="{{asset('build/assets/src/assets/img/blog/Fisher.png')}}" alt="img"></a>
+{{--                                        <a href="#" class="addWish"><i class="fal fa-heart"></i></a>--}}
+                                        <a href="{{route('articles.show', $article->id)}}">
+                                            {{$article->getFirstMedia('sm_image')}}
+                                        </a>
                                     </div>
                                     <div class="trending__post-content">
-                                        <h4 class="title tgcommon__hover"><a href="news-details.html">Фишер, это жуткий сериал, про манька который убивал...</a></h4>
+                                        <h4 class="title tgcommon__hover">
+                                            <a href="{{route('articles.show', $article->id)}}">
+                                                {{$article->title}}
+                                            </a>
+                                        </h4>
                                         <ul class="post__activity list-wrap">
-                                            <li><i class="fal fa-heart"></i> 1.0k</li>
-                                            <li><a href="news-details.html"><i class="fal fa-comment-dots"></i> 128</a></li>
-                                            <li><i class="fal fa-share"></i> 29</li>
+                                            <li class="align-self-baseline">
+                                                <livewire:reactions :model="$article"/>
+                                            </li>
+                                            <li class="align-self-baseline">
+                                                <a href="{{route('articles.show', $article->id)}}">
+                                                    <i class="fal fa-comment-dots"></i>
+                                                    {{$article->comments->count()}}
+                                                </a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
-                            <div class="swiper-slide">
-                                <div class="trending__post">
-                                    <div class="trending__post-thumb tgImage__hover">
-                                        <a href="#" class="addWish"><i class="fal fa-heart"></i></a>
-                                        <a href="news-details.html"><img src="{{asset('build/assets/src/assets/img/blog/news6.png')}}" alt="img"></a>
-                                    </div>
-                                    <div class="trending__post-content">
-                                        <h4 class="title tgcommon__hover"><a href="news-details.html">Cпин-офф получила «Теория большого взрыва».</a></h4>
-                                        <ul class="post__activity list-wrap">
-                                            <li><i class="fal fa-heart"></i> 1.0k</li>
-                                            <li><a href="news-details.html"><i class="fal fa-comment-dots"></i> 115</a></li>
-                                            <li><i class="fal fa-share"></i> 19</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="trending__post">
-                                    <div class="trending__post-thumb tgImage__hover">
-                                        <a href="#" class="addWish"><i class="fal fa-heart"></i></a>
-                                        <a href="news-details.html"><img src="{{asset('build/assets/src/assets/img/blog/mira.png')}}" alt="img"></a>
-                                    </div>
-                                    <div class="trending__post-content">
-                                        <h4 class="title tgcommon__hover"><a href="news-details.html">МИРА фильм-катастрофа с&nbsp;терапевтическим эффектом.</a></h4>
-                                        <ul class="post__activity list-wrap">
-                                            <li><i class="fal fa-heart"></i> 1.2k</li>
-                                            <li><a href="news-details.html"><i class="fal fa-comment-dots"></i> 110</a></li>
-                                            <li><i class="fal fa-share"></i> 16</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="trending__post">
-                                    <div class="trending__post-thumb tgImage__hover">
-                                        <a href="#" class="addWish"><i class="fal fa-heart"></i></a>
-                                        <a href="news-details.html"><img src="{{asset('build/assets/src/assets/img/blog/frozenGround.png')}}" alt="img"></a>
-                                    </div>
-                                    <div class="trending__post-content">
-                                        <h4 class="title tgcommon__hover"><a href="news-details.html">&laquo;Мерзлая земля&raquo;: что стоит знать о&nbsp;сериале.</a></h4>
-                                        <ul class="post__activity list-wrap">
-                                            <li><i class="fal fa-heart"></i> 1.5k</li>
-                                            <li><a href="news-details.html"><i class="fal fa-comment-dots"></i> 150</a></li>
-                                            <li><i class="fal fa-share"></i> 42</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="trending__post">
-                                    <div class="trending__post-thumb tgImage__hover">
-                                        <a href="#" class="addWish"><i class="fal fa-heart"></i></a>
-                                        <a href="news-details.html"><img src="{{asset('build/assets/src/assets/img/blog/MrsMaisel.png')}}" alt="img"></a>
-                                    </div>
-                                    <div class="trending__post-content">
-                                        <h4 class="title tgcommon__hover"><a href="news-details.html">Не все без ума от Мидж: Каким вышел четвертый...</a></h4>
-                                        <ul class="post__activity list-wrap">
-                                            <li><i class="fal fa-heart"></i> 1.5k</li>
-                                            <li><a href="news-details.html"><i class="fal fa-comment-dots"></i> 150</a></li>
-                                            <li><i class="fal fa-share"></i> 32</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -175,78 +158,28 @@
                     </div>
                 </div>
                 <div class="row">
+                    @foreach($authors as $key=>$author)
                     <div class="col-lg-4 col-sm-6">
                         <div class="featured__post">
-                            <div class="featured__thumb" data-background="{{asset('build/assets/src/assets/img/blog/People3.png')}}"></div>
+                            <div class="featured__thumb" data-background=>{{$author->getFirstMedia('avatars')}}</div>
                             <div class="featured__content">
                                 <ul class="tgbanner__content-meta list-wrap">
-                                    <li class="category"><a href="author.html">Автор</a></li>
-                                    <li><a href="blog.html">Марина Ф.</a></li>
+                                    <li class="category"><a href="{{route('authors.show', $author->id)}}">Автор </a></li>
+                                    <li><a href="{{route('authors.show', $author->id)}}">{{$author->name}}</a></li>
                                 </ul>
-                                <h4 class="title tgcommon__hover"><a href="article-details.html">«Океаны» предлагают зрителю заглянуть в волшебный...</a></h4>
+                                @if($author->articles)
+                                <h4 class="title tgcommon__hover">
+                                    <a href="#">
+{{--                                        {{$author->articles->last()->title}}--}}
+                                    </a>
+                                </h4>
+                                @else
+                                <h4>У автора статей пока нет</h4>
+                                @endif
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <div class="featured__post">
-                            <div class="featured__thumb" data-background="{{asset('build/assets/src/assets/img/blog/People2.png')}}"></div>
-                            <div class="featured__content">
-                                <ul class="tgbanner__content-meta list-wrap">
-                                    <li class="category"><a href="author.html">Автор</a></li>
-                                    <li><a href="blog.html">Леди кошка</a></li>
-                                </ul>
-                                <h4 class="title tgcommon__hover"><a href="article-details.html">Киновселенная Marvel — это поп-культурная глыба...</a></h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <div class="featured__post">
-                            <div class="featured__thumb" data-background="{{asset('build/assets/src/assets/img/blog/People1.png')}}"></div>
-                            <div class="featured__content">
-                                <ul class="tgbanner__content-meta list-wrap">
-                                    <li class="category"><a href="author.html">Автор</a></li>
-                                    <li> <a href="blog.html">Тесс </a></li>
-                                </ul>
-                                <h4 class="title tgcommon__hover"><a href="article-details.html">После просмотра 1 сезона "The Last of Us"...</a></h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <div class="featured__post">
-                            <div class="featured__thumb" data-background="{{asset('build/assets/src/assets/img/blog/People5.png')}}"></div>
-                            <div class="featured__content">
-                                <ul class="tgbanner__content-meta list-wrap">
-                                    <li class="category"><a href="author.html">Автор</a></li>
-                                    <li> <a href="blog.html">Gandalf</a></li>
-                                </ul>
-                                <h4 class="title tgcommon__hover"><a href="article-details.html">Сказания о Средиземье — это хроника Великой войны...</a></h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <div class="featured__post">
-                            <div class="featured__thumb" data-background="{{asset('build/assets/src/assets/img/blog/People4.png')}}"></div>
-                            <div class="featured__content">
-                                <ul class="tgbanner__content-meta list-wrap">
-                                    <li class="category"><a href="author.html">Автор</a></li>
-                                    <li><a href="blog.html">Грогу</a></li>
-                                </ul>
-                                <h4 class="title tgcommon__hover"><a href="article-details.html">Сериал Мандалорец, про некогда могучих...</a></h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <div class="featured__post">
-                            <div class="featured__thumb" data-background="{{asset('build/assets/src/assets/img/blog/People6.png')}}"></div>
-                            <div class="featured__content">
-                                <ul class="tgbanner__content-meta list-wrap">
-                                    <li class="category"><a href="author.html">Автор</a></li>
-                                    <li><a href="blog.html">Любовь и Сериалы</a></li>
-                                </ul>
-                                <h4 class="title tgcommon__hover"><a href="article-details.html">Фишер, это жуткий сериал, про манька который убивал...</a></h4>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </section>

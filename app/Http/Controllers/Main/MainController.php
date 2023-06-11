@@ -4,20 +4,26 @@ namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\ArticleRepository;
+use App\Repositories\AuthorRepository;
 use Illuminate\Contracts\View\View;
 
 class MainController extends Controller
 {
     /**
      * @param ArticleRepository $articleRepository
+     * @param AuthorRepository $authorRepository
      * @return View
      */
-    public function index(ArticleRepository $articleRepository): View
+    public function index(ArticleRepository $articleRepository, AuthorRepository $authorRepository): View
     {
-        $mainArticle = $articleRepository->getLast();
+        $mainArticles = $articleRepository->getLast();
+        $popularArticles = $articleRepository->getPopular();
+        $authors = $authorRepository->getAuthorsForMain();
 
         return view('main.index', [
-            'mainArticle' => $mainArticle,
+            'mainArticles' => $mainArticles,
+            'popularArticles' => $popularArticles,
+            'authors' => $authors
         ]);
     }
 }

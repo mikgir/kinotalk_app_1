@@ -6,6 +6,7 @@ use App\Contracts\ArticleRepositoryInterface;
 use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Date;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -35,7 +36,19 @@ class ArticleRepository implements ArticleRepositoryInterface
         return Article::with(['user', 'category', 'media'])
             ->where('active', 1)
             ->latest('created_at')
-            ->limit(1)->get();
+            ->limit(3)->get();
+    }
+
+    /**
+     * @return Builder|Collection
+     */
+    public function getPopular(): Builder|Collection
+    {
+        return Article::with(['user', 'category', 'media', 'comments'])
+            ->where('status', 'PUBLISHED')
+            ->orderBy('created_at', 'DESC')
+            ->limit(10)
+            ->get();
     }
 
     /**
