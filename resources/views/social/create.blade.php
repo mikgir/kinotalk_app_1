@@ -28,7 +28,7 @@
         <!-- Save changes button-->
 
         <div class="block col-4 align-self-center text-end btn_pr__w3">
-            <button class="btn  btn-primary btn btn__b3" type="submit">Обновить</button>
+            <button class="btn  btn-primary btn btn__b3" type="submit">Добавить</button>
         </div>
     </div>
 </form>

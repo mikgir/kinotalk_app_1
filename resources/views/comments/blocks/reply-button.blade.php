@@ -1,11 +1,11 @@
 @can('create-own comments')
-    <div xmlns:wire="http://www.w3.org/1999/xhtml" class="blog-wrap-content-btn__w2">
-        <button class="btn btn-primary btn-primary__w2" type="button" style="padding: 15px;"
+    <div xmlns:wire="http://www.w3.org/1999/xhtml" class="col-1">
+        <a type="button"
                 data-bs-toggle="modal" data-bs-target="#modalFormReply_{{ $comment->id }}"
                 wire:click="setReplyText({{ $comment->user_id }})"
                 wire:loading.attr="disabled">
-            Ответить
-        </button>
+            <i class="fal fa-share"></i>
+        </a>
         @include('comments.blocks.modal-form', [
             'model' => $model,
             'title' => 'Ответить на комментарий:',

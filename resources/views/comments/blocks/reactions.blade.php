@@ -1,15 +1,15 @@
 @auth
-    <div xmlns:wire="http://www.w3.org/1999/xhtml" class="blog-wrap-content-btn__w2 d-flex">
-        <p class="align-self-baseline mx-1" >
+    <div xmlns:wire="http://www.w3.org/1999/xhtml" class="col-1">
+        <span class="align-self-baseline mx-1" >
             {{ $totalArray[$comment->id] }}
-        </p>
+        </span>
         <a type="button" class="link align-self-baseline" wire:click="setReaction({{ $comment->id }}, 'Like')"
-           wire:loading.attr="disabled"><i class="fa fa-heart"></i></a>
-{{--        <button class="link-danger" type="button"--}}
-{{--                style="background: {{ $likeArray[$comment->id] ? 'darkslateblue' : 'lightgray'}};"--}}
-{{--                wire:click="setReaction({{ $comment->id }}, 'Like')"--}}
-{{--                wire:loading.attr="disabled">--}}
-{{--            <i class="fa fa-heart"></i>--}}
-{{--        </button>--}}
+           wire:loading.attr="disabled">
+            @if($likeArray[$comment->id] )
+                <i class="fa fa-heart"></i>
+            @else
+                <i class="fal fa-heart"></i>
+            @endif
+        </a>
     </div>
 @endauth

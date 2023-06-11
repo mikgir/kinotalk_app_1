@@ -16,7 +16,7 @@ class NewsRepository implements NewsRepositoryInterface
     /**
      * @return LengthAwarePaginator|Collection
      */
-    public function getAll(): LengthAwarePaginator| Collection
+    public function getAll(): LengthAwarePaginator|Collection
     {
         return News::orderByDesc('created_at')->paginate(12);
     }
@@ -28,6 +28,33 @@ class NewsRepository implements NewsRepositoryInterface
     public function getOne(int $id): News
     {
         return News::findOrFail($id);
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getLast(): Collection
+    {
+        return News::with([
+            'loveReactant.reactions.reacter.reacterable',
+            'loveReactant.reactions.type',
+            'loveReactant.reactionCounters',
+            'loveReactant.reactionTotal',
+        ])
+            ->orderBy('created_at', 'DESC')
+            ->limit(10)->get();
+    }
+
+    public function getPopular(): Collection
+    {
+        return News::with([
+            'loveReactant.reactions.reacter.reacterable',
+            'loveReactant.reactions.type',
+            'loveReactant.reactionCounters',
+            'loveReactant.reactionTotal',
+        ])
+            ->orderBy('created_at', 'DESC')
+            ->limit(6)->get();
     }
 
     /**
