@@ -43,6 +43,9 @@
                                     {!! $article->body !!}
                                 </p>
                             </div>
+
+                            <livewire:reactions :model="$article"/>
+
                             <div class="blog-details-bottom">
                                 <div class="row align-items-baseline">
                                     <div class="col-xl-6 col-md-7">
@@ -69,8 +72,8 @@
                                         <div class="pn-post-item">
                                             <div class="thumb">
                                                 <a href="article-details.html"><img
-                                                        src="{{asset('build/assets/src/assets/img/lifestyle/TheLastofUs.png')}}"
-                                                        alt="img"></a>
+                                                            src="{{asset('build/assets/src/assets/img/lifestyle/TheLastofUs.png')}}"
+                                                            alt="img"></a>
                                             </div>
                                             <div class="content">
                                                 <span>Предыдущая статья</span>
@@ -83,8 +86,8 @@
                                         <div class="pn-post-item next-post">
                                             <div class="thumb">
                                                 <a href="article-details.html"><img
-                                                        src="{{asset('build/assets/src/assets/img/lifestyle/LordOfTheRings.png')}}"
-                                                        alt="img"></a>
+                                                            src="{{asset('build/assets/src/assets/img/lifestyle/LordOfTheRings.png')}}"
+                                                            alt="img"></a>
                                             </div>
                                             <div class="content">
                                                 <span>Следующая статья</span>
@@ -119,29 +122,29 @@
                                 <ul class="list-wrap">
                                     <li>
                                         <div class="thumb"><a href="news.html"><img
-                                                    src="{{asset('build/assets/src/assets/img/category/Mira.png')}}"
-                                                    alt="img"></a></div>
+                                                        src="{{asset('build/assets/src/assets/img/category/Mira.png')}}"
+                                                        alt="img"></a></div>
                                         <a href="news.html">Кино</a>
                                         <span class="float-right">12</span>
                                     </li>
                                     <li>
                                         <div class="thumb"><a href="news.html"><img
-                                                    src="{{asset('build/assets/src/assets/img/category/Sansara.png')}}"
-                                                    alt="img"></a></div>
+                                                        src="{{asset('build/assets/src/assets/img/category/Sansara.png')}}"
+                                                        alt="img"></a></div>
                                         <a href="news.html">Сериалы</a>
                                         <span class="float-right">10</span>
                                     </li>
                                     <li>
                                         <div class="thumb"><a href="news.html"><img
-                                                    src="{{asset('build/assets/src/assets/img/category/GuardiansOfTheGalaxy.png')}}"
-                                                    alt="img"></a></div>
+                                                        src="{{asset('build/assets/src/assets/img/category/GuardiansOfTheGalaxy.png')}}"
+                                                        alt="img"></a></div>
                                         <a href="news.html">Комиксы</a>
                                         <span class="float-right">08</span>
                                     </li>
                                     <li>
                                         <div class="thumb"><a href="news.html"><img
-                                                    src="{{asset('build/assets/src/assets/img/category/HarryPotter.png')}}"
-                                                    alt="img"></a></div>
+                                                        src="{{asset('build/assets/src/assets/img/category/HarryPotter.png')}}"
+                                                        alt="img"></a></div>
                                         <a href="news.html">Франшизы</a>
                                         <span class="float-right">06</span>
                                     </li>

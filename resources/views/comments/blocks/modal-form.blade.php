@@ -19,7 +19,7 @@
                 @guest
                     <a href="{{ route('login') }}"
                        class="modal-title__text4">
-                        Чтобы оставить комментарий необходимо войти в аккаунт.
+                        {{ $guest_title }}
                     </a>
                 @endguest
             </div>
