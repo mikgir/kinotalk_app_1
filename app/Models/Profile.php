@@ -22,13 +22,11 @@ class Profile extends Model
         'user_id',
         'first_name',
         'last_name',
-        'occupation',
         'city',
         'country',
         'website',
-        'company',
         'about_me',
-        'bio',
+        'birthday'
     ];
 
     public function user(): BelongsTo

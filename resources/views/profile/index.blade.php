@@ -24,7 +24,7 @@
                 <div class="col-xl-3">
                     <!-- Profile picture card-->
                     <div class="mb-4 mb-xl-0">
-                        <div class="card-header__wp4 user_text__w3">{{ $user->email  }}</div>
+                        <div class="card-header__wp4 user_text__w3">{{ $user->email }}</div>
                         <div class="w-100 card-header__img">
                             {{ Auth::user()->getFirstMedia('avatars') }}
                             <div class="col">
@@ -51,9 +51,9 @@
                         <div class="card-header__wp4">Личная информация</div>
                         <div class="card-body">
                           @if(isset($user->profile))
-                              @include('profile.edit')
+                              @include('profile.edit', ['profile' => $user->profile])
                               @else
-                              @include('profile.create')
+                              @include('profile.create', ['profile' => $user->profile])
                           @endif
                         </div>
                     </div>
