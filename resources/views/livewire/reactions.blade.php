@@ -6,14 +6,8 @@
         <a type="button" class="addWish align-self-baseline mx-2"
            wire:click="setReaction('Like')"
            wire:loading.attr="disabled">
-            <i class="fal fa-heart"></i>
+                <i class="fal fa-heart"></i>
         </a>
-{{--        <button class="btn btn-primary btn-primary__w2" type="button"--}}
-{{--                style="padding: 15px; background: {{ $like ? 'darkslateblue' : 'lightgray'}};"--}}
-{{--                wire:click="setReaction('Like')"--}}
-{{--                wire:loading.attr="disabled">--}}
-{{--            Like--}}
-{{--        </button>--}}
     @endauth
     @guest
         <a type="button" class="addWish align-self-baseline"
@@ -21,11 +15,6 @@
            data-bs-target="#modalFormLike">
             <i class="fal fa-heart"></i>
         </a>
-{{--        <button class="btn btn-primary btn-primary__w2" type="button"--}}
-{{--                style="padding: 15px; background: lightgray;"--}}
-{{--                data-bs-toggle="modal" data-bs-target="#modalFormLike">--}}
-{{--            Like--}}
-{{--        </button>--}}
         @include('comments.blocks.modal-form', [
             'model' => $model,
             'title' => '',
