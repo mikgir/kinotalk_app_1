@@ -21,6 +21,14 @@ class AuthorRepository implements AuthorRepositoryInterface
             ->paginate(9);
     }
 
+    public function getAuthorsForMain(): Collection
+    {
+        return User::role('author')
+            ->with(['articles', 'profile', 'socialLinks'])
+            ->limit(6)
+            ->get();
+    }
+
     /**
      * @return LengthAwarePaginator|Collection
      */
@@ -45,7 +53,7 @@ class AuthorRepository implements AuthorRepositoryInterface
      */
     public function showAuthorWithArticles(int $id): Collection|User
     {
-        return User::with(['profile','socialLinks', 'articles' => function ($query) {
+        return User::with(['profile', 'socialLinks', 'articles' => function ($query) {
             $query->where('status', 'PUBLISHED')
                 ->orderBy('created_at', 'desc');
         }])

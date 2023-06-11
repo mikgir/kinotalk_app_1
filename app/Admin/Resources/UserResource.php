@@ -89,6 +89,7 @@ class UserResource extends Resource
                             ])
                             ->hideOnIndex(),
                         HasMany::make('SocialLinks')
+                            ->hideOnIndex()
                             ->resourceMode(),
                         MorphMany::make('Роль', 'roles')
                             ->sortable()

@@ -14,7 +14,6 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
-use Illuminate\Support\Facades\Auth;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -105,7 +104,12 @@ class UserProfileController extends Controller
         return redirect('/profile', $id)->with('success', 'Profile updated successful');
     }
 
-    public function userUpdate(Request $request, $id)
+    /**
+     * @param Request $request
+     * @param $id
+     * @return RedirectResponse
+     */
+    public function userUpdate(Request $request, $id): RedirectResponse
     {
         $request->validate([
             'email' => ['nullable', 'string', 'email', 'max:255', 'unique:users'],
