@@ -16,6 +16,7 @@
 @include('comments.blocks.modal-form', [
     'model' => $model,
     'title' => 'Оставьте свой комментарий:',
+    'guest_title' => 'Чтобы оставить комментарий необходимо войти в аккаунт.',
     'nested_form_name' => 'comments.create',
     'modal_form_id' => 'modalFormCreate',
 ])
