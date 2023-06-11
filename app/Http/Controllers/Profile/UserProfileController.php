@@ -101,7 +101,7 @@ class UserProfileController extends Controller
         $profile = Profile::with('user')->findOrFail($id);
         $profile->update($request->validated());
 
-        return redirect('/profile', $id)->with('success', 'Profile updated successful');
+        return redirect('/profile')->with('success', 'Profile updated successful');
     }
 
     /**

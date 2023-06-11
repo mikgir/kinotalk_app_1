@@ -24,15 +24,14 @@ class ProfileFormRequest extends FormRequest
     {
         return [
             'user_id'=>['required', 'exists:users,id'],
-            'first_name'=>['required', 'sting', 'min:3'],
-            'last_name'=>['required', 'sting', 'min:2'],
-            'occupation'=>['sting', 'max:255'],
-            'company'=>['sting', 'max:255'],
-            'city'=>['required', 'sting', 'max:255'],
-            'country'=>['required', 'sting', 'max:255'],
-            'website'=>['sting', 'max:255'],
-            'about_me'=>['required', 'sting', 'max:255'],
-            'bio'=>['sting', 'max:500'],
+            'first_name'=>['nullable', 'string', 'min:3'],
+            'last_name'=>['nullable', 'string', 'min:2'],
+            'city'=>['nullable', 'string', 'max:255'],
+            'country'=>['nullable', 'string', 'max:255'],
+            'website'=>['nullable', 'url', 'max:255'],
+            'about_me'=>['nullable', 'string', 'max:255'],
+            'bio'=>['nullable', 'string', 'max:500'],
+            'birthday'=>['nullable', 'date']
         ];
     }
 
