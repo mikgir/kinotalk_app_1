@@ -1,13 +1,21 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml" class="blog-wrap-content-btn__w2 d-flex">
-    <p class="align-self-baseline">
+    <span class="align-self-baseline">
         {{ $total }}
-    </p>
+    </span>
     @auth()
+        @if($like)
         <a type="button" class="addWish align-self-baseline mx-2"
            wire:click="setReaction('Like')"
            wire:loading.attr="disabled">
-                <i class="fal fa-heart"></i>
+                <i class="fa fa-heart"></i>
         </a>
+        @else
+            <a type="button" class="addWish align-self-baseline mx-2"
+               wire:click="setReaction('Like')"
+               wire:loading.attr="disabled">
+                <i class="fal fa-heart"></i>
+            </a>
+        @endif
     @endauth
     @guest
         <a type="button" class="addWish align-self-baseline"

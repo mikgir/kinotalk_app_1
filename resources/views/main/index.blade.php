@@ -6,22 +6,22 @@
                 <div class="tgbanner__grid">
                     <div class="tgbanner__post big-post">
                         <div class="tgbanner__thumb tgImage__hover">
-                            <a href="#">
+                            <a href="{{route('articles.show', $mainArticles[0]->id)}}">
                                 {{$mainArticles[0]->getFirstMedia('sm_image')}}
                             </a>
                         </div>
                         <div class="tgbanner__content">
                             <ul class="tgbanner__content-meta list-wrap">
-                                <li class="category"><a href="article-details.html">Категория: {{$mainArticles[0]->category->name}}</a></li>
+                                <li class="category"><a href="{{route('articles.category') . '?page=' . $mainArticles[0]->category->id}}">Категория: {{$mainArticles[0]->category->name}}</a></li>
                                 <li><span class="by">Автор: </span>
-                                    <a href="blog.html">
+                                    <a href="{{route('authors.show', $mainArticles[0]->user->id)}}">
                                         {{$mainArticles[0]->user->name}}
                                     </a>
                                 </li>
                                 <li>{{$mainArticles[0]->craeted_at}}</li>
                             </ul>
                             <h2 class="title tgcommon__hover">
-                                <a href="article-details.html">
+                                <a href="{{route('articles.show', $mainArticles[0]->id)}}">
                                     {{$mainArticles[0]->title}}
                                 </a
                             ></h2>
@@ -32,44 +32,44 @@
 
                         <div class="tgbanner__post small-post">
                             <div class="tgbanner__thumb tgImage__hover">
-                                <a href="article-details.html">
+                                <a href="{{route('articles.show', $mainArticles[1]->id)}}">
                                     {{$mainArticles[1]->getFirstMedia('sm_image')}}
                                 </a>
                             </div>
                             <div class="tgbanner__content">
                                 <ul class="tgbanner__content-meta list-wrap">
-                                    <li class="category"><a href="article-details.html">Категория: {{$mainArticles[1]->category->name}}</a></li>
+                                    <li class="category"><a href="{{route('articles.category') . '?page=' . $mainArticles[1]->category->id}}">Категория: {{$mainArticles[1]->category->name}}</a></li>
                                     <li><span class="by">Автор: </span>
-                                        <a href="blog.html">
+                                        <a href="{{route('authors.show', $mainArticles[1]->user->id)}}">
                                             {{$mainArticles[1]->user->name}}
                                         </a>
                                     </li>
                                 </ul>
-                                <h2 class="title tgcommon__hover"><a href="article-details.html">
+                                <h2 class="title tgcommon__hover"><a href="{{route('articles.show', $mainArticles[1]->id)}}">
                                        {{$mainArticles[1]->title}}
                                     </a></h2>
                             </div>
                         </div>
                         <div class="tgbanner__post small-post">
                             <div class="tgbanner__thumb tgImage__hover">
-                                    <a href="article-details.html">
+                                    <a href="{{route('articles.show', $mainArticles[2]->id)}}">
                                         {{$mainArticles[2]->getFirstMedia('sm_image')}}
                                     </a>
                             </div>
                             <div class="tgbanner__content">
                                 <ul class="tgbanner__content-meta list-wrap">
                                    <li class="category">
-                                       <a href="article-details.html">
+                                       <a href="{{route('articles.category') . '?page=' . $mainArticles[2]->category->id}}">
                                            Категория: {{$mainArticles[2]->category->name}}
                                        </a>
                                    </li>
                                    <li><span class="by">Автор: </span>
-                                       <a href="blog.html"> {{$mainArticles[2]->user->name}}
+                                       <a href="{{route('authors.show', $mainArticles[2]->user->id)}}"> {{$mainArticles[2]->user->name}}
                                        </a>
                                    </li>
                                 </ul>
                                 <h2 class="title tgcommon__hover">
-                                    <a href="article-details.html">
+                                    <a href="{{route('articles.show', $mainArticles[2]->id)}}">
                                         {{$mainArticles[2]->title}}
                                     </a>
                                 </h2>
@@ -152,7 +152,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="section__read-more text-start text-sm-end">
-                                <a href="author.html">Перейти ко&nbsp;всем авторам<i class="far fa-long-arrow-right"></i></a>
+                                <a href="{{route('authors')}}">Перейти ко&nbsp;всем авторам<i class="far fa-long-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -188,7 +188,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="section__read-more text-start text-sm-end">
-                                <a href="article.html">Читать все новости<i class="far fa-long-arrow-right"></i></a>
+                                <a href="{{route('news')}}">Читать все новости<i class="far fa-long-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -207,19 +207,21 @@
                                     </a>
                                 </div>
                                 <div class="trending__post-content">
-{{--                                    <ul class="tgbanner__content-meta list-wrap">--}}
-{{--                                        <li class="category"><a href="article.html">Фильм "Океаны"</a></li>--}}
-{{--                                        <li><span class="by">Автор</span> <a href="blog.html">Марина Ф.</a></li>--}}
-{{--                                    </ul>--}}
                                     <h4 class="title tgcommon__hover">
                                         <a href="{{route('news.show', $news->id)}}">
                                             {{$news->title}}
                                         </a>
                                     </h4>
                                     <ul class="post__activity list-wrap">
-                                        <li><i class="fal fa-heart"></i> 1.0k</li>
-                                        <li><a href="article-details.html"><i class="fal fa-comment-dots"></i> 128</a></li>
-                                        <li><i class="fal fa-share"></i> 29</li>
+                                        <li>
+                                            <livewire:reactions :model="$news"/>
+                                        </li>
+                                        <li>
+                                            <a href="{{route('news.show', $news->id)}}">
+                                                <i class="fal fa-comment-dots"></i>
+                                                {{$news->comments->count()}}
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -243,7 +245,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="section__read-more text-start text-sm-end">
-                                <a href="news.html">Читать все новости <i class="far fa-long-arrow-right"></i></a>
+                                <a href="{{route('news')}}">Читать все новости <i class="far fa-long-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>

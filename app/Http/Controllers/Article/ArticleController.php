@@ -47,6 +47,19 @@ class ArticleController extends Controller
     }
 
     /**
+     * @return View
+     */
+    public function showCategory(): View
+    {
+        $categories = $this->categoryRepository->getAll();
+
+        return \view('articles.category', [
+            'categories' => $categories
+        ]);
+
+    }
+
+    /**
      * @param $id
      * @return View
      */
@@ -108,8 +121,8 @@ class ArticleController extends Controller
         $categories = Category::all();
 
         return \view('articles.edit', [
-            'article'=>$article,
-            'categories'=>$categories
+            'article' => $article,
+            'categories' => $categories
         ]);
     }
 
@@ -121,7 +134,7 @@ class ArticleController extends Controller
      */
     public function update(ArticleRequest $request, string $id): Application|Redirector|RedirectResponse
     {
-        $this->articleRepository->updateArticle($id,$request);
+        $this->articleRepository->updateArticle($id, $request);
 
         return redirect('/profile')
             ->with('success', 'Статья успешно обновлена');
