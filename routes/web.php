@@ -27,9 +27,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [MainController::class, 'index'])->name('main');
 Route::get('/articles', [ArticleController::class, 'index'])
     ->name('articles');
-Route::get('/articles?page={key}', [ArticleController::class, 'index'])
-    ->name('articles.category')
-    ->where('key', '\d+');
+Route::get('/articles/category', [ArticleController::class, 'showCategory'])
+    ->name('articles.category');
 Route::get('/articles/{id}', [ArticleController::class, 'show'])
     ->where('id', '\d+')
     ->name('articles.show');

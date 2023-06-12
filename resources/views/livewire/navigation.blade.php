@@ -18,7 +18,7 @@
                                     <ul class="sub-menu">
                                         @foreach($categories as $key=>$category)
                                             <li class="item {{ $category->name === $category->id ? 'active' : '' }}">
-                                                <a href="{{route('articles.category', $category->id)}}">{{$category->name}}</a>
+                                                <a href="{{route('articles.category') . '?page=' . $category->id}}">{{$category->name}}</a>
                                             </li>
                                         @endforeach
                                     </ul></li>

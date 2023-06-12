@@ -9,8 +9,7 @@
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('main')}}">Главная</a></li>
-                                    <li class="breadcrumb-item"><a href="{{route('authors')}}">Авторы</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page"> {{$user->name}}</li>
+                                    <li class="breadcrumb-item active">Категории</li>
                                 </ol>
                             </nav>
                         </div>
@@ -25,8 +24,9 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-xl-8 col-lg-7">
+                        @foreach($categories as $key=>$category)
                         <div class="blog-post-wrapper">
-                            @foreach($user->articles as $key=>$article)
+                            @foreach($category->articles as $key=>$article)
                                 <div class="latest__post-item">
                                     <div class="latest__post-thumb tgImage__hover">
                                         <a href="{{route('articles.show', $article->id)}}">
@@ -36,6 +36,7 @@
                                     <div class="latest__post-content">
                                         <ul class="tgbanner__content-meta list-wrap">
                                             <li class="category"><a href="#">Категория: {{$article->category->name}}</a></li>
+                                            <li><span class="by">Автор:</span><a href="{{route('authors.show', $article->user->id)}}">{{$article->user->name}}</a></li>
                                             <li>{{$article->created_at}}</li>
                                         </ul>
                                         <h3 class="title tgcommon__hover"><a href="{{route('articles.show', $article->id)}}">{{$article->title}}</a></h3>
@@ -45,28 +46,14 @@
                                     </div>
                                 </div>
                             @endforeach
+{{--                            {{$category->articles->links('vendor.pagination.bootstrap-5')}}--}}
                         </div>
+                        @endforeach
+                        {{$categories->links('vendor.pagination.bootstrap-5')}}
                     </div>
+
                     <div class="col-xl-3 col-lg-4 col-md-6">
                         <aside class="blog-sidebar">
-                            <div class="widget sidebar-widget">
-                                <div class="tgAbout-me">
-                                    <div class="tgAbout-thumb">
-                                        {{ $user->getFirstMedia('avatars') }}
-                                    </div>
-                                    <div class="tgAbout-info">
-                                        <span class="designation">{{$user->name}}</span>
-                                    </div>
-                                    <div class="tgAbout-info">
-{{--                                        <span class="designation">{{$user->profile->about_me}}</span>--}}
-                                    </div>
-                                    <div class="tgAbout-social">
-                                        @foreach($user->socialLinks as $key=>$socialLink)
-                                        <a href="{{$socialLink->link}}" target="_blank"><i class="fab fa-{{$socialLink->socialType->icon_name}}"></i></a>
-                                        @endforeach
-                                    </div>
-                                </div>
-                            </div>
                             <div class="widget sidebar-widget widget_categories">
                                 <h4 class="widget-title">Популярная категория</h4>
                                 <ul class="list-wrap">
