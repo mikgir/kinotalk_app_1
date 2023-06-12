@@ -58,7 +58,9 @@
                                         <span class="designation">{{$user->name}}</span>
                                     </div>
                                     <div class="tgAbout-info">
-{{--                                        <span class="designation">{{$user->profile->about_me}}</span>--}}
+                                        @if($user->profile)
+                                        <span class="designation text-black">{{$user->profile->about_me}}</span>
+                                        @endif
                                     </div>
                                     <div class="tgAbout-social">
                                         @foreach($user->socialLinks as $key=>$socialLink)

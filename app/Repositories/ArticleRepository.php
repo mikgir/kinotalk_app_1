@@ -53,9 +53,9 @@ class ArticleRepository implements ArticleRepositoryInterface
 
     /**
      * @param $id
-     * @return object
+     * @return Collection
      */
-    public function getOne($id): object
+    public function getOne($id): Collection
     {
         return Article::with(['category', 'user', 'comments'])->findOrFail($id);
     }
@@ -104,7 +104,11 @@ class ArticleRepository implements ArticleRepositoryInterface
         ]);
 
         if ($request->hasFile('image')) {
-            $article->clearMediaCollection('sm_image');
+            $media = $article->getMedia('sm_image')->first();
+
+            if ($media){
+                $article->clearMediaCollection('sm_image');
+            }
 
             $article->addMediaFromRequest('image')
                 ->toMediaCollection('sm_image');

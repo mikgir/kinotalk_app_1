@@ -72,21 +72,11 @@ class UserResource extends Resource
                             ->fields([
                                 Text::make('Имя', 'first_name'),
                                 Text::make('Фамилия', 'last_name'),
+                                Date::make('Дата рождения', 'birthday'),
                                 Text::make('Город', 'city'),
                                 Text::make('Страна', 'country'),
-                            ])
-                            ->hideOnIndex(),
-                        HasOne::make('Род занятий', 'profile')
-                            ->fields([
-                                Text::make('Род занятий', 'occupation'),
-                                Text::make('Компания', 'company'),
-                                Url::make('Сайт', 'url'),
-                            ])
-                            ->hideOnIndex(),
-                        HasOne::make('Обо мне', 'profile')
-                            ->fields([
                                 Textarea::make('Обо мне', 'about_me'),
-                            ])
+                            ])->resourceMode()
                             ->hideOnIndex(),
                         HasMany::make('SocialLinks')
                             ->hideOnIndex()
