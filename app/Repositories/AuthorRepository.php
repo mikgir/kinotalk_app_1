@@ -23,7 +23,8 @@ class AuthorRepository implements AuthorRepositoryInterface
 
     public function getAuthorsForMain(): Collection
     {
-        return User::role('author')->where('active', 1)
+        return User::role('author')
+            ->where('active', 1)
             ->with([ 'profile', 'socialLinks', 'articles'=> function ($query) {
                 $query->where('status', 'PUBLISHED')
                     ->orderBy('created_at', 'DESC')
