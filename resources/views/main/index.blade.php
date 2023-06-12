@@ -100,35 +100,36 @@
                         </div>
                     </div>
                 </div>
-                <div class="trending__slider">
-                    <div class="swiper-container trending-active">
+                <div class="trending__slider ">
+                    <div class="swiper-container trending-active flex-column justify-content-between">
                         <div class="swiper-wrapper">
                             @foreach($popularArticles as $key=>$article)
-                            <div class="swiper-slide">
-                                <div class="trending__post">
+                            <div class="swiper-slide ">
+                                <div class="trending__post ">
                                     <div class="trending__post-thumb tgImage__hover">
 {{--                                        <a href="#" class="addWish"><i class="fal fa-heart"></i></a>--}}
                                         <a href="{{route('articles.show', $article->id)}}">
                                             {{$article->getFirstMedia('sm_image')}}
                                         </a>
                                     </div>
-                                    <div class="trending__post-content">
-                                        <h4 class="title tgcommon__hover">
-                                            <a href="{{route('articles.show', $article->id)}}">
-                                                {{$article->title}}
-                                            </a>
-                                        </h4>
-                                        <ul class="post__activity list-wrap">
-                                            <li class="align-self-baseline">
-                                                <livewire:reactions :model="$article"/>
-                                            </li>
-                                            <li class="align-self-baseline">
+                                    <div class="trending__post-content post-content__justify">
+                                            <h4 class="title tgcommon__hover title__text-w3">
                                                 <a href="{{route('articles.show', $article->id)}}">
-                                                    <i class="fal fa-comment-dots"></i>
-                                                    {{$article->comments->count()}}
+                                                    {{$article->title}}
                                                 </a>
-                                            </li>
-                                        </ul>
+                                            </h4>
+
+                                            <ul class="post__activity list-wrap">
+                                                <li class="align-self-baseline">
+                                                    <livewire:reactions :model="$article"/>
+                                                </li>
+                                                <li class="align-self-baseline">
+                                                    <a href="{{route('articles.show', $article->id)}}" >
+                                                        <i class="fal fa-comment-dots"></i>
+                                                        {{$article->comments->count()}}
+                                                    </a>
+                                                </li>
+                                            </ul>
                                     </div>
                                 </div>
                             </div>
@@ -159,13 +160,18 @@
                 </div>
                 <div class="row">
                     @foreach($authors as $key=>$author)
-                    <div class="col-lg-4 col-sm-6">
-                        <div class="featured__post">
-                            <div class="featured__thumb" data-background=>{{$author->getFirstMedia('avatars')}}</div>
+                    <div class="col-lg-4 col-sm-6 ">
+                        <div class="featured__post ">
+                            <div class="featured__thumb trending__post-thumb tgImage__hover">
+                                <a data-background=>
+                                    {{$author->getFirstMedia('avatars')}}
+                                </a>
+                            </div>
+
                             <div class="featured__content">
                                 <ul class="tgbanner__content-meta list-wrap">
-                                    <li class="category"><a href="{{route('authors.show', $author->id)}}">Автор </a></li>
-                                    <li><a href="{{route('authors.show', $author->id)}}">{{$author->name}}</a></li>
+                                {{--   <li class="category"><a href="{{route('authors.show', $author->id)}}">Автор </a></li>--}}
+                                    <li class="category"> <a href="{{route('authors.show', $author->id)}}">{{$author->name}}</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -180,7 +186,7 @@
         <section class="hand-picked-area black-bg fix section__hover-line pt-75 pb-80">
             <div class="container">
                 <div class="section__title-wrap section__title-white mb-40">
-                    <div class="row align-items-end">
+                    <div class="row align-items-end" >
                         <div class="col-sm-6">
                             <div class="section__title">
                                 <h3 class="section__main-title">Последние новости</h3>
@@ -196,12 +202,12 @@
             </div>
             <div class="trending__slider dark-post-slider">
                 <div class="swiper-container trending-active">
-                    <div class="swiper-wrapper">
+                    <div class="swiper-wrapper" >
                         @foreach($lastNews as $key=>$news)
                         <div class="swiper-slide">
                             <div class="trending__post">
-                                <div class="trending__post-thumb tgImage__hover">
-                                    <a href="#" class="addWish"><i class="fal fa-heart"></i></a>
+                                <div class="trending__post-thumb tgImage__hover tgImage__a">
+                                    <a href="#" class="addWish addWis__w3"><i class="fal fa-heart"></i></a>
                                     <a href="{{route('news.show', $news->id)}}">
                                         <img src="{{asset($news->image)}}" alt="img">
                                     </a>
@@ -211,7 +217,7 @@
 {{--                                        <li class="category"><a href="article.html">Фильм "Океаны"</a></li>--}}
 {{--                                        <li><span class="by">Автор</span> <a href="blog.html">Марина Ф.</a></li>--}}
 {{--                                    </ul>--}}
-                                    <h4 class="title tgcommon__hover">
+                                    <h4 class="title tgcommon__hover news_text__w3">
                                         <a href="{{route('news.show', $news->id)}}">
                                             {{$news->title}}
                                         </a>
@@ -251,7 +257,7 @@
                 <div class="row row-gutters-40">
                     <div class="col-md-6">
                         <div class="stories-post__item">
-                            <div class="stories-post__thumb tgImage__hover">
+                            <div class="stories-post__thumb tgImage__hover tgImage__a">
                                 <a href="{{route('news.show', $popularNews[0]->id)}}">
                                     <img src="{{asset($popularNews[0]->image)}}" alt="img">
                                 </a>
@@ -260,7 +266,7 @@
                                 <ul class="tgbanner__content-meta list-wrap">
                                     <li>{{$popularNews[0]->created_at}}</li>
                                 </ul>
-                                <h3 class="title tgcommon__hover">
+                                <h3 class="title tgcommon__hover news_text__w4">
                                     <a href="{{route('news.show', $popularNews[0]->id)}}">
                                         {{$popularNews[0]->title}}
                                     </a>
@@ -270,7 +276,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="stories-post__item">
-                            <div class="stories-post__thumb tgImage__hover">
+                            <div class="stories-post__thumb tgImage__hover tgImage__a">
                                 <a href="{{route('news.show', $popularNews[1]->id)}}">
                                     <img src="{{asset($popularNews[1]->image)}}" alt="img">
                                 </a>
@@ -279,7 +285,7 @@
                                 <ul class="tgbanner__content-meta list-wrap">
                                     <li>{{$popularNews[1]->created_at}}</li>
                                 </ul>
-                                <h3 class="title tgcommon__hover">
+                                <h3 class="title tgcommon__hover news_text__w4">
                                     <a href="{{route('news.show', $popularNews[1]->id)}}">
                                         {{$popularNews[1]->title}}
                                     </a>
@@ -298,7 +304,7 @@
                                 <ul class="tgbanner__content-meta list-wrap">
                                     <li>{{$popularNews[2]->created_at}}</li>
                                 </ul>
-                                <h4 class="title tgcommon__hover">
+                                <h4 class="news_text__w5">
                                     <a href="{{route('news.show', $popularNews[2]->id)}}">
                                        {{$popularNews[2]->title}}
                                     </a>
@@ -315,7 +321,7 @@
                                 <ul class="tgbanner__content-meta list-wrap">
                                     <li>{{$popularNews[3]->created_at}}</li>
                                 </ul>
-                                <h4 class="title tgcommon__hover">
+                                <h4 class=" news_text__w5">
                                     <a href="{{route('news.show', $popularNews[3]->id)}}">
                                         {{$popularNews[3]->title}}
                                     </a>
@@ -332,7 +338,7 @@
                                 <ul class="tgbanner__content-meta list-wrap">
                                     <li>{{$popularNews[4]->created_at}}</li>
                                 </ul>
-                                <h4 class="title tgcommon__hover">
+                                <h4 class=" news_text__w5">
                                     <a href="{{route('news.show', $popularNews[4]->id)}}">
                                         {{$popularNews[4]->title}}
                                     </a>
@@ -349,7 +355,7 @@
                                 <ul class="tgbanner__content-meta list-wrap">
                                     <li>{{$popularNews[5]->created_at}}</li>
                                 </ul>
-                                <h4 class="title tgcommon__hover">
+                                <h4 class=" news_text__w5">
                                     <a href="{{route('news.show', $popularNews[5]->id)}}">
                                         {{$popularNews[5]->title}}
                                     </a>
