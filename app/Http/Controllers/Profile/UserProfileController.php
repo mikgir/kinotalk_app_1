@@ -65,7 +65,7 @@ class UserProfileController extends Controller
 
         $user->profile()->create($request->validated());
 
-        return redirect('/profile', $id)->with('success', 'Profile created successful');
+        return redirect('/profile')->with('success', 'Profile created successful');
     }
 
     /**

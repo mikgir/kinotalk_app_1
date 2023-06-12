@@ -163,14 +163,13 @@
                     <div class="col-lg-4 col-sm-6 ">
                         <div class="featured__post ">
                             <div class="featured__thumb trending__post-thumb tgImage__hover">
-                                <a data-background=>
+                                <a href="{{route('authors.show', $author->id)}}">
                                     {{$author->getFirstMedia('avatars')}}
                                 </a>
                             </div>
 
                             <div class="featured__content">
                                 <ul class="tgbanner__content-meta list-wrap">
-                                {{--   <li class="category"><a href="{{route('authors.show', $author->id)}}">Автор </a></li>--}}
                                     <li class="category"> <a href="{{route('authors.show', $author->id)}}">{{$author->name}}</a></li>
                                 </ul>
                             </div>
@@ -216,7 +215,7 @@
 
                                     <h4 class="title tgcommon__hover news_text__w3">
 
-                                 
+
                                         <a href="{{route('news.show', $news->id)}}">
                                             {{$news->title}}
                                         </a>
