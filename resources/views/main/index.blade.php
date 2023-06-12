@@ -213,10 +213,6 @@
                                     </a>
                                 </div>
                                 <div class="trending__post-content">
-{{--                                    <ul class="tgbanner__content-meta list-wrap">--}}
-{{--                                        <li class="category"><a href="article.html">Фильм "Океаны"</a></li>--}}
-{{--                                        <li><span class="by">Автор</span> <a href="blog.html">Марина Ф.</a></li>--}}
-{{--                                    </ul>--}}
                                     <h4 class="title tgcommon__hover news_text__w3">
                                         <a href="{{route('news.show', $news->id)}}">
                                             {{$news->title}}
