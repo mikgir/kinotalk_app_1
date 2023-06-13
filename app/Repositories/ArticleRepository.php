@@ -53,9 +53,9 @@ class ArticleRepository implements ArticleRepositoryInterface
 
     /**
      * @param $id
-     * @return Collection
+     * @return object
      */
-    public function getOne($id): Collection
+    public function getOne($id): object
     {
         return Article::with(['category', 'user', 'comments'])->findOrFail($id);
     }

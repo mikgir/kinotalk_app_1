@@ -49,51 +49,8 @@
                     </div>
                     <div class="col-xl-3 col-lg-4 col-md-6">
                         <aside class="blog-sidebar">
-                            <div class="widget sidebar-widget">
-                                <div class="tgAbout-me">
-                                    <div class="tgAbout-thumb">
-                                        {{ $user->getFirstMedia('avatars') }}
-                                    </div>
-                                    <div class="tgAbout-info">
-                                        <span class="designation">{{$user->name}}</span>
-                                    </div>
-                                    <div class="tgAbout-info">
-                                        @if($user->profile)
-                                        <span class="designation text-black">{{$user->profile->about_me}}</span>
-                                        @endif
-                                    </div>
-                                    <div class="tgAbout-social">
-                                        @foreach($user->socialLinks as $key=>$socialLink)
-                                        <a href="{{$socialLink->link}}" target="_blank"><i class="fab fa-{{$socialLink->socialType->icon_name}}"></i></a>
-                                        @endforeach
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="widget sidebar-widget widget_categories">
-                                <h4 class="widget-title">Популярная категория</h4>
-                                <ul class="list-wrap">
-                                    <li>
-                                        <div class="thumb"><a href="news.html"><img src="{{asset('build/assets/src/assets/img/category/Mira.png')}}" alt="img"></a></div>
-                                        <a href="news.html">Кино</a>
-                                        <span class="float-right">12</span>
-                                    </li>
-                                    <li>
-                                        <div class="thumb"><a href="news.html"><img src="{{asset('build/assets/src/assets/img/category/Sansara.png')}}" alt="img"></a></div>
-                                        <a href="news.html">Сериалы</a>
-                                        <span class="float-right">10</span>
-                                    </li>
-                                    <li>
-                                        <div class="thumb"><a href="news.html"><img src="{{asset('build/assets/src/assets/img/category/GuardiansOfTheGalaxy.png')}}" alt="img"></a></div>
-                                        <a href="news.html">Комиксы</a>
-                                        <span class="float-right">08</span>
-                                    </li>
-                                    <li>
-                                        <div class="thumb"><a href="news.html"><img src="{{asset('build/assets/src/assets/img/category/HarryPotter.png')}}" alt="img"></a></div>
-                                        <a href="news.html">Франшизы</a>
-                                        <span class="float-right">06</span>
-                                    </li>
-                                </ul>
-                            </div>
+                            <livewire:user-widget :user="$user"/>
+                            <livewire:category-widget/>
                         </aside>
                     </div>
                 </div>
