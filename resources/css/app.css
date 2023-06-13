@@ -112,12 +112,17 @@ main{
     padding: 10px 20px 10px;
 }
 .blog-avatar-content__wrap{
-    width: 90%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+
 }
 .blog-avatar-content__wrap p{
+    width: 95%;
     margin: 10px 30px 2px;
-    font-size: 15px;
-    width: 90%;
+    padding: 1rem;
+    font-size: 1rem;
+
 }
 
 .blog-avatar-wrap__w3{
@@ -156,7 +161,8 @@ main{
     width: 10%;
 }
 .blog-avatar-img__p4 img{
-    max-width: 6rem;
+    max-width: 3rem;
+    max-height: 3rem;
     border-radius: 50%;
 }
 
