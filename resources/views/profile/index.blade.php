@@ -78,7 +78,7 @@
                             </div>
 
                             <div class="card-body card-header__wp4">
-                                <a href="{{route('articles.create')}}" class="btn btn-primary">Написать статью</a>
+                                <a href="{{route('articles.create')}}" class="">Написать статью <span><i class="fa fa-2x fa-feather-alt"></i></span></a>
                                 <div class="block__wp5">
                             <span>Список статей</span>
                                     <div class="table-responsive-md table-hover block__wp6 small mb-2">
@@ -122,20 +122,26 @@
                                                 <div class="col-2 text-center col__tab4">
                                                     <div class="block-btn__pr4 flex-column">
                                                         <div>
-                                                            <a href="{{route('articles.edit', $article->id)}}" class="btn btn__b3 btn-outline-primary mb-2 w-100">Редактировать</a>
+                                                            <a href="{{route('articles.edit', $article->id)}}" class="mb-2 bg-transparent">
+                                                                <i class="fa fa-2x fa-pen-square"></i>
+                                                            </a>
                                                         </div>
                                                         <div>
                                                             <form method="post" action="{{route('articles.publish', $article->id)}}">
                                                                 @csrf
                                                                 @method('patch')
-                                                                <button type="submit" class="btn btn__b3 btn-outline-success mb-2 w-100">Опубликовать</button>
+                                                                <button type="submit" style="border: none; outline: none" class="mb-2 bg-transparent">
+                                                                    <i class="fa fa-2x  fa-share"></i>
+                                                                </button>
                                                             </form>
                                                         </div>
                                                         <div>
                                                             <form method="delete" action="{{route('articles.destroy', $article->id)}}">
                                                                 @csrf
                                                                 @method('delete')
-                                                                <button type="submit" class="btn btn__b3 btn-outline-success mb-2 w-100">Удалить</button>
+                                                                <button type="submit" style="border: none; outline: none" class="mb-2 bg-transparent">
+                                                                    <i class="fa fa-2x fa-trash"></i>
+                                                                </button>
                                                             </form>
                                                         </div>
 

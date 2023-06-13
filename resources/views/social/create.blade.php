@@ -28,7 +28,9 @@
         <!-- Save changes button-->
 
         <div class="block col-4 align-self-center text-end btn_pr__w3">
-            <button class="btn  btn-primary btn btn__b3" type="submit">Добавить</button>
+            <button class="bg-transparent" style="border: none; outline: none" type="submit">
+                <i class="fa fa-2x fa-share"></i>
+            </button>
         </div>
     </div>
 </form>

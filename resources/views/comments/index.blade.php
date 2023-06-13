@@ -9,10 +9,10 @@
 </div>
 
 <!-- Button trigger modal -->
-<button wire:click="clearText()" type="button" class="btn btn-primary mb-3" data-bs-toggle="modal"
+<a wire:click="clearText()" type="button" class="mb-3 bg-transparent" data-bs-toggle="modal"
         data-bs-target="#modalFormCreate">
-    Оставить комментарий
-</button>
+    Оставить комментарий <span><I class="fa fa-comment"></I></span>
+</a>
 @include('comments.blocks.modal-form', [
     'model' => $model,
     'title' => 'Оставьте свой комментарий:',
