@@ -33,10 +33,10 @@
 </div>
 --}}
 <div class="blog-wrap__style">
-<div class="blog-wrap-content">
-    <div class="blog-avatar-img__p4 d-flex" >
-        {{$comment->user->getFirstMedia('avatars')}}
-    </div>
+    <div class="blog-wrap-content">
+        <div class="blog-avatar-img__p4 d-flex" >
+            {{$comment->user->getFirstMedia('avatars')}}
+        </div>
         <div class="blog-text__content">
             <span class="name align-self-start name__color">{{$comment->user->name}}</span>
             <p class="blog-avatar-content__p4">{{ $comment->text }}</p>
@@ -47,7 +47,7 @@
                 @endif
             </span>
         </div>
-</div>
+    </div>
 
     <div class="d-flex justify-content-end">
         @if($comment->parent_id == null)

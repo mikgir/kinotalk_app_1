@@ -159,8 +159,8 @@
                 </div>
                 <div class="row">
                     @foreach($authors as $key=>$author)
-                    <div class="col-lg-4 col-sm-6 ">
-                        <div class="featured__post ">
+                    <div class="col-lg-3 col-sm-6 ">
+                        <div class="featured__post flex-column">
                             <div class="featured__thumb trending__post-thumb tgImage__hover">
                                 <a href="{{route('authors.show', $author->id)}}">
                                     {{$author->getFirstMedia('avatars')}}

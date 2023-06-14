@@ -6502,7 +6502,25 @@ blockquote .blockquote-cite .info span {
 .newsletter-style-two.style-four .newsletter__form-grp .form-check::before {
     opacity: 1;
 }
+/*============================
+      Glass css
+ ==============================*/
 
+.glass-m {
+    background: rgba(255, 255, 255, 0.14);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(6.5px);
+    -webkit-backdrop-filter: blur(6.5px);
+}
+.glass-m-p {
+    background: rgba(255, 255, 255, 0.14);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(6.5px);
+    -webkit-backdrop-filter: blur(6.5px);
+    padding: 2rem;
+}
 /*=============================
     18. Footer
 ===============================*/
@@ -6956,5 +6974,6 @@ blockquote .blockquote-cite .info span {
 [tg-theme=dark] .footer-style-three.footer-bg .border-btn, [tg-theme=dark] .slider__style-two .border-btn {
     border-color: var(--tg-dark-color-1);
 }
+
 
 /*# sourceMappingURL=main.css.map */

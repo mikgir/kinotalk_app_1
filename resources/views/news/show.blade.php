@@ -7,7 +7,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <div class="breadcrumb-content">
+                        <div class="breadcrumb-content glass-m">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('main')}}">Главная</a></li>
@@ -54,12 +54,12 @@
                                 </div>
                             </div>
 
-                            <livewire:comments :model="$news"/>
-                            <script>
-                                window.addEventListener('closeModal', event => {
-                                    $('[id*="modalForm"]').modal('hide');
-                                })
-                            </script>
+                                <livewire:comments :model="$news"/>
+                                <script>
+                                    window.addEventListener('closeModal', event => {
+                                        $('[id*="modalForm"]').modal('hide');
+                                    })
+                                </script>
 
                             <div class="blog-prev-next-posts">
                                 <div class="row">
@@ -99,39 +99,7 @@
                     </div>
                     <div class="col-xl-3 col-lg-4 col-md-6">
                         <aside class="blog-sidebar">
-                            <div class="widget sidebar-widget widget_categories">
-                                <h4 class="widget-title">Популярная категория</h4>
-                                <ul class="list-wrap">
-                                    <li>
-                                        <div class="thumb"><a href="news.html"><img
-                                                        src="{{asset('build/assets/src/assets/img/category/Mira.png')}}"
-                                                        alt="img"></a></div>
-                                        <a href="news.html">Кино</a>
-                                        <span class="float-right">12</span>
-                                    </li>
-                                    <li>
-                                        <div class="thumb"><a href="news.html"><img
-                                                        src="{{asset('build/assets/src/assets/img/category/Sansara.png')}}"
-                                                        alt="img"></a></div>
-                                        <a href="news.html">Сериалы</a>
-                                        <span class="float-right">10</span>
-                                    </li>
-                                    <li>
-                                        <div class="thumb"><a href="news.html"><img
-                                                        src="{{asset('build/assets/src/assets/img/category/GuardiansOfTheGalaxy.png')}}"
-                                                        alt="img"></a></div>
-                                        <a href="news.html">Комиксы</a>
-                                        <span class="float-right">08</span>
-                                    </li>
-                                    <li>
-                                        <div class="thumb"><a href="news.html"><img
-                                                        src="{{asset('build/assets/src/assets/img/category/HarryPotter.png')}}"
-                                                        alt="img"></a></div>
-                                        <a href="news.html">Франшизы</a>
-                                        <span class="float-right">06</span>
-                                    </li>
-                                </ul>
-                            </div>
+                            <livewire:category-widget/>
                         </aside>
                     </div>
                 </div>

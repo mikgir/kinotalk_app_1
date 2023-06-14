@@ -9,6 +9,7 @@ use App\Http\Controllers\Profile\UserProfileController;
 use App\Http\Controllers\Mail\MailController;
 use App\Http\Controllers\Social\SocialLinkController;
 use Illuminate\Support\Facades\Route;
+use MoonShine\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -100,14 +101,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/articles/destroy/{id}', [ArticleController::class, 'destroy'])
         ->where('id', '\d+')
         ->name('articles.destroy');
-
-    // Не используются
-//    Route::post('articles/{id}/comments/create', [CommentController::class, 'store'])
-//        ->where('id', '\d+')
-//        ->name('comments.create');
-//    Route::delete('comments/{id}', [CommentController::class, 'destroy'])
-//        ->where('id', '\d+')
-//        ->name('comments.destroy');
 });
 
 require __DIR__ . '/auth.php';

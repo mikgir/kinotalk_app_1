@@ -1,6 +1,6 @@
 <div class="widget sidebar-widget widget_categories">
     <h4 class="widget-title">Популярная категория</h4>
-    <ul class="list-wrap">
+    <ul class="list-wrap glass-m-p">
         @foreach($categories as $key=>$category)
         <li>
             <div class="thumb">
