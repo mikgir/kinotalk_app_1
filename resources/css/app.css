@@ -307,7 +307,8 @@ main{
 .modal-title__text4{
     font-family: 'Roboto', sans-serif;
     font-size: 15px;
-    color: #111111;
+    color: #dd4a68;
+    padding-right: 50%;
 }
 .modal-content__md2{
     position: relative;
@@ -451,4 +452,8 @@ main{
 .list-wrap__auth{
     justify-content: space-between;
     width: 95%;
+}
+
+.span__pan{
+    margin-right: 1%;
 }
