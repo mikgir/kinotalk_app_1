@@ -28,17 +28,17 @@
                                 </a>
                             </div>
                             <div class="minimal__post-content">
-                                <ul class="tgbanner__content-meta list-wrap">
+                                <ul class="tgbanner__content-meta list-wrap list-wrap__auth">
                                     <li><span class="by">Автор:</span> <a href="{{route('authors.show', $user->id)}}">{{$user->name}}</a></li>
                                     <li>{{$user->created_at->diffForHumans()}}</li>
                                 </ul>
-                                <div class="tgAbout-social">
+                              {{--  <div class="tgAbout-social">
                                     @foreach($user->socialLinks as $key=>$socialLink)
                                         <a href="{{$socialLink->link}}" target="_blank"><i class="fab fa-{{$socialLink->socialType->icon_name}}"></i></a>
                                     @endforeach
-                                </div>
-                                @if ($user->articles->isNotEmpty())
-                                    <h4 class="title tgcommon__hover"><a href="{{route('articles.show', $user->articles->first()->id)}}">{{$user->articles->first()->title}}</a></h4>
+                                </div>--}}
+                            @if ($user->articles->isNotEmpty())
+                                    <h4 class="tgcommon__hover authors__text"><a href="{{route('articles.show', $user->articles->first()->id)}}">{{$user->articles->first()->title}}</a></h4>
                                 @endif
                             </div>
                         </div>

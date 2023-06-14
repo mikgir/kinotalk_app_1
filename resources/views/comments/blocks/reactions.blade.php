@@ -1,5 +1,5 @@
 @auth
-    <div xmlns:wire="http://www.w3.org/1999/xhtml" class="col-3 text-end">
+    <div xmlns:wire="http://www.w3.org/1999/xhtml" class="block-btn__com">
         <span class="align-self-ceter mx-2" >
             {{ $totalArray[$comment->id] }}
         </span>
