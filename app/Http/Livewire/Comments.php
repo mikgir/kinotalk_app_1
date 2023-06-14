@@ -36,7 +36,16 @@ class Comments extends Component
 
     public function clearText(): void
     {
+        $this->setRedirectUrl();
+
         $this->text = '';
+    }
+
+    public function setRedirectUrl(): void
+    {
+        if (!auth()->check()) {
+            session()->put('redirect_url', url()->previous());
+        }
     }
 
     public function setText($id, CommentRepository $repository): void
