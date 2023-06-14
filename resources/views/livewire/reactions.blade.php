@@ -1,5 +1,5 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml" class="blog-wrap-content-btn__w2 d-flex">
-    <span class="align-self-baseline">
+    <span class="align-self-baseline span__pan">
         {{ $total }}
     </span>
     @auth()

@@ -1,6 +1,6 @@
 @auth
     <div xmlns:wire="http://www.w3.org/1999/xhtml" class="block-btn__com">
-        <span class="align-self-ceter mx-2" >
+        <span class="align-self-ceter mx-2 span__pan" >
             {{ $totalArray[$comment->id] }}
         </span>
         <a type="button" class="link align-self-center" wire:click="setReaction({{ $comment->id }}, 'Like')"
