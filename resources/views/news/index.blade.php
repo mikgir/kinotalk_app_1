@@ -28,7 +28,7 @@
                             </a>
                         </div>
                         <div class="trending__post-content">
-                            <h4 class="title tgcommon__hover"><a href="{{route('news.show', $item->id)}}">{{$item->title}}</a></h4>
+                            <h4 class=" tgcommon__hover news_text__w3"><a href="{{route('news.show', $item->id)}}">{{$item->title}}</a></h4>
                         </div>
                     </div>
                     @endforeach

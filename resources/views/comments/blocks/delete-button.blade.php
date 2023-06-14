@@ -1,6 +1,6 @@
 @can('delete-own comments')
     @if($comment->user_id == Auth::id())
-        <div xmlns:wire="http://www.w3.org/1999/xhtml" class="col-2 text-center">
+        <div xmlns:wire="http://www.w3.org/1999/xhtml" class="block-btn__com">
             <a type="button"
                     data-bs-toggle="modal" data-bs-target="#modalFormDelete_{{ $comment->id }}"
                     wire:click="setText({{ $comment->id }})"
