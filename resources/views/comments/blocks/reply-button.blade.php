@@ -1,5 +1,5 @@
 @can('create-own comments')
-    <div xmlns:wire="http://www.w3.org/1999/xhtml" class="col-1">
+    <div xmlns:wire="http://www.w3.org/1999/xhtml" class="block-btn__com">
         <a type="button"
                 data-bs-toggle="modal" data-bs-target="#modalFormReply_{{ $comment->id }}"
                 wire:click="setReplyText({{ $comment->user_id }})"

@@ -38,7 +38,7 @@
                                             <li><span class="by">Автор:</span><a href="{{route('authors.show', $article->user->id)}}">{{$article->user->name}}</a></li>
                                             <li>{{$article->created_at}}</li>
                                         </ul>
-                                        <h3 class="title tgcommon__hover"><a href="{{route('articles.show', $article->id)}}">{{$article->title}}</a></h3>
+                                        <h3 class="title tgcommon__hover articles_text__w3"><a href="{{route('articles.show', $article->id)}}">{{$article->title}}</a></h3>
                                         <div class="latest__post-read-more">
                                             <a href="{{route('articles.show', $article->id)}}">Читать дальше <i class="far fa-long-arrow-right"></i></a>
                                         </div>

@@ -51,7 +51,7 @@
                                     <div class="col-xl-6 col-md-7">
                                         <div class="blog-details-tags">
                                             <ul class="list-wrap mb-0">
-                                                <li><a href="#">Сериалы</a></li>
+                                                <li><a href="{{route('articles.category') . '?page=' . $article->category->id}}">{{$article->category->name}}</a></li>
                                                 <li><a href="{{route('authors')}}">Авторы</a></li>
                                             </ul>
                                         </div>

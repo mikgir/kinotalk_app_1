@@ -31,7 +31,6 @@
                                         <li><a href="#">Теги</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="#">Подборки фильмов</a></li>
                             </ul>
                         </div>
                         <div class="tgmenu__action">

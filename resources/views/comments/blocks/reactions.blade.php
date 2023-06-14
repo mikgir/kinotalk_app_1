@@ -1,9 +1,9 @@
 @auth
-    <div xmlns:wire="http://www.w3.org/1999/xhtml" class="col-1">
-        <span class="align-self-baseline mx-1" >
+    <div xmlns:wire="http://www.w3.org/1999/xhtml" class="block-btn__com">
+        <span class="align-self-ceter mx-2 span__pan" >
             {{ $totalArray[$comment->id] }}
         </span>
-        <a type="button" class="link align-self-baseline" wire:click="setReaction({{ $comment->id }}, 'Like')"
+        <a type="button" class="link align-self-center" wire:click="setReaction({{ $comment->id }}, 'Like')"
            wire:loading.attr="disabled">
             @if($likeArray[$comment->id] )
                 <i class="fa fa-heart"></i>

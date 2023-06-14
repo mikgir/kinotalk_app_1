@@ -29,7 +29,6 @@
                     </div>
 
                     <div class="tgbanner__side-post">
-
                         <div class="tgbanner__post small-post">
                             <div class="tgbanner__thumb tgImage__hover">
                                 <a href="{{route('articles.show', $mainArticles[1]->id)}}">
@@ -45,7 +44,7 @@
                                         </a>
                                     </li>
                                 </ul>
-                                <h2 class="title tgcommon__hover"><a href="{{route('articles.show', $mainArticles[1]->id)}}">
+                                <h2 class="title tgcommon__hover articles_text__w3"><a href="{{route('articles.show', $mainArticles[1]->id)}}">
                                        {{$mainArticles[1]->title}}
                                     </a></h2>
                             </div>
@@ -68,7 +67,7 @@
                                        </a>
                                    </li>
                                 </ul>
-                                <h2 class="title tgcommon__hover">
+                                <h2 class="title tgcommon__hover articles_text__w3">
                                     <a href="{{route('articles.show', $mainArticles[2]->id)}}">
                                         {{$mainArticles[2]->title}}
                                     </a>

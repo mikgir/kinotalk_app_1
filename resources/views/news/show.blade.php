@@ -72,7 +72,8 @@
                                             </div>
                                             <div class="content">
                                                 <span>Предыдущая новость</span>
-                                                <h5 class="title tgcommon__hover"><a href="news-details.html">Уникальный
+                                                <h5 class="title tgcommon__hover news_text__w3">
+                                                    <a href="news-details.html">Уникальный
                                                         российский кинопроект "Вызов"...</a></h5>
                                             </div>
                                         </div>
@@ -86,7 +87,8 @@
                                             </div>
                                             <div class="content">
                                                 <span>Следующая новость</span>
-                                                <h5 class="title tgcommon__hover"><a href="news-details.html">"Форсаж".
+                                                <h5 class="title tgcommon__hover news_text__w3">
+                                                    <a href="news-details.html">"Форсаж".
                                                         История семьи Доминика Торетто.</a></h5>
                                             </div>
                                         </div>
