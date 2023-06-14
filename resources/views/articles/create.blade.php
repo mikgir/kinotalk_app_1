@@ -4,7 +4,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
-                            <div class="breadcrumb-content">
+                            <div class="breadcrumb-content glass-m">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="{{route('main')}}">Главная</a></li>
@@ -67,7 +67,7 @@
     <script>
         tinymce.init({
             selector: 'textarea',
-            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+            plugins: 'anchor autolink charmap codesample emoticons image link lists media fullscreen preview searchreplace table visualblocks wordcount',
             toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
         });
     </script>

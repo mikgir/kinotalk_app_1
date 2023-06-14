@@ -1,5 +1,5 @@
 <div class="widget sidebar-widget">
-    <div class="tgAbout-me">
+    <div class="tgAbout-me glass-m">
         <div class="tgAbout-thumb">
             {{ $user->getFirstMedia('avatars') }}
         </div>

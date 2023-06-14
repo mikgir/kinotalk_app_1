@@ -5,7 +5,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <div class="breadcrumb-content">
+                        <div class="breadcrumb-content glass-m">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('main')}}">Главная</a></li>

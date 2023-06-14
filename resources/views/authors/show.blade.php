@@ -5,7 +5,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <div class="breadcrumb-content">
+                        <div class="breadcrumb-content glass-m">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('main')}}">Главная</a></li>
@@ -27,20 +27,22 @@
                     <div class="col-xl-8 col-lg-7">
                         <div class="blog-post-wrapper">
                             @foreach($user->articles as $key=>$article)
-                                <div class="latest__post-item">
-                                    <div class="latest__post-thumb tgImage__hover">
-                                        <a href="{{route('articles.show', $article->id)}}">
-                                            {{$article->getFirstMedia('sm_image')}}
-                                        </a>
-                                    </div>
-                                    <div class="latest__post-content">
-                                        <ul class="tgbanner__content-meta list-wrap">
-                                            <li class="category"><a href="#">Категория: {{$article->category->name}}</a></li>
-                                            <li>{{$article->created_at}}</li>
-                                        </ul>
-                                        <h3 class="title tgcommon__hover"><a href="{{route('articles.show', $article->id)}}">{{$article->title}}</a></h3>
-                                        <div class="latest__post-read-more">
-                                            <a href="{{route('articles.show', $article->id)}}">Читать дальше <i class="far fa-long-arrow-right"></i></a>
+                                <div class="glass-m-p mb-3">
+                                    <div class="latest__post-item">
+                                        <div class="latest__post-thumb tgImage__hover">
+                                            <a href="{{route('articles.show', $article->id)}}">
+                                                {{$article->getFirstMedia('sm_image')}}
+                                            </a>
+                                        </div>
+                                        <div class="latest__post-content">
+                                            <ul class="tgbanner__content-meta list-wrap">
+                                                <li class="category"><a href="#">Категория: {{$article->category->name}}</a></li>
+                                                <li>{{$article->created_at}}</li>
+                                            </ul>
+                                            <h3 class="title tgcommon__hover"><a href="{{route('articles.show', $article->id)}}">{{$article->title}}</a></h3>
+                                            <div class="latest__post-read-more">
+                                                <a href="{{route('articles.show', $article->id)}}">Читать дальше <i class="far fa-long-arrow-right"></i></a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

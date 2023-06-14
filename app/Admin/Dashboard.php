@@ -13,6 +13,7 @@ use MoonShine\Dashboard\DashboardBlock;
 use MoonShine\Dashboard\DashboardScreen;
 use MoonShine\Dashboard\ResourcePreview;
 use MoonShine\Metrics\ValueMetric;
+use MoonShine\Traits\Fields\LinkTrait;
 use Spatie\Permission\Models\Role;
 
 class Dashboard extends DashboardScreen

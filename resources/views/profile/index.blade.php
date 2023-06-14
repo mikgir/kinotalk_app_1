@@ -4,7 +4,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <div class="breadcrumb-content">
+                        <div class="breadcrumb-content glass-m">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('main')}}">Главная</a></li>
@@ -23,7 +23,7 @@
             <div class="row">
                 <div class="col-xl-3">
                     <!-- Profile picture card-->
-                    <div class="mb-4 mb-xl-0">
+                    <div class="mb-4 mb-xl-0 glass-m-p">
                         <div class="card-header__wp4 user_text__w3">{{ $user->email }}</div>
                         <div class="w-100 card-header__img">
                             {{ Auth::user()->getFirstMedia('avatars') }}

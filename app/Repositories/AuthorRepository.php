@@ -30,7 +30,7 @@ class AuthorRepository implements AuthorRepositoryInterface
                     ->orderBy('created_at', 'DESC')
                     ->latest();
             }])->orderBy('created_at', 'DESC')
-            ->limit(6)
+            ->limit(8)
             ->get();
     }
 

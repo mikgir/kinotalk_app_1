@@ -5,9 +5,9 @@
         <!-- breadcrumb-area -->
         <div class="breadcrumb-area">
             <div class="container">
-                <div class="row">
+                <div class="row" >
                     <div class="col-12">
-                        <div class="breadcrumb-content">
+                        <div class="breadcrumb-content glass-m">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('main')}}">Главная</a></li>
@@ -31,8 +31,8 @@
                         <div class="blog-details-wrap">
                             <ul class="tgbanner__content-meta list-wrap">
                                 <li class="category">{{$article->category->name}}</li>
-                                <li><span class="by">Автор:</span><a href="blog.html">{{$article->user->name}}</a></li>
-                                <li>05.05.2023</li>
+                                <li><span class="by">Автор:</span><a href="{{route('authors.show', $article->user->id)}}">{{$article->user->name}}</a></li>
+                                <li>{{$article->created_at}}</li>
                             </ul>
                             <h2 class="title">{{$article->title}}</h2>
                             <div class="blog-details-thumb">
@@ -59,12 +59,12 @@
                                 </div>
                             </div>
 
-                            <livewire:comments :model="$article"/>
-                            <script>
-                                window.addEventListener('closeModal', event => {
-                                    $('[id*="modalForm"]').modal('hide');
-                                })
-                            </script>
+                                <livewire:comments :model="$article"/>
+                                <script>
+                                    window.addEventListener('closeModal', event => {
+                                        $('[id*="modalForm"]').modal('hide');
+                                    })
+                                </script>
 
                             <div class="blog-prev-next-posts">
                                 <div class="row">
