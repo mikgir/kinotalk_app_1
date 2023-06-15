@@ -28,8 +28,8 @@
         <!-- Save changes button-->
 
         <div class="block col-4 align-self-center text-end btn_pr__w3">
-            <button class="bg-transparent" style="border: none; outline: none" type="submit">
-                <i class="fa fa-2x fa-share"></i>
+            <button class="bg-transparent" style="border: none; outline: none; font-size: 1.3rem"  type="submit">
+                <i class="fa fa-share"></i>
             </button>
         </div>
     </div>
