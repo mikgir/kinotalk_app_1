@@ -4,12 +4,11 @@ namespace App\Admin\Resources;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\SocialType;
-
 use MoonShine\Decorations\Block;
 use MoonShine\Decorations\Column;
 use MoonShine\Decorations\Grid;
-use MoonShine\Fields\Date;
-use MoonShine\Fields\Text;
+use MoonShine\Fields\BelongsTo;
+use MoonShine\Fields\Url;
 use MoonShine\Resources\Resource;
 use MoonShine\Fields\ID;
 use MoonShine\Actions\FiltersAction;
@@ -31,11 +30,12 @@ class SocialTypeResource extends Resource
             Grid::make([
                 Column::make([
                     Block::make('Информация', [
-                        Text::make('Наименование', 'name')
-                            ->sortable(),
-                        Text::make('icon_name'),
-                        Date::make('Дата создания', 'created_at'),
-                        Date::make('Дата изменения', 'updated_at')
+                        BelongsTo::make('Пользователь', 'user_id', 'name')
+                            ->sortable()
+                            ->searchable(),
+                        BelongsTo::make('Соц.сеть', 'social_type_id', 'name')
+                            ->searchable(),
+                        Url::make('Ссылка', 'link'),
                     ])
                 ])->columnSpan(6),
             ])
@@ -46,7 +46,6 @@ class SocialTypeResource extends Resource
 	{
 	    return [
             'name'=>'required|string|max:50',
-            'icon_name'=>'required|string|max:50',
         ];
     }
 

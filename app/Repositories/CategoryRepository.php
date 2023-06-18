@@ -17,7 +17,11 @@ class CategoryRepository implements CategoryRepositoryInterface
      */
     public function getAll(): LengthAwarePaginator
     {
-        return Category::with('articles')->paginate(1);
+        return Category::with(['articles' => function($query) {
+            $query->where('status', 'PUBLISHED')
+                ->where('active', 1)
+                ->orderBy('created_at', 'desc');
+        }])->paginate(1);
     }
 
     /**
@@ -25,7 +29,11 @@ class CategoryRepository implements CategoryRepositoryInterface
      */
     public function getHeaderAll(): Collection
     {
-        return Category::with('articles')->get();
+        return Category::with(['articles' => function($query) {
+            $query->where('status', 'PUBLISHED')
+                ->where('active', 1)
+                ->orderBy('created_at', 'desc');
+        }])->get();
     }
 
     /**

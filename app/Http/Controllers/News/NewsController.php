@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\News;
 
 use App\Http\Controllers\Controller;
-use App\Models\News;
-use App\Repositories\CategoryRepository;
 use App\Repositories\NewsRepository;
 use Illuminate\View\View;
 
@@ -33,6 +31,15 @@ class NewsController extends Controller
     public function show(int $id): View
     {
         $news = $this->newsRepository->getOne($id);
-        return view('news.show', compact('news'));
+
+        $previousNews = $this->newsRepository->getPreviousNews($id);
+
+        $nextNews = $this->newsRepository->getNextNews($id);
+
+        return view('news.show', [
+            'news' => $news,
+            'previousNews' => $previousNews,
+            'nextNews' => $nextNews,
+        ]);
     }
 }

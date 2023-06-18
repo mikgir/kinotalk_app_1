@@ -66,30 +66,32 @@
                                     <div class="col-xl-6 col-lg-8 col-md-6">
                                         <div class="pn-post-item">
                                             <div class="thumb">
-                                                <a href="news-details.html"><img
-                                                            src="{{asset('build/assets/src/assets/img/news/call.png')}}"
-                                                            alt="img"></a>
+                                                <a href="{{route('news.show', $previousNews->id)}}">
+                                                    <img
+                                                        src="{{$previousNews->image}}"
+                                                        alt="img">
+                                                </a>
                                             </div>
                                             <div class="content">
                                                 <span>Предыдущая новость</span>
                                                 <h5 class="title tgcommon__hover news_text__w3">
-                                                    <a href="news-details.html">Уникальный
-                                                        российский кинопроект "Вызов"...</a></h5>
+                                                    <a href="{{route('news.show', $previousNews->id)}}">{{Str::limit($previousNews->title, $limit = 40, ' ...')}}</a></h5>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-xl-6 col-lg-8 col-md-6">
                                         <div class="pn-post-item next-post">
                                             <div class="thumb">
-                                                <a href="news-details.html"><img
-                                                            src="{{asset('build/assets/src/assets/img/news/Afterburner.png')}}"
-                                                            alt="img"></a>
+                                                <a href="{{route('news.show', $nextNews->id)}}">
+                                                    <img
+                                                        src="{{$nextNews->image}}"
+                                                        alt="img">
+                                                </a>
                                             </div>
                                             <div class="content">
                                                 <span>Следующая новость</span>
                                                 <h5 class="title tgcommon__hover news_text__w3">
-                                                    <a href="news-details.html">"Форсаж".
-                                                        История семьи Доминика Торетто.</a></h5>
+                                                    <a href="{{route('news.show', $nextNews->id)}}">{{Str::limit($nextNews->title, $limit = 40, ' ...')}}</a></h5>
                                             </div>
                                         </div>
                                     </div>

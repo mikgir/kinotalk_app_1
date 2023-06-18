@@ -6,17 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
 use App\Models\Category;
-use App\Models\User;
 use App\Repositories\ArticleRepository;
 use App\Repositories\CategoryRepository;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
-use Illuminate\Support\Facades\Date;
-use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
@@ -66,8 +62,15 @@ class ArticleController extends Controller
     public function show($id): View
     {
         $article = $this->articleRepository->getOne($id);
+
+        $previousArticle = $this->articleRepository->getPreviousArticle($id);
+
+        $nextArticle = $this->articleRepository->getNextArticle($id);
+
         return view('articles.show', [
-            'article' => $article
+            'article' => $article,
+            'previousArticle' => $previousArticle,
+            'nextArticle' => $nextArticle,
         ]);
     }
 

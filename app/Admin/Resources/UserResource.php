@@ -9,15 +9,14 @@ use Illuminate\Contracts\Database\Eloquent\Builder;
 use MoonShine\Decorations\Block;
 use MoonShine\Decorations\Column;
 use MoonShine\Decorations\Grid;
+use MoonShine\Fields\BelongsToMany;
 use MoonShine\Fields\Date;
 use MoonShine\Fields\Email;
 use MoonShine\Fields\HasMany;
 use MoonShine\Fields\HasOne;
-use MoonShine\Fields\MorphMany;
-use MoonShine\Fields\Password;
+use MoonShine\Fields\Select;
 use MoonShine\Fields\Text;
 use MoonShine\Fields\Textarea;
-use MoonShine\Fields\Url;
 use MoonShine\Filters\DateFilter;
 use MoonShine\Filters\TextFilter;
 use MoonShine\ItemActions\ItemAction;
@@ -26,7 +25,6 @@ use MoonShine\Fields\ID;
 use MoonShine\Actions\FiltersAction;
 use Spatie\Permission\Traits\HasRoles;
 use VI\MoonShineSpatieMediaLibrary\Fields\MediaLibrary;
-
 
 class UserResource extends Resource
 {
@@ -37,7 +35,6 @@ class UserResource extends Resource
     public static string $subTitle = 'Управление пользователями';
     public string $titleField = 'name';
     public static int $itemsPerPage = 5;
-
 
     /**
      * @return Builder
@@ -78,17 +75,20 @@ class UserResource extends Resource
                                 Textarea::make('Обо мне', 'about_me'),
                             ])->resourceMode()
                             ->hideOnIndex(),
-                        HasMany::make('SocialLinks')
-                            ->hideOnIndex()
-                            ->resourceMode(),
-                        MorphMany::make('Роль', 'roles')
-                            ->sortable()
-                            ->removable(),
-                        Text::make('Статус пользователя', 'active', fn($item) => $item->active ? 1 : 0)
-                            ->hideOnIndex()
+                        HasMany::make('Ссылки на соц.сети', 'SocialLinks')
+                            ->removable()
+                            ->hideOnIndex(),
+                        BelongsToMany::make('Роль', 'roles', new RoleResource())
+                            ->sortable(),
+                        Select::make('Статус пользователя', 'active')
+                            ->options([
+                                1 => 'Активный пользователь',
+                                0 => 'Удаленный пользователь'
+                            ])
+                            ->hideOnIndex(),
                     ])
 
-                ])->columnSpan(6),
+                ])->columnSpan(12),
 
             ])
         ];

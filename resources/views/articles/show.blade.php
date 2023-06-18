@@ -71,28 +71,26 @@
                                     <div class="col-xl-6 col-lg-8 col-md-6">
                                         <div class="pn-post-item">
                                             <div class="thumb">
-                                                <a href="article-details.html"><img
-                                                            src="{{asset('build/assets/src/assets/img/lifestyle/TheLastofUs.png')}}"
-                                                            alt="img"></a>
+                                                <a href="{{route('articles.show', $previousArticle->id)}}">
+                                                    {{$previousArticle->getFirstMedia('sm_image')}}
+                                                </a>
                                             </div>
                                             <div class="content">
                                                 <span>Предыдущая статья</span>
-                                                <h5 class="title tgcommon__hover"><a href="article-details.html">После
-                                                        просмотра 1 сезона "The Last of Us"...</a></h5>
+                                                <h5 class="title tgcommon__hover"><a href="{{route('articles.show', $previousArticle->id)}}">{{Str::limit($previousArticle->title, $limit = 40, ' ...')}}</a></h5>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-xl-6 col-lg-8 col-md-6">
-                                        <div class="pn-post-item next-post">
+                                        <div class="pn-post-item">
                                             <div class="thumb">
-                                                <a href="article-details.html"><img
-                                                            src="{{asset('build/assets/src/assets/img/lifestyle/LordOfTheRings.png')}}"
-                                                            alt="img"></a>
+                                                <a href="{{route('articles.show', $nextArticle->id)}}">
+                                                    {{$nextArticle->getFirstMedia('sm_image')}}
+                                                </a>
                                             </div>
                                             <div class="content">
                                                 <span>Следующая статья</span>
-                                                <h5 class="title tgcommon__hover"><a href="article-details.html">Сказания
-                                                        о Средиземье — это хроника Великой...</a></h5>
+                                                <h5 class="title tgcommon__hover"><a href="{{route('articles.show', $nextArticle->id)}}">{{Str::limit($nextArticle->title, $limit = 40, ' ...')}}</a></h5>
                                             </div>
                                         </div>
                                     </div>
