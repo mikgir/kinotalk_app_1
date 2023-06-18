@@ -33,7 +33,7 @@
     </form>
     <form method="post" action="{{route('social_link.delete', $link->id)}}" class="col-1">
         @csrf
-        @method('delete')
+        @method('DELETE')
         <div class="col-1 align-self-center text-end btn_pr__w3">
             <button class="bg-transparent" style="border: none; outline: none; margin-top: 25px; font-size: 1.3rem" type="submit">
                 <i class="fa fa-trash"></i>
