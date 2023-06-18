@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\SocialLink;
 
 use MoonShine\Decorations\Block;
+use MoonShine\Decorations\Column;
 use MoonShine\Decorations\Grid;
 use MoonShine\Fields\BelongsTo;
 use MoonShine\Fields\Text;
@@ -22,6 +23,8 @@ class SocialLinkResource extends Resource
 	public static string $title = 'Социальные сети';
     public static string $subTitle = 'Страницы соц-сетей пользователей';
     public static int $itemsPerPage = 5;
+    protected bool $editInModal = true;
+    protected bool $createInModal = true;
 
 
     public function query(): Builder
@@ -36,14 +39,16 @@ class SocialLinkResource extends Resource
 		return [
 		    ID::make()->sortable(),
             Grid::make([
-                Block::make('Информация', [
-                    BelongsTo::make('Пользователь', 'user_id', 'name')
-                        ->sortable()
-                        ->searchable(),
-                    BelongsTo::make('Соц-сеть', 'social_type_id', 'name')
-                        ->searchable(),
-                    Url::make('Ссылка', 'link')
-                ])
+                Column::make([
+                    Block::make('Информация', [
+                        BelongsTo::make('Пользователь', 'user_id', 'name')
+                            ->sortable()
+                            ->searchable(),
+                        BelongsTo::make('Соц-сеть', 'social_type_id', 'name')
+                            ->searchable(),
+                        Url::make('Ссылка', 'link')
+                    ])
+                ])->columnSpan(6),
             ])
         ];
 	}

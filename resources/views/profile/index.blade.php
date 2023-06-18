@@ -136,9 +136,9 @@
                                                             </form>
                                                         </div>
                                                         <div>
-                                                            <form method="delete" action="{{route('articles.destroy', $article->id)}}">
+                                                            <form method="post" action="{{route('articles.destroy', $article->id)}}">
                                                                 @csrf
-                                                                @method('delete')
+                                                                @method('DELETE')
                                                                 <button type="submit" style="border: none; outline: none" class="mb-2 bg-transparent">
                                                                     <i class="fa fa-2x fa-trash"></i>
                                                                 </button>
