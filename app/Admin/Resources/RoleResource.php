@@ -9,7 +9,6 @@ use MoonShine\Decorations\Grid;
 use MoonShine\Fields\BelongsToMany;
 use MoonShine\Fields\Text;
 use Spatie\Permission\Models\Role;
-
 use MoonShine\Resources\Resource;
 use MoonShine\Fields\ID;
 use MoonShine\Actions\FiltersAction;
@@ -17,7 +16,6 @@ use MoonShine\Actions\FiltersAction;
 class RoleResource extends Resource
 {
 	public static string $model = Role::class;
-
 	public static string $title = 'Роли';
     public static string $subTitle = 'Управление ролями';
     public string $titleField = 'name';

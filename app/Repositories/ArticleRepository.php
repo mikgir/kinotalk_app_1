@@ -8,7 +8,6 @@ use App\Models\Article;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Date;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
@@ -24,7 +23,9 @@ class ArticleRepository implements ArticleRepositoryInterface
     public function getAll(): Collection|LengthAwarePaginator
     {
         return Article::with(['category', 'user'])
+            ->where('status', 'PUBLISHED')
             ->where('active', 1)
+            ->orderBy('created_at', 'desc')
             ->paginate(5);
     }
 
@@ -34,6 +35,7 @@ class ArticleRepository implements ArticleRepositoryInterface
     public function getLast(): Collection
     {
         return Article::with(['user', 'category', 'media'])
+            ->where('status', 'PUBLISHED')
             ->where('active', 1)
             ->latest('created_at')
             ->limit(3)->get();
@@ -116,4 +118,68 @@ class ArticleRepository implements ArticleRepositoryInterface
 
     }
 
+    /**
+     * @param int $id
+     * @param int $categoryId
+     * @return mixed
+     */
+    public function getPreviousArticle(int $id): mixed
+    {
+        $categoryId = $this->getOne($id)->category->id;
+
+        $articlesByCategory = $this->getArticlesByCategory($categoryId);
+
+        //проверяем, если ли предыдущая статья
+        $article = $articlesByCategory->where('id', '<', $id)->sortByDesc('id')->first();
+
+        if(!$article){
+            //если статья не найдена (например id=1), наоборот, берем самую последнюю
+            $article = $articlesByCategory->where('id', '>', $id)->sortByDesc('id')->first();
+
+            if(!$article){
+                //если статей в категории всего одна, то возвращаем ее
+                $article = $this->getOne($id);
+            }
+        }
+        return $article;
+    }
+
+    /**
+     * @param int $id
+     * @param int $categoryId
+     * @return mixed
+     */
+    public function getNextArticle(int $id): mixed
+    {
+        $categoryId = $this->getOne($id)->category->id;
+
+        $articlesByCategory = $this->getArticlesByCategory($categoryId);
+
+        //проверяем, если ли следующая статья
+        $article = $articlesByCategory->where('id', '>', $id)->sortByDesc('id')->last();
+
+        if(!$article){
+            //если статья не найдена (например id=1), наоборот, берем самую последнюю
+            $article = $articlesByCategory->where('id', '<', $id)->sortByDesc('id')->last();
+
+            if(!$article){
+                //если статей в категории всего одна, то возвращаем ее
+                $article = $this->getOne($id);
+            }
+        }
+        return $article;
+    }
+
+    /**
+     * @param int $categoryId
+     * @return Builder[]|Collection
+     */
+    public function getArticlesByCategory(int $categoryId): Builder|Collection
+    {
+        return Article::with(['user', 'category', 'media'])
+            ->where('category_id', $categoryId)
+            ->where('status', 'PUBLISHED')
+            ->where('active', 1)
+            ->get();
+    }
 }

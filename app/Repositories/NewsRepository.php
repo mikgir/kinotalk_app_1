@@ -3,10 +3,8 @@
 namespace App\Repositories;
 
 use App\Contracts\NewsRepositoryInterface;
-use App\Models\Category;
 use App\Models\News;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
 
@@ -80,5 +78,63 @@ class NewsRepository implements NewsRepositoryInterface
     public function getAllBySourceId(int $id): News
     {
         return News::where('source_id', $id)->get();
+    }
+
+    /**
+     * @param int $id
+     * @param int $categoryId
+     * @return mixed
+     */
+    public function getPreviousNews(int $id): mixed
+    {
+        $news = $this->getAllNewsWithoutPagination();
+
+        //проверяем, если ли предыдущая новость
+        $singleNews = $news->where('id', '<', $id)->sortByDesc('id')->first();
+
+        if(!$singleNews){
+            //если новость не найдена (например id=1), наоборот, берем самую последнюю
+            $singleNews = $news->where('id', '>', $id)->sortByDesc('id')->first();
+
+            if(!$singleNews){
+                //если новость всего одна, то возвращаем ее
+                $singleNews = $this->getOne($id);
+            }
+        }
+        return $singleNews;
+    }
+
+    /**
+     * @param int $id
+     * @param int $categoryId
+     * @return mixed
+     */
+    public function getNextNews(int $id): mixed
+    {
+        $news = $this->getAllNewsWithoutPagination();
+
+        //проверяем, если ли следующая статья
+        $singleNews = $news->where('id', '>', $id)->sortByDesc('id')->last();
+
+        if(!$singleNews){
+            //если статья не найдена (например id=1), наоборт, берем самую последнюю
+            $singleNews = $news->where('id', '<', $id)->sortByDesc('id')->last();
+
+            if(!$singleNews){
+                //если статей в категории всего одна, то возвращаем ее
+                $singleNews = $this->getOne($id);
+            }
+        }
+        return $singleNews;
+    }
+
+    /**
+     * @return Collection|LengthAwarePaginator
+     */
+    public function getAllNewsWithoutPagination(): Collection|LengthAwarePaginator
+    {
+        return News::where('status', 'PUBLISHED')
+            ->where('active', 1)
+            ->get();
     }
 }
