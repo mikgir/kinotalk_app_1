@@ -1,100 +1,28 @@
 <!-- footer-area -->
-<footer class="footer-area black-bg">
+<footer class="footer-area black-bg footer-container">
     <div class="container">
         <div class="footer__top-wrap">
             <div class="row">
                 <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                     <div class="footer__widget">
                         <h4 class="fw-title">Реклама</h4>
-                        <!-- <ul class="list-wrap">
-                             <li><a href="#">U.N.</a></li>
-                             <li><a href="#">Conflicts</a></li>
-                             <li><a href="#">Terrorism</a></li>
-                             <li><a href="#">Disasters</a></li>
-                             <li><a href="#">Global Economy</a></li>
-                             <li><a href="#">Environment</a></li>
-                             <li><a href="#">Religion</a></li>
-                             <li><a href="#">Scandals</a></li>
-                         </ul>-->
                     </div>
                 </div>
                 <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                     <div class="footer__widget">
                         <h4 class="fw-title">Предложения</h4>
-                        <!-- <ul class="list-wrap">
-                              <li><a href="#">Executive</a></li>
-                              <li><a href="#">Senate</a></li>
-                              <li><a href="#">House</a></li>
-                              <li><a href="#">Judiciary</a></li>
-                              <li><a href="#">Global Economy</a></li>
-                              <li><a href="#">Foreign policy</a></li>
-                              <li><a href="#">Polls</a></li>
-                              <li><a href="#">Elections</a></li>
-                          </ul>-->
                     </div>
                 </div>
                 <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                     <div class="footer__widget">
                         <h4 class="fw-title">Соглашение</h4>
-                        <!--   <ul class="list-wrap">
-                              <li><a href="#">Celebrity News</a></li>
-                              <li><a href="#">Movies</a></li>
-                              <li><a href="#">TV News</a></li>
-                              <li><a href="#">Disasters</a></li>
-                              <li><a href="#">Music News</a></li>
-                              <li><a href="#">Environment</a></li>
-                              <li><a href="#">Style News</a></li>
-                              <li><a href="#">Entertainment Video</a></li>
-                          </ul>-->
                     </div>
                 </div>
                 <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                     <div class="footer__widget">
                         <h4 class="fw-title">Служба поддержки</h4>
-                        <!--   <ul class="list-wrap">
-                              <li><a href="#">Environment</a></li>
-                              <li><a href="#">Conflicts</a></li>
-                              <li><a href="#">Terrorism</a></li>
-                              <li><a href="#">Disasters</a></li>
-                              <li><a href="#">Global Economy</a></li>
-                              <li><a href="#">Environment</a></li>
-                              <li><a href="#">Religion</a></li>
-                              <li><a href="#">Scandals</a></li>
-                          </ul>-->
                     </div>
                 </div>
-                <!--   <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                      <div class="footer__widget">
-                          <h4 class="fw-title">Health</h4>
-                          <ul class="list-wrap">
-                              <li><a href="#">Movies</a></li>
-                              <li><a href="#">Conflicts</a></li>
-                              <li><a href="#">Terrorism</a></li>
-                              <li><a href="#">Disasters</a></li>
-                              <li><a href="#">Global Economy</a></li>
-                              <li><a href="#">Scandals</a></li>
-                              <li><a href="#">Environment</a></li>
-                              <li><a href="#">Religion</a></li>
-                          </ul>
-                      </div>
-                  </div>
-                  <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                      <div class="footer__widget">
-                          <h4 class="fw-title">Trending In</h4>
-                          <ul class="list-wrap">
-                              <li><a href="#">U.N.</a></li>
-                              <li><a href="#">Conflicts</a></li>
-                              <li><a href="#">Terrorism</a></li>
-                              <li><a href="#">Disasters</a></li>
-                              <li><a href="#">Global Economy</a></li>
-                              <li><a href="#">Environment</a></li>
-                              <li><a href="#">Religion</a></li>
-                              <li><a href="#">Scandals</a></li>
-                          </ul>
-                      </div>
-                  </div>
-              </div>
-          </div>-->
                 <div class="footer__logo-wrap">
                     <div class="row align-items-center">
                         <div class="col-lg-3 col-md-4">

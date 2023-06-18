@@ -12,7 +12,6 @@ return new class extends Migration {
     {
         Schema::create('news', function (Blueprint $table) {
             $table->id();
-            $table->integer('category_id')->unsigned()->index();
             $table->integer('source_id')->unsigned()->index();
             $table->string('title');
             $table->string('seo_title')->nullable();
@@ -26,10 +25,6 @@ return new class extends Migration {
             $table->boolean('featured')->default(0);
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('category_id')
-                ->references('id')
-                ->on('categories');
 
             $table->foreign('source_id')
                 ->references('id')

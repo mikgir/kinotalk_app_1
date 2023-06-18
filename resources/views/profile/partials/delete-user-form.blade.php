@@ -1,29 +1,28 @@
-<section class="mb-2">
+<section class="mb-5">
     <header>
-        <h4 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-            {{ __('Удалить аккаунт') }}
-        </h4>
-
-        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+        <div class="card-header__wp5 block__wp5">{{ __('Удалить аккаунт') }}</div>
+        <p class="mt-1 card-header__font font__wp5">
             {{ __('После удаления вашей учетной записи все ее ресурсы и данные будут безвозвратно удалены. Перед удалением своей учетной записи загрузите любые данные или информацию, которые вы хотите сохранить.') }}
         </p>
     </header>
+    <div class="btn-update__wp3">
+        <x-primary-button
+            x-data=""
+            x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')">
+            {{ __('Удалить аккаунт') }}
+        </x-primary-button>
+</div>
 
-    <x-danger-button
-        x-data=""
-        x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
-    >{{ __('Удалить аккаунт') }}</x-danger-button>
-
-    <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
-        <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
+    <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable >
+        <form method="post" action="{{ route('profile.destroy', $user->id) }}" class="">
             @csrf
             @method('delete')
 
-            <h4 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                {{ __('Are you sure you want to delete your account?') }}
+            <h4 class="">
+                {{ __('Вы уверены, что хотите удалить свой аккаунт?') }}
             </h4>
 
-            <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+            <p class="mt-1">
                 {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
             </p>
 
@@ -46,7 +45,7 @@
                     {{ __('Cancel') }}
                 </x-secondary-button>
 
-                <x-danger-button class="btn btn-danger">
+                <x-danger-button class="btn btn-danger">role_has_permissions
                     {{ __('Delete Account') }}
                 </x-danger-button>
             </div>

@@ -2,11 +2,11 @@
 
 namespace App\MoonShine\Actions;
 
-use App\Http\Services\KinonewsParserService;
-use Illuminate\Support\Facades\App;
-use App\Repositories\CategoryRepository;
-use App\Repositories\NewsRepository;
+use App\Http\Services\Parser\Enum\NewsSources;
+use App\Http\Services\Parser\FilmRUParserService;
+use App\Http\Services\Parser\KinonewsParserService;
 use App\Repositories\SourceRepository;
+use Illuminate\Support\Facades\App;
 use MoonShine\Actions\Action;
 
 class ParserAction extends Action
@@ -20,21 +20,26 @@ class ParserAction extends Action
         return redirect('admin/resource/news-resource ');
     }
 
-    public function parce()
+    /**
+     * @return void
+     */
+    public function parce(): void
     {
         App::call(function (
-            CategoryRepository $categoryRepository,
             SourceRepository $sourceRepository,
-            NewsRepository $newsRepository,
-            KinonewsParserService $parser
+            KinonewsParserService $kinonewsParserServiceParser,
+            FilmRUParserService $filmRUParserService,
         ){
             $sources = $sourceRepository->getAll();
 
             foreach ($sources as $source) {
-                if($source->status === 'ACTIVE') {
-                    match ($source->url) {
-                        'https://www.kinonews.ru/rss' => $parser->saveNews($source->url),
+                if($source->status) {
+                    $parser = match ($source->url) {
+                        NewsSources::Kinonews->value => $kinonewsParserServiceParser,
+                        NewsSources::FilmRu->value => $filmRUParserService
                     };
+
+                    $parser->saveNews($source->url);
                 }
             }
         });

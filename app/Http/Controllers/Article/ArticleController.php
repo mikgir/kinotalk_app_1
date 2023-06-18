@@ -3,20 +3,29 @@
 namespace App\Http\Controllers\Article;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
+use App\Models\Category;
 use App\Repositories\ArticleRepository;
+use App\Repositories\CategoryRepository;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
-
+use Illuminate\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 
 class ArticleController extends Controller
 {
-    protected $repository;
+    protected $articleRepository;
+    protected $categoryRepository;
 
-    public function __construct(ArticleRepository $repository)
+    public function __construct(ArticleRepository $articleRepository, CategoryRepository $categoryRepository)
     {
-        $this->repository = $repository;
+        $this->articleRepository = $articleRepository;
+        $this->categoryRepository = $categoryRepository;
     }
 
     /**
@@ -24,11 +33,26 @@ class ArticleController extends Controller
      */
     public function index(): View
     {
-        $articles = $this->repository->getAll()->partition(5);
+        $categories = $this->categoryRepository->getAll();
+        $articles = $this->articleRepository->getAll();
 
         return view('articles.index', [
-            'articles' => $articles
+            'articles' => $articles,
+            'categories' => $categories
         ]);
+    }
+
+    /**
+     * @return View
+     */
+    public function showCategory(): View
+    {
+        $categories = $this->categoryRepository->getAll();
+
+        return \view('articles.category', [
+            'categories' => $categories
+        ]);
+
     }
 
     /**
@@ -37,9 +61,16 @@ class ArticleController extends Controller
      */
     public function show($id): View
     {
-        $article = $this->repository->getOne($id);
+        $article = $this->articleRepository->getOne($id);
+
+        $previousArticle = $this->articleRepository->getPreviousArticle($id);
+
+        $nextArticle = $this->articleRepository->getNextArticle($id);
+
         return view('articles.show', [
-            'article' => $article
+            'article' => $article,
+            'previousArticle' => $previousArticle,
+            'nextArticle' => $nextArticle,
         ]);
     }
 
@@ -49,39 +80,81 @@ class ArticleController extends Controller
      */
     public function create(): View
     {
-        return view('articles.create');
+        $categories = Category::all();
+        return view('articles.create', compact('categories'));
     }
 
     /**
      * Store a newly created resource in storage.
+     * @param ArticleRequest $request
+     * @return RedirectResponse
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
      */
-    public function store(Request $request)
+    public function store(ArticleRequest $request): RedirectResponse
     {
-        //
+        $this->articleRepository->createArticle($request);
+
+        return redirect('/profile')
+            ->with('success', 'Статья успешно создана');
+    }
+
+    /**
+     * @param $id
+     * @return Application|Redirector|RedirectResponse
+     */
+    public function publish($id): Application|Redirector|RedirectResponse
+    {
+        $article = Article::with('user')->findOrFail($id);
+        $article->update(['status' => 'PENDING']);
+
+        return redirect('/profile')
+            ->with('success', 'Статья успешно обновлена');
     }
 
 
     /**
      * Show the form for editing the specified resource.
+     * @param string $id
+     * @return Factory|Application|View
      */
-    public function edit(string $id)
+    public function edit(string $id): Factory|Application|View
     {
-        //
+        $article = Article::with(['user', 'category'])->findOrFail($id);
+        $categories = Category::all();
+
+        return \view('articles.edit', [
+            'article' => $article,
+            'categories' => $categories
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
+     * @param ArticleRequest $request
+     * @param string $id
+     * @return Application|Redirector|RedirectResponse
      */
-    public function update(Request $request, string $id)
+    public function update(ArticleRequest $request, string $id): Application|Redirector|RedirectResponse
     {
+        $this->articleRepository->updateArticle($id, $request);
 
+        return redirect('/profile')
+            ->with('success', 'Статья успешно обновлена');
     }
 
     /**
      * Remove the specified resource from storage.
+     * @param string $id
+     * @return RedirectResponse
      */
-    public function destroy(string $id)
+    public function destroy(string $id): RedirectResponse
     {
-        //
+        $article = $this->articleRepository->getOne($id);
+        $article->delete();
+
+        return redirect('/profile')
+            ->with('success', 'Статья успешно удалена');
+
     }
 }

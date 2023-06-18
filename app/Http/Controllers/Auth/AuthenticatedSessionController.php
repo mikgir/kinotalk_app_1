@@ -8,6 +8,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
@@ -27,9 +28,19 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
+        // Если пользователь хотел оставить комментарий, перенаправляем его на страницу с комментарием
+        if ($request->session()->has('redirect_url')) {
+            $redirectUrl = $request->session()->get('redirect_url');
+            $request->session()->forget('redirect_url');
+            $request->session()->regenerate();
+
+            return redirect($redirectUrl);
+        }
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        // Если пользователь зашел на сайт без намерения оставить комментарий, перенаправляем его на главную страницу
+        return redirect('/');
+
     }
 
     /**

@@ -553,22 +553,22 @@ $('.popup-video').magnificPopup({
 /*===========================================
 	=        Isotope Active       =
 =============================================*/
-$('.minimal__post-wrapper, .adventure__post-wrapper').imagesLoaded(function () {
-	// init Isotope
-	var $grid = $('.minimal__post-wrapper, .adventure__post-wrapper').isotope({
-		itemSelector: '.grid-item',
-		percentPosition: true,
-		masonry: {
-			columnWidth: 1,
-		}
-	});
-	// filter items on button click
-	$('.portfolio-menu').on('click', 'button', function () {
-		var filterValue = $(this).attr('data-filter');
-		$grid.isotope({ filter: filterValue });
-	});
-
-});
+// $('.minimal__post-wrapper, .adventure__post-wrapper').imagesLoaded(function () {
+// 	// init Isotope
+// 	var $grid = $('.minimal__post-wrapper, .adventure__post-wrapper').isotope({
+// 		itemSelector: '.grid-item',
+// 		percentPosition: true,
+// 		masonry: {
+// 			columnWidth: 1,
+// 		}
+// 	});
+// 	// filter items on button click
+// 	$('.portfolio-menu').on('click', 'button', function () {
+// 		var filterValue = $(this).attr('data-filter');
+// 		$grid.isotope({ filter: filterValue });
+// 	});
+//
+// });
 //for menu active class
 $('.product-license li').on('click', function (event) {
 	$(this).siblings('.active').removeClass('active');

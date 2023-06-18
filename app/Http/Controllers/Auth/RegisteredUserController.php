@@ -47,6 +47,7 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
         if ($request->hasFile('avatar')) {
+
             $user->addMediaFromRequest('avatar')
                 ->toMediaCollection('avatars');
         }
@@ -57,6 +58,16 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        // Если пользователь хотел оставить комментарий, перенаправляем его на страницу с комментарием
+        if ($request->session()->has('redirect_url')) {
+            $redirectUrl = $request->session()->get('redirect_url');
+            $request->session()->forget('redirect_url');
+
+            return redirect($redirectUrl);
+        }
+        $request->session()->regenerate();
+
+        // Если пользователь регистрируется без намерения оставить комментарий, перенаправляем его на главную страницу
+        return redirect(RouteServiceProvider::ACCOUNT);
     }
 }

@@ -9,7 +9,6 @@ use MoonShine\Decorations\Grid;
 use MoonShine\Fields\BelongsToMany;
 use MoonShine\Fields\Text;
 use Spatie\Permission\Models\Role;
-
 use MoonShine\Resources\Resource;
 use MoonShine\Fields\ID;
 use MoonShine\Actions\FiltersAction;
@@ -17,13 +16,15 @@ use MoonShine\Actions\FiltersAction;
 class RoleResource extends Resource
 {
 	public static string $model = Role::class;
-
 	public static string $title = 'Роли';
     public static string $subTitle = 'Управление ролями';
-    public string $titleField = 'title';
+    public string $titleField = 'name';
     public static int $itemsPerPage = 5;
     protected bool $editInModal = true;
     protected bool $createInModal = true;
+    public static array $with = [
+        'permissions'
+    ];
 
 	public function fields(): array
 	{
@@ -36,13 +37,13 @@ class RoleResource extends Resource
                         Text::make('guard_name'),
                         ])
 
-                ])->columnSpan(6),
+                ])->columnSpan(5),
                 Column::make('Роли', [
                     Block::make('Выберете разрешения', [
                         BelongsToMany::make('Разрешения', 'permissions', 'name')
                             ->hideOnIndex()
                     ])
-                ])->columnSpan(6)
+                ])->columnSpan(7)
             ])
         ];
 	}

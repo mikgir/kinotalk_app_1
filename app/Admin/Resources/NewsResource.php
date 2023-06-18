@@ -31,7 +31,7 @@ class NewsResource extends Resource
 
     public function query(): Builder
     {
-        return News::with(['category', 'source']);
+        return News::with(['source']);
     }
 
     public function fields(): array
@@ -41,14 +41,14 @@ class NewsResource extends Resource
             Grid::make([
                 Column::make([
                     Block::make('Информация', [
-                        BelongsTo::make('Категоия', 'category_id', 'name')
+                        BelongsTo::make('Название', 'source_id', 'name')
                             ->sortable(),
-                        Text::make('Ресурс', 'source_id', 'name')
+                        BelongsTo::make('Ресурс', 'source_id', 'url')
                             ->sortable(),
-                        Text::make('title', 'title')
+                        Text::make('Новость', 'title')
                             ->sortable(),
                         Text::make('seo title')
-                            ->sortable(),
+                            ->hideOnIndex(),
                         Date::make('Дата создания', 'created_at')
                             ->format('d.m.Y')
                             ->sortable(),
@@ -85,7 +85,7 @@ class NewsResource extends Resource
     public function rules(Model $item): array
     {
         return [
-            'source' => ['required', 'string', 'min:3'],
+            'source_id' => ['required', 'integer'],
             'title' => ['required', 'string', 'min:3'],
             'body' => ['required', 'string', 'min:3']
         ];

@@ -2,23 +2,28 @@
 
 namespace App\Models;
 
+use App\Traits\Commentable;
+use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableInterface;
+use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class News extends Model
+class News extends Model implements ReactableInterface
 {
     use HasFactory;
+    use SoftDeletes;
+    use Commentable;
+    use Reactable;
 
     protected $table = 'news';
 
     protected $casts = [
-        'category_id' => 'int',
         'featured' => 'bool'
     ];
 
     protected $fillable = [
-        'category_id',
         'source_id',
         'title',
         'seo_title',
@@ -31,11 +36,6 @@ class News extends Model
         'status',
         'featured'
     ];
-
-    public function category(): BelongsTo
-    {
-        return $this->belongsTo(Category::class);
-    }
 
     public function source(): BelongsTo
     {

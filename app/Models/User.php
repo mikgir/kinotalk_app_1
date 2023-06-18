@@ -21,7 +21,6 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Permission\Traits\HasRoles;
 
-
 /**
  * Class User
  *
@@ -35,6 +34,8 @@ use Spatie\Permission\Traits\HasRoles;
  * @property Carbon|null $updated_at
  * *
  * @property Collection|Article[] $articles
+ * @property Collection|SocialLink[] $socialLinks
+ *
  *
  * @package App\Models
  */
@@ -46,10 +47,6 @@ class User extends Authenticatable implements ReacterableInterface, HasMedia
     use Reacterable;
     use InteractsWithMedia;
 
-//    public function registerMediaCollections(): void
-//    {
-//        $this ->addMediaCollection('avatars');
-//    }
     protected $table = 'users';
 
     protected $casts = [
@@ -67,6 +64,7 @@ class User extends Authenticatable implements ReacterableInterface, HasMedia
         'email_verified_at',
         'password',
         'remember_token',
+        'active'
     ];
 
     /**
@@ -77,12 +75,25 @@ class User extends Authenticatable implements ReacterableInterface, HasMedia
         return $this->hasMany(Article::class);
     }
 
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     /**
      * @return HasOne
      */
     public function profile(): HasOne
     {
         return $this->hasOne(Profile::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function socialLinks(): HasMany
+    {
+        return $this->hasMany(SocialLink::class);
     }
 
     /**

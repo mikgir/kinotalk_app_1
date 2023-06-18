@@ -1,10 +1,6 @@
 <section class="mb-2">
     <header>
-        <h4 class="">
-            {{ __('Информация аккаунта') }}
-        </h4>
-
-        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+        <p class="mt-1 px-3 card-header__font">
             {{ __("Обновите информацию профиля своей учетной записи и адрес электронной почты.") }}
         </p>
     </header>
@@ -14,27 +10,27 @@
     </form>
 
 
-    <form method="post" action="{{ route('profile.update') }}" class="form-control">
+    <form method="post" enctype="multipart/form-data" action="{{ route('profile.user_update', auth()->id()) }}">
         @csrf
         @method('patch')
-
         <div class="form-group row">
-            <label for="avatar" class="col-md-4 col-form-label text-md-right">{{ __('Аватар') }}</label>
-            <div class="col-md-6">
-                {{ Auth::user()->getFirstMedia('avatars') }}
-                <input id="avatar" type="file" class="form-control" name="avatar">
+            <label for="avatar" class="col-md-4 col-form-label text-md-right card-header__wp5">{{ __('Аватар') }}</label>
+            <div class="col-md-20">
+                <input id="avatar" name="avatar" type="file" class="form-control card-header__inp3">
             </div>
         </div>
-
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" value="{{Auth::user()->name}}" class="form-control mb-2" required autofocus autocomplete="name" />
+        <div class="card-header__wp6">
+            <x-input-label for="name" :value="__('Имя')" />
+            <x-text-input id="name" name="name" type="text" class="form-control mb-2 card-header__inp3" autofocus autocomplete="name"
+                          placeholder="Введите имя"/>
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
 
-        <div>
+        <div class="card-header__wp6">
             <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" name="email" type="email" class="form-control mb-2"  required autocomplete="username" />
+            <x-text-input id="email" name="email" type="email" class="form-control mb-2 card-header__inp3"
+                          autocomplete="username"
+                          placeholder="Введите Email"/>
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
@@ -56,8 +52,8 @@
             @endif
         </div>
 
-        <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+        <div class="btn-update__wp3">
+            <x-primary-button>{{ __('Сохранить') }}</x-primary-button>
 
             @if (session('status') === 'profile-updated')
                 <p

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enum\ArticleStatusEnum;
+use App\Traits\Commentable;
 use Carbon\Carbon;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableInterface;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
@@ -9,7 +11,6 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Image\Exceptions\InvalidManipulation;
 use Spatie\MediaLibrary\HasMedia;
@@ -33,6 +34,7 @@ use Spatie\Image\Manipulations;
  * @property string|null $meta_keywords
  * @property string $status
  * @property bool $featured
+ * @property bool $active
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property string|null $deleted_at
@@ -49,14 +51,16 @@ class Article extends Model implements ReactableInterface, HasMedia
     use SoftDeletes;
     use Reactable;
     use InteractsWithMedia;
-
+    use Commentable;
 
     protected $table = 'articles';
 
     protected $casts = [
         'user_id' => 'int',
         'category_id' => 'int',
-        'featured' => 'bool'
+        'featured' => 'bool',
+        'active' => 'bool',
+        'status' => ArticleStatusEnum::class
     ];
 
     protected $fillable = [
@@ -71,7 +75,8 @@ class Article extends Model implements ReactableInterface, HasMedia
         'meta_description',
         'meta_keywords',
         'status',
-        'featured'
+        'featured',
+        'active'
     ];
 
     public function category(): BelongsTo
@@ -83,7 +88,6 @@ class Article extends Model implements ReactableInterface, HasMedia
     {
         return $this->belongsTo(User::class);
     }
-
 
     /**
      * @throws InvalidManipulation
@@ -99,7 +103,8 @@ class Article extends Model implements ReactableInterface, HasMedia
             ->nonQueued();
     }
 
-    public static function last() {
+    public static function last()
+    {
         return static::all()->last();
     }
 

@@ -9,13 +9,14 @@ use App\Models\Profile;
 use MoonShine\Decorations\Block;
 use MoonShine\Decorations\Column;
 use MoonShine\Decorations\Grid;
-use MoonShine\Fields\BelongsTo;
 use MoonShine\Fields\Date;
+use MoonShine\Fields\Email;
 use MoonShine\Fields\HasOne;
 use MoonShine\Fields\Text;
 use MoonShine\Resources\Resource;
 use MoonShine\Fields\ID;
 use MoonShine\Actions\FiltersAction;
+use VI\MoonShineSpatieMediaLibrary\Fields\MediaLibrary;
 
 class ProfileResource extends Resource
 {
@@ -34,20 +35,19 @@ class ProfileResource extends Resource
             Grid::make([
                 Column::make([
                     Block::make('Содержание', [
-                        Text::make('first_name'),
-                        Text::make('last_name'),
-                        HasOne::make('user', 'user_id'),
-                        Text::make('occupation')
-                            ->hideOnIndex(),
+                        HasOne::make('user', 'user_id')->fields([
+                            MediaLibrary::make('Аватар', 'avatars'),
+                            Text::make('Имя', 'name'),
+                            Email::make('email'),
+                        ]),
+                        Text::make('Имя', 'first_name'),
+                        Text::make('Фамилия', 'last_name'),
+                        Date::make('Дата рождения', 'birthday'),
                         Text::make('Город', 'city'),
                         Text::make('Страна', 'country'),
                         Text::make('Вэб сайт', 'website')
                             ->hideOnIndex(),
-                        Text::make('Компания', 'company')
-                            ->hideOnIndex(),
                         Text::make('Обо мне', 'about_me')
-                            ->hideOnIndex(),
-                        Text::make('Биография', 'bio')
                             ->hideOnIndex(),
                         Date::make('Дата создания', 'created_at')
                             ->format('d.m.Y')
