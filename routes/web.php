@@ -8,6 +8,7 @@ use App\Http\Controllers\News\NewsController;
 use App\Http\Controllers\Profile\UserProfileController;
 use App\Http\Controllers\Mail\MailController;
 use App\Http\Controllers\Social\SocialLinkController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use MoonShine\Http\Controllers\DashboardController;
 
@@ -46,6 +47,10 @@ Route::get('/becomeAuthor/{id}', [MailController::class, 'sendEmailBecomeAuthor'
     ->where('id', '\d+')
     ->name('becomeAuthor');
 
+//Route::group(['middleware' => ['role:super-admin|moderator']], function () {
+//    Route::get('/', ['middleware'=>'moonshine.index'])
+//        ->name('admin');
+//});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [UserProfileController::class, 'index'])
@@ -104,3 +109,12 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
+
+Route::get('/clear', function () {
+    Artisan::call('cache:clear');
+    Artisan::call('config:cache');
+    Artisan::call('view:clear');
+    Artisan::call('route:clear');
+
+    return "Кэш очищен.";
+});
