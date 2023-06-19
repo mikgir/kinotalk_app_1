@@ -47,11 +47,6 @@ Route::get('/becomeAuthor/{id}', [MailController::class, 'sendEmailBecomeAuthor'
     ->where('id', '\d+')
     ->name('becomeAuthor');
 
-//Route::group(['middleware' => ['role:super-admin|moderator']], function () {
-//    Route::get('/', ['middleware'=>'moonshine.index'])
-//        ->name('admin');
-//});
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [UserProfileController::class, 'index'])
         ->name('profile.show');
