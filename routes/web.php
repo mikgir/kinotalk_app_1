@@ -8,6 +8,8 @@ use App\Http\Controllers\News\NewsController;
 use App\Http\Controllers\Profile\UserProfileController;
 use App\Http\Controllers\Mail\MailController;
 use App\Http\Controllers\Social\SocialLinkController;
+use App\Http\Controllers\Support\SupportController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use MoonShine\Http\Controllers\DashboardController;
 
@@ -33,19 +35,22 @@ Route::get('/articles/category', [ArticleController::class, 'showCategory'])
 Route::get('/articles/{id}', [ArticleController::class, 'show'])
     ->where('id', '\d+')
     ->name('articles.show');
-Route::get('/authors', [AuthorController::class, 'index'])->name('authors');
+Route::get('/authors', [AuthorController::class, 'index'])
+    ->name('authors');
 Route::get('/authors/{id}', [AuthorController::class, 'show'])
     ->where('id', '\d+')
     ->name('authors.show');
-Route::get('/news', [NewsController::class, 'index'])->name('news');
+Route::get('/news', [NewsController::class, 'index'])
+    ->name('news');
 Route::get('/news/{id}', [NewsController::class, 'show'])
     ->where('id', '\d+')
     ->name('news.show');
+Route::get('/support', [SupportController::class, 'index'])
+    ->name('support');
 
 Route::get('/becomeAuthor/{id}', [MailController::class, 'sendEmailBecomeAuthor'])
     ->where('id', '\d+')
     ->name('becomeAuthor');
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [UserProfileController::class, 'index'])
@@ -104,3 +109,12 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
+
+Route::get('/clear', function () {
+    Artisan::call('cache:clear');
+    Artisan::call('config:cache');
+    Artisan::call('view:clear');
+    Artisan::call('route:clear');
+
+    return "Кэш очищен.";
+});

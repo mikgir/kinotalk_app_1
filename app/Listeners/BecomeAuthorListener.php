@@ -26,7 +26,7 @@ class BecomeAuthorListener
     {
 
         // автоматическое присвоение роли "автор"
-        if ($event->user->hasRole(['user', 'moderator'])) {
+        if ($event->user->hasRole('user') && $event->user->hasRole('moderator')) {
             $event->user->assignRole(['user', 'moderator', 'author']);
         }
         $event->user->assignRole(['user', 'author']);
