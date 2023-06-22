@@ -5,22 +5,22 @@
             <div class="row">
                 <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                     <div class="footer__widget">
-                        <h4 class="fw-title">Реклама</h4>
+                        <h4 class="fw-title"><a href="{{route('support')}}">Реклама</a></h4>
                     </div>
                 </div>
                 <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                     <div class="footer__widget">
-                        <h4 class="fw-title">Предложения</h4>
+                        <h4 class="fw-title"><a href="{{route('support')}}">Предложения</a></h4>
                     </div>
                 </div>
                 <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                     <div class="footer__widget">
-                        <h4 class="fw-title">Соглашение</h4>
+                        <h4 class="fw-title"><a href="{{route('support')}}">Соглашение</a></h4>
                     </div>
                 </div>
                 <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                     <div class="footer__widget">
-                        <h4 class="fw-title">Служба поддержки</h4>
+                        <h4 class="fw-title"><a href="{{route('support')}}">Служба поддержки</a></h4>
                     </div>
                 </div>
                 <div class="footer__logo-wrap">

@@ -1,4 +1,6 @@
 <x-guest-layout xmlns:livewire="http://www.w3.org/1999/xhtml">
+    <livewire:styles/>
+    <livewire:scripts/>
     <main>
         <!-- banner-area -->
         <section class="tgbanner__area">
@@ -120,7 +122,10 @@
 
                                             <ul class="post__activity list-wrap">
                                                 <li class="align-self-baseline">
-                                                    <livewire:reactions :model="$article"/>
+{{--                                                    <a href="{{route('articles.show', $article->id)}}" >--}}
+{{--                                                        <i class="fa fa-heart"></i>--}}
+{{--                                                    </a>--}}
+{{--                                                    <livewire:reactions :model="$article"/>--}}
                                                 </li>
                                                 <li class="align-self-baseline">
                                                     <a href="{{route('articles.show', $article->id)}}" >
@@ -221,7 +226,7 @@
                                     </h4>
                                     <ul class="post__activity list-wrap">
                                         <li>
-                                            <livewire:reactions :model="$news"/>
+{{--                                            <livewire:reactions :model="$news"/>--}}
                                         </li>
                                         <li>
                                             <a href="{{route('news.show', $news->id)}}">
