@@ -24,13 +24,13 @@
                                     </ul></li>
                                 <li><a href="{{route('news')}}">Новости</a></li>
                                 <li><a href="{{route('authors')}}">Авторы</a></li>
-                                <li class="menu-item-has-children"><a href="#">Популярное</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="#">Статьи</a></li>
-                                        <li><a href="#">Авторы</a></li>
-                                        <li><a href="#">Теги</a></li>
-                                    </ul>
-                                </li>
+{{--                                <li class="menu-item-has-children"><a href="#">Популярное</a>--}}
+{{--                                    <ul class="sub-menu">--}}
+{{--                                        <li><a href="#">Статьи</a></li>--}}
+{{--                                        <li><a href="#">Авторы</a></li>--}}
+{{--                                        <li><a href="#">Теги</a></li>--}}
+{{--                                    </ul>--}}
+{{--                                </li>--}}
                             </ul>
                         </div>
                         <div class="tgmenu__action">

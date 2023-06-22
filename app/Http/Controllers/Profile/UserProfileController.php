@@ -138,9 +138,14 @@ class UserProfileController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     * @param string $id
+     * @return RedirectResponse
      */
-    public function destroy(string $id)
+    public function destroy(string $id): RedirectResponse
     {
-        //
+        $user = User::with('profile')->findOrFail($id);
+        $user->delete();
+
+        return redirect('/');
     }
 }

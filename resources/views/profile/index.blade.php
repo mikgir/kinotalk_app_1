@@ -45,6 +45,61 @@
                         </div>
                     </div>
                 </div>
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Удалить аккаунт</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+
+                                <form method="post" action="{{ route('profile.destroy', $user->id) }}" class="">
+                                    @csrf
+                                    @method('delete')
+                                    <div class="modal-body">
+                                    <h4 class="">
+                                        {{ __('Вы уверены, что хотите удалить свой аккаунт?') }}
+                                    </h4>
+
+                                    <p class="mt-1">
+                                        {{ __('После удаления вашей учетной записи все ее ресурсы и данные будут безвозвратно удалены. Пожалуйста, введите свой пароль, чтобы подтвердить, что вы хотите навсегда удалить свою учетную запись.') }}
+                                    </p>
+
+                                    <div class="mt-6">
+                                        <x-input-label for="password" value="{{ __('Пароль') }}" class="" />
+
+                                        <x-text-input
+                                            id="password"
+                                            name="password"
+                                            type="password"
+                                            class="mt-1 block w-3/4"
+                                            placeholder="{{ __('Password') }}"
+                                        />
+
+                                        {{--                            <x-input-error :messages="$errors->userDeletion->get('password')" class="mt-2" />--}}
+                                    </div>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <div class="mt-6 flex justify-end">
+                                            <x-secondary-button
+                                                data-bs-dismiss="modal"
+                                                {{--                    x-on:click="$dispatch('close')"--}}
+                                            >
+                                                {{ __('Отмена') }}
+                                            </x-secondary-button>
+                                            @can('delete-own profile')
+                                                <x-danger-button class="btn btn-danger">
+                                                    {{ __('Удалить') }}
+                                                </x-danger-button>
+                                            @endcan
+                                        </div>
+                                    </div>
+                                </form>
+
+                        </div>
+                    </div>
+                </div>
                 <div class="col-xl-9">
                     <!-- Account details card-->
                     <div>
