@@ -27,15 +27,21 @@
                     <div class="row align-items-center">
                         <div class="col-lg-3 col-md-4">
                             <div class="footer__logo logo">
-                                <a href="#"><img src="{{asset('build/assets/src/assets/img/logo/w_kinotalk.png')}}" alt="Logo"></a>
+                                <a href="#"><img src="{{asset('build/assets/src/assets/img/logo/w_kinotalk.png')}}"
+                                                 alt="Logo"></a>
                             </div>
                         </div>
                         <div class="col-lg-9 col-md-8">
                             <div class="footer__social">
                                 <ul class="list-wrap">
-                                    <li><a href="#"><i class="fab fa-telegram"></i> Telegram <span>25K</span></a></li>
-                                    <li><a href="#"><i class="fab fa-vk"></i> VK <span>44K</span></a></li>
-                                    <li><a href="#"><i class="fab flaticon-instagram"></i> Instagram <span>91K</span></a></li>
+                                    <li><a href="https://web.telegram.org/a/" target="_blank"><i
+                                                class="fab fa-telegram"></i> Telegram <span>25K</span></a></li>
+                                    <li><a href="https://vk.com/" target="_blank"><i class="fab fa-vk"></i> VK
+                                            <span>44K</span></a>
+                                    </li>
+                                    <li><a href="https://ru.pinterest.com/" target="_blank"><i
+                                                class="fab fa-pinterest"></i> Pinterest
+                                            <span>91K</span></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -51,9 +57,9 @@
                         <div class="col-lg-6">
                             <div class="copyright__menu">
                                 <ul class="list-wrap">
-                                    <li><a href="#">Контакты</a></li>
-                                    <li><a href="#">Условия эксплуатации</a></li>
-                                    <li><a href="#">Адрес</a></li>
+                                    <li><a href="{{route('support')}}">Контакты</a></li>
+                                    <li><a href="{{route('support')}}">Условия эксплуатации</a></li>
+                                    <li><a href="{{route('support')}}">Адрес</a></li>
                                 </ul>
                             </div>
                         </div>

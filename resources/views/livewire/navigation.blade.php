@@ -5,32 +5,41 @@
                 <div class="tgmenu__wrap">
                     <nav class="tgmenu__nav">
                         <div class="logo d-block d-md-none">
-                            <a href="{{route('main')}}" class="logo-dark"><img src="{{asset('build/assets/src/assets/img/logo/b_kinotalk.png')}}" alt="Logo"></a>
-                            <a href="{{route('main')}}" class="logo-light"><img src="{{asset('build/assets/src/assets/img/logo/w_kinotalk.png')}}" alt="Logo"></a>
+                            <a href="{{route('main')}}" class="logo-dark"><img
+                                    src="{{asset('build/assets/src/assets/img/logo/b_kinotalk.png')}}" alt="Logo"></a>
+                            <a href="{{route('main')}}" class="logo-light"><img
+                                    src="{{asset('build/assets/src/assets/img/logo/w_kinotalk.png')}}" alt="Logo"></a>
                         </div>
                         <div class="offcanvas-toggle">
                             <a href="#"><i class="flaticon-menu-bar"></i></a>
                         </div>
                         <div class="tgmenu__navbar-wrap tgmenu__main-menu d-none d-lg-flex">
                             <ul class="navigation">
-                                <li class="active"><a href="{{route('main')}}">Главная</a></li>
-                                <li class="menu-item-has-children"><a href="{{route('articles')}}">Статьи</a>
+                                <li class="@if (request()->routeIs('main')) active @endif"><a href="{{route('main')}}">Главная</a>
+                                </li>
+                                <li class="menu-item-has-children @if (request()->routeIs('articles') || request()->routeIs('articles.*')) active @endif">
+                                    <a href="{{route('articles')}}">Статьи</a>
                                     <ul class="sub-menu">
                                         @foreach($categories as $key=>$category)
                                             <li class="item {{ $category->name === $category->id ? 'active' : '' }}">
                                                 <a href="{{route('articles.category') . '?page=' . $category->id}}">{{$category->name}}</a>
                                             </li>
                                         @endforeach
-                                    </ul></li>
-                                <li><a href="{{route('news')}}">Новости</a></li>
-                                <li><a href="{{route('authors')}}">Авторы</a></li>
-{{--                                <li class="menu-item-has-children"><a href="#">Популярное</a>--}}
-{{--                                    <ul class="sub-menu">--}}
-{{--                                        <li><a href="#">Статьи</a></li>--}}
-{{--                                        <li><a href="#">Авторы</a></li>--}}
-{{--                                        <li><a href="#">Теги</a></li>--}}
-{{--                                    </ul>--}}
-{{--                                </li>--}}
+                                    </ul>
+                                </li>
+                                <li class="@if (request()->routeIs('news') || request()->routeIs('news.*')) active @endif">
+                                    <a
+                                        href="{{route('news')}}">Новости</a></li>
+                                <li class="@if (request()->routeIs('authors') || request()->routeIs('authors.*')) active @endif">
+                                    <a
+                                        href="{{route('authors')}}">Авторы</a></li>
+                                {{--                                <li class="menu-item-has-children"><a href="#">Популярное</a>--}}
+                                {{--                                    <ul class="sub-menu">--}}
+                                {{--                                        <li><a href="#">Статьи</a></li>--}}
+                                {{--                                        <li><a href="#">Авторы</a></li>--}}
+                                {{--                                        <li><a href="#">Теги</a></li>--}}
+                                {{--                                    </ul>--}}
+                                {{--                                </li>--}}
                             </ul>
                         </div>
                         <div class="tgmenu__action">
@@ -52,8 +61,10 @@
                     <nav class="tgmobile__menu-box">
                         <div class="close-btn"><i class="fas fa-times"></i></div>
                         <div class="nav-logo">
-                            <a href="{{route('main')}}" class="logo-dark"><img src="{{asset('build/assets/src/assets/img/logo/b_kinotalk.png')}}" alt="Logo"></a>
-                            <a href="{{route('main')}}" class="logo-light"><img src="{{asset('build/assets/src/assets/img/logo/w_kinotalk.png')}}" alt="Logo"></a>
+                            <a href="{{route('main')}}" class="logo-dark"><img
+                                    src="{{asset('build/assets/src/assets/img/logo/b_kinotalk.png')}}" alt="Logo"></a>
+                            <a href="{{route('main')}}" class="logo-light"><img
+                                    src="{{asset('build/assets/src/assets/img/logo/w_kinotalk.png')}}" alt="Logo"></a>
                         </div>
                         <div class="tgmobile__search">
                             <form action="#">
